@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="theme-color" content="#C45A38"/>
+<title>WeAte — De Barto's</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div class="phone">
+  <section class="view on" id="splash">
+    <div class="splash">
+      <div style="font-size:42px;font-weight:800;letter-spacing:-1px">We<span style="color:#5F8A62">Ate</span></div>
+      <p class="sub" style="text-align:center">Eten voor het hele huis.<br/>De Barto's.</p>
+      <button class="btn full" id="start" style="margin-top:18px">Aan de slag</button>
+    </div>
+  </section>
+  <section class="view" id="bord">
+    <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Bord</b></div><button class="btn s w" data-go="huis">Huis</button></div>
+    <div class="sc"><p class="sub" id="weekline"></p><div id="days"></div></div>
+    <nav class="nav"><button class="on" data-go="bord">Bord</button><button data-go="lijst">Lijst</button><button data-go="winkel">Winkel</button><button data-go="huis">Huis</button></nav>
+  </section>
+  <section class="view" id="kies">
+    <div class="hd"><button class="btn s w" data-go="bord">Terug</button><b>Kies eten</b><span class="meta" id="kiesdag"></span></div>
+    <div class="sc"><div class="row" id="cuisines" style="margin-bottom:12px"></div><p class="note" id="kiesnote"></p><div id="recipes"></div></div>
+  </section>
+  <section class="view" id="recept">
+    <img class="heroimg" id="rhero" alt=""/>
+    <div class="hd"><button class="btn s w" id="rback">Terug</button><b id="rtitle">Recept</b></div>
+    <div class="sc">
+      <p class="sub" id="rmeta"></p>
+      <div class="sec">Wie eet dit?</div>
+      <p class="note">Tik iemand: mee → later → apart → niet.</p>
+      <div id="rwho" class="row" style="margin-bottom:12px"></div>
+      <div id="rwarn"></div>
+      <b>Ingrediënten</b><div id="rings"></div>
+      <b>Bereiding</b><ol id="rstps"></ol>
+      <div id="rapart"></div>
+      <button class="btn g full" id="rput">Zet op het bord</button>
+    </div>
+  </section>
+  <section class="view" id="lijst">
+    <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Lijst</b></div><span class="sub" id="lijstline"></span></div>
+    <div class="sc" id="lijstbody"></div>
+    <button class="fab" id="fab">+</button>
+    <nav class="nav"><button data-go="bord">Bord</button><button class="on" data-go="lijst">Lijst</button><button data-go="winkel">Winkel</button><button data-go="huis">Huis</button></nav>
+  </section>
+  <section class="view" id="winkel">
+    <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Winkel</b></div></div>
+    <div class="sc">
+      <div class="row" id="brands" style="margin-bottom:12px">
+        <button class="chip" data-b="A">A-merk</button>
+        <button class="chip" data-b="B">Huismerk</button>
+        <button class="chip on" data-b="MIX">Mix</button>
+        <button class="chip" data-b="CHEAP">Goedkoopst</button>
+      </div>
+      <p class="note">Prijzen zijn indicatie, geen kassaprijs.</p>
+      <div id="stores"></div>
+    </div>
+    <nav class="nav"><button data-go="bord">Bord</button><button data-go="lijst">Lijst</button><button class="on" data-go="winkel">Winkel</button><button data-go="huis">Huis</button></nav>
+  </section>
+  <section class="view" id="huis">
+    <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Huis</b></div></div>
+    <div class="sc">
+      <h1 id="huisnaam">De Barto's</h1>
+      <p class="sub">Tik iemand aan voor dieet, smaak en sportavonden. Ontbijt en lunch horen niet op het bord — die staan onder Altijd op de lijst.</p>
+      <div id="people"></div>
+      <button class="btn g full" id="addPerson">+ Gezinslid</button>
+      <label>Weekbudget (€)</label>
+      <input id="budget" type="number" min="20" step="5"/>
+      <p class="note">Geen rem. Alleen zodat je op Winkel kunt zien of je in de buurt zit.</p>
+      <div class="sec">Altijd mee (ontbijt / lunch / vast)</div>
+      <div id="always"></div>
+      <button class="btn w full" id="addAlways">+ Vast product</button>
+    </div>
+    <nav class="nav"><button data-go="bord">Bord</button><button data-go="lijst">Lijst</button><button data-go="winkel">Winkel</button><button class="on" data-go="huis">Huis</button></nav>
+  </section>
+  <section class="view" id="gegeten">
+    <div class="hd"><button class="btn s w" data-go="bord">Terug</button><b>Gegeten</b></div>
+    <div class="sc">
+      <h1 id="etitle"></h1>
+      <p class="sub">Wie at mee? Kind: tik nog eens voor half / niet.</p>
+      <div id="ewho"></div>
+      <label>Restje</label>
+      <div class="row" id="erest"><button class="chip on" data-v="op">Op</button><button class="chip" data-v="rest">Restje</button></div>
+      <button class="btn g full" style="margin-top:16px" id="edone">Opslaan</button>
+    </div>
+  </section>
+  <section class="panel" id="editp">
+    <div class="hd"><button class="btn s w" id="ecancel">Sluit</button><b id="etithd">Lid</b></div>
+    <div class="sc">
+      <label>Naam</label><input id="ename"/>
+      <label>Rol</label>
+      <div class="row" id="erole"><button class="chip" data-v="adult">Volwassene</button><button class="chip" data-v="child">Kind</button></div>
+      <label>Portie</label>
+      <div class="row" id="eport"><button class="chip" data-v="small">Klein</button><button class="chip" data-v="normal">Normaal</button><button class="chip" data-v="large">Groot</button></div>
+      <label>Dieet / allergie (hard)</label><div class="row" id="ediet"></div>
+      <label>Lust dit niet (smaak)</label><div class="row" id="eveto"></div>
+      <label>Zelf toevoegen</label><input id="eextra" placeholder="bijv. olijven"/>
+      <label>Avondschema</label><div id="esched"></div>
+      <p class="note">Apart = ander eenvoudig bord die avond. Later = hetzelfde, opwarmen.</p>
+      <button class="btn g full" id="esave">Opslaan</button>
+      <button class="btn w full" style="margin-top:8px" id="edel">Verwijderen</button>
+    </div>
+  </section>
+  <section class="panel" id="addp">
+    <div class="hd"><button class="btn s w" id="acancel">Sluit</button><b>Nieuw product</b></div>
+    <div class="sc">
+      <label>Product</label><input id="aname" placeholder="Melk, komkommer"/>
+      <label>Hoeveel</label><input id="aqty" value="1"/>
+      <label>Rubriek</label>
+      <div class="row" id="asec"><button class="chip on" data-s="Altijd">Altijd</button><button class="chip" data-s="Vers">Vers</button><button class="chip" data-s="Koeling">Koeling</button><button class="chip" data-s="Houdbaar">Houdbaar</button><button class="chip" data-s="Huis">Huis</button></div>
+      <button class="btn g full" id="asave">Zet op de lijst</button>
+    </div>
+  </section>
+  <div class="toast" id="toast"></div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
