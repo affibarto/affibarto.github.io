@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#C45A38"/>
 <title>WeAte — De Barto's</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="style.css?v=3"/>
+<link rel="stylesheet" href="style.css?v=4"/>
 </head>
 <body>
 <div class="phone">
@@ -50,23 +50,35 @@
   </section>
   <section class="view" id="lijst">
     <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Lijst</b></div><span class="sub" id="lijstline"></span></div>
-    <div class="sc" id="lijstbody"></div>
+    <div class="sc">
+      <div class="sec">A of huismerk</div>
+      <div class="row brandbar" style="margin-bottom:8px">
+        <button class="chip" data-b="A">A-merk</button>
+        <button class="chip" data-b="B">Huismerk</button>
+        <button class="chip on" data-b="MIX">Mix</button>
+        <button class="chip" data-b="CHEAP">Goedkoopst</button>
+      </div>
+      <p class="note" id="lijstbrandhint">Mix: vers en koel A-merk, houdbaar huismerk.</p>
+      <div id="lijstbody"></div>
+    </div>
     <button class="fab" id="fab">+</button>
     <nav class="nav"><button data-go="bord">Bord</button><button class="on" data-go="lijst">Lijst</button><button data-go="winkel">Winkel</button><button data-go="huis">Huis</button></nav>
   </section>
   <section class="view" id="winkel">
     <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Winkel</b></div></div>
     <div class="sc">
-      <div class="sec">Jouw winkels</div>
-      <p class="note">Zet uit wat je nooit doet. Score telt alleen de aanstaande.</p>
-      <div class="row" id="storepick" style="margin-bottom:14px"></div>
-      <div class="sec">Merk</div>
-      <div class="row" id="brands" style="margin-bottom:12px">
+      <div class="sec">A-merk of huismerk</div>
+      <p class="note" id="winkelbrandhint">Dit telt voor de hele lijst. Mix = vers/koel A, rest huismerk.</p>
+      <div class="row brandbar" id="brands" style="margin-bottom:14px">
         <button class="chip" data-b="A">A-merk</button>
         <button class="chip" data-b="B">Huismerk</button>
         <button class="chip on" data-b="MIX">Mix</button>
         <button class="chip" data-b="CHEAP">Goedkoopst</button>
       </div>
+      <p class="note" id="brandsave"></p>
+      <div class="sec">Jouw winkels</div>
+      <p class="note">Zet uit wat je nooit doet. Score telt alleen de aanstaande.</p>
+      <div class="row" id="storepick" style="margin-bottom:14px"></div>
       <p class="note">Prijzen zijn indicatie, geen kassaprijs.</p>
       <div id="stores"></div>
     </div>
@@ -147,7 +159,7 @@
   });
 })();
 </script>
-<script src="recipes.js?v=3"></script>
-<script src="app.js?v=3"></script>
+<script src="recipes.js?v=4"></script>
+<script src="app.js?v=4"></script>
 </body>
 </html>
