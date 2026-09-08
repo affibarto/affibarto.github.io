@@ -4,16 +4,17 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-title" content="WeAte"/>
 <meta name="theme-color" content="#C45A38"/>
 <title>WeAte — De Barto's</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="style.css"/>
+<link rel="stylesheet" href="style.css?v=2"/>
 </head>
 <body>
 <div class="phone">
   <section class="view on" id="splash">
     <div class="splash">
-      <div style="font-size:42px;font-weight:800;letter-spacing:-1px">We<span style="color:#5F8A62">Ate</span></div>
+      <svg class="brand" viewBox="0 0 280 90" width="220" height="70" role="img" aria-label="WeAte" xmlns="http://www.w3.org/2000/svg"><circle cx="28" cy="45" r="22" fill="#C45A38"/><circle cx="28" cy="45" r="14" fill="#F4E6D2"/><path d="M28 31v28" stroke="#C45A38" stroke-width="3"/><text x="58" y="58" font-family="Outfit,system-ui,sans-serif" font-weight="800" font-size="48" fill="#2A1810">We<tspan fill="#5F8A62">Ate</tspan></text></svg>
       <p class="sub" style="text-align:center">Eten voor het hele huis.<br/>De Barto's.</p>
       <button class="btn full" id="start" style="margin-top:18px">Aan de slag</button>
     </div>
@@ -118,7 +119,21 @@
   </section>
   <div class="toast" id="toast"></div>
 </div>
-<script src="recipes.js"></script>
-<script src="app.js"></script>
+<script>
+(function(){
+  function goBord(){
+    var splash=document.getElementById('splash');
+    var bord=document.getElementById('bord');
+    if(splash) splash.classList.remove('on');
+    if(bord) bord.classList.add('on');
+    if(typeof show==='function') show('bord');
+  }
+  document.addEventListener('click', function(e){
+    if(e.target && e.target.id==='start'){ e.preventDefault(); goBord(); }
+  });
+})();
+</script>
+<script src="recipes.js?v=2"></script>
+<script src="app.js?v=2"></script>
 </body>
 </html>
