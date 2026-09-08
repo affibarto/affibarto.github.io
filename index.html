@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#C45A38"/>
 <title>WeAte — De Barto's</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="style.css?v=4"/>
+<link rel="stylesheet" href="style.css?v=5"/>
 </head>
 <body>
 <div class="phone">
@@ -58,7 +58,7 @@
         <button class="chip on" data-b="MIX">Mix</button>
         <button class="chip" data-b="CHEAP">Goedkoopst</button>
       </div>
-      <p class="note" id="lijstbrandhint">Mix: vers en koel A-merk, houdbaar huismerk.</p>
+      <p class="note" id="lijstbrandhint">Tik A/B op een product. Bedragen zijn indicatie.</p>
       <div id="lijstbody"></div>
     </div>
     <button class="fab" id="fab">+</button>
@@ -68,7 +68,7 @@
     <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Winkel</b></div></div>
     <div class="sc">
       <div class="sec">A-merk of huismerk</div>
-      <p class="note" id="winkelbrandhint">Dit telt voor de hele lijst. Mix = vers/koel A, rest huismerk.</p>
+      <p class="note" id="winkelbrandhint">Standaard voor nieuwe regels. Per product op de lijst te overrulen.</p>
       <div class="row brandbar" id="brands" style="margin-bottom:14px">
         <button class="chip" data-b="A">A-merk</button>
         <button class="chip" data-b="B">Huismerk</button>
@@ -79,7 +79,7 @@
       <div class="sec">Jouw winkels</div>
       <p class="note">Zet uit wat je nooit doet. Score telt alleen de aanstaande.</p>
       <div class="row" id="storepick" style="margin-bottom:14px"></div>
-      <p class="note">Prijzen zijn indicatie, geen kassaprijs.</p>
+      <p class="note">Prijzen zijn indicatie, geen kassaprijs. A/B op de lijst is de instructie in de winkel.</p>
       <div id="stores"></div>
     </div>
     <nav class="nav"><button data-go="bord">Bord</button><button data-go="lijst">Lijst</button><button class="on" data-go="winkel">Winkel</button><button data-go="huis">Huis</button></nav>
@@ -159,8 +159,8 @@
   });
 })();
 </script>
-<script src="recipes.js?v=4"></script>
-<script src="app.js?v=4"></script>
-<script src="brands.js?v=4"></script>
+<script src="recipes.js?v=5"></script>
+<script src="app.js?v=5"></script>
+<script src="brands.js?v=5"></script>
 </body>
 </html>
