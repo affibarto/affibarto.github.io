@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#C45A38"/>
 <title>WeAte — De Barto's</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="style.css?v=2"/>
+<link rel="stylesheet" href="style.css?v=3"/>
 </head>
 <body>
 <div class="phone">
@@ -36,6 +36,11 @@
       <div class="sec">Wie eet dit?</div>
       <p class="note">Tik iemand: mee → later → apart → niet.</p>
       <div id="rwho" class="row" style="margin-bottom:12px"></div>
+      <div id="rfijn" style="display:none">
+        <div class="sec">Fijn (zelfde pan)</div>
+        <p class="note">Gigi en Luca: pesto apart, spinazie fijn, paprika eraf. Geen extra boodschappen.</p>
+        <div id="rfijnrow" class="row" style="margin-bottom:12px"></div>
+      </div>
       <div id="rwarn"></div>
       <b>Ingrediënten</b><div id="rings"></div>
       <b>Bereiding</b><ol id="rstps"></ol>
@@ -52,6 +57,10 @@
   <section class="view" id="winkel">
     <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Winkel</b></div></div>
     <div class="sc">
+      <div class="sec">Jouw winkels</div>
+      <p class="note">Zet uit wat je nooit doet. Score telt alleen de aanstaande.</p>
+      <div class="row" id="storepick" style="margin-bottom:14px"></div>
+      <div class="sec">Merk</div>
       <div class="row" id="brands" style="margin-bottom:12px">
         <button class="chip" data-b="A">A-merk</button>
         <button class="chip" data-b="B">Huismerk</button>
@@ -67,15 +76,15 @@
     <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Huis</b></div></div>
     <div class="sc">
       <h1 id="huisnaam">De Barto's</h1>
-      <p class="sub">Tik iemand aan voor dieet, smaak en sportavonden. Ontbijt en lunch horen niet op het bord — die staan onder Altijd op de lijst.</p>
+      <p class="sub">Tik iemand aan voor dieet, smaak en sportavonden. Ontbijt en lunch staan niet op het bord. Zelf op de lijst zetten als je ze nodig hebt.</p>
       <div id="people"></div>
       <button class="btn g full" id="addPerson">+ Gezinslid</button>
       <label>Weekbudget (€)</label>
       <input id="budget" type="number" min="20" step="5"/>
       <p class="note">Geen rem. Alleen zodat je op Winkel kunt zien of je in de buurt zit.</p>
-      <div class="sec">Altijd mee (ontbijt / lunch / vast)</div>
+      <div class="sec">Zelf vast op de lijst</div>
       <div id="always"></div>
-      <button class="btn w full" id="addAlways">+ Vast product</button>
+      <button class="btn w full" id="addAlways">+ Product</button>
     </div>
     <nav class="nav"><button data-go="bord">Bord</button><button data-go="lijst">Lijst</button><button data-go="winkel">Winkel</button><button class="on" data-go="huis">Huis</button></nav>
   </section>
@@ -85,8 +94,13 @@
       <h1 id="etitle"></h1>
       <p class="sub">Wie at mee? Kind: tik nog eens voor half / niet.</p>
       <div id="ewho"></div>
-      <label>Restje</label>
+      <label>Op of restje?</label>
       <div class="row" id="erest"><button class="chip on" data-v="op">Op</button><button class="chip" data-v="rest">Restje</button></div>
+      <div id="erestto" style="display:none;margin-top:12px">
+        <div class="sec">Waar gaat het restje heen?</div>
+        <p class="note">Morgenavond, of later voor wie sport. Geen tweede boodschappen.</p>
+        <div class="row" id="erestchips"></div>
+      </div>
       <button class="btn g full" style="margin-top:16px" id="edone">Opslaan</button>
     </div>
   </section>
@@ -113,7 +127,7 @@
       <label>Product</label><input id="aname" placeholder="Melk, komkommer"/>
       <label>Hoeveel</label><input id="aqty" value="1"/>
       <label>Rubriek</label>
-      <div class="row" id="asec"><button class="chip on" data-s="Altijd">Altijd</button><button class="chip" data-s="Vers">Vers</button><button class="chip" data-s="Koeling">Koeling</button><button class="chip" data-s="Houdbaar">Houdbaar</button><button class="chip" data-s="Huis">Huis</button></div>
+      <div class="row" id="asec"><button class="chip" data-s="Huis">Huis</button><button class="chip" data-s="Vers">Vers</button><button class="chip" data-s="Koeling">Koeling</button><button class="chip" data-s="Houdbaar">Houdbaar</button></div>
       <button class="btn g full" id="asave">Zet op de lijst</button>
     </div>
   </section>
@@ -133,7 +147,7 @@
   });
 })();
 </script>
-<script src="recipes.js?v=2"></script>
-<script src="app.js?v=2"></script>
+<script src="recipes.js?v=3"></script>
+<script src="app.js?v=3"></script>
 </body>
 </html>
