@@ -1,2 +1,2 @@
-# affibarto.github.io
-WeAte prototype — De Barto's
+# WeAte
+Prototype De Barto's. Live: https://affibarto.github.io/
