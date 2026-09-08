@@ -58,6 +58,8 @@ input{width:100%;border:1px solid #E8D4B8;border-radius:12px;padding:12px;font:i
 .price{font-weight:800;white-space:nowrap}
 .badge{font-size:11px;font-weight:800;background:#EDE0D0;border-radius:8px;padding:3px 7px}
 .badge.best{background:#C45A38;color:#fff}
+.badge.a{background:#3A2A24;color:#fff}
+.badge.b{background:#5F8A62;color:#fff}
 ol{padding-left:18px}
 ol li{margin:0 0 8px}
 .note{font-size:13px;color:#7A5C48;margin:0 0 12px}
