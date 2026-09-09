@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#C45A38"/>
 <title>WeAte — De Barto's</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="style.css?v=17"/>
+<link rel="stylesheet" href="style.css?v=18"/>
 </head>
 <body>
 <div class="phone">
@@ -38,7 +38,6 @@
       <div id="rwho" class="row" style="margin-bottom:12px"></div>
       <div id="rfijn" style="display:none">
         <div class="sec">Fijn (zelfde pan)</div>
-        <p class="note">Gigi en Luca: pesto apart, spinazie fijn, paprika eraf. Geen extra boodschappen.</p>
         <div id="rfijnrow" class="row" style="margin-bottom:12px"></div>
       </div>
       <div id="rwarn"></div>
@@ -51,7 +50,7 @@
   <section class="view" id="lijst">
     <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Lijst</b></div><span class="sub" id="lijstline"></span></div>
     <div class="sc">
-      <p class="note">Vink af in de winkel. Actie-regels hebben − en +.</p>
+      <p class="note">Vink links. Actie: − en +. Swipe naar links = weg.</p>
       <div id="lijstbody"></div>
     </div>
     <button class="fab" id="fab">+</button>
@@ -60,7 +59,7 @@
   <section class="view" id="folder">
     <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Actie</b></div><span class="sub" id="folderline"></span></div>
     <div class="sc">
-      <p class="note">Folder deze week. Tik een actie: hij gaat op je lijst.</p>
+      <p class="note">Tik een actie: op de lijst. Zoek of filter op winkel.</p>
       <div class="row" id="folderpick" style="margin-bottom:12px"></div>
       <div id="folderbody"></div>
     </div>
@@ -70,9 +69,7 @@
     <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Winkel</b></div></div>
     <div class="sc">
       <div class="sec">Jouw winkels</div>
-      <p class="note">Zet uit wat je nooit doet.</p>
       <div class="row" id="storepick" style="margin-bottom:14px"></div>
-      <p class="note">Actieprijs alleen bij die keten. Rest is indicatie.</p>
       <div id="stores"></div>
     </div>
     <nav class="nav"><button data-go="bord">Bord</button><button data-go="lijst">Lijst</button><button data-go="folder">Actie</button><button class="on" data-go="winkel">Winkel</button><button data-go="huis">Huis</button></nav>
@@ -96,12 +93,10 @@
     <div class="hd"><button class="btn s w" data-go="bord">Terug</button><b>Gegeten</b></div>
     <div class="sc">
       <h1 id="etitle"></h1>
-      <p class="sub">Wie at mee?</p>
       <div id="ewho"></div>
       <label>Op of restje?</label>
       <div class="row" id="erest"><button class="chip on" data-v="op">Op</button><button class="chip" data-v="rest">Restje</button></div>
       <div id="erestto" style="display:none;margin-top:12px">
-        <div class="sec">Waar gaat het restje heen?</div>
         <div class="row" id="erestchips"></div>
       </div>
       <button class="btn g full" style="margin-top:16px" id="edone">Opslaan</button>
@@ -149,10 +144,11 @@
   });
 })();
 </script>
-<script src="recipes.js?v=17"></script>
-<script src="app.js?v=17"></script>
-<script src="weekplan.js?v=17"></script>
-<script src="folder.js?v=17"></script>
-<script src="brands.js?v=17"></script>
+<script src="recipes.js?v=18"></script>
+<script src="app.js?v=18"></script>
+<script src="weekplan.js?v=18"></script>
+<script src="folder.js?v=18"></script>
+<script src="brands.js?v=18"></script>
+<script src="listfix.js?v=18"></script>
 </body>
 </html>
