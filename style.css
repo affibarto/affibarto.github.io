@@ -31,7 +31,8 @@ h1{font-size:26px;margin:0 0 8px}
 .schedrow .chip{padding:8px 6px;font-size:12px;text-align:center}
 .swipewrap{position:relative;border-radius:18px;margin:0 0 8px;overflow:hidden;background:#B33A2B}
 .swipebg{position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-end;padding:0 18px;color:#fff;font-weight:800;pointer-events:none}
-.swipewrap .listrow{margin:0;position:relative;z-index:1;transition:transform .12s ease}
+.swipewrap.right .swipebg{justify-content:flex-start}
+.swipewrap .listrow,.swipewrap .dayrow{margin:0;position:relative;z-index:1;transition:transform .12s ease}
 .dayrow{display:flex;align-items:center;gap:12px;cursor:pointer}
 .dayrow .dow{width:36px;font-weight:800}
 .av{width:44px;height:44px;border-radius:16px;background:#5F8A62;color:#fff;display:grid;place-items:center;font-weight:800;flex:none}
