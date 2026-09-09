@@ -8,14 +8,13 @@
 <meta name="theme-color" content="#C45A38"/>
 <title>WeAte — De Barto's</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="style.css?v=25"/>
+<link rel="stylesheet" href="style.css?v=26"/>
 <style>
 .qtybox{display:flex;align-items:center;gap:6px;flex:none}
 .qtybtn{width:34px;height:34px;border:0;border-radius:10px;background:#EDE0D0;font:800 18px Outfit,sans-serif;color:#2A1810}
 .qtyn{min-width:18px;text-align:center;font-weight:800}
 .listrow.onlist{outline:2px solid #C45A38;outline-offset:-2px}
 #folderlijst{display:none}
-.nav button{font-size:13px}
 </style>
 </head>
 <body>
@@ -64,20 +63,16 @@
   <section class="view" id="folder">
     <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Actie</b></div><span class="sub" id="folderline"></span></div>
     <div class="sc">
-      <p class="note">Tik = op de lijst. Je ziet − 1 + op dat product.</p>
+      <p class="note">Tik = op de lijst. Daarna − 1 + op dat product.</p>
       <div class="row" id="folderpick" style="margin-bottom:12px"></div>
       <div id="folderbody"></div>
     </div>
     <nav class="nav"><button data-go="bord">Bord</button><button data-go="lijst">Lijst</button><button class="on" data-go="folder">Actie</button><button data-go="huis">Huis</button></nav>
   </section>
-  <section class="view" id="winkel">
-    <div class="hd"><button class="btn s w" data-go="lijst">Terug</button><b>Winkels</b></div>
-    <div class="sc"><div class="row" id="storepick"></div><div id="stores"></div></div>
-  </section>
   <section class="panel" id="storepanel">
-    <div class="hd"><button class="btn s w" data-go="lijst">Sluit</button><b>Winkels in je vergelijking</b></div>
+    <div class="hd"><button class="btn s w" type="button" id="closeset">Sluit</button><b>Winkels in je vergelijking</b></div>
     <div class="sc">
-      <p class="note">Zet uit wat je nooit doet. Alleen aan = mee in het totaal.</p>
+      <p class="note">Zet uit wat je nooit doet.</p>
       <div class="row" id="setstores"></div>
     </div>
   </section>
@@ -90,7 +85,6 @@
       <label>Weekbudget (€)</label>
       <input id="budget" type="number" min="20" step="5"/>
       <div class="sec">Winkels in je vergelijking</div>
-      <p class="note">Zelfde als de knop Winkels op de lijst.</p>
       <div class="row" id="huisstores" style="margin-bottom:14px"></div>
       <div class="sec">Zelf vast op de lijst</div>
       <div id="always"></div>
@@ -148,12 +142,12 @@
   });
 })();
 </script>
-<script src="recipes.js?v=25"></script>
-<script src="app.js?v=25"></script>
-<script src="weekplan.js?v=25"></script>
-<script src="folder.js?v=25"></script>
-<script src="brands.js?v=25"></script>
-<script src="listfix.js?v=25"></script>
-<script src="actie.js?v=25"></script>
+<script src="recipes.js?v=26"></script>
+<script src="app.js?v=26"></script>
+<script src="weekplan.js?v=26"></script>
+<script src="folder.js?v=26"></script>
+<script src="brands.js?v=26"></script>
+<script src="listfix.js?v=26"></script>
+<script src="actie.js?v=26"></script>
 </body>
 </html>
