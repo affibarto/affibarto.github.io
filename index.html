@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#C45A38"/>
 <title>WeAte — De Barto's</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="style.css?v=6"/>
+<link rel="stylesheet" href="style.css?v=7"/>
 </head>
 <body>
 <div class="phone">
@@ -22,7 +22,7 @@
   <section class="view" id="bord">
     <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Bord</b></div><button class="btn s w" data-go="huis">Huis</button></div>
     <div class="sc"><p class="sub" id="weekline"></p><div id="days"></div></div>
-    <nav class="nav"><button class="on" data-go="bord">Bord</button><button data-go="lijst">Lijst</button><button data-go="winkel">Winkel</button><button data-go="huis">Huis</button></nav>
+    <nav class="nav"><button class="on" data-go="bord">Bord</button><button data-go="lijst">Lijst</button><button data-go="folder">Actie</button><button data-go="winkel">Winkel</button><button data-go="huis">Huis</button></nav>
   </section>
   <section class="view" id="kies">
     <div class="hd"><button class="btn s w" data-go="bord">Terug</button><b>Kies eten</b><span class="meta" id="kiesdag"></span></div>
@@ -62,7 +62,16 @@
       <div id="lijstbody"></div>
     </div>
     <button class="fab" id="fab">+</button>
-    <nav class="nav"><button data-go="bord">Bord</button><button class="on" data-go="lijst">Lijst</button><button data-go="winkel">Winkel</button><button data-go="huis">Huis</button></nav>
+    <nav class="nav"><button data-go="bord">Bord</button><button class="on" data-go="lijst">Lijst</button><button data-go="folder">Actie</button><button data-go="winkel">Winkel</button><button data-go="huis">Huis</button></nav>
+  </section>
+  <section class="view" id="folder">
+    <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Actie</b></div><span class="sub" id="folderline"></span></div>
+    <div class="sc">
+      <p class="note">Folder deze week. Tik een actie: hij gaat op je lijst.</p>
+      <div class="row" id="folderpick" style="margin-bottom:12px"></div>
+      <div id="folderbody"></div>
+    </div>
+    <nav class="nav"><button data-go="bord">Bord</button><button data-go="lijst">Lijst</button><button class="on" data-go="folder">Actie</button><button data-go="winkel">Winkel</button><button data-go="huis">Huis</button></nav>
   </section>
   <section class="view" id="winkel">
     <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Winkel</b></div></div>
@@ -79,10 +88,10 @@
       <div class="sec">Jouw winkels</div>
       <p class="note">Zet uit wat je nooit doet. Folderhits tellen per winkel.</p>
       <div class="row" id="storepick" style="margin-bottom:14px"></div>
-      <p class="note">Folder 9–15 sep via PrijsProfeet. Geen kassaprijs op de rest.</p>
+      <p class="note">Folder via PrijsProfeet. Geen kassaprijs op de rest.</p>
       <div id="stores"></div>
     </div>
-    <nav class="nav"><button data-go="bord">Bord</button><button data-go="lijst">Lijst</button><button class="on" data-go="winkel">Winkel</button><button data-go="huis">Huis</button></nav>
+    <nav class="nav"><button data-go="bord">Bord</button><button data-go="lijst">Lijst</button><button data-go="folder">Actie</button><button class="on" data-go="winkel">Winkel</button><button data-go="huis">Huis</button></nav>
   </section>
   <section class="view" id="huis">
     <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Huis</b></div></div>
@@ -98,7 +107,7 @@
       <div id="always"></div>
       <button class="btn w full" id="addAlways">+ Product</button>
     </div>
-    <nav class="nav"><button data-go="bord">Bord</button><button data-go="lijst">Lijst</button><button data-go="winkel">Winkel</button><button class="on" data-go="huis">Huis</button></nav>
+    <nav class="nav"><button data-go="bord">Bord</button><button data-go="lijst">Lijst</button><button data-go="folder">Actie</button><button data-go="winkel">Winkel</button><button class="on" data-go="huis">Huis</button></nav>
   </section>
   <section class="view" id="gegeten">
     <div class="hd"><button class="btn s w" data-go="bord">Terug</button><b>Gegeten</b></div>
@@ -159,9 +168,9 @@
   });
 })();
 </script>
-<script src="recipes.js?v=6"></script>
-<script src="app.js?v=6"></script>
-<script src="folder.js?v=6"></script>
-<script src="brands.js?v=6"></script>
+<script src="recipes.js?v=7"></script>
+<script src="app.js?v=7"></script>
+<script src="folder.js?v=7"></script>
+<script src="brands.js?v=7"></script>
 </body>
 </html>
