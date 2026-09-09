@@ -8,7 +8,13 @@
 <meta name="theme-color" content="#C45A38"/>
 <title>WeAte — De Barto's</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="style.css?v=22"/>
+<link rel="stylesheet" href="style.css?v=23"/>
+<style>
+.qtybox{display:flex;align-items:center;gap:6px;flex:none;margin-left:auto}
+.qtybtn{width:34px;height:34px;border:0;border-radius:10px;background:#EDE0D0;font:800 18px Outfit,sans-serif;color:#2A1810}
+.qtyn{min-width:18px;text-align:center;font-weight:800}
+#folderlijst{margin:0 0 8px}
+</style>
 </head>
 <body>
 <div class="phone">
@@ -45,14 +51,17 @@
   </section>
   <section class="view" id="lijst">
     <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Lijst</b></div><span class="sub" id="lijstline"></span></div>
-    <div class="sc"><p class="note">Boven: Uit de folder, met − en +.</p><div id="lijstbody"></div></div>
+    <div class="sc">
+      <div id="folderlijst"></div>
+      <div id="lijstbody"></div>
+    </div>
     <button class="fab" id="fab">+</button>
     <nav class="nav"><button data-go="bord">Bord</button><button class="on" data-go="lijst">Lijst</button><button data-go="folder">Actie</button><button data-go="winkel">Winkel</button><button data-go="huis">Huis</button></nav>
   </section>
   <section class="view" id="folder">
     <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Actie</b></div><span class="sub" id="folderline"></span></div>
     <div class="sc">
-      <p class="note">Tik een product. Je springt daarna naar de lijst.</p>
+      <p class="note">Tik een product. Het komt bovenaan de lijst.</p>
       <div class="row" id="folderpick" style="margin-bottom:12px"></div>
       <div id="folderbody"></div>
     </div>
@@ -62,13 +71,7 @@
     <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Winkel</b></div></div>
     <div class="sc">
       <div class="sec">Jouw winkels</div>
-      <div class="row" id="storepick" style="margin-bottom:14px">
-        <button class="chip on" data-act="store" data-id="dirk">Dirk</button>
-        <button class="chip on" data-act="store" data-id="ah">Albert Heijn</button>
-        <button class="chip on" data-act="store" data-id="lidl">Lidl</button>
-        <button class="chip on" data-act="store" data-id="jumbo">Jumbo</button>
-        <button class="chip on" data-act="store" data-id="plus">Plus</button>
-      </div>
+      <div class="row" id="storepick"></div>
       <div id="stores"></div>
     </div>
     <nav class="nav"><button data-go="bord">Bord</button><button data-go="lijst">Lijst</button><button data-go="folder">Actie</button><button class="on" data-go="winkel">Winkel</button><button data-go="huis">Huis</button></nav>
@@ -105,8 +108,8 @@
       <div class="row" id="erole"><button class="chip" data-v="adult">Volwassene</button><button class="chip" data-v="child">Kind</button></div>
       <label>Portie</label>
       <div class="row" id="eport"><button class="chip" data-v="small">Klein</button><button class="chip" data-v="normal">Normaal</button><button class="chip" data-v="large">Groot</button></div>
-      <label>Dieet / allergie</label><div class="row" id="ediet"></div>
-      <label>Lust dit niet</label><div class="row" id="eveto"></div>
+      <label>Dieet</label><div class="row" id="ediet"></div>
+      <label>Lust niet</label><div class="row" id="eveto"></div>
       <label>Avondschema</label><div id="esched"></div>
       <button class="btn g full" id="esave">Opslaan</button>
       <button class="btn w full" style="margin-top:8px" id="edel">Verwijderen</button>
@@ -125,24 +128,24 @@
 </div>
 <script>
 (function(){
-  function goBord(){
-    var splash=document.getElementById('splash');
-    var bord=document.getElementById('bord');
-    if(splash) splash.classList.remove('on');
-    if(bord) bord.classList.add('on');
-    if(typeof show==='function') show('bord');
-  }
   document.addEventListener('click', function(e){
-    if(e.target && e.target.id==='start'){ e.preventDefault(); goBord(); }
+    if(e.target && e.target.id==='start'){
+      e.preventDefault();
+      var splash=document.getElementById('splash');
+      var bord=document.getElementById('bord');
+      if(splash) splash.classList.remove('on');
+      if(bord) bord.classList.add('on');
+      if(typeof show==='function') show('bord');
+    }
   });
 })();
 </script>
-<script src="recipes.js?v=22"></script>
-<script src="app.js?v=22"></script>
-<script src="actie.js?v=22"></script>
-<script src="weekplan.js?v=22"></script>
-<script src="folder.js?v=22"></script>
-<script src="brands.js?v=22"></script>
-<script src="listfix.js?v=22"></script>
+<script src="recipes.js?v=23"></script>
+<script src="app.js?v=23"></script>
+<script src="weekplan.js?v=23"></script>
+<script src="folder.js?v=23"></script>
+<script src="brands.js?v=23"></script>
+<script src="listfix.js?v=23"></script>
+<script src="actie.js?v=23"></script>
 </body>
 </html>
