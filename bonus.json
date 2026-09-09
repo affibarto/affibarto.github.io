@@ -1,0 +1,45 @@
+{
+  "week": "9–15 sep 2026",
+  "source": "PrijsProfeet",
+  "fetched": "2026-09-09",
+  "note": "Folder/actie deze week op WeAte-producten. Geen kassaprijs.",
+  "ah": {
+    "pasta": {"was": 250, "now": 125, "deal": "1+1 gratis", "name": "AH Spaghetti all' uovo", "until": "2026-09-15"},
+    "kaas": {"was": 299, "now": 250, "deal": "2 voor €5", "name": "AH Emmentaler geraspte kaas", "until": "2026-09-15"},
+    "yoghurt": {"was": 239, "now": 200, "deal": "2 voor €3,99", "name": "Activia Yoghurt naturel", "until": "2026-09-15"},
+    "brood": {"was": 249, "now": 200, "deal": "2 voor €3,99", "name": "AH Vloerbrood volkoren heel", "until": "2026-09-15"},
+    "sla": {"was": 149, "now": 104, "deal": "2e halve prijs", "name": "AH IJsbergsla melange", "until": "2026-09-15"},
+    "mozzarella": {"was": 299, "now": 250, "deal": "2 voor €5", "name": "AH Mozzarella geraspt", "until": "2026-09-15"},
+    "hagelslag": {"was": 279, "now": 227, "deal": "Bonus", "name": "AH Hagelslag melk", "until": "2026-09-15"},
+    "fruit": {"was": 229, "now": 175, "deal": "2 voor €3,50", "name": "Chiquita bananen", "until": "2026-09-15"},
+    "komkommer": {"was": 249, "now": 200, "deal": "2 voor €4", "name": "AH Rauwkost komkommer", "until": "2026-09-15"}
+  },
+  "jumbo": {
+    "gehakt": {"was": 600, "now": 300, "deal": "1+1 gratis", "name": "Jumbo Biologisch Rundergehakt 300g", "until": "2026-09-15"},
+    "pasta": {"was": 359, "now": 239, "deal": "2e halve prijs", "name": "Grand'Italia Spaghetti 1kg", "until": "2026-09-15"},
+    "aardappel": {"was": 149, "now": 100, "deal": "2 voor €2", "name": "Jumbo Aardappelen kruimig 1kg", "until": "2026-09-15"}
+  },
+  "lidl": {
+    "pesto": {"was": 299, "now": 249, "deal": "Actie", "name": "Bio pesto", "until": "2026-09-15"},
+    "sla": {"was": 99, "now": 69, "deal": "30% korting", "name": "IJsbergsla", "until": "2026-09-15"},
+    "ei": {"was": 549, "now": 479, "deal": "Actie", "name": "Nederlandse scharreleieren", "until": "2026-09-15"}
+  },
+  "plus": {
+    "pasta": {"was": 219, "now": 159, "deal": "folder", "name": "Grand'Italia Spaghetti ei-pasta", "until": "2026-09-15"},
+    "aardappel": {"was": 199, "now": 149, "deal": "folder", "name": "PLUS Biologische aardappelen", "until": "2026-09-15"},
+    "ui": {"was": 149, "now": 99, "deal": "folder", "name": "Plus Rode uien gesneden", "until": "2026-09-15"},
+    "kaas": {"was": 249, "now": 199, "deal": "folder", "name": "Geraspte Goudse kaas", "until": "2026-09-15"},
+    "pesto": {"was": 249, "now": 200, "deal": "folder", "name": "Plus Groene pesto", "until": "2026-09-15"},
+    "ham": {"was": 259, "now": 200, "deal": "folder", "name": "PLUS Achterham", "until": "2026-09-15"},
+    "beleg": {"was": 389, "now": 312, "deal": "folder", "name": "Calvé Pindakaas Extra crunchy", "until": "2026-09-15"},
+    "hagelslag": {"was": 299, "now": 254, "deal": "folder", "name": "Venz Hagelslag", "until": "2026-09-15"},
+    "komkommer": {"was": 99, "now": 69, "deal": "folder", "name": "Plus Komkommer", "until": "2026-09-15"},
+    "linzen": {"was": 189, "now": 149, "deal": "folder", "name": "PLUS Linzen rood", "until": "2026-09-15"},
+    "lasagne": {"was": 199, "now": 150, "deal": "folder", "name": "Honig Lasagnebladen", "until": "2026-09-15"}
+  },
+  "dirk": {
+    "aardappel": {"was": 149, "now": 99, "deal": "Actie", "name": "1 de Beste Aardappelen kruimig", "until": "2026-09-15"},
+    "ui": {"was": 189, "now": 149, "deal": "Actie", "name": "1 de Beste Uien", "until": "2026-09-15"},
+    "sla": {"was": 119, "now": 89, "deal": "Actie", "name": "1 de Beste IJsbergsla", "until": "2026-09-15"}
+  }
+}
