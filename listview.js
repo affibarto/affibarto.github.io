@@ -25,7 +25,8 @@ var slot=S.plan&&S.plan[d];if(!slot||!slot.id||slot.leftover)return;
 var rec=typeof recipeBy==="function"?recipeBy(slot.id):null;if(!rec)return;
 var who=eatersMain(d);
 var scale=(typeof portions==="function")?portions(who.length?who:(S.people||[]))/4:1;
-html+="<div class=sec>"+d+" \u00b7 "+rec.t+"</div>";
+var done=S.shopped&&S.shopped[d];
+html+="<div class=sec style=display:flex;align-items:center;justify-content:space-between;gap:8px><span>"+d+" \u00b7 "+rec.t+(done?" \u00b7 gehaald":"")+"</span><button type=button class='btn s w' data-act=gehaald data-d="+d+">"+(done?"Ok":"Gehaald")+"</button></div>";
 (rec.ing||[]).forEach(function(it){
 if(S.omit&&S.omit[d+":"+slot.id+":"+it.k])return;
 var k=it.k+"@"+d;
