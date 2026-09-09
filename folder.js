@@ -1,0 +1,2 @@
+function applyFolder(d){if(!d||typeof BONUS==="undefined")return;["ah","jumbo","lidl","plus","dirk"].forEach(function(r){BONUS[r]=d[r]||{};});window.FOLDER_META=d;if(typeof drawList==="function"){var lijst=document.getElementById("lijst");if(lijst&&lijst.classList.contains("on"))drawList();}if(typeof drawStores==="function"){var w=document.getElementById("winkel");if(w&&w.classList.contains("on"))drawStores();}}
+fetch("bonus.json?v=6",{cache:"no-store"}).then(function(r){return r.json();}).then(applyFolder).catch(function(){});
