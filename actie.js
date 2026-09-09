@@ -1,6 +1,7 @@
 (function(){
 if(window._actieOnce)return;window._actieOnce=1;
 function euro(c){return "\u20ac"+((+c||0)/100).toFixed(2).replace(".",",");}
+function storeN(id){var s=(typeof STORES!=="undefined"?STORES:[]).filter(function(x){return x.id===id;})[0];return s?s.n:(id||"");}
 function closePanel(){var p=document.getElementById("storepanel");if(p)p.classList.remove("on");}
 function findEx(n,sid){S.extras=S.extras||[];for(var i=0;i<S.extras.length;i++){if(S.extras[i].n===n&&(S.extras[i].sid||"")===(sid||""))return i;}return -1;}
 function extraOfKey(k){if(!k||String(k).indexOf("e:")!==0)return null;return (S.extras||[])[+String(k).split(":")[1]]||null;}
@@ -8,31 +9,27 @@ function hitFrom(btn){
 var rows=window._folderRows||[];
 var idx=+btn.getAttribute("data-idx");
 if(rows[idx])return rows[idx];
-var n="";try{n=decodeURIComponent(btn.getAttribute("data-n")||"");}catch(e){n=btn.getAttribute("data-n")||"";}
+var n="";try{n=decodeURIComponent(btn.getAttribute("data-n")||"");}catch(er){n=btn.getAttribute("data-n")||"";}
 if(!n)return null;
-var pack="";try{pack=decodeURIComponent(btn.getAttribute("data-pack")||"");}catch(e){pack=btn.getAttribute("data-pack")||"";}
+var pack="";try{pack=decodeURIComponent(btn.getAttribute("data-pack")||"");}catch(er){pack=btn.getAttribute("data-pack")||"";}
 return {n:n,s:btn.getAttribute("data-sid")||"",now:+btn.getAttribute("data-now")||0,qty:pack};
 }
 function scoreStores(){
-var items=(typeof buildList==="function"?buildList():[]).filter(function(i){return !(S.checked&&S.checked[i.k]);});
+var extras=S.extras||[];
 var stores=typeof activeStores==="function"?activeStores():(STORES||[]);
 return stores.map(function(r){
-var actie=0,rest=0;
-items.forEach(function(i){
-var ex=extraOfKey(i.k);
-if(ex){if(!ex.sid||ex.sid===r.id)actie+=ex.line||((ex.cents||0)*(ex.q||1));return;}
-var pr=typeof unitPrice==="function"?unitPrice(i.cat,r.id,S.brand,i.k):null;
-if(pr!=null)rest+=Math.round(pr*Math.max(+i.q||1,0.5));
-});
-return {id:r.id,n:r.n,actie:actie,rest:rest,total:actie+rest};
+var actie=0;
+extras.forEach(function(e){if(!e.sid||e.sid===r.id)actie+=e.line||((e.cents||0)*(e.q||1));});
+return {id:r.id,n:r.n,total:actie};
 }).sort(function(a,b){return a.total-b.total;});
 }
 function paintScore(){
 var host=document.getElementById("listscore");if(!host)return;
-var scores=scoreStores();if(!scores.length){host.innerHTML="";return;}
-var best=scores[0];
-var bits=scores.slice(0,3).map(function(s,i){return (i===0?"<b>"+s.n+" "+euro(s.total)+"</b>":s.n+" "+euro(s.total));});
-host.innerHTML="<div class=listrow style=margin:0 0 10px><div style=flex:1><b>Voordeligst: "+best.n+"</b><div class=meta>"+bits.join(" \u00b7 ")+"</div></div><div class=price>"+euro(best.total)+"</div></div>";
+var extras=S.extras||[];
+if(!extras.length){host.innerHTML="";return;}
+var scores=scoreStores();var best=scores[0];
+var bits=scores.filter(function(s){return s.total>0;}).slice(0,3).map(function(s,i){return (i===0?"<b>"+s.n+" "+euro(s.total)+"</b>":s.n+" "+euro(s.total));});
+host.innerHTML="<div class=listrow style=margin:0 0 10px><div style=flex:1><b>Voordeligst: "+best.n+"</b><div class=meta>"+(bits.join(" \u00b7 ")||"alleen actieprijs")+"</div></div><div class=price>"+euro(best.total)+"</div></div>";
 }
 function paintStores(){
 ["setstores","huisstores"].forEach(function(id){
@@ -50,29 +47,33 @@ else {btn.classList.remove("onlist");var qb=btn.querySelector(".qtybox");if(qb)q
 });
 };
 function markList(){
-var host=document.getElementById("folderlijst");if(host)host.innerHTML="";
-document.querySelectorAll("#lijstbody .swipewrap").forEach(function(w){
-var k=w.getAttribute("data-k")||"";var row=w.querySelector(".listrow");if(!row)return;
-var ex=extraOfKey(k);
-if(!ex)return;
-var i=+String(k).split(":")[1];
-if(row.querySelector(".qtybox")){row.querySelector(".qtyn").textContent=String(ex.q||1);var pr=row.querySelector(".price");if(pr)pr.textContent=euro(ex.line||((ex.cents||0)*(ex.q||1)));return;}
-var tails=row.querySelectorAll(":scope > .meta");var tail=tails.length?tails[tails.length-1]:null;
-var wrap=document.createElement("div");wrap.style.cssText="display:flex;align-items:center;gap:8px;flex:none";
-wrap.innerHTML="<div class=qtybox><button type=button class=qtybtn data-act=exqty data-i="+i+" data-d=-1>\u2212</button><span class=qtyn>"+(ex.q||1)+"</span><button type=button class=qtybtn data-act=exqty data-i="+i+" data-d=1>+</button></div><div class=price>"+euro(ex.line||((ex.cents||0)*(ex.q||1)))+"</div>";
-if(tail)tail.replaceWith(wrap);else row.appendChild(wrap);
+var body=document.getElementById("lijstbody");
+var slot=document.getElementById("folderlijst");
+var extras=S.extras||[];
+var html="";
+extras.forEach(function(e,i){
+var k="e:"+i;
+var on=!!(S.checked&&S.checked[k]);
+var prijs=e.line||((e.cents||0)*(e.q||1));
+html+="<div class=swipewrap data-k='"+k+"' data-extra=1><div class=swipebg>Verwijderen</div><div class='listrow "+(on?"muted":"")+"'><button type=button class='ck "+(on?"on":"")+"' data-act=tog data-k='"+k+"'>"+(on?"\u2713":"")+"</button><div style=flex:1><b>"+String(e.n||"").replace(/</g,"")+"</b><div class=meta>"+[storeN(e.sid),e.pack||""].filter(Boolean).join(" \u00b7 ")+"</div></div><div class=qtybox><button type=button class=qtybtn data-act=exqty data-i="+i+" data-d=-1>\u2212</button><span class=qtyn>"+(e.q||1)+"</span><button type=button class=qtybtn data-act=exqty data-i="+i+" data-d=1>+</button></div><div class=price>"+euro(prijs)+"</div></div></div>";
 });
+if(slot){slot.style.display=extras.length?"block":"none";slot.innerHTML=html;}
+else if(body){
+body.querySelectorAll("[data-extra]").forEach(function(n){n.remove();});
+if(html){var empty=body.querySelector("p.sub");if(empty)empty.remove();body.insertAdjacentHTML("afterbegin",html);}
+}
 paintScore();
 }
 function addHit(hit){
 if(!hit||!hit.n||typeof S==="undefined")return;
 S.extras=S.extras||[];S.removed=S.removed||{};
 Object.keys(S.removed).forEach(function(k){if(String(k).indexOf("e:")===0)delete S.removed[k];});
-if(findEx(hit.n,hit.s)>=0){window.markFolder();return;}
+if(findEx(hit.n,hit.s)>=0){window.markFolder();markList();return;}
 S.extras.push({n:hit.n,q:1,s:"Houdbaar",sid:hit.s||"",cents:+hit.now||0,line:+hit.now||0,pack:hit.qty||hit.pack||""});
 if(typeof save==="function")save();
 window.markFolder();
 if(typeof drawList==="function")drawList();
+markList();
 }
 function bump(i,d){
 var e=(S.extras||[])[i];if(!e)return;
@@ -81,6 +82,7 @@ if(e.q<=0)S.extras.splice(i,1);else e.line=(e.cents||0)*e.q;
 if(typeof save==="function")save();
 window.markFolder();
 if(typeof drawList==="function")drawList();
+markList();
 }
 document.addEventListener("click",function(e){
 var t=e.target;if(t&&t.nodeType===3)t=t.parentNode;if(!t||!t.closest)return;
@@ -93,11 +95,12 @@ if(q){e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.sto
 var ad=t.closest("[data-act=adddeal]");
 if(ad){e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();var hit=hitFrom(ad);if(hit)addHit(hit);return;}
 var st=t.closest("[data-act=store]");
-if(st){e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();var id=st.getAttribute("data-id");S.stores=S.stores||{};var on=S.stores[id]!==false;var nOn=0;Object.keys(S.stores).forEach(function(k){if(S.stores[k]!==false)nOn++;});if(on&&nOn<=1)return;S.stores[id]=!on;if(typeof save==="function")save();paintStores();if(typeof drawList==="function")drawList();}
+if(st){e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();var id=st.getAttribute("data-id");S.stores=S.stores||{};var on=S.stores[id]!==false;var nOn=0;Object.keys(S.stores).forEach(function(k){if(S.stores[k]!==false)nOn++;});if(on&&nOn<=1)return;S.stores[id]=!on;if(typeof save==="function")save();paintStores();markList();}
 },true);
 if(typeof drawList==="function"&&!drawList._actie){var _dl=drawList;drawList=function(){_dl();markList();};drawList._actie=true;}
 if(typeof drawFolder==="function"&&!drawFolder._actie){var _df=drawFolder;drawFolder=function(){_df();window.markFolder();};drawFolder._actie=true;}
 if(typeof drawHuis==="function"&&!drawHuis._actie){var _dh=drawHuis;drawHuis=function(){_dh();paintStores();};drawHuis._actie=true;}
+if(typeof show==="function"&&!show._extras){var _sh=show;show=function(id){_sh(id);if(id==="lijst")markList();};show._extras=true;}
 window.paintFolderList=markList;
 setTimeout(function(){window.markFolder();markList();paintStores();},0);
 })();
