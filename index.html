@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#C45A38"/>
 <title>WeAte — De Barto's</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="style.css?v=16"/>
+<link rel="stylesheet" href="style.css?v=17"/>
 </head>
 <body>
 <div class="phone">
@@ -51,14 +51,7 @@
   <section class="view" id="lijst">
     <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Lijst</b></div><span class="sub" id="lijstline"></span></div>
     <div class="sc">
-      <div class="sec">A of huismerk</div>
-      <div class="row brandbar" style="margin-bottom:8px">
-        <button class="chip" data-b="A">A-merk</button>
-        <button class="chip" data-b="B">Huismerk</button>
-        <button class="chip on" data-b="MIX">Mix</button>
-        <button class="chip" data-b="CHEAP">Goedkoopst</button>
-      </div>
-      <p class="note" id="lijstbrandhint">Tik A/B op een product. Folder staat achter het product.</p>
+      <p class="note">Vink af in de winkel. Actie-regels hebben − en +.</p>
       <div id="lijstbody"></div>
     </div>
     <button class="fab" id="fab">+</button>
@@ -76,19 +69,10 @@
   <section class="view" id="winkel">
     <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Winkel</b></div></div>
     <div class="sc">
-      <div class="sec">A-merk of huismerk</div>
-      <p class="note" id="winkelbrandhint">Standaard voor nieuwe regels. Per product op de lijst te overrulen.</p>
-      <div class="row brandbar" id="brands" style="margin-bottom:14px">
-        <button class="chip" data-b="A">A-merk</button>
-        <button class="chip" data-b="B">Huismerk</button>
-        <button class="chip on" data-b="MIX">Mix</button>
-        <button class="chip" data-b="CHEAP">Goedkoopst</button>
-      </div>
-      <p class="note" id="brandsave"></p>
       <div class="sec">Jouw winkels</div>
-      <p class="note">Zet uit wat je nooit doet. Folderhits tellen per winkel.</p>
+      <p class="note">Zet uit wat je nooit doet.</p>
       <div class="row" id="storepick" style="margin-bottom:14px"></div>
-      <p class="note">Folder via PrijsProfeet. Geen kassaprijs op de rest.</p>
+      <p class="note">Actieprijs alleen bij die keten. Rest is indicatie.</p>
       <div id="stores"></div>
     </div>
     <nav class="nav"><button data-go="bord">Bord</button><button data-go="lijst">Lijst</button><button data-go="folder">Actie</button><button class="on" data-go="winkel">Winkel</button><button data-go="huis">Huis</button></nav>
@@ -97,12 +81,11 @@
     <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Huis</b></div></div>
     <div class="sc">
       <h1 id="huisnaam">De Barto's</h1>
-      <p class="sub">Tik iemand aan voor dieet, smaak en sportavonden. Ontbijt en lunch staan niet op het bord. Zelf op de lijst zetten als je ze nodig hebt.</p>
+      <p class="sub">Tik iemand aan voor dieet, smaak en sportavonden.</p>
       <div id="people"></div>
       <button class="btn g full" id="addPerson">+ Gezinslid</button>
       <label>Weekbudget (€)</label>
       <input id="budget" type="number" min="20" step="5"/>
-      <p class="note">Geen rem. Alleen zodat je op Winkel kunt zien of je in de buurt zit.</p>
       <div class="sec">Zelf vast op de lijst</div>
       <div id="always"></div>
       <button class="btn w full" id="addAlways">+ Product</button>
@@ -113,13 +96,12 @@
     <div class="hd"><button class="btn s w" data-go="bord">Terug</button><b>Gegeten</b></div>
     <div class="sc">
       <h1 id="etitle"></h1>
-      <p class="sub">Wie at mee? Kind: tik nog eens voor half / niet.</p>
+      <p class="sub">Wie at mee?</p>
       <div id="ewho"></div>
       <label>Op of restje?</label>
       <div class="row" id="erest"><button class="chip on" data-v="op">Op</button><button class="chip" data-v="rest">Restje</button></div>
       <div id="erestto" style="display:none;margin-top:12px">
         <div class="sec">Waar gaat het restje heen?</div>
-        <p class="note">Morgenavond, of later voor wie sport. Geen tweede boodschappen.</p>
         <div class="row" id="erestchips"></div>
       </div>
       <button class="btn g full" style="margin-top:16px" id="edone">Opslaan</button>
@@ -137,7 +119,6 @@
       <label>Lust dit niet (smaak)</label><div class="row" id="eveto"></div>
       <label>Zelf toevoegen</label><input id="eextra" placeholder="bijv. olijven"/>
       <label>Avondschema</label><div id="esched"></div>
-      <p class="note">Apart = ander eenvoudig bord die avond. Later = hetzelfde, opwarmen.</p>
       <button class="btn g full" id="esave">Opslaan</button>
       <button class="btn w full" style="margin-top:8px" id="edel">Verwijderen</button>
     </div>
@@ -168,10 +149,10 @@
   });
 })();
 </script>
-<script src="recipes.js?v=16"></script>
-<script src="app.js?v=16"></script>
-<script src="weekplan.js?v=16"></script>
-<script src="folder.js?v=16"></script>
-<script src="brands.js?v=16"></script>
+<script src="recipes.js?v=17"></script>
+<script src="app.js?v=17"></script>
+<script src="weekplan.js?v=17"></script>
+<script src="folder.js?v=17"></script>
+<script src="brands.js?v=17"></script>
 </body>
 </html>
