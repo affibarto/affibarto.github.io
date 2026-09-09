@@ -45,14 +45,14 @@
   </section>
   <section class="view" id="lijst">
     <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Lijst</b></div><span class="sub" id="lijstline"></span></div>
-    <div class="sc"><p class="note">Vink links. Actie-regels: − en +.</p><div id="lijstbody"></div></div>
+    <div class="sc"><p class="note">Boven: uit de folder, met − en +. Rest van het bord daaronder.</p><div id="lijstbody"></div></div>
     <button class="fab" id="fab">+</button>
     <nav class="nav"><button data-go="bord">Bord</button><button class="on" data-go="lijst">Lijst</button><button data-go="folder">Actie</button><button data-go="winkel">Winkel</button><button data-go="huis">Huis</button></nav>
   </section>
   <section class="view" id="folder">
     <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Actie</b></div><span class="sub" id="folderline"></span></div>
     <div class="sc">
-      <p class="note">Filter op winkel. Tik een product: het gaat op de lijst.</p>
+      <p class="note">Tik een product. Daarna Lijst: staat bovenaan onder Uit de folder.</p>
       <div class="row" id="folderpick" style="margin-bottom:12px"></div>
       <div id="folderbody"></div>
     </div>
@@ -62,7 +62,7 @@
     <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Winkel</b></div></div>
     <div class="sc">
       <div class="sec">Jouw winkels</div>
-      <p class="note">Zet uit wat je nooit doet.</p>
+      <p class="note">Zet uit wat je nooit doet. Bedragen zijn folderprijs van wat op de lijst staat, plus indicatie voor de rest.</p>
       <div class="row" id="storepick" style="margin-bottom:14px">
         <button class="chip on" data-act="store" data-id="dirk">Dirk</button>
         <button class="chip on" data-act="store" data-id="ah">Albert Heijn</button>
@@ -108,7 +108,6 @@
       <div class="row" id="eport"><button class="chip" data-v="small">Klein</button><button class="chip" data-v="normal">Normaal</button><button class="chip" data-v="large">Groot</button></div>
       <label>Dieet / allergie (hard)</label><div class="row" id="ediet"></div>
       <label>Lust dit niet (smaak)</label><div class="row" id="eveto"></div>
-      <label>Zelf toevoegen</label><input id="eextra"/>
       <label>Avondschema</label><div id="esched"></div>
       <button class="btn g full" id="esave">Opslaan</button>
       <button class="btn w full" style="margin-top:8px" id="edel">Verwijderen</button>
@@ -119,7 +118,6 @@
     <div class="sc">
       <label>Product</label><input id="aname" placeholder="Melk, komkommer"/>
       <label>Hoeveel</label><input id="aqty" value="1"/>
-      <label>Rubriek</label>
       <div class="row" id="asec"><button class="chip" data-s="Huis">Huis</button><button class="chip" data-s="Vers">Vers</button><button class="chip" data-s="Koeling">Koeling</button><button class="chip" data-s="Houdbaar">Houdbaar</button></div>
       <button class="btn g full" id="asave">Zet op de lijst</button>
     </div>
@@ -140,11 +138,11 @@
   });
 })();
 </script>
-<script src="recipes.js?v=20"></script>
-<script src="app.js?v=20"></script>
-<script src="weekplan.js?v=20"></script>
-<script src="folder.js?v=20"></script>
-<script src="brands.js?v=20"></script>
-<script src="listfix.js?v=20"></script>
+<script src="recipes.js?v=21"></script>
+<script src="app.js?v=21"></script>
+<script src="weekplan.js?v=21"></script>
+<script src="folder.js?v=21"></script>
+<script src="brands.js?v=21"></script>
+<script src="listfix.js?v=21"></script>
 </body>
 </html>
