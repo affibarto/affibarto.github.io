@@ -11,5 +11,5 @@ document.addEventListener("click",function(e){var fs=e.target.closest&&e.target.
 if(typeof show==="function"&&!show._folderWrap){var _show=show;show=function(id){_show(id);if(id==="folder")drawFolder();};show._folderWrap=true;}
 fetch("bonus.json?v=8",{cache:"no-store"}).then(function(r){return r.json();}).then(applyFolder).catch(function(){});
 Promise.all(["ah","jumbo","lidl","plus","dirk"].map(function(s){return fetch("folder-"+s+".json?v=8",{cache:"no-store"}).then(function(r){return r.json();});})).then(function(arr){var items=[];arr.forEach(function(d){(d.items||[]).forEach(function(it){items.push(it);});});applyFull({week:(arr[0]&&arr[0].week)||"",source:"PrijsProfeet",fetched:(arr[0]&&arr[0].fetched)||"",items:items});}).catch(function(){});
-(function loadExtra(src,flag){if(window[flag])return;window[flag]=1;var s=document.createElement("script");s.src=src;document.body.appendChild(s);})("deal.js?v=9","_dealjs");
+(function loadExtra(src,flag){if(window[flag])return;window[flag]=1;var s=document.createElement("script");s.src=src;document.body.appendChild(s);})("deal.js?v=10","_dealjs");
 (function loadExtra(src,flag){if(window[flag])return;window[flag]=1;var s=document.createElement("script");s.src=src;document.body.appendChild(s);})("pick.js?v=8","_pickjs");
