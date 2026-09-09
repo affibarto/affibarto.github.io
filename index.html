@@ -8,13 +8,13 @@
 <meta name="theme-color" content="#C45A38"/>
 <title>WeAte — De Barto's</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="style.css?v=29"/>
+<link rel="stylesheet" href="style.css?v=30"/>
 <style>
 .qtybox{display:flex;align-items:center;gap:6px;flex:none}
 .qtybtn{width:34px;height:34px;border:0;border-radius:10px;background:#EDE0D0;font:800 18px Outfit,sans-serif;color:#2A1810}
 .qtyn{min-width:18px;text-align:center;font-weight:800}
 .listrow.onlist{outline:2px solid #C45A38;outline-offset:-2px}
-#mic{right:88px}
+#mic{right:88px;font-size:13px}
 </style>
 </head>
 <body>
@@ -51,13 +51,14 @@
     </div>
   </section>
   <section class="view" id="lijst">
-    <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Lijst</b></div><span class="sub" id="lijstline"></span><button class="btn s w" id="listgear" type="button">Winkels</button></div>
+    <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Lijst</b></div><button class="btn s w" type="button" id="clearlist">Leeg</button><button class="btn s w" id="listgear" type="button">Winkels</button></div>
     <div class="sc">
+      <p class="sub" id="lijstline"></p>
       <div id="listscore"></div>
       <div id="folderlijst"></div>
       <div id="lijstbody"></div>
     </div>
-    <button class="fab" id="mic" type="button">\u563</button>
+    <button class="fab" id="mic" type="button">Zeg</button>
     <button class="fab" id="fab">+</button>
     <nav class="nav"><button data-go="bord">Bord</button><button class="on" data-go="lijst">Lijst</button><button data-go="folder">Actie</button><button data-go="huis">Huis</button></nav>
   </section>
@@ -143,13 +144,14 @@
   });
 })();
 </script>
-<script src="recipes.js?v=29"></script>
-<script src="app.js?v=29"></script>
-<script src="weekplan.js?v=29"></script>
-<script src="folder.js?v=29"></script>
-<script src="brands.js?v=29"></script>
-<script src="listfix.js?v=29"></script>
-<script src="actie.js?v=29"></script>
-<script src="listview.js?v=29"></script>
+<script src="recipes.js?v=30"></script>
+<script src="app.js?v=30"></script>
+<script src="weekplan.js?v=30"></script>
+<script src="folder.js?v=30"></script>
+<script src="brands.js?v=30"></script>
+<script src="listfix.js?v=30"></script>
+<script src="actie.js?v=30"></script>
+<script src="listview.js?v=30"></script>
+<script src="boardfix.js?v=30"></script>
 </body>
 </html>
