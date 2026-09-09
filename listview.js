@@ -8,6 +8,13 @@ function row(k,name,meta,qtxt,rightHtml){
 var on=!!(S.checked&&S.checked[k]);
 return "<div class=swipewrap data-k='"+String(k).replace(/'/g,"")+"'><div class=swipebg>Verwijderen</div><div class='listrow "+(on?"muted":"")+"'><button type=button class='ck "+(on?"on":"")+"' data-act=tog data-k='"+String(k).replace(/'/g,"")+"'>"+(on?"\u2713":"")+"</button><div style=flex:1><b>"+String(name||"").replace(/</g,"")+"</b>"+(meta?"<div class=meta>"+meta+"</div>":"")+"</div>"+(rightHtml||("<div class=qtyn>"+qtxt+"</div>"))+"</div></div>";
 }
+function eatersMain(d){
+if(typeof S==="undefined"||!S.people)return [];
+return S.people.filter(function(p){
+var m=(typeof modeOf==="function")?modeOf(d,p):(p.sched&&p.sched[d])||"eat";
+return m==="eat"||m==="later";
+});
+}
 function drawListByMeal(){
 var body=document.getElementById("lijstbody");if(!body)return;
 var slotF=document.getElementById("folderlijst");if(slotF)slotF.innerHTML="";
@@ -16,19 +23,14 @@ var days=typeof DAYS!=="undefined"?DAYS:["Ma","Di","Wo","Do","Vr","Za","Zo"];
 days.forEach(function(d){
 var slot=S.plan&&S.plan[d];if(!slot||!slot.id||slot.leftover)return;
 var rec=typeof recipeBy==="function"?recipeBy(slot.id):null;if(!rec)return;
-var scale=(typeof portions==="function"&&typeof eatersOn==="function")?portions(eatersOn(d))/4:1;
+var who=eatersMain(d);
+var scale=(typeof portions==="function")?portions(who.length?who:(S.people||[]))/4:1;
 html+="<div class=sec>"+d+" \u00b7 "+rec.t+"</div>";
 (rec.ing||[]).forEach(function(it){
 if(S.omit&&S.omit[d+":"+slot.id+":"+it.k])return;
 var k=it.k+"@"+d;
 if(S.removed&&S.removed[k])return;
 n++;html+=row(k,nm(it.k),rec.t,qty(it.q*scale));
-});
-if(typeof apartOn==="function")apartOn(d).forEach(function(p){
-var ap=(typeof APART!=="undefined"&&APART.find(function(a){return a.id===(S.apartPick[d+":"+p.id]||"tosti");}))||(APART&&APART[0]);
-if(!ap)return;
-html+="<div class=sec>"+d+" \u00b7 "+p.name+" apart</div>";
-(ap.ing||[]).forEach(function(it){var k=it.k+"@"+d+"@"+p.id;if(S.removed&&S.removed[k])return;n++;html+=row(k,nm(it.k),ap.t,qty(it.q));});
 });
 });
 var extras=S.extras||[];
@@ -42,7 +44,7 @@ html+=row(k,e.n,[storeN(e.sid),e.pack||""].filter(Boolean).join(" \u00b7 "),e.q|
 });
 }
 var extraN=0;
-(S.always||[]).forEach(function(a,i){
+(S.always||[]).forEach(function(a){
 var k=a.k&&typeof CAT!=="undefined"&&CAT[a.k]?a.k:("x:"+a.n);
 if(S.removed&&S.removed[k])return;
 if(!extraN)html+="<div class=sec>Extra</div>";extraN++;n++;
@@ -79,14 +81,10 @@ if(typeof toast==="function")toast(items.map(function(i){return i.q+"\u00d7 "+i.
 }
 function startListen(){
 var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-if(!SR){
-var t=window.prompt("Wat moet er op de lijst? (komma of en)");
-if(t)addSpoken(t);
-return;
-}
+if(!SR){var t=window.prompt("Wat moet er op de lijst?");if(t)addSpoken(t);return;}
 var rec=new SR();rec.lang="nl-NL";rec.interimResults=false;rec.maxAlternatives=1;
 if(typeof toast==="function")toast("Zeg het maar…");
-rec.onresult=function(ev){var said=ev.results[0][0].transcript;addSpoken(said);};
+rec.onresult=function(ev){addSpoken(ev.results[0][0].transcript);};
 rec.onerror=function(){var t=window.prompt("Niet verstaan. Typ het:");if(t)addSpoken(t);};
 rec.start();
 }
