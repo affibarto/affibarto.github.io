@@ -34,12 +34,8 @@
     <div class="sc">
       <p class="sub" id="rmeta"></p>
       <div class="sec">Wie eet dit?</div>
-      <p class="note">Tik iemand: mee → later → apart → niet.</p>
       <div id="rwho" class="row" style="margin-bottom:12px"></div>
-      <div id="rfijn" style="display:none">
-        <div class="sec">Fijn (zelfde pan)</div>
-        <div id="rfijnrow" class="row" style="margin-bottom:12px"></div>
-      </div>
+      <div id="rfijn" style="display:none"><div id="rfijnrow" class="row"></div></div>
       <div id="rwarn"></div>
       <b>Ingrediënten</b><div id="rings"></div>
       <b>Bereiding</b><ol id="rstps"></ol>
@@ -49,17 +45,14 @@
   </section>
   <section class="view" id="lijst">
     <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Lijst</b></div><span class="sub" id="lijstline"></span></div>
-    <div class="sc">
-      <p class="note">Vink links. Actie: − en +. Swipe naar links = weg.</p>
-      <div id="lijstbody"></div>
-    </div>
+    <div class="sc"><p class="note">Vink links. Actie-regels: − en +.</p><div id="lijstbody"></div></div>
     <button class="fab" id="fab">+</button>
     <nav class="nav"><button data-go="bord">Bord</button><button class="on" data-go="lijst">Lijst</button><button data-go="folder">Actie</button><button data-go="winkel">Winkel</button><button data-go="huis">Huis</button></nav>
   </section>
   <section class="view" id="folder">
     <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Actie</b></div><span class="sub" id="folderline"></span></div>
     <div class="sc">
-      <p class="note">Tik een actie: op de lijst. Zoek of filter op winkel.</p>
+      <p class="note">Filter op winkel. Tik een product: het gaat op de lijst.</p>
       <div class="row" id="folderpick" style="margin-bottom:12px"></div>
       <div id="folderbody"></div>
     </div>
@@ -69,7 +62,14 @@
     <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Winkel</b></div></div>
     <div class="sc">
       <div class="sec">Jouw winkels</div>
-      <div class="row" id="storepick" style="margin-bottom:14px"></div>
+      <p class="note">Zet uit wat je nooit doet.</p>
+      <div class="row" id="storepick" style="margin-bottom:14px">
+        <button class="chip on" data-act="store" data-id="dirk">Dirk</button>
+        <button class="chip on" data-act="store" data-id="ah">Albert Heijn</button>
+        <button class="chip on" data-act="store" data-id="lidl">Lidl</button>
+        <button class="chip on" data-act="store" data-id="jumbo">Jumbo</button>
+        <button class="chip on" data-act="store" data-id="plus">Plus</button>
+      </div>
       <div id="stores"></div>
     </div>
     <nav class="nav"><button data-go="bord">Bord</button><button data-go="lijst">Lijst</button><button data-go="folder">Actie</button><button class="on" data-go="winkel">Winkel</button><button data-go="huis">Huis</button></nav>
@@ -78,7 +78,6 @@
     <div class="hd"><div class="hdleft"><div class="hdlogo" style="display:grid;place-items:center;background:#C45A38;color:#fff;font-weight:800;font-size:11px">WA</div><b>Huis</b></div></div>
     <div class="sc">
       <h1 id="huisnaam">De Barto's</h1>
-      <p class="sub">Tik iemand aan voor dieet, smaak en sportavonden.</p>
       <div id="people"></div>
       <button class="btn g full" id="addPerson">+ Gezinslid</button>
       <label>Weekbudget (€)</label>
@@ -94,11 +93,8 @@
     <div class="sc">
       <h1 id="etitle"></h1>
       <div id="ewho"></div>
-      <label>Op of restje?</label>
       <div class="row" id="erest"><button class="chip on" data-v="op">Op</button><button class="chip" data-v="rest">Restje</button></div>
-      <div id="erestto" style="display:none;margin-top:12px">
-        <div class="row" id="erestchips"></div>
-      </div>
+      <div id="erestto" style="display:none;margin-top:12px"><div class="row" id="erestchips"></div></div>
       <button class="btn g full" style="margin-top:16px" id="edone">Opslaan</button>
     </div>
   </section>
@@ -112,7 +108,7 @@
       <div class="row" id="eport"><button class="chip" data-v="small">Klein</button><button class="chip" data-v="normal">Normaal</button><button class="chip" data-v="large">Groot</button></div>
       <label>Dieet / allergie (hard)</label><div class="row" id="ediet"></div>
       <label>Lust dit niet (smaak)</label><div class="row" id="eveto"></div>
-      <label>Zelf toevoegen</label><input id="eextra" placeholder="bijv. olijven"/>
+      <label>Zelf toevoegen</label><input id="eextra"/>
       <label>Avondschema</label><div id="esched"></div>
       <button class="btn g full" id="esave">Opslaan</button>
       <button class="btn w full" style="margin-top:8px" id="edel">Verwijderen</button>
@@ -144,11 +140,11 @@
   });
 })();
 </script>
-<script src="recipes.js?v=18"></script>
-<script src="app.js?v=18"></script>
-<script src="weekplan.js?v=18"></script>
-<script src="folder.js?v=18"></script>
-<script src="brands.js?v=18"></script>
-<script src="listfix.js?v=18"></script>
+<script src="recipes.js?v=20"></script>
+<script src="app.js?v=20"></script>
+<script src="weekplan.js?v=20"></script>
+<script src="folder.js?v=20"></script>
+<script src="brands.js?v=20"></script>
+<script src="listfix.js?v=20"></script>
 </body>
 </html>
