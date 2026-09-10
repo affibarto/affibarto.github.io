@@ -1,7 +1,7 @@
 {
   "week": "7–13 sep 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-09-09",
+  "fetched": "2026-09-10",
   "note": "Folder/actie, automatisch. Geen kassaprijs.",
   "ah": {
     "pasta": {
@@ -11,25 +11,11 @@
       "name": "AH Spaghetti all' uovo",
       "until": "2026-09-13"
     },
-    "kip": {
-      "was": 579,
-      "now": 399,
-      "deal": "VOOR 3.99",
-      "name": "AH Kipfilet pepersaus met wortel en doperwt",
-      "until": "2026-09-13"
-    },
     "kaas": {
       "was": 299,
       "now": 250,
       "deal": "2 VOOR 5.00",
       "name": "AH Cheddar geraspte kaas",
-      "until": "2026-09-13"
-    },
-    "boter": {
-      "was": 499,
-      "now": 250,
-      "deal": "1 + 1 GRATIS",
-      "name": "Becel Met roomboter smeerbaar",
       "until": "2026-09-13"
     },
     "yoghurt": {
@@ -39,25 +25,11 @@
       "name": "Activia Yoghurt naturel",
       "until": "2026-09-13"
     },
-    "rijst": {
-      "was": 329,
-      "now": 214,
-      "deal": "35% KORTING",
-      "name": "Zonnatura Hazelnoot rijst drink",
-      "until": "2026-09-13"
-    },
     "wraps": {
-      "was": 1156,
-      "now": 867,
-      "deal": "Gratis bezorging bij 15 euro",
-      "name": "Knorr Tomaten wraps 4-pack",
-      "until": "2026-09-20"
-    },
-    "spinazie": {
-      "was": 449,
-      "now": 350,
-      "deal": "2 VOOR 7.00",
-      "name": "AH Terra Pureersoep broccoli spinazie",
+      "was": 987,
+      "now": 888,
+      "deal": "Gratis bezorging bij 12.50 euro",
+      "name": "Santa Maria Tortilla wraps volkoren 6x large 3-pack",
       "until": "2026-09-13"
     },
     "brood": {
@@ -82,11 +54,11 @@
       "until": "2026-09-13"
     },
     "mozzarella": {
-      "was": 796,
-      "now": 597,
-      "deal": "Gratis bezorging bij 15 euro",
-      "name": "Knorr Ovenpasta tomaat mozzarella 4-pack",
-      "until": "2026-09-20"
+      "was": 279,
+      "now": 250,
+      "deal": "2 VOOR 5.00",
+      "name": "AH Mozzarella geraspt",
+      "until": "2026-09-13"
     },
     "hagelslag": {
       "was": 349,
@@ -100,20 +72,6 @@
       "now": 175,
       "deal": "2 VOOR 3.50",
       "name": "Chiquita Groene bananen",
-      "until": "2026-09-13"
-    },
-    "zalm": {
-      "was": 415,
-      "now": 200,
-      "deal": "2 VOOR 3.99",
-      "name": "Johma Zalm salade",
-      "until": "2026-09-13"
-    },
-    "komkommer": {
-      "was": 249,
-      "now": 200,
-      "deal": "2 VOOR 4.00",
-      "name": "AH Rauwkost komkommer",
       "until": "2026-09-13"
     }
   },
@@ -133,10 +91,10 @@
       "until": "2026-09-15"
     },
     "melk": {
-      "was": 1076,
-      "now": 968,
+      "was": 1074,
+      "now": 966,
       "deal": "10% korting",
-      "name": "Campina Halfvolle Melk Voordeelpack 4 x 2.4 L",
+      "name": "Campina Halfvolle Melk 6 x 500 ml Fles Multipack",
       "until": "2026-10-06"
     },
     "aardappel": {
@@ -146,20 +104,6 @@
       "name": "Jumbo Aardappelen Kruimig 1 kg",
       "until": "2026-09-15"
     },
-    "pesto": {
-      "was": 259,
-      "now": 225,
-      "deal": "2 voor 4,50",
-      "name": "Jumbo Groene Pesto Salade 200 g ",
-      "until": "2026-09-29"
-    },
-    "rijst": {
-      "was": 289,
-      "now": 145,
-      "deal": "50% korting",
-      "name": "Lassie Ready to Load Rijst Spiced 250g",
-      "until": "2026-09-22"
-    },
     "wraps": {
       "was": 319,
       "now": 239,
@@ -167,32 +111,11 @@
       "name": "Santa Maria Tortilla Wraps Corn&Wheat Medium 8 Stuks 336 g",
       "until": "2026-09-15"
     },
-    "paprika": {
-      "was": 199,
-      "now": 149,
-      "deal": "25% korting",
-      "name": "Chio Fusion Peanuts Sweet Paprika Style 200 g",
-      "until": "2026-09-22"
-    },
-    "mozzarella": {
-      "was": 249,
-      "now": 125,
-      "deal": "50% korting",
-      "name": "Bertolli Pasta Presto Pomodoro Mozzarella 70g",
-      "until": "2026-09-22"
-    },
     "zalm": {
       "was": 569,
       "now": 285,
       "deal": "1+1 gratis",
       "name": "Jumbo Fijnproevers IJslandse Gerookte Zalm Lang Gesneden 100 g",
-      "until": "2026-09-15"
-    },
-    "komkommer": {
-      "was": 399,
-      "now": 299,
-      "deal": "voor 2,99",
-      "name": "Jumbo Groene Salade Tomaat & Komkommer 340 g",
       "until": "2026-09-15"
     }
   },
@@ -217,16 +140,16 @@
       "deal": "Actie",
       "name": "Nederlandse scharreleieren",
       "until": "2026-09-13"
-    },
-    "champignon": {
-      "was": 199,
-      "now": 179,
-      "deal": "10% korting",
-      "name": "Roerbakmix champignons",
-      "until": "2026-09-13"
     }
   },
   "plus": {
+    "gehakt": {
+      "was": 899,
+      "now": 764,
+      "deal": "folder",
+      "name": "Biologisch PLUS Rundergehakt",
+      "until": "2026-09-22"
+    },
     "pasta": {
       "was": 239,
       "now": 159,
@@ -242,10 +165,10 @@
       "until": "2026-09-11"
     },
     "kip": {
-      "was": 499,
-      "now": 250,
+      "was": 179,
+      "now": 99,
       "deal": "folder",
-      "name": "Knorr Trattoria kipfilet romana",
+      "name": "Plus Scharrel kipfilet KVP",
       "until": "2026-09-15"
     },
     "ui": {
@@ -262,32 +185,18 @@
       "name": "Neutraal Gouda Geraspte kaas pittig",
       "until": "2026-09-11"
     },
-    "boter": {
-      "was": 349,
-      "now": 300,
-      "deal": "folder",
-      "name": "PLUS Korenlanders Roomboter margrietjes",
-      "until": "2026-09-11"
-    },
     "pesto": {
-      "was": 329,
-      "now": 200,
+      "was": 299,
+      "now": 149,
       "deal": "folder",
-      "name": "Plus Groene pesto",
-      "until": "2026-09-11"
-    },
-    "rijst": {
-      "was": 499,
-      "now": 399,
-      "deal": "folder",
-      "name": "Plus Kip Sweet Chili met Kantonese rijst",
-      "until": "2026-09-11"
+      "name": "Plus Pastasaus groene pesto",
+      "until": "2026-09-22"
     },
     "spinazie": {
-      "was": 549,
-      "now": 275,
+      "was": 195,
+      "now": 99,
       "deal": "folder",
-      "name": "Iglo Smaaksensatie Spinazie",
+      "name": "Plus Spinazie gewassen",
       "until": "2026-09-15"
     },
     "sla": {
@@ -297,33 +206,19 @@
       "name": "Plus IJsbergsla fijn",
       "until": "2026-09-11"
     },
-    "paprika": {
-      "was": 309,
-      "now": 154,
-      "deal": "folder",
-      "name": "Silvo Gerookte paprika",
-      "until": "2026-09-15"
-    },
     "ham": {
       "was": 209,
       "now": 200,
       "deal": "folder",
       "name": "PLUS Puur van smaak Kleintje Achterham",
-      "until": "2026-09-11"
+      "until": "2026-09-12"
     },
     "mozzarella": {
-      "was": 399,
-      "now": 266,
+      "was": 299,
+      "now": 169,
       "deal": "folder",
-      "name": "Grand'Italia Gnocchi mozzarella e pomodoro",
-      "until": "2026-09-11"
-    },
-    "beleg": {
-      "was": 625,
-      "now": 312,
-      "deal": "folder",
-      "name": "Calvé Pindakaas Extra crunchy",
-      "until": "2026-09-11"
+      "name": "Parrano Rasp mozzarella",
+      "until": "2026-09-15"
     },
     "hagelslag": {
       "was": 339,
@@ -334,17 +229,17 @@
     },
     "zalm": {
       "was": 459,
-      "now": 250,
+      "now": 344,
       "deal": "folder",
-      "name": "Plus Lasagne met zalm",
-      "until": "2026-09-15"
+      "name": "Plus Gerookte Noorse zalm",
+      "until": "2026-09-11"
     },
     "komkommer": {
-      "was": 419,
-      "now": 299,
+      "was": 75,
+      "now": 69,
       "deal": "folder",
-      "name": "Plus Salade Tomaat Komkommer",
-      "until": "2026-09-11"
+      "name": "Plus Komkommer",
+      "until": "2026-09-15"
     },
     "linzen": {
       "was": 199,
@@ -354,11 +249,11 @@
       "until": "2026-09-11"
     },
     "lasagne": {
-      "was": 219,
+      "was": 299,
       "now": 150,
       "deal": "folder",
-      "name": "Honig Lasagnebladen verdi",
-      "until": "2026-09-15"
+      "name": "La Molisana Lasagnebladen no 219",
+      "until": "2026-09-22"
     }
   },
   "dirk": {
@@ -381,13 +276,6 @@
       "now": 149,
       "deal": "ACTIE",
       "name": "1 de Beste Uien",
-      "until": "2026-09-15"
-    },
-    "rijst": {
-      "was": 499,
-      "now": 399,
-      "deal": "ACTIE",
-      "name": "Padifood Chinese kip chili rijst kantonese stijl",
       "until": "2026-09-15"
     },
     "spinazie": {
