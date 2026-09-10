@@ -87,7 +87,7 @@ if(hit>=0)S.always[hit].q=(+S.always[hit].q||1)+it.q;
 else S.always.push({n:it.n,q:it.q});
 });
 if(typeof save==="function")save();
-drawListByMeal();
+if(typeof window.drawList==="function")window.drawList();else drawListByMeal();
 if(typeof toast==="function")toast(items.map(function(i){return i.q+"\u00d7 "+i.n;}).join(", "));
 }
 function startListen(){
@@ -104,5 +104,5 @@ var t=e.target;if(t&&t.nodeType===3)t=t.parentNode;
 if(t&&t.id==="mic"){e.preventDefault();e.stopPropagation();startListen();}
 },true);
 window.addSpoken=addSpoken;
-setTimeout(function(){var v=document.getElementById("lijst");if(v&&v.classList.contains("on"))drawListByMeal();},0);
+setTimeout(function(){var v=document.getElementById("lijst");if(v&&v.classList.contains("on")&&typeof window.drawList==="function")window.drawList();},0);
 })();
