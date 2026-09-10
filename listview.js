@@ -38,7 +38,7 @@ var extras=S.extras||[];
 if(extras.length){
 html+="<div class=sec>Actie</div>";
 extras.forEach(function(e,i){
-var k="e:"+i;if(S.removed&&S.removed[k])return;n++;
+var k="e:"+i+":"+e.n;if(S.removed&&S.removed[k])return;n++;
 var prijs=e.line||((e.cents||0)*(e.q||1));
 var right="<div class=qtybox><button type=button class=qtybtn data-act=exqty data-i="+i+" data-d=-1>\u2212</button><span class=qtyn>"+(e.q||1)+"</span><button type=button class=qtybtn data-act=exqty data-i="+i+" data-d=1>+</button></div><div class=price>"+euro(prijs)+"</div>";
 html+=row(k,e.n,[storeN(e.sid),e.pack||""].filter(Boolean).join(" \u00b7 "),e.q||1,right);
@@ -56,6 +56,16 @@ body.innerHTML=html||"<p class=sub>Nog leeg. Zet eten op het bord, tik een actie
 if(typeof paintScore==="function")paintScore();
 }
 window.drawList=drawListByMeal;
+// re-apply brands/actie wraps that ran before listview overwrote drawList
+if(typeof paintBrand==="function"||typeof stampItemBrands==="function"||typeof markList==="function"){
+  var _base=window.drawList;
+  window.drawList=function(){
+    _base();
+    if(typeof markList==="function")markList();
+    if(typeof paintBrand==="function")paintBrand();
+    if(typeof stampItemBrands==="function")stampItemBrands();
+  };
+}
 var WOORD={een:1,"\u00e9\u00e9n":1,twee:2,drie:3,vier:4,vijf:5,zes:6,zeven:7,acht:8,negen:9,tien:10,elf:11,twaalf:12};
 function parseSpeak(text){
 text=String(text||"").toLowerCase().replace(/\ben\b/g,",").replace(/[+/]/g,",");
