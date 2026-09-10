@@ -52,7 +52,15 @@ if(!extraN)html+="<div class=sec>Extra</div>";extraN++;n++;
 html+=row(k,a.n||nm(a.k),"zelf",qty(a.q||1));
 });
 var line=document.getElementById("lijstline");if(line)line.textContent=n?n+" open":"";
-body.innerHTML=html||"<p class=sub>Nog leeg. Zet eten op het bord, tik een actie, of spreek iets in.</p>";
+if(!html){
+  var micOk=!!(window.SpeechRecognition||window.webkitSpeechRecognition||document.getElementById("mic"));
+  body.innerHTML="<div class=empty-list>"+
+    "<p class=\"sub ghost\">Nog stil hier. Zet avondeten op het bord, tik een actie, of zeg wat erbij moet.</p>"+
+    "<button type=button class=\"card emptycta\" data-go=\"bord\"><div class=p><b>Naar Bord</b><div class=meta>Kies of laat voorstellen zetten</div></div></button>"+
+    "<button type=button class=\"card emptycta\" data-go=\"folder\"><div class=p><b>Naar Actie</b><div class=meta>Folderhits van Dirk, AH, Lidl…</div></div></button>"+
+    "<button type=button class=\"card emptycta\" id=emptymic><div class=p><b>"+(micOk?"Spreek in":"Typ iets in")+"</b><div class=meta>"+(micOk?"Zeg wat er op de lijst moet":"Via + of typ een product")+"</div></div></button>"+
+    "</div>";
+}else body.innerHTML=html;
 if(typeof paintScore==="function")paintScore();
 }
 window.drawList=drawListByMeal;
@@ -101,7 +109,9 @@ rec.start();
 }
 document.addEventListener("click",function(e){
 var t=e.target;if(t&&t.nodeType===3)t=t.parentNode;
-if(t&&t.id==="mic"){e.preventDefault();e.stopPropagation();startListen();}
+if(!t)return;
+var mic=t.id==="mic"||t.id==="emptymic"||(t.closest&&t.closest("#emptymic"));
+if(mic){e.preventDefault();e.stopPropagation();startListen();return;}
 },true);
 window.addSpoken=addSpoken;
 setTimeout(function(){var v=document.getElementById("lijst");if(v&&v.classList.contains("on")&&typeof window.drawList==="function")window.drawList();},0);
