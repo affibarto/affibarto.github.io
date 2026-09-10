@@ -41,11 +41,12 @@ S.extras=[];S.always=[];S.checked={};S.removed={};
 if(typeof save==="function")save();
 if(typeof drawList==="function")drawList();
 if(typeof drawHuis==="function")drawHuis();
-if(typeof toast==="function")toast("Actie en extra weg. Bord blijft.");
+if(typeof toast==="function")toast("Acties en extra weg. Boodschappen van het bord blijven.");
 };
 document.addEventListener("click",function(e){
 var t=e.target;if(t&&t.nodeType===3)t=t.parentNode;
-if(t&&t.id==="clearlist"){e.preventDefault();e.stopPropagation();if(window.confirm("Acties en extra van de lijst af? Gerechten blijven op het bord."))window.clearList();}
+var btn=(t&&t.closest)?t.closest("#clearlist"):(t&&t.id==="clearlist"?t:null);
+if(btn){e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();if(window.confirm("Acties en extra van de lijst af? Gerechten blijven op het bord."))window.clearList();}
 },true);
 setTimeout(wrapDays,0);
 })();
