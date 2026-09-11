@@ -36,6 +36,7 @@ h1{font-size:26px;margin:0 0 8px}
 .dayrow{display:flex;align-items:center;gap:12px;cursor:pointer}
 .dayrow .dow{width:36px;font-weight:800}
 .av{width:44px;height:44px;border-radius:16px;background:#5F8A62;color:#fff;display:grid;place-items:center;font-weight:800;flex:none}
+.av.g{background:#C45A38}
 .av.k{background:#E4CBA8;color:#2b2108}
 .person{display:flex;gap:12px;align-items:center;cursor:pointer}
 .listrow{display:flex;gap:12px;align-items:center}
@@ -76,3 +77,8 @@ ol li{margin:0 0 8px}
 .empty-list .ghost{opacity:.75;margin:0 0 14px}
 .empty-list .emptycta{cursor:pointer}
 .sugrow{cursor:pointer}
+
+
+.person.prow{display:flex;align-items:center;gap:8px}
+.person.prow .pgrow{flex:1;display:flex;gap:12px;align-items:center;border:0;background:transparent;padding:0;text-align:left;font:inherit;color:inherit;cursor:pointer}
+.person.prow .chip{flex-shrink:0;font-size:12px;padding:6px 10px}
