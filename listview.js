@@ -57,7 +57,7 @@ if(!html){
   body.innerHTML="<div class=empty-list>"+
     "<p class=\"sub ghost\">Nog stil hier. Zet avondeten op het bord, tik een actie, of zeg wat erbij moet.</p>"+
     "<button type=button class=\"card emptycta\" data-go=\"bord\"><div class=p><b>Naar Bord</b><div class=meta>Kies of laat voorstellen zetten</div></div></button>"+
-    "<button type=button class=\"card emptycta\" data-go=\"folder\"><div class=p><b>Naar Actie</b><div class=meta>Folderhits van Dirk, AH, Lidl…</div></div></button>"+
+    "<button type=button class=\"card emptycta\" data-go=\"folder\"><div class=p><b>Naar Actie</b><div class=meta>Folderhits van alle supers…</div></div></button>"+
     "<button type=button class=\"card emptycta\" id=emptymic><div class=p><b>"+(micOk?"Spreek in":"Typ iets in")+"</b><div class=meta>"+(micOk?"Zeg wat er op de lijst moet":"Via + of typ een product")+"</div></div></button>"+
     "</div>";
 }else body.innerHTML=html;
