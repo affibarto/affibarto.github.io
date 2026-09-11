@@ -82,3 +82,13 @@ ol li{margin:0 0 8px}
 .person.prow{display:flex;align-items:center;gap:8px}
 .person.prow .pgrow{flex:1;display:flex;gap:12px;align-items:center;border:0;background:transparent;padding:0;text-align:left;font:inherit;color:inherit;cursor:pointer}
 .person.prow .chip{flex-shrink:0;font-size:12px;padding:6px 10px}
+
+/* Buurtwinkels */
+.nearby-search{display:flex;gap:8px;align-items:center;margin:0 0 10px}
+.nearby-search input{flex:1;margin:0}
+.nearbyacts{display:flex;flex-direction:column;gap:6px;align-items:flex-end;flex:none}
+.nearbyrow{cursor:pointer}
+.nearbyrow .badge{margin-right:2px}
+.nearby-err{color:#9A3B2A}
+.nearby-ok{color:#3F6B42}
+.nearby-entry .note{margin-bottom:0}
