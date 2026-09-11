@@ -45,8 +45,17 @@ function put(hit,q){
 if(!hit||!hit.n)return;
 S.extras=S.extras||[];
 var i=-1;for(var x=0;x<S.extras.length;x++){if(S.extras[x].n===hit.n&&(S.extras[x].sid||"")===(hit.s||""))i=x;}
-if(i>=0)S.extras[i].q=(+S.extras[i].q||1)+q;
-else S.extras.push({n:hit.n,q:q,s:"Houdbaar",sid:hit.s||"",cents:+hit.now||0,line:(+hit.now||0)*q,pack:hit.qty||hit.q||"",deal:hit.deal||""});
+var pack=hit.qty||hit.q||hit.pack||"";
+var brand=hit.b||hit.brand||"";
+var deal=hit.deal||"";
+if(i>=0){
+S.extras[i].q=(+S.extras[i].q||1)+q;
+if(!S.extras[i].b&&brand)S.extras[i].b=brand;
+if(!S.extras[i].brand&&brand)S.extras[i].brand=brand;
+if(!S.extras[i].pack&&pack)S.extras[i].pack=pack;
+if(!S.extras[i].deal&&deal)S.extras[i].deal=deal;
+if(!S.extras[i].sid&&hit.s)S.extras[i].sid=hit.s;
+}else S.extras.push({n:hit.n,q:q,s:"Houdbaar",sid:hit.s||"",cents:+hit.now||0,line:(+hit.now||0)*q,pack:pack,deal:deal,b:brand,brand:brand});
 var e=S.extras[i>=0?i:S.extras.length-1];e.line=(e.cents||0)*e.q;
 if(typeof save==="function")save();
 window.markFolder();
