@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#C45A38"/>
 <title>WeAte — De Barto's</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="style.css?v=35"/>
+<link rel="stylesheet" href="style.css?v=36"/>
 <style>
 .qtybox{display:flex;align-items:center;gap:6px;flex:none}
 .qtybtn{width:34px;height:34px;border:0;border-radius:10px;background:#EDE0D0;font:800 18px Outfit,sans-serif;color:#2A1810}
@@ -80,6 +80,27 @@
     <div class="sc">
       <p class="note">Zet uit wat je nooit doet.</p>
       <div class="row" id="setstores"></div>
+      <div class="nearby-entry" style="margin-top:14px">
+        <button type="button" class="btn w full" id="opennnearby" data-act="opennnearby">In de buurt</button>
+        <p class="note" style="margin-top:8px">Weekje weg? Zoek Dirk, AH, Lidl, Jumbo of Plus bij je in de buurt.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="nearbypanel">
+    <div class="hd"><button class="btn s w" type="button" id="closenearby">Sluit</button><b>In de buurt</b></div>
+    <div class="sc">
+      <p class="note">Weekje weg? Zoek winkels bij je in de buurt.</p>
+      <button type="button" class="btn g full" id="nearbygps">Gebruik mijn locatie</button>
+      <p class="note" style="margin-top:8px">WeAte vraagt je locatie alleen om Dirk, Albert Heijn, Lidl, Jumbo en Plus in de buurt te zoeken. Niet opgeslagen op een server.</p>
+      <label for="nearbyq">Of plaats / postcode</label>
+      <div class="nearby-search">
+        <input id="nearbyq" type="text" placeholder="bijv. Utrecht of 3511" autocomplete="postal-code"/>
+        <button type="button" class="btn s" id="nearbysearch">Zoek</button>
+      </div>
+      <div id="nearbystatus" class="note"></div>
+      <div id="nearbybody"></div>
+      <p class="note">OpenStreetMap-data — kan incompleet zijn. Geen Picnic.</p>
     </div>
   </section>
   <section class="view" id="huis">
@@ -93,7 +114,8 @@
       <label>Weekbudget (€)</label>
       <input id="budget" type="number" min="20" step="5"/>
       <div class="sec">Winkels in je vergelijking</div>
-      <div class="row" id="huisstores" style="margin-bottom:14px"></div>
+      <div class="row" id="huisstores" style="margin-bottom:10px"></div>
+      <button type="button" class="btn w full" id="opennnearby2" data-act="opennnearby" style="margin-bottom:14px">In de buurt</button>
       <div class="sec">Zelf vast op de lijst</div>
       <div id="always"></div>
       <button class="btn w full" id="addAlways">+ Product</button>
@@ -153,16 +175,17 @@
   });
 })();
 </script>
-<script src="recipes.js?v=35"></script>
-<script src="app.js?v=35"></script>
-<script src="weekplan.js?v=35"></script>
-<script src="suggest.js?v=35"></script>
-<script src="folder.js?v=35"></script>
-<script src="brands.js?v=35"></script>
-<script src="listfix.js?v=35"></script>
-<script src="actie.js?v=35"></script>
-<script src="listview.js?v=35"></script>
-<script src="boardfix.js?v=35"></script>
-<script src="assist.js?v=35"></script>
+<script src="recipes.js?v=36"></script>
+<script src="app.js?v=36"></script>
+<script src="weekplan.js?v=36"></script>
+<script src="suggest.js?v=36"></script>
+<script src="folder.js?v=36"></script>
+<script src="brands.js?v=36"></script>
+<script src="listfix.js?v=36"></script>
+<script src="actie.js?v=36"></script>
+<script src="nearby.js?v=36"></script>
+<script src="listview.js?v=36"></script>
+<script src="boardfix.js?v=36"></script>
+<script src="assist.js?v=36"></script>
 </body>
 </html>

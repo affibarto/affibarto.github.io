@@ -1,7 +1,7 @@
 (function(){
 if(window._actieOnce)return;window._actieOnce=1;
 function euro(c){return "\u20ac"+((+c||0)/100).toFixed(2).replace(".",",");}
-function closePanel(){var p=document.getElementById("storepanel");if(p)p.classList.remove("on");}
+function closePanel(){var p=document.getElementById("storepanel");if(p)p.classList.remove("on");var n=document.getElementById("nearbypanel");if(n)n.classList.remove("on");}
 function scoreStores(){
 var extras=S.extras||[];
 var stores=typeof activeStores==="function"?activeStores():(STORES||[]);
@@ -22,6 +22,7 @@ var bits=scores.slice(0,3).map(function(s,i){return (i===0?"<b>"+s.n+" "+euro(s.
 host.innerHTML="<div class=listrow style=margin:0 0 10px><div style=flex:1><b>Voordeligst: "+best.n+"</b><div class=meta>"+bits.join(" \u00b7 ")+"</div></div><div class=price>"+euro(best.total)+"</div></div>";
 }
 window.paintScore=paintScore;
+window.paintStores=paintStores;
 function paintStores(){
 ["setstores","huisstores"].forEach(function(id){
 var el=document.getElementById(id);if(!el||typeof STORES==="undefined")return;
