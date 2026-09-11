@@ -39,6 +39,8 @@ if(isHouseBrand(brand)||isHouseBrand(name))return "B";
 if(String(brand).trim())return "A";
 return "";
 }
+window.detectBrandTier=detectBrandTier;
+window.isHouseBrand=isHouseBrand;
 function ask(title,body,yes,no,onYes,onNo){
 var p=document.getElementById("askbox");
 if(!p){
