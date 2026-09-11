@@ -20,6 +20,7 @@ h1{font-size:26px;margin:0 0 8px}
 .chip.on{background:#C45A38;color:#fff}
 .chip.warn{background:#F3D2B8;color:#7A3B1A}
 .chip.hard{background:#3A2A24;color:#fff}
+.chip:disabled{opacity:.45;cursor:not-allowed}
 .row{display:flex;flex-wrap:wrap;gap:8px}
 .card,.person,.listrow,.store,.dayrow{background:#fff;border-radius:18px;padding:12px 14px;margin:0 0 8px;border:0;width:100%;text-align:left;font-family:inherit;color:inherit;overflow:hidden}
 .card img,.heroimg{width:100%;height:140px;object-fit:cover;display:block;background:#E4CBA8}
