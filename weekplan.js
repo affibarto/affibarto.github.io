@@ -10,7 +10,8 @@ function cookPool(){if(typeof cooksOn==="function")return cooksOn();return (S.pe
 function defaultCookId(){var c=cookPool();if(c.length)return c[0].id;return (S.people&&S.people[0]&&S.people[0].id)||1;}
 function resolveCook(id){var c=cookPool();if(!c.length)return id||1;if(c.some(function(p){return p.id===id;}))return id;return c[0].id;}
 function weekKey(){return isoWeek();}
-function getWeek(){ensure();var k=weekKey();if(!S.weekPlans[k]){var w={};DAYS.forEach(function(d){var who={};(S.people||[]).forEach(function(p){who[p.id]=(p.sched&&p.sched[d])||"eat";});w[d]={who:who,cook:defaultCookId(),guests:0};});S.weekPlans[k]=w;}return S.weekPlans[k];}
+function personDayMode(p,d){if(p.sched&&p.sched[d])return p.sched[d];return (p.role==="guest"||p.temp)?"skip":"eat";}
+function getWeek(){ensure();var k=weekKey();if(!S.weekPlans[k]){var w={};DAYS.forEach(function(d){var who={};(S.people||[]).forEach(function(p){who[p.id]=personDayMode(p,d);});w[d]={who:who,cook:defaultCookId(),guests:0};});S.weekPlans[k]=w;}return S.weekPlans[k];}
 function slot(day){var w=getWeek();return w[day]||(w[day]={who:{},cook:defaultCookId(),guests:0});}
 function guestsOf(day){var s=S.weekPlans&&S.weekPlans[weekKey()]&&S.weekPlans[weekKey()][day];return s&&+s.guests||0;}
 function filled(){var w=S.weekPlans&&S.weekPlans[weekKey()];return !!(w&&w._done);}
@@ -21,15 +22,15 @@ function boardMealCount(){
   return n;
 }
 function panel(){var el=document.getElementById("weekplan");if(el)return el;el=document.createElement("section");el.className="panel";el.id="weekplan";el.innerHTML="<div class=hd><button class='btn s w' id=wpclose>Later</button><b>Weekplanning</b></div><div class=sc id=wpbody></div>";(document.querySelector(".phone")||document.body).appendChild(el);return el;}
-function drawPlan(){ensure();var w=getWeek();var host=document.getElementById("wpbody");if(!host)return;var html="<p class=note>Deze week. Per dag wie thuis / later / anders / weg, wie kookt, visite.</p>";DAYS.forEach(function(d){var sl=w[d]||{who:{},cook:1,guests:0};
+function drawPlan(){ensure();var w=getWeek();var host=document.getElementById("wpbody");if(!host)return;var html="<p class=note>Deze week. Per dag wie thuis / later / anders / weg, wie kookt, visite. Tijdelijke koks (visite) kun je hierboven kiezen om te koken — ze eten niet standaard de hele week mee.</p>";DAYS.forEach(function(d){var sl=w[d]||{who:{},cook:1,guests:0};
 html+="<div class=sec style=margin-top:16px>"+DLAB[d]+"</div>";
 var cooks=cookPool();sl.cook=resolveCook(sl.cook);
 html+="<div class=meta style=margin:4px 0 8px>Kookt</div><div class=row>";
 if(!cooks.length){html+="<span class=note>Niemand gemarkeerd als kok — zet dat in Huis.</span>";}
 else{cooks.forEach(function(p){html+="<button class='chip "+(sl.cook===p.id?"on":"")+"' data-act=wpcook data-d="+d+" data-id="+p.id+">"+p.name+"</button>";});}
 html+="</div><div class=meta style=margin:8px 0 6px>Wie eet</div>";
-(S.people||[]).forEach(function(p){var m=sl.who[p.id]||"eat";html+="<div style='display:flex;align-items:center;gap:8px;margin:0 0 8px'><b style=min-width:64px>"+p.name+"</b><div class=row>";MODES.forEach(function(md){html+="<button class='chip "+(m===md.id?"on":"")+"' data-act=wpmode data-d="+d+" data-id="+p.id+" data-m="+md.id+">"+md.n+"</button>";});html+="</div></div>";});
-html+="<label>Visite</label><input type=number min=0 max=12 value="+(sl.guests||0)+" data-act=wpguests data-d="+d+">";});
+(S.people||[]).filter(function(p){return p.role!=="guest"&&!p.temp;}).forEach(function(p){var m=sl.who[p.id]||personDayMode(p,d);html+="<div style='display:flex;align-items:center;gap:8px;margin:0 0 8px'><b style=min-width:64px>"+p.name+"</b><div class=row>";MODES.forEach(function(md){html+="<button class='chip "+(m===md.id?"on":"")+"' data-act=wpmode data-d="+d+" data-id="+p.id+" data-m="+md.id+">"+md.n+"</button>";});html+="</div></div>";});
+html+="<label>Visite (extra eters)</label><input type=number min=0 max=12 value="+(sl.guests||0)+" data-act=wpguests data-d="+d+">";});
 html+="<button class='btn g full' id=wpsave style=margin-top:16px>Planning zetten</button>";
 host.innerHTML=html;}
 function openPlan(){panel().classList.add("on");drawPlan();}

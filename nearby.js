@@ -9,7 +9,7 @@ var CHAINS=[
   {id:"plus",n:"Plus",re:/\bplus\b/i}
 ];
 var RADIUS_KM=12;
-var CACHE_KEY="weate.nearby.v1";
+var CACHE_KEY="weate.nearby.v2";
 var _lastNomAt=0;
 var _busy=false;
 
@@ -80,59 +80,86 @@ function closePanel(){
   var p=document.getElementById("nearbypanel");
   if(p)p.classList.remove("on");
 }
+function isKnownChain(id){
+  if(!id)return false;
+  if(typeof STORES!=="undefined")return STORES.some(function(s){return s.id===id;});
+  return CHAINS.some(function(c){return c.id===id;});
+}
 function renderList(rows){
   var host=document.getElementById("nearbybody");
   if(!host)return;
   window._nearbyRows=rows||[];
   if(!rows||!rows.length){
-    host.innerHTML="<p class=note>Geen Dirk, Albert Heijn, Lidl, Jumbo of Plus in de buurt gevonden. Probeer een andere plaats.</p>";
+    host.innerHTML="<p class=note>Geen supermarkten in de buurt gevonden. Probeer een andere plaats.</p>";
     return;
   }
   var storesOn=(typeof S!=="undefined"&&S.stores)||{};
   var html="";
   rows.forEach(function(r,i){
-    var on=storesOn[r.id]!==false;
+    var known=!!r.known&&isKnownChain(r.id);
+    var on=known&&storesOn[r.id]!==false;
+    var badge=r.chain||"Supermarkt";
+    var actHtml;
+    if(known){
+      actHtml="<button type=button class='chip "+(on?"on":"")+"' data-act=neartog data-id='"+esc(r.id)+"'>"+(on?"Aan":"Zet aan")+"</button>";
+    }else{
+      actHtml="<button type=button class='chip' disabled title='Alleen bekende ketens kun je als actiewinkel zetten'>Zet aan</button>";
+    }
     html+="<div class='listrow nearbyrow' data-act=nearmap data-i="+i+">"+
       "<div style=flex:1>"+
         "<b>"+esc(r.name)+"</b>"+
-        "<div class=meta><span class=badge>"+esc(r.chain)+"</span> · "+fmtKm(r.km)+(r.addr?" · "+esc(r.addr):"")+"</div>"+
+        "<div class=meta><span class=badge>"+esc(badge)+"</span> · "+fmtKm(r.km)+(r.addr?" · "+esc(r.addr):"")+"</div>"+
+        (known?"":"<div class=meta style=margin-top:4px>Alleen bekende ketens kun je als actiewinkel zetten</div>")+
       "</div>"+
       "<div class=nearbyacts>"+
-        "<button type=button class='chip "+(on?"on":"")+"' data-act=neartog data-id='"+esc(r.id)+"'>"+(on?"Aan":"Zet aan")+"</button>"+
+        actHtml+
         "<a class='btn s w' href='"+mapsUrl(r.lat,r.lon,r.name)+"' target=_blank rel=noopener data-act=nearmaplink>Kaart</a>"+
       "</div>"+
     "</div>";
   });
   host.innerHTML=html;
 }
+function isPicnic(tags,name){
+  tags=tags||{};
+  var blob=[tags.brand,tags.name,tags.operator,tags["brand:en"],tags["name:nl"],name].filter(Boolean).join(" ");
+  return /\bpicnic\b/i.test(blob);
+}
 function parseOverpass(data,lat,lon){
   var seen={},out=[];
   (data.elements||[]).forEach(function(el){
     var tags=el.tags||{};
-    var ch=chainOf(tags);
-    if(!ch)return;
     var la=el.lat,lo=el.lon;
     if(el.center){la=el.center.lat;lo=el.center.lon;}
     if(la==null||lo==null)return;
     var km=haversine(lat,lon,+la,+lo);
     if(km>RADIUS_KM+0.4)return;
-    var key=ch.id+"|"+Math.round(+la*4000)+"|"+Math.round(+lo*4000);
+    var ch=chainOf(tags);
+    var name=tags.name||tags.brand||(ch&&ch.n)||"Supermarkt";
+    if(isPicnic(tags,name))return;
+    // Picnic: chainOf returns null; still skip by name/brand
+    var key=(ch?ch.id:"s")+"|"+Math.round(+la*4000)+"|"+Math.round(+lo*4000);
     if(seen[key])return;
     seen[key]=1;
-    var name=tags.name||tags.brand||ch.n;
-    if(/\bpicnic\b/i.test(name))return;
     var addr=[tags["addr:street"],tags["addr:housenumber"],tags["addr:city"]||tags["addr:place"]].filter(Boolean).join(" ").replace(/\s+/g," ").trim();
-    out.push({id:ch.id,chain:ch.n,name:name,lat:+la,lon:+lo,addr:addr,km:km});
+    out.push({
+      id:ch?ch.id:("osm:"+(el.type||"n")+":"+(el.id||(Math.round(+la*1e4)+"_"+Math.round(+lo*1e4)))),
+      chain:ch?ch.n:"Supermarkt",
+      known:!!ch,
+      name:name,
+      lat:+la,lon:+lo,addr:addr,km:km
+    });
   });
   out.sort(function(a,b){return a.km-b.km;});
   return out;
 }
 function overpassQuery(lat,lon){
   var b=bboxAround(lat,lon,RADIUS_KM);
-  // bbox + shop=supermarket is indexed and reliable; brands filtered client-side
+  // All OSM supermarkets (+ hypermarket); Picnic filtered client-side
   return "[out:json][timeout:40];("+
     "node[\"shop\"=\"supermarket\"]("+b.s+","+b.w+","+b.n+","+b.e+");"+
     "way[\"shop\"=\"supermarket\"]("+b.s+","+b.w+","+b.n+","+b.e+");"+
+    "node[\"shop\"=\"hypermarket\"]("+b.s+","+b.w+","+b.n+","+b.e+");"+
+    "way[\"shop\"=\"hypermarket\"]("+b.s+","+b.w+","+b.n+","+b.e+");"+
     ");out center tags;";
 }
 function fetchNearby(lat,lon,label){
@@ -223,9 +250,10 @@ function searchTyped(){
 }
 function enableChain(id){
   if(!id||typeof S==="undefined")return;
-  var known=false;
-  if(typeof STORES!=="undefined")known=STORES.some(function(s){return s.id===id;});
-  if(!known)return;
+  if(!isKnownChain(id)){
+    if(typeof toast==="function")toast("Alleen bekende ketens kun je als actiewinkel zetten");
+    return;
+  }
   S.stores=S.stores||{};
   S.stores[id]=true;
   if(typeof save==="function")save();
