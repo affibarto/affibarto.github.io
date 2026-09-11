@@ -133,13 +133,23 @@ if(product&&!pack){
 var pp=parsePack(product);
 if(pp.pack){pack=normPack(pp.pack);product=pp.name||product;}
 }
+var tier="";
+if(typeof window.detectBrandTier==="function"){
+tier=window.detectBrandTier({b:brand,brand:brand,n:product||bonusName||(folder&&folder.n)||""})||"";
+}else if(brand){
+/* assist not loaded yet: crude house vs A */
+var bl=String(brand).toLowerCase();
+if(/^(ah|jumbo|plus|lidl|dirk|aldi|gwoon|picnic|hoogvliet|dekamarkt|vomar|ekoplaza)\b/.test(bl))tier="B";
+else tier="A";
+}
 return {
 title:confident&&product?product:catTitle,
 brand:brand,
 pack:pack,
 store:store,
 deal:deal,
-meal:""
+meal:"",
+tier:tier
 };
 }
 function joinMeta(parts){
@@ -187,6 +197,10 @@ var k=it.k+"@"+d;
 if(S.removed&&S.removed[k])return;
 var need=qty(it.q*scale);
 var info=enrichIngredient(it.k);
+if((info.tier==="A"||info.tier==="B")){
+S.itemBrand=S.itemBrand||{};
+if(S.itemBrand[k]===undefined){S.itemBrand[k]=info.tier;window._brandDirty=1;}
+}
 n++;html+=row(k,info.title,mealMeta(info,d+" \u00b7 "+rec.t,need),need);
 });
 });
@@ -195,6 +209,14 @@ if(extras.length){
 html+="<div class=sec>Actie</div>";
 extras.forEach(function(e,i){
 var k="e:"+i+":"+e.n;if(S.removed&&S.removed[k])return;n++;
+if(!(e.brandTier==="A"||e.brandTier==="B")&&typeof window.detectBrandTier==="function"){
+var t=window.detectBrandTier({b:e.b||e.brand,brand:e.b||e.brand,n:e.n});
+if(t==="A"||t==="B"){e.brandTier=t;window._brandDirty=1;}
+}
+if((e.brandTier==="A"||e.brandTier==="B")){
+S.itemBrand=S.itemBrand||{};
+if(S.itemBrand[k]===undefined){S.itemBrand[k]=e.brandTier;window._brandDirty=1;}
+}
 var prijs=e.line||((e.cents||0)*(e.q||1));
 var right="<div class=qtybox><button type=button class=qtybtn data-act=exqty data-i="+i+" data-d=-1>\u2212</button><span class=qtyn>"+(e.q||1)+"</span><button type=button class=qtybtn data-act=exqty data-i="+i+" data-d=1>+</button></div><div class=price>"+euro(prijs)+"</div>";
 html+=row(k,e.n,extraMeta(e),e.q||1,right);
@@ -218,6 +240,7 @@ if(!html){
     "<button type=button class=\"card emptycta\" id=emptymic><div class=p><b>"+(micOk?"Spreek in":"Typ iets in")+"</b><div class=meta>"+(micOk?"Zeg wat er op de lijst moet":"Via + of typ een product")+"</div></div></button>"+
     "</div>";
 }else body.innerHTML=html;
+if(window._brandDirty){window._brandDirty=0;if(typeof save==="function")save();}
 if(typeof paintScore==="function")paintScore();
 }
 window.drawList=drawListByMeal;

@@ -1,12 +1,54 @@
 S.itemBrand=S.itemBrand||{};
 function brandHint(){return{A:"Standaard A-merk. Tik A/B op een regel om één product te overrulen.",B:"Standaard huismerk. Tik A/B op een regel om één product te overrulen.",MIX:"Standaard: vers/koel A, houdbaar huismerk. Per regel te overrulen.",CHEAP:"Standaard laagste indicatie. Per regel nog A of B zetten."}[S.brand]||"";}
-function itemMode(k){return(S.itemBrand&&S.itemBrand[k])||"auto";}
+function extraBrandTier(k){
+if(!k||String(k).indexOf("e:")!==0||!S.extras)return "";
+var m=String(k).match(/^e:(\d+):(.*)$/);
+if(!m)return "";
+var name=m[2],idx=+m[1];
+var ex=S.extras[idx];
+if(ex&&ex.n===name&&(ex.brandTier==="A"||ex.brandTier==="B"))return ex.brandTier;
+for(var i=0;i<S.extras.length;i++){
+ex=S.extras[i];
+if(ex&&ex.n===name&&(ex.brandTier==="A"||ex.brandTier==="B"))return ex.brandTier;
+}
+return "";
+}
+function itemMode(k){
+var v=S.itemBrand&&S.itemBrand[k];
+if(v==="A"||v==="B"||v==="auto")return v;
+var fb=extraBrandTier(k);
+if(fb==="A"||fb==="B")return fb;
+return "auto";
+}
 function effectiveBrand(item){var ov=itemMode(item.k);if(ov==="A"||ov==="B")return ov;if(S.brand==="A"||S.brand==="B")return S.brand;if(S.brand==="CHEAP")return"laagste";return(item.aisle==="Vers"||item.aisle==="Koeling")?"A":"B";}
 function paintBrand(){document.querySelectorAll(".brandbar .chip").forEach(function(c){c.classList.toggle("on",c.dataset.b===S.brand);});var h=brandHint();var a=document.getElementById("lijstbrandhint");if(a)a.textContent=h;var b=document.getElementById("winkelbrandhint");if(b)b.textContent=h;var s=document.getElementById("brandsave");if(s&&typeof buildList==="function"){var items=buildList().filter(function(i){return!S.checked[i.k];});var nA=0,nB=0;items.forEach(function(i){if(effectiveBrand(i)==="B")nB++;else if(effectiveBrand(i)==="A")nA++;});s.textContent=nA+"× A-merk · "+nB+"× huismerk op deze lijst. Bedragen zijn indicatie, geen kassaprijs.";}}
 if(typeof unitPrice==="function"&&!unitPrice._wrapped){var _up=unitPrice;unitPrice=function(cat,retailer,brand,k){var ov=k&&S.itemBrand&&S.itemBrand[k];if(ov==="A"||ov==="B")brand=ov;return _up(cat,retailer,brand,k);};unitPrice._wrapped=true;}
-function stampItemBrands(){var root=document.getElementById("lijstbody");if(!root)return;root.querySelectorAll(".swipewrap").forEach(function(w){var k=w.dataset.k;if(!k)return;if(w.querySelector("[data-act=itembrand]"))return;var row=w.querySelector(".listrow");if(!row)return;var mode=itemMode(k);var fake={k:k,aisle:(row.closest(".swipewrap").previousElementSibling?"":"")};
-var btn=document.createElement("button");btn.className="chip "+(mode==="A"?"hard":mode==="B"?"on":"");btn.setAttribute("data-act","itembrand");btn.setAttribute("data-k",k);btn.textContent=mode==="A"?"A":mode==="B"?"B":"A/B";btn.style.flex="none";btn.style.padding="6px 10px";row.appendChild(btn);});}
-document.addEventListener("click",function(e){var ib=e.target.closest&&e.target.closest("[data-act=itembrand]");if(ib){e.preventDefault();e.stopPropagation();S.itemBrand=S.itemBrand||{};var k=ib.getAttribute("data-k");var order=["auto","A","B"];var cur=S.itemBrand[k]||"auto";var next=order[(order.indexOf(cur)+1)%3];if(next==="auto")delete S.itemBrand[k];else S.itemBrand[k]=next;save();if(typeof drawList==="function")drawList();if(typeof drawStores==="function")drawStores();if(typeof toast==="function")toast(next==="A"?"Dit product: A-merk":next==="B"?"Dit product: huismerk":"Dit product volgt de standaard");return;}var t=e.target.closest&&e.target.closest(".brandbar [data-b]");if(!t)return;S.brand=t.dataset.b;save();paintBrand();if(typeof drawList==="function")drawList();if(typeof drawStores==="function")drawStores();});
+function stampItemBrands(){
+var root=document.getElementById("lijstbody");if(!root)return;
+root.querySelectorAll(".swipewrap").forEach(function(w){
+var k=w.dataset.k;if(!k)return;
+var mode=itemMode(k);
+var label=mode==="A"?"A":mode==="B"?"B":"A/B";
+var cls="chip "+(mode==="A"?"hard":mode==="B"?"on":"");
+var btn=w.querySelector("[data-act=itembrand]");
+if(btn){
+btn.className=cls;
+btn.textContent=label;
+btn.setAttribute("data-k",k);
+return;
+}
+var row=w.querySelector(".listrow");if(!row)return;
+btn=document.createElement("button");
+btn.className=cls;
+btn.setAttribute("data-act","itembrand");
+btn.setAttribute("data-k",k);
+btn.textContent=label;
+btn.style.flex="none";
+btn.style.padding="6px 10px";
+row.appendChild(btn);
+});
+}
+document.addEventListener("click",function(e){var ib=e.target.closest&&e.target.closest("[data-act=itembrand]");if(ib){e.preventDefault();e.stopPropagation();S.itemBrand=S.itemBrand||{};var k=ib.getAttribute("data-k");var order=["auto","A","B"];var cur=S.itemBrand[k];if(cur!=="auto"&&cur!=="A"&&cur!=="B")cur="auto";var next=order[(order.indexOf(cur)+1)%3];S.itemBrand[k]=next;save();if(typeof drawList==="function")drawList();if(typeof drawStores==="function")drawStores();if(typeof toast==="function")toast(next==="A"?"Dit product: A-merk":next==="B"?"Dit product: huismerk":"Dit product volgt de standaard");return;}var t=e.target.closest&&e.target.closest(".brandbar [data-b]");if(!t)return;S.brand=t.dataset.b;save();paintBrand();if(typeof drawList==="function")drawList();if(typeof drawStores==="function")drawStores();});
 if(typeof drawList==="function"&&!drawList._brandWrap){var _dl=drawList;drawList=function(){_dl();paintBrand();stampItemBrands();};drawList._brandWrap=true;}
 if(typeof drawStores==="function"&&!drawStores._brandWrap){var _ds=drawStores;drawStores=function(){_ds();paintBrand();};drawStores._brandWrap=true;}
 try{paintBrand();if(document.getElementById("lijst")&&document.getElementById("lijst").classList.contains("on"))stampItemBrands();}catch(e){}
