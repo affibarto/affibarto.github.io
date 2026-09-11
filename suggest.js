@@ -101,10 +101,18 @@ function drawSuggest(list){
     host.innerHTML="<p class=note>Geen vrije avonden met eten thuis, of alles botst met dieet. Kies handmatig op het bord.</p><button class='btn g full' id=suggo type=button>Naar bord</button>";
     return;
   }
-  var html="<p class=note>Drie tot vijf avonden, passend bij wie thuis is. Minder veto\u2019s eerst, keukens afgewisseld. Tik een regel om te wisselen.</p>";
+  var html="<p class=note>Drie tot vijf avonden, passend bij wie thuis is. Kok uit wie kan koken. Minder veto\u2019s eerst, keukens afgewisseld. Tik een regel om te wisselen.</p>";
   S._sugDraft.forEach(function(s,i){
     var taste=s.taste?(" \u00b7 "+s.taste+" smaak"):"";
-    html+="<button type=button class='card sugrow' data-act=sugswap data-i="+i+"><div class=p><b>"+DLAB[s.day]+" \u00b7 "+s.t+"</b><div class=meta>"+s.c+" \u00b7 "+(s.time||"?")+" min"+taste+" \u00b7 tik om te wisselen</div></div></button>";
+    var cookN="";
+    var pool=(typeof cooksOn==="function")?cooksOn():(S.people||[]).filter(function(p){return !!p.canCook;});
+    if(pool.length){
+      var wkey=(function(){var d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()+3-(d.getDay()+6)%7);var w1=new Date(d.getFullYear(),0,4);var w=1+Math.round(((d-w1)/86400000-(3-(w1.getDay()+6)%7))/7);return d.getFullYear()+"-W"+String(w).padStart(2,"0");})();
+      var sl=S.weekPlans&&S.weekPlans[wkey]&&S.weekPlans[wkey][s.day];
+      var hit=pool.filter(function(p){return p.id===(sl&&sl.cook);})[0]||pool[0];
+      if(hit)cookN=" \u00b7 kookt "+hit.name;
+    }
+    html+="<button type=button class='card sugrow' data-act=sugswap data-i="+i+"><div class=p><b>"+DLAB[s.day]+" \u00b7 "+s.t+"</b><div class=meta>"+s.c+" \u00b7 "+(s.time||"?")+" min"+taste+cookN+" \u00b7 tik om te wisselen</div></div></button>";
   });
   html+="<button class='btn g full' id=sugaccept type=button style=margin-top:8px>Alles op het bord</button>";
   html+="<button class='btn w full' id=sugclose2 type=button style=margin-top:8px>Nog even niet</button>";
@@ -153,6 +161,15 @@ function acceptAll(){
     var rec=(typeof recipeBy==="function")?recipeBy(s.id):null;
     S.plan[s.day]={id:s.id,who:who,fijn:(rec&&rec.fijn)?kids.slice():[],leftover:false};
     if(S.eaten)delete S.eaten[s.day];
+    var pool=(typeof cooksOn==="function")?cooksOn():(S.people||[]).filter(function(p){return !!p.canCook;});
+    if(pool.length&&S.weekPlans){
+      var wkey=(function(){var d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()+3-(d.getDay()+6)%7);var w1=new Date(d.getFullYear(),0,4);var w=1+Math.round(((d-w1)/86400000-(3-(w1.getDay()+6)%7))/7);return d.getFullYear()+"-W"+String(w).padStart(2,"0");})();
+      var wk=S.weekPlans[wkey];
+      if(wk&&wk[s.day]){
+        var cur=wk[s.day].cook;
+        if(!pool.some(function(p){return p.id===cur;}))wk[s.day].cook=pool[0].id;
+      }
+    }
   });
   if(typeof save==="function")save();
   closeSuggest();

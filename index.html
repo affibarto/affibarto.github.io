@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#C45A38"/>
 <title>WeAte — De Barto's</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="style.css?v=34"/>
+<link rel="stylesheet" href="style.css?v=35"/>
 <style>
 .qtybox{display:flex;align-items:center;gap:6px;flex:none}
 .qtybtn{width:34px;height:34px;border:0;border-radius:10px;background:#EDE0D0;font:800 18px Outfit,sans-serif;color:#2A1810}
@@ -88,6 +88,8 @@
       <h1 id="huisnaam">De Barto's</h1>
       <div id="people"></div>
       <button class="btn g full" id="addPerson">+ Gezinslid</button>
+      <button class="btn w full" id="addCook" style="margin-top:8px">Kok toevoegen</button>
+      <p class="note">Markeer wie kan koken. Kinderen staan standaard uit. Tijdelijke kok (visite/oppas) verschijnt in de weekplanning.</p>
       <label>Weekbudget (€)</label>
       <input id="budget" type="number" min="20" step="5"/>
       <div class="sec">Winkels in je vergelijking</div>
@@ -113,7 +115,9 @@
     <div class="sc">
       <label>Naam</label><input id="ename"/>
       <label>Rol</label>
-      <div class="row" id="erole"><button class="chip" data-v="adult">Volwassene</button><button class="chip" data-v="child">Kind</button></div>
+      <div class="row" id="erole"><button class="chip" data-v="adult">Volwassene</button><button class="chip" data-v="child">Kind</button><button class="chip" data-v="guest">Gast / oppas</button></div>
+      <label>Kan koken</label>
+      <div class="row" id="ecook"><button class="chip" data-v="1">Ja</button><button class="chip" data-v="0">Nee</button></div>
       <label>Portie</label>
       <div class="row" id="eport"><button class="chip" data-v="small">Klein</button><button class="chip" data-v="normal">Normaal</button><button class="chip" data-v="large">Groot</button></div>
       <label>Dieet</label><div class="row" id="ediet"></div>
@@ -149,16 +153,16 @@
   });
 })();
 </script>
-<script src="recipes.js?v=34"></script>
-<script src="app.js?v=34"></script>
-<script src="weekplan.js?v=34"></script>
-<script src="suggest.js?v=34"></script>
-<script src="folder.js?v=34"></script>
-<script src="brands.js?v=34"></script>
-<script src="listfix.js?v=34"></script>
-<script src="actie.js?v=34"></script>
-<script src="listview.js?v=34"></script>
-<script src="boardfix.js?v=34"></script>
-<script src="assist.js?v=34"></script>
+<script src="recipes.js?v=35"></script>
+<script src="app.js?v=35"></script>
+<script src="weekplan.js?v=35"></script>
+<script src="suggest.js?v=35"></script>
+<script src="folder.js?v=35"></script>
+<script src="brands.js?v=35"></script>
+<script src="listfix.js?v=35"></script>
+<script src="actie.js?v=35"></script>
+<script src="listview.js?v=35"></script>
+<script src="boardfix.js?v=35"></script>
+<script src="assist.js?v=35"></script>
 </body>
 </html>
