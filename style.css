@@ -66,7 +66,7 @@ input{width:100%;border:1px solid #E8D4B8;border-radius:12px;padding:12px;font:i
 ol{padding-left:18px}
 ol li{margin:0 0 8px}
 .note{font-size:13px;color:#7A5C48;margin:0 0 12px}
-#folderbody img,.listrow img.thumb,img.thumb{width:48px;height:48px;min-width:48px;max-width:48px;max-height:48px;object-fit:cover;border-radius:12px;flex:none;background:#EDE0D0;display:block}
+#folderbody img,.listrow img.thumb,img.thumb,.listrow span.thumb{width:72px;height:72px;min-width:72px;max-width:72px;max-height:72px;object-fit:cover;border-radius:14px;flex:none;background:#EDE0D0;display:block}
 #rhero.heroimg{width:100%;height:140px;max-width:none;max-height:140px}
 
 /* Fase 1 — cold start hierarchy */
