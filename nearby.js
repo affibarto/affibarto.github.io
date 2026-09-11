@@ -6,7 +6,13 @@ var CHAINS=[
   {id:"ah",n:"Albert Heijn",re:/albert\s*heijn|\bah\b/i},
   {id:"lidl",n:"Lidl",re:/\blidl\b/i},
   {id:"jumbo",n:"Jumbo",re:/\bjumbo\b/i},
-  {id:"plus",n:"Plus",re:/\bplus\b/i}
+  {id:"plus",n:"Plus",re:/\bplus\b/i},
+  {id:"aldi",n:"Aldi",re:/\baldi\b/i},
+  {id:"dekamarkt",n:"Dekamarkt",re:/\bdeka\s*markt\b|\bdekamarkt\b/i},
+  {id:"ekoplaza",n:"Ekoplaza",re:/\bekoplaza\b/i},
+  {id:"hoogvliet",n:"Hoogvliet",re:/\bhoogvliet\b/i},
+  {id:"vomar",n:"Vomar",re:/\bvomar\b/i},
+  {id:"picnic",n:"Picnic",re:/\bpicnic\b/i}
 ];
 var RADIUS_KM=12;
 var CACHE_KEY="weate.nearby.v2";
@@ -17,7 +23,6 @@ function esc(s){return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").
 function chainOf(tags){
   tags=tags||{};
   var blob=[tags.brand,tags.name,tags.operator,tags["brand:en"],tags["name:nl"]].filter(Boolean).join(" ");
-  if(/\bpicnic\b/i.test(blob))return null;
   for(var i=0;i<CHAINS.length;i++){
     if(CHAINS[i].re.test(blob))return CHAINS[i];
   }
@@ -119,11 +124,6 @@ function renderList(rows){
   });
   host.innerHTML=html;
 }
-function isPicnic(tags,name){
-  tags=tags||{};
-  var blob=[tags.brand,tags.name,tags.operator,tags["brand:en"],tags["name:nl"],name].filter(Boolean).join(" ");
-  return /\bpicnic\b/i.test(blob);
-}
 function parseOverpass(data,lat,lon){
   var seen={},out=[];
   (data.elements||[]).forEach(function(el){
@@ -135,8 +135,6 @@ function parseOverpass(data,lat,lon){
     if(km>RADIUS_KM+0.4)return;
     var ch=chainOf(tags);
     var name=tags.name||tags.brand||(ch&&ch.n)||"Supermarkt";
-    if(isPicnic(tags,name))return;
-    // Picnic: chainOf returns null; still skip by name/brand
     var key=(ch?ch.id:"s")+"|"+Math.round(+la*4000)+"|"+Math.round(+lo*4000);
     if(seen[key])return;
     seen[key]=1;
@@ -154,7 +152,7 @@ function parseOverpass(data,lat,lon){
 }
 function overpassQuery(lat,lon){
   var b=bboxAround(lat,lon,RADIUS_KM);
-  // All OSM supermarkets (+ hypermarket); Picnic filtered client-side
+  // All OSM supermarkets (+ hypermarket)
   return "[out:json][timeout:40];("+
     "node[\"shop\"=\"supermarket\"]("+b.s+","+b.w+","+b.n+","+b.e+");"+
     "way[\"shop\"=\"supermarket\"]("+b.s+","+b.w+","+b.n+","+b.e+");"+

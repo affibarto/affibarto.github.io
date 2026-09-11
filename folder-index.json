@@ -1,0 +1,84 @@
+{
+  "week": "7–13 sep 2026",
+  "source": "PrijsProfeet",
+  "fetched": "2026-09-11",
+  "stores": [
+    {
+      "id": "dirk",
+      "n": "Dirk",
+      "pp": "dirk",
+      "file": "folder-dirk.json",
+      "count": 100
+    },
+    {
+      "id": "ah",
+      "n": "Albert Heijn",
+      "pp": "albert_heijn",
+      "file": "folder-ah.json",
+      "count": 100
+    },
+    {
+      "id": "lidl",
+      "n": "Lidl",
+      "pp": "lidl",
+      "file": "folder-lidl.json",
+      "count": 100
+    },
+    {
+      "id": "jumbo",
+      "n": "Jumbo",
+      "pp": "jumbo",
+      "file": "folder-jumbo.json",
+      "count": 100
+    },
+    {
+      "id": "plus",
+      "n": "Plus",
+      "pp": "plus",
+      "file": "folder-plus.json",
+      "count": 100
+    },
+    {
+      "id": "aldi",
+      "n": "Aldi",
+      "pp": "aldi",
+      "file": "folder-aldi.json",
+      "count": 100
+    },
+    {
+      "id": "dekamarkt",
+      "n": "Dekamarkt",
+      "pp": "dekamarkt",
+      "file": "folder-dekamarkt.json",
+      "count": 100
+    },
+    {
+      "id": "ekoplaza",
+      "n": "Ekoplaza",
+      "pp": "ekoplaza",
+      "file": "folder-ekoplaza.json",
+      "count": 100
+    },
+    {
+      "id": "hoogvliet",
+      "n": "Hoogvliet",
+      "pp": "hoogvliet",
+      "file": "folder-hoogvliet.json",
+      "count": 100
+    },
+    {
+      "id": "vomar",
+      "n": "Vomar",
+      "pp": "vomar",
+      "file": "folder-vomar.json",
+      "count": 100
+    },
+    {
+      "id": "picnic",
+      "n": "Picnic",
+      "pp": "picnic",
+      "file": "folder-picnic.json",
+      "count": 0
+    }
+  ]
+}
