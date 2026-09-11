@@ -106,3 +106,55 @@ ol li{margin:0 0 8px;font-weight:600}
 .nearby-err{color:#9A3B2A}
 .nearby-ok{color:#3F6B42}
 .nearby-entry .note{margin-bottom:0}
+
+
+/* Lijst compact + sticky sections */
+.listsec{margin:0 0 8px}
+.listsec .sechead{
+position:sticky;top:0;z-index:4;
+display:flex;align-items:center;gap:8px;
+padding:8px 0 6px;margin:0;
+background:#F4E6D2;
+border-bottom:1px solid transparent
+}
+.listsec.open .sechead{border-bottom-color:#E8D4B8}
+.listsec .sectog{
+flex:1;min-width:0;display:flex;align-items:center;gap:8px;
+border:0;background:transparent;padding:6px 2px;margin:0;
+font:inherit;color:inherit;text-align:left;cursor:pointer;font-weight:700
+}
+.listsec .sectog:active{opacity:.85}
+.listsec .chev{
+flex:none;width:1.1em;color:#C45A38;font-size:14px;line-height:1
+}
+.listsec .seclabel{
+flex:1;min-width:0;font-size:13px;font-weight:800;color:#2A1810;
+letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+text-transform:none
+}
+.listsec .sechead .btn{flex:none}
+.listsec:not(.open) .secbody{display:none}
+.listsec .secbody{padding-top:4px}
+.qtybox{display:flex;align-items:center;gap:4px;flex:none}
+.qtybtn{width:28px;height:28px;border-radius:10px;border:1px solid #E8D4B8;background:#fff;font:inherit;font-weight:700;color:#2A1810;padding:0;line-height:1}
+.qtyn{min-width:1.2em;text-align:center;font-weight:700}
+
+#lijst.compact .swipewrap{margin:0 0 6px;border-radius:14px}
+#lijst.compact .listrow{padding:8px 10px;gap:10px;border-radius:14px}
+#lijst.compact .listrow .meta{
+font-size:12px;line-height:1.25;
+white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%
+}
+#lijst.compact .listrow > div[style*="flex:1"]{min-width:0;overflow:hidden}
+#lijst.compact .listrow b{font-size:14px}
+#lijst.compact .ck{width:22px;height:22px;border-radius:7px;font-size:12px}
+#lijst.compact .listrow img.thumb,#lijst.compact .listrow span.thumb{
+width:48px;height:48px;min-width:48px;max-width:48px;max-height:48px;border-radius:10px
+}
+#lijst.compact .listrow .chip,#lijst.compact .swipewrap .chip{
+padding:4px 8px;font-size:11px;border-radius:999px
+}
+#lijst.compact .qtybtn{width:24px;height:24px;border-radius:8px;font-size:13px}
+#lijst.compact .seclabel{font-size:12px}
+#lijst.compact .listsec{margin:0 0 4px}
+#listcompact.on{background:#C45A38;color:#fff;border-color:#C45A38}
