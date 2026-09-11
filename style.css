@@ -10,6 +10,7 @@ html,body{margin:0;height:100%;font-family:Outfit,system-ui,sans-serif;backgroun
 .sc{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;padding:0 16px 110px}
 .btn{border:0;border-radius:16px;padding:14px 16px;font-weight:700;background:#C45A38;color:#fff;font-family:inherit;transition:transform .12s ease,opacity .12s ease,filter .12s ease}
 .btn:active{transform:scale(.98);filter:brightness(.94)}
+.btn:disabled{opacity:.5;cursor:not-allowed;filter:none;transform:none}
 .g{background:#5F8A62}.w{background:#fff;color:#2A1810;border:1px solid #E8D4B8}
 .s{padding:8px 12px;border-radius:12px;font-size:13px;width:auto;font-weight:600}
 .full{width:100%}
@@ -91,7 +92,13 @@ ol li{margin:0 0 8px;font-weight:600}
 .empty-list{margin-top:4px}
 .empty-list .ghost{opacity:.75;margin:0 0 14px}
 .empty-list .emptycta{cursor:pointer}
-.sugrow{cursor:pointer}
+.sugrow{display:flex;align-items:stretch;padding:0;cursor:default}
+.sugrow.dim{opacity:.55}
+.sugrow .sugchk{display:flex;align-items:center;padding:0 2px 0 14px;flex-shrink:0;cursor:pointer;margin:0}
+.sugrow .sugchkbox{width:20px;height:20px;accent-color:#C45A38;cursor:pointer}
+.sugrow .sugmain{flex:1;min-width:0;border:0;background:transparent;padding:0;margin:0;text-align:left;font:inherit;color:inherit;cursor:pointer;font-weight:600}
+.sugrow .sugmain .p{padding:14px 16px 16px 10px}
+.sugquick{margin:0 0 10px}
 
 .person.prow{display:flex;align-items:center;gap:8px}
 .person.prow .pgrow{flex:1;display:flex;gap:12px;align-items:center;border:0;background:transparent;padding:0;text-align:left;font:inherit;color:inherit;cursor:pointer}

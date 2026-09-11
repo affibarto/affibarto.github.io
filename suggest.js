@@ -103,14 +103,49 @@ function panel(){
   return el;
 }
 
-function drawSuggest(list){
+function syncPick(list,keep){
+  var prev=keep?(S._sugPick||{}):{};
+  var next={};
+  (list||[]).forEach(function(s){
+    next[s.day]=(prev[s.day]!==undefined)?!!prev[s.day]:true;
+  });
+  S._sugPick=next;
+}
+
+function selectedList(){
+  return sortByWeekDay((S._sugDraft||[]).filter(function(s){return S._sugPick&&S._sugPick[s.day];}));
+}
+
+function selectedCount(){
+  return selectedList().length;
+}
+
+function refreshAcceptBtn(){
+  var btn=document.getElementById("sugaccept");
+  if(!btn)return;
+  var n=selectedCount();
+  btn.textContent=n?("Gekozen op het bord ("+n+")"):"Gekozen op het bord";
+  btn.disabled=!n;
+  btn.setAttribute("aria-disabled",n?"false":"true");
+  btn.style.opacity=n?"":"0.5";
+}
+
+function setAllPick(on){
+  (S._sugDraft||[]).forEach(function(s){S._sugPick[s.day]=!!on;});
+  drawSuggest(S._sugDraft,{keepPick:true});
+}
+
+function drawSuggest(list,opts){
+  opts=opts||{};
   S._sugDraft=sortByWeekDay(list||[]);
+  syncPick(S._sugDraft,!!opts.keepPick);
   var host=document.getElementById("sugbody");if(!host)return;
   if(!S._sugDraft.length){
     host.innerHTML="<p class=note>Geen vrije avonden met eten thuis, of alles botst met dieet. Kies handmatig op het bord.</p><button class='btn g full' id=suggo type=button>Naar bord</button>";
     return;
   }
-  var html="<p class=note>Drie tot vijf avonden, passend bij wie thuis is. Kok uit wie kan koken. Minder veto\u2019s eerst, keukens afgewisseld. Tik een regel om te wisselen.</p>";
+  var html="<p class=note>Vink de avonden die je wilt. Tik de regel om te wisselen van recept. Kok uit wie kan koken \u2014 minder veto\u2019s eerst, keukens afgewisseld.</p>";
+  html+="<div class='row sugquick'><button type=button class='chip' id=sugall>Alles</button><button type=button class='chip' id=sugnone>Geen</button></div>";
   S._sugDraft.forEach(function(s,i){
     var taste=s.taste?(" \u00b7 "+s.taste+" smaak"):"";
     var cookN="";
@@ -121,11 +156,16 @@ function drawSuggest(list){
       var hit=pool.filter(function(p){return p.id===(sl&&sl.cook);})[0]||pool[0];
       if(hit)cookN=" \u00b7 kookt "+hit.name;
     }
-    html+="<button type=button class='card sugrow' data-act=sugswap data-i="+i+"><div class=p><b>"+DLAB[s.day]+" \u00b7 "+s.t+"</b><div class=meta>"+s.c+" \u00b7 "+(s.time||"?")+" min"+taste+cookN+" \u00b7 tik om te wisselen</div></div></button>";
+    var on=S._sugPick[s.day]!==false;
+    html+="<div class='card sugrow"+(on?"":" dim")+"'>"+
+      "<label class=sugchk><input type=checkbox class=sugchkbox data-i="+i+(on?" checked":"")+" aria-label=\""+DLAB[s.day]+" op het bord\"></label>"+
+      "<button type=button class=sugmain data-act=sugswap data-i="+i+"><div class=p><b>"+DLAB[s.day]+" \u00b7 "+s.t+"</b><div class=meta>"+s.c+" \u00b7 "+(s.time||"?")+" min"+taste+cookN+" \u00b7 tik om te wisselen</div></div></button>"+
+      "</div>";
   });
-  html+="<button class='btn g full' id=sugaccept type=button style=margin-top:8px>Alles op het bord</button>";
+  html+="<button class='btn g full' id=sugaccept type=button style=margin-top:8px>Gekozen op het bord</button>";
   html+="<button class='btn w full' id=sugclose2 type=button style=margin-top:8px>Nog even niet</button>";
   host.innerHTML=html;
+  refreshAcceptBtn();
 }
 
 function openSuggest(forceList){
@@ -133,6 +173,7 @@ function openSuggest(forceList){
   if(list.length>5)list=list.slice(0,5);
   if(list.length>=3&&list.length<=5){/* ok */}
   else if(list.length&&list.length<3){/* still show what we have */}
+  S._sugPick={};
   panel().classList.add("on");
   drawSuggest(list);
 }
@@ -158,12 +199,15 @@ function swapOne(i){
   if(!pool.length){if(typeof toast==="function")toast("Geen andere optie");return;}
   var next=pool[0].rec;
   S._sugDraft[i]={day:cur.day,id:next.id,t:next.t,c:next.c,time:next.time,taste:(typeof tasteHits==="function")?tasteHits(next,people).length:0};
-  drawSuggest(S._sugDraft);
+  drawSuggest(S._sugDraft,{keepPick:true});
 }
 
-function acceptAll(){
-  var list=sortByWeekDay(S._sugDraft||[]);
-  if(!list.length){closeSuggest();if(typeof show==="function")show("bord");return;}
+function acceptSelected(){
+  var list=selectedList();
+  if(!list.length){
+    if(typeof toast==="function")toast("Kies minstens één avond");
+    return;
+  }
   list.forEach(function(s){
     var who=whoFor(s.day);
     var kids=(S.people||[]).filter(function(p){return p.role==="child"&&p.portion==="small";}).map(function(p){return p.id;});
@@ -184,7 +228,7 @@ function acceptAll(){
   closeSuggest();
   if(typeof drawBord==="function")drawBord();
   if(typeof drawList==="function")drawList();
-  if(typeof toast==="function")toast(list.length+" avonden op het bord \u00b7 lijst bijgewerkt");
+  if(typeof toast==="function")toast(list.length+" avond"+(list.length===1?"":"en")+" op het bord \u00b7 lijst bijgewerkt");
   if(typeof show==="function")show("bord");
 }
 
@@ -196,9 +240,25 @@ document.addEventListener("click",function(e){
   var t=e.target;if(t&&t.nodeType===3)t=t.parentNode;if(!t||!t.closest)return;
   if(t.id==="sugclose"||t.id==="sugclose2"){e.preventDefault();closeSuggest();return;}
   if(t.id==="suggo"){e.preventDefault();closeSuggest();if(typeof show==="function")show("bord");return;}
-  if(t.id==="sugaccept"){e.preventDefault();acceptAll();return;}
+  if(t.id==="sugall"){e.preventDefault();setAllPick(true);return;}
+  if(t.id==="sugnone"){e.preventDefault();setAllPick(false);return;}
+  if(t.id==="sugaccept"){e.preventDefault();acceptSelected();return;}
+  // Checkbox has its own hit target — do not treat as row swap
+  if(t.classList&&t.classList.contains("sugchkbox")){return;}
+  if(t.closest&&t.closest("label.sugchk")){return;}
   var row=t.closest("[data-act=sugswap]");
   if(row){e.preventDefault();swapOne(+row.getAttribute("data-i"));return;}
+},true);
+
+document.addEventListener("change",function(e){
+  var t=e.target;if(!t||!t.classList||!t.classList.contains("sugchkbox"))return;
+  var i=+t.getAttribute("data-i");
+  var s=S._sugDraft&&S._sugDraft[i];
+  if(!s)return;
+  S._sugPick[s.day]=!!t.checked;
+  var row=t.closest(".sugrow");
+  if(row){if(t.checked)row.classList.remove("dim");else row.classList.add("dim");}
+  refreshAcceptBtn();
 },true);
 
 if(typeof show==="function"&&!show._sug){
