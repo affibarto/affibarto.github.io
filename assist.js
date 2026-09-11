@@ -8,6 +8,37 @@ if(/2e?\s*halve|tweede\s*halve|2e halve/.test(t))return "half";
 if(/2\s*voor|twee voor|3\s*voor|pakket/.test(t)&&!/1\+1/.test(t))return "pack";
 return "";
 }
+
+function normBrand(s){
+return String(s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[''`\u2019]/g,"").replace(/\s+/g," ").trim();
+}
+// NL private labels / store house lines (huismerk)
+var _HOUSE_EXACT={
+"ah":1,"albert heijn":1,"ah terra":1,"ah biologisch":1,"ah puur & eerlijk":1,"ah puur en eerlijk":1,
+"jumbo":1,"plus":1,"lidl":1,"dirk":1,"1 de beste":1,"1debeste":1,
+"gwoon":1,"g woon":1,"everyday":1,"budget":1,"aldi":1,
+"hoogvliet":1,"dekamarkt":1,"dekavers":1,"vomar":1,"ekoplaza":1,"picnic":1,
+"milsani":1,"daylicious":1,"euro shopper":1,"euroshopper":1,
+"moser roth":1,"power force":1,"alpen schmaus":1,"boni":1,"xtra":1
+};
+var _HOUSE_PREFIX=/^(ah|albert heijn|jumbo|plus|lidl|dirk|aldi|hoogvliet|dekavers|dekamarkt|gwoon|1 de beste|everyday|budget|picnic|milsani|daylicious)\b/;
+function isHouseBrand(s){
+var n=normBrand(s);
+if(!n)return false;
+if(_HOUSE_EXACT[n])return true;
+if(_HOUSE_PREFIX.test(n))return true;
+// "AH Something" as brand string
+if(/^ah\b/.test(n))return true;
+return false;
+}
+function detectBrandTier(hit){
+if(!hit)return "";
+var brand=hit.b||hit.brand||"";
+var name=hit.n||"";
+if(isHouseBrand(brand)||isHouseBrand(name))return "B";
+if(String(brand).trim())return "A";
+return "";
+}
 function ask(title,body,yes,no,onYes,onNo){
 var p=document.getElementById("askbox");
 if(!p){
@@ -44,10 +75,13 @@ if(pr&&hit.now)pr.textContent=euro(hit.now);
 function put(hit,q){
 if(!hit||!hit.n)return;
 S.extras=S.extras||[];
+S.itemBrand=S.itemBrand||{};
 var i=-1;for(var x=0;x<S.extras.length;x++){if(S.extras[x].n===hit.n&&(S.extras[x].sid||"")===(hit.s||""))i=x;}
 var pack=hit.qty||hit.q||hit.pack||"";
 var brand=hit.b||hit.brand||"";
 var deal=hit.deal||"";
+var tier=detectBrandTier(hit);
+var isNew=i<0;
 if(i>=0){
 S.extras[i].q=(+S.extras[i].q||1)+q;
 if(!S.extras[i].b&&brand)S.extras[i].b=brand;
@@ -55,11 +89,27 @@ if(!S.extras[i].brand&&brand)S.extras[i].brand=brand;
 if(!S.extras[i].pack&&pack)S.extras[i].pack=pack;
 if(!S.extras[i].deal&&deal)S.extras[i].deal=deal;
 if(!S.extras[i].sid&&hit.s)S.extras[i].sid=hit.s;
-}else S.extras.push({n:hit.n,q:q,s:"Houdbaar",sid:hit.s||"",cents:+hit.now||0,line:(+hit.now||0)*q,pack:pack,deal:deal,b:brand,brand:brand});
-var e=S.extras[i>=0?i:S.extras.length-1];e.line=(e.cents||0)*e.q;
+// qty bump: never wipe brandTier / itemBrand override
+}else{
+var row={n:hit.n,q:q,s:"Houdbaar",sid:hit.s||"",cents:+hit.now||0,line:(+hit.now||0)*q,pack:pack,deal:deal,b:brand,brand:brand};
+if(tier==="A"||tier==="B")row.brandTier=tier;
+S.extras.push(row);
+i=S.extras.length-1;
+}
+var e=S.extras[i];e.line=(e.cents||0)*e.q;
+var extraKey="e:"+i+":"+e.n;
+if(isNew&&(tier==="A"||tier==="B")){
+e.brandTier=tier;
+S.itemBrand[extraKey]=tier;
+}
 if(typeof save==="function")save();
 window.markFolder();
 if(typeof drawList==="function")drawList();
+else if(typeof stampItemBrands==="function")stampItemBrands();
+if(isNew&&typeof toast==="function"){
+if(tier==="B")toast("Huismerk (B)");
+else if(tier==="A")toast("A-merk");
+}
 }
 function consider(hit){
 var k=dealKind(hit);
