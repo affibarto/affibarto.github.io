@@ -15,6 +15,160 @@ var m=(typeof modeOf==="function")?modeOf(d,p):(p.sched&&p.sched[d])||"eat";
 return m==="eat"||m==="later";
 });
 }
+var _STOP={voor:1,met:1,van:1,een:1,het:1,de:1,en:1,per:1,stuks:1,pack:1,doos:1,vers:1,diepvries:1,milde:1,halfvolle:1,all:1,uovo:1,flavour:1};
+var _GENERIC={rundergehakt:1,gehakt:1,pasta:1,spaghetti:1,melk:1,boter:1,roomboter:1,yoghurt:1,rijst:1,kip:1,kipfilet:1,kaas:1,pesto:1,brood:1,wraps:1,spinazie:1,aardappel:1,aardappelen:1,tomaat:1,tomatenblokjes:1,ui:1,uien:1,wortel:1,wortelen:1,paprika:1,sla:1,komkommer:1,ham:1,fruit:1,bananen:1};
+function _tokens(s){
+return String(s||"").toLowerCase().replace(/[^\wäöüßà-ÿ0-9]+/g," ").split(/\s+/).filter(function(t){
+return t.length>=4 && !_STOP[t] && !/^\d/.test(t);
+});
+}
+function parsePack(text){
+var s=String(text||"").trim();
+if(!s)return {name:"",pack:""};
+var m=s.match(/^(.*?)[\s,·\-–]+((?:\d+\s*[x×]\s*)?\d+(?:[.,]\d+)?\s*(?:g|kg|ml|cl|l|liter|stuks?|st)|\d+(?:[.,]\d+)?\s*(?:g|kg|ml|cl|l)|(?:\d+\s*)?(?:x\s*)?pack|\d+\-pack)\s*$/i);
+if(m)return {name:m[1].trim(),pack:m[2].replace(/\s+/g," ").trim()};
+var m2=s.match(/^(.*?)[\s,·]+(\d+\s*[x×]\s*\d+(?:[.,]\d+)?\s*(?:g|kg|ml|l))\s*$/i);
+if(m2)return {name:m2[1].trim(),pack:m2[2].replace(/\s+/g," ").trim()};
+return {name:s,pack:""};
+}
+function normPack(p){
+p=String(p||"").replace(/\s+/g," ").trim();
+if(!p)return "";
+return p.replace(/(\d)(g|kg|ml|cl|l)\b/i,function(_,a,b){return a+" "+b.toLowerCase();});
+}
+function guessBrand(name,explicit){
+if(explicit)return String(explicit).trim();
+var n=String(name||"").trim();if(!n)return "";
+var w=n.split(/\s+/)[0];
+if(!w||w.length<2)return "";
+var low=w.toLowerCase().replace(/[^a-zäöüßà-ÿ0-9]/g,"");
+if(_GENERIC[low]||_STOP[low])return "";
+if(/^(ah|jumbo|lidl|plus|dirk|aldi|vomar|picnic)$/i.test(w))return w.toUpperCase()==="AH"?"AH":w.charAt(0).toUpperCase()+w.slice(1).toLowerCase();
+if(/^[A-ZÀ-Ý]/.test(w) && n.indexOf(" ")>0)return w;
+return "";
+}
+function activeStoreList(){
+if(typeof activeStores==="function")return activeStores();
+return (typeof STORES!=="undefined"?STORES:[]);
+}
+function findBonusHit(k){
+if(typeof BONUS==="undefined"||!k)return null;
+var stores=activeStoreList();
+for(var i=0;i<stores.length;i++){
+var sid=stores[i].id||stores[i];
+var b=BONUS[sid]&&BONUS[sid][k];
+if(b&&(b.name||b.deal||b.now))return {sid:sid,store:storeN(sid),b:b};
+}
+return null;
+}
+function findFolderHit(k,catName,preferName){
+var items=(window.FOLDER_FULL&&window.FOLDER_FULL.items)||[];
+if(!items.length)return null;
+var stores=activeStoreList();
+var active={};stores.forEach(function(s){active[s.id||s]=1;});
+var needles=_tokens(catName||"");
+var keyTok=String(k||"").toLowerCase();
+if(keyTok&&keyTok.length>=4&&needles.indexOf(keyTok)<0)needles=needles.concat([keyTok]);
+var prefer=String(preferName||"").toLowerCase();
+var best=null,bestScore=0;
+for(var i=0;i<items.length;i++){
+var r=items[i];if(!r||!r.n)continue;
+if(Object.keys(active).length&&r.s&&!active[r.s])continue;
+var hay=(r.n+" "+(r.b||"")+" "+(r.qty||r.q||"")).toLowerCase();
+var score=0;
+if(prefer&&hay.indexOf(prefer)>=0)score+=8;
+if(keyTok&&hay.indexOf(keyTok)>=0)score+=5;
+for(var j=0;j<needles.length;j++){
+if(hay.indexOf(needles[j])>=0)score+=2;
+}
+if(catName){
+var cn=String(catName).toLowerCase();
+var base=parsePack(cn).name.toLowerCase();
+if(base.length>=5&&hay.indexOf(base)>=0)score+=4;
+}
+if(score>bestScore){bestScore=score;best=r;}
+}
+if(bestScore>=5)return best;
+return null;
+}
+function enrichIngredient(k){
+var catName=nm(k);
+var catPack=normPack(parsePack(catName).pack);
+var catTitle=parsePack(catName).name||catName;
+var hit=findBonusHit(k);
+var bonusName=hit&&hit.b&&hit.b.name?String(hit.b.name).trim():"";
+var folder=findFolderHit(k,catName,bonusName);
+var brand="";
+var pack=catPack;
+var store="";
+var deal="";
+var product="";
+var confident=false;
+if(hit){
+store=hit.store||"";
+deal=String(hit.b.deal||"").trim();
+if(/^(feed|folder|actie|bonus|promotie)$/i.test(deal))deal="";
+if(bonusName){product=bonusName;confident=true;}
+}
+if(folder){
+if(!brand&&folder.b)brand=String(folder.b).trim();
+if(!pack&&(folder.qty||folder.q||folder.pack))pack=normPack(folder.qty||folder.q||folder.pack);
+if(!store&&folder.s)store=storeN(folder.s);
+if(!deal&&folder.deal){
+deal=String(folder.deal).trim();
+if(/^(feed|folder|actie|bonus|promotie)$/i.test(deal))deal="";
+}
+if(!product&&folder.n&&confident===false){
+/* folder-only match: only promote title when strong */
+var fscore=0;
+var hay=(folder.n+" "+(folder.b||"")).toLowerCase();
+if(hay.indexOf(String(k).toLowerCase())>=0)fscore+=5;
+var base=parsePack(catName).name.toLowerCase();
+if(base.length>=5&&hay.indexOf(base)>=0)fscore+=4;
+if(fscore>=5){product=folder.n;confident=true;}
+}
+}
+if(!brand)brand=guessBrand(product||bonusName,"");
+if(product&&!pack){
+var pp=parsePack(product);
+if(pp.pack){pack=normPack(pp.pack);product=pp.name||product;}
+}
+return {
+title:confident&&product?product:catTitle,
+brand:brand,
+pack:pack,
+store:store,
+deal:deal,
+meal:""
+};
+}
+function joinMeta(parts){
+return parts.filter(function(p){return p&&String(p).trim();}).join(" \u00b7 ");
+}
+function mealMeta(info,mealLabel,needQty){
+var bits=[];
+if(info.brand)bits.push(info.brand);
+if(info.pack){
+bits.push("pak: "+info.pack);
+if(needQty!=null&&needQty!=="")bits.push("nodig: "+needQty);
+}
+if(info.store)bits.push(info.store);
+if(info.deal)bits.push(info.deal);
+if(mealLabel)bits.push(mealLabel);
+return joinMeta(bits);
+}
+function extraMeta(e){
+var brand=e.b||e.brand||"";
+var pack=normPack(e.pack||e.qty||"");
+var deal=String(e.deal||"").trim();
+if(/^(feed|folder|actie|bonus|promotie)$/i.test(deal))deal="";
+return joinMeta([brand,pack,storeN(e.sid),deal]);
+}
+function alwaysDisplay(a){
+var raw=a.n||nm(a.k)||"";
+var parsed=parsePack(raw);
+return {title:parsed.name||raw,meta:joinMeta([normPack(parsed.pack),"zelf"])};
+}
 function drawListByMeal(){
 var body=document.getElementById("lijstbody");if(!body)return;
 var slotF=document.getElementById("folderlijst");if(slotF)slotF.innerHTML="";
@@ -31,7 +185,9 @@ html+="<div class=sec style=display:flex;align-items:center;justify-content:spac
 if(S.omit&&S.omit[d+":"+slot.id+":"+it.k])return;
 var k=it.k+"@"+d;
 if(S.removed&&S.removed[k])return;
-n++;html+=row(k,nm(it.k),rec.t,qty(it.q*scale));
+var need=qty(it.q*scale);
+var info=enrichIngredient(it.k);
+n++;html+=row(k,info.title,mealMeta(info,d+" \u00b7 "+rec.t,need),need);
 });
 });
 var extras=S.extras||[];
@@ -41,7 +197,7 @@ extras.forEach(function(e,i){
 var k="e:"+i+":"+e.n;if(S.removed&&S.removed[k])return;n++;
 var prijs=e.line||((e.cents||0)*(e.q||1));
 var right="<div class=qtybox><button type=button class=qtybtn data-act=exqty data-i="+i+" data-d=-1>\u2212</button><span class=qtyn>"+(e.q||1)+"</span><button type=button class=qtybtn data-act=exqty data-i="+i+" data-d=1>+</button></div><div class=price>"+euro(prijs)+"</div>";
-html+=row(k,e.n,[storeN(e.sid),e.pack||""].filter(Boolean).join(" \u00b7 "),e.q||1,right);
+html+=row(k,e.n,extraMeta(e),e.q||1,right);
 });
 }
 var extraN=0;
@@ -49,7 +205,8 @@ var extraN=0;
 var k=a.k&&typeof CAT!=="undefined"&&CAT[a.k]?a.k:("x:"+a.n);
 if(S.removed&&S.removed[k])return;
 if(!extraN)html+="<div class=sec>Extra</div>";extraN++;n++;
-html+=row(k,a.n||nm(a.k),"zelf",qty(a.q||1));
+var disp=alwaysDisplay(a);
+html+=row(k,disp.title,disp.meta,qty(a.q||1));
 });
 var line=document.getElementById("lijstline");if(line)line.textContent=n?n+" open":"";
 if(!html){
@@ -64,6 +221,7 @@ if(!html){
 if(typeof paintScore==="function")paintScore();
 }
 window.drawList=drawListByMeal;
+window._enrichIngredient=enrichIngredient;
 // re-apply brands/actie wraps that ran before listview overwrote drawList
 if(typeof paintBrand==="function"||typeof stampItemBrands==="function"||typeof markList==="function"){
   var _base=window.drawList;
