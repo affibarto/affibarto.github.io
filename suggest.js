@@ -29,12 +29,21 @@ function dayNeedsMeal(d){
   return eatersFor(d).length>0;
 }
 
+function dayRank(d){
+  var i=DAYS.indexOf(d);
+  return i<0?99:i;
+}
+function sortByWeekDay(list){
+  return (list||[]).slice().sort(function(a,b){
+    var da=typeof a==="string"?a:a.day;
+    var db=typeof b==="string"?b:b.day;
+    return dayRank(da)-dayRank(db);
+  });
+}
 function candidateDays(want){
   want=want||5;
-  var start=todayIdx();
-  var ordered=[];
-  for(var i=0;i<7;i++)ordered.push(DAYS[(start+i)%7]);
-  return ordered.filter(dayNeedsMeal).slice(0,want);
+  // Always Ma→Zo so voorstellen niet "door elkaar" vanaf vandaag lopen
+  return DAYS.filter(dayNeedsMeal).slice(0,want);
 }
 
 function scoreRec(rec,people,usedCuisine){
@@ -95,7 +104,7 @@ function panel(){
 }
 
 function drawSuggest(list){
-  S._sugDraft=(list||[]).slice();
+  S._sugDraft=sortByWeekDay(list||[]);
   var host=document.getElementById("sugbody");if(!host)return;
   if(!S._sugDraft.length){
     host.innerHTML="<p class=note>Geen vrije avonden met eten thuis, of alles botst met dieet. Kies handmatig op het bord.</p><button class='btn g full' id=suggo type=button>Naar bord</button>";
@@ -120,7 +129,7 @@ function drawSuggest(list){
 }
 
 function openSuggest(forceList){
-  var list=forceList||buildSuggestions(5);
+  var list=sortByWeekDay(forceList||buildSuggestions(5));
   if(list.length>5)list=list.slice(0,5);
   if(list.length>=3&&list.length<=5){/* ok */}
   else if(list.length&&list.length<3){/* still show what we have */}
@@ -153,7 +162,7 @@ function swapOne(i){
 }
 
 function acceptAll(){
-  var list=S._sugDraft||[];
+  var list=sortByWeekDay(S._sugDraft||[]);
   if(!list.length){closeSuggest();if(typeof show==="function")show("bord");return;}
   list.forEach(function(s){
     var who=whoFor(s.day);
