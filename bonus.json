@@ -1,7 +1,7 @@
 {
   "week": "7–13 sep 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-09-12",
+  "fetched": "2026-09-13",
   "note": "Folder/actie, automatisch. Geen kassaprijs.",
   "ah": {
     "gehakt": {
@@ -139,11 +139,18 @@
       "name": "Grand'Italia Spaghetti Tradizionali Voordeelpak 1kg",
       "until": "2026-09-15"
     },
+    "tomaat": {
+      "was": 169,
+      "now": 99,
+      "deal": "voor 0,99",
+      "name": "Heinz Tomatenblokjes 390g",
+      "until": "2026-09-22"
+    },
     "melk": {
-      "was": 1076,
-      "now": 968,
+      "was": 1074,
+      "now": 966,
       "deal": "10% korting",
-      "name": "Campina Halfvolle Melk Voordeelpack 4 x 2.4 L",
+      "name": "Campina Halfvolle Melk 6 x 500 ml Fles Multipack",
       "until": "2026-10-06"
     },
     "aardappel": {
@@ -153,6 +160,13 @@
       "name": "Jumbo Aardappelen Kruimig 1 kg",
       "until": "2026-09-15"
     },
+    "kaas": {
+      "was": 279,
+      "now": 149,
+      "deal": "voor 1,49",
+      "name": "Parrano Geraspte Kaas Snippers Robusto",
+      "until": "2026-09-22"
+    },
     "wraps": {
       "was": 319,
       "now": 239,
@@ -161,11 +175,18 @@
       "until": "2026-09-15"
     },
     "paprika": {
-      "was": 245,
-      "now": 199,
-      "deal": "voor 1,99",
-      "name": "Jumbo Zoete Punt Paprika Mix 3 Stuks",
-      "until": "2026-09-15"
+      "was": 109,
+      "now": 55,
+      "deal": "1+1 gratis",
+      "name": "Jumbo Paprika Rood",
+      "until": "2026-09-22"
+    },
+    "mozzarella": {
+      "was": 299,
+      "now": 149,
+      "deal": "voor 1,49",
+      "name": "Parrano  Geraspte Mozzarella",
+      "until": "2026-09-22"
     },
     "zalm": {
       "was": 569,
@@ -184,11 +205,46 @@
       "until": "2026-09-13"
     },
     "kip": {
-      "was": 999,
-      "now": 999,
+      "was": 199,
+      "now": 199,
       "deal": "folder",
       "name": "Kipfilet",
-      "until": "2026-09-13"
+      "until": "2026-09-20"
+    },
+    "aardappel": {
+      "was": 119,
+      "now": 99,
+      "deal": "16% korting",
+      "name": "Aardappelen vastkokend of kruimig",
+      "until": "2026-09-20"
+    },
+    "ui": {
+      "was": 289,
+      "now": 289,
+      "deal": "folder",
+      "name": "Uien",
+      "until": "2026-09-20"
+    },
+    "kaas": {
+      "was": 279,
+      "now": 279,
+      "deal": "folder",
+      "name": "Gouda Jong belegen geraspte kaas",
+      "until": "2026-09-20"
+    },
+    "spinazie": {
+      "was": 179,
+      "now": 99,
+      "deal": "44% korting",
+      "name": "Spinazie",
+      "until": "2026-09-20"
+    },
+    "brood": {
+      "was": 118,
+      "now": 99,
+      "deal": "16% korting",
+      "name": "Tijgerbruin vloerbrood",
+      "until": "2026-09-20"
     },
     "sla": {
       "was": 99,
@@ -204,11 +260,25 @@
       "name": "Nederlandse scharreleieren",
       "until": "2026-09-13"
     },
-    "zalm": {
-      "was": 799,
-      "now": 799,
+    "mozzarella": {
+      "was": 149,
+      "now": 149,
       "deal": "folder",
-      "name": "Zalm op huid",
+      "name": "Mozzarella",
+      "until": "2026-09-20"
+    },
+    "beleg": {
+      "was": 435,
+      "now": 329,
+      "deal": "24% korting",
+      "name": "CALVÉ Pindakaas",
+      "until": "2026-09-20"
+    },
+    "zalm": {
+      "was": 499,
+      "now": 499,
+      "deal": "folder",
+      "name": "Gerookte zalm",
       "until": "2026-09-13"
     }
   },
@@ -228,11 +298,11 @@
       "until": "2026-09-22"
     },
     "kip": {
-      "was": 209,
-      "now": 200,
-      "deal": "folder",
-      "name": "PLUS Puur van smaak Kleintje Kipfilet",
-      "until": "2026-09-14"
+      "was": 179,
+      "now": 99,
+      "deal": "45% korting",
+      "name": "Plus Scharrel kipfilet KVP",
+      "until": "2026-09-15"
     },
     "boter": {
       "was": 579,
@@ -242,18 +312,25 @@
       "until": "2026-09-22"
     },
     "pesto": {
-      "was": 329,
-      "now": 200,
-      "deal": "39% korting",
-      "name": "Plus Groene pesto",
-      "until": "2026-09-15"
+      "was": 299,
+      "now": 149,
+      "deal": "50% korting",
+      "name": "Plus Pastasaus groene pesto",
+      "until": "2026-09-22"
+    },
+    "spinazie": {
+      "was": 349,
+      "now": 175,
+      "deal": "50% korting",
+      "name": "Hak Spinazie",
+      "until": "2026-09-22"
     },
     "ham": {
       "was": 209,
       "now": 200,
       "deal": "folder",
       "name": "PLUS Puur van smaak Kleintje Achterham",
-      "until": "2026-09-14"
+      "until": "2026-09-15"
     },
     "mozzarella": {
       "was": 299,
