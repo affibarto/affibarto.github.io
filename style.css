@@ -165,3 +165,8 @@ padding:4px 8px;font-size:11px;border-radius:999px
 #lijst.compact .seclabel{font-size:12px}
 #lijst.compact .listsec{margin:0 0 4px}
 #listcompact.on{background:#C45A38;color:#fff;border-color:#C45A38}
+
+#rings .listrow{cursor:pointer}
+#rings .listrow .btn{flex:none}
+#ringhint{opacity:.75}
+#radd{background:#FFF9F1;border:1px solid #E8D4B8;border-radius:14px;padding:12px}

@@ -3,7 +3,8 @@ if(window._listview)return;window._listview=1;
 function euro(c){return "\u20ac"+((+c||0)/100).toFixed(2).replace(".",",");}
 function storeN(id){var s=(typeof STORES!=="undefined"?STORES:[]).filter(function(x){return x.id===id;})[0];return s?s.n:(id||"");}
 function nm(k){return (typeof CAT!=="undefined"&&CAT[k]&&CAT[k].name)||k;}
-function qty(n){return typeof n==="number"?String(Math.round(n*2)/2).replace(".",","):String(n||1);}
+function qty(n,cat){if(cat&&typeof formatAmount==="function")return formatAmount(cat,n);if(typeof n==="number")return String(Math.round(n*2)/2).replace(".",",");return String(n||1);}
+function amountFor(it,scale){var packs=(+it.q||1)*scale;var cat=(typeof CAT!=="undefined"&&it.k&&CAT[it.k])?CAT[it.k]:(it.n?{name:it.n,label:it.n,base:1,unit:"x"}:null);if(typeof formatAmount==="function"&&cat)return formatAmount(cat,packs);return qty(packs);}
 function row(k,name,meta,qtxt,rightHtml){
 var on=!!(S.checked&&S.checked[k]);
 return "<div class=swipewrap data-k='"+String(k).replace(/'/g,"")+"'><div class=swipebg>Verwijderen</div><div class='listrow "+(on?"muted":"")+"'><button type=button class='ck "+(on?"on":"")+"' data-act=tog data-k='"+String(k).replace(/'/g,"")+"'>"+(on?"\u2713":"")+"</button><div style=flex:1><b>"+String(name||"").replace(/</g,"")+"</b>"+(meta?"<div class=meta>"+meta+"</div>":"")+"</div>"+(rightHtml||("<div class=qtyn>"+qtxt+"</div>"))+"</div></div>";
@@ -158,10 +159,7 @@ return parts.filter(function(p){return p&&String(p).trim();}).join(" \u00b7 ");
 function mealMeta(info,mealLabel,needQty){
 var bits=[];
 if(info.brand)bits.push(info.brand);
-if(info.pack){
-bits.push("pak: "+info.pack);
-if(needQty!=null&&needQty!=="")bits.push("nodig: "+needQty);
-}
+if(info.pack)bits.push("pak: "+info.pack);
 if(info.store)bits.push(info.store);
 if(info.deal)bits.push(info.deal);
 if(mealLabel)bits.push(mealLabel);
@@ -229,8 +227,9 @@ var rows="";var count=0;var allChecked=true;
 if(S.omit&&S.omit[d+":"+slot.id+":"+it.k])return;
 var k=it.k+"@"+d;
 if(S.removed&&S.removed[k])return;
-var need=qty(it.q*scale);
+var need=amountFor(it,scale);
 var info=enrichIngredient(it.k);
+if(typeof productLabel==="function"&&CAT[it.k])info.title=productLabel(CAT[it.k]);
 if((info.tier==="A"||info.tier==="B")){
 S.itemBrand=S.itemBrand||{};
 if(S.itemBrand[k]===undefined){S.itemBrand[k]=info.tier;window._brandDirty=1;}
@@ -238,6 +237,19 @@ if(S.itemBrand[k]===undefined){S.itemBrand[k]=info.tier;window._brandDirty=1;}
 if(!(S.checked&&S.checked[k]))allChecked=false;
 count++;n++;
 rows+=row(k,info.title,mealMeta(info,d+" \u00b7 "+rec.t,need),need);
+});
+var adds=(S.ingAdd&&S.ingAdd[d+":"+slot.id])||[];
+adds.forEach(function(it,idx){
+var k=(it.k?it.k:("add:"+it.n))+"@"+d+"#"+idx;
+if(S.removed&&S.removed[k])return;
+if(it.k&&S.omit&&S.omit[d+":"+slot.id+":"+it.k])return;
+var need=amountFor(it,scale);
+var title=it.k&&CAT[it.k]?(typeof productLabel==="function"?productLabel(CAT[it.k]):CAT[it.k].name):(it.n||"extra");
+var info=it.k?enrichIngredient(it.k):{title:title,brand:"",pack:"",store:"",deal:"",tier:""};
+info.title=title;
+if(!(S.checked&&S.checked[k]))allChecked=false;
+count++;n++;
+rows+=row(k,info.title,mealMeta(info,d+" \u00b7 "+rec.t+" \u00b7 erbij",need),need);
 });
 if(!count)allChecked=false;
 dayBlocks.push({d:d,rec:rec,shopped:shopped,done:shopped||allChecked,rows:rows,count:count});
