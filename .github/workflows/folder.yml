@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -22,4 +24,9 @@ jobs:
           git add bonus.json folder-*.json folder-index.json
           git diff --cached --quiet && echo "geen wijziging" && exit 0
           git commit -m "Folder + acties automatisch $(date -u +%F)"
-          git push
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push && exit 0
+            echo "push retry $i"
+            sleep 5
+          done
+          exit 1
