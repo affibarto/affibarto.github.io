@@ -53,10 +53,14 @@ h1{font-size:26px;margin:0 0 8px;font-weight:800}
 label{display:block;font-weight:600;font-size:13px;margin:14px 0 6px}
 input{width:100%;border:1px solid #E8D4B8;border-radius:12px;padding:12px;font:inherit;background:#fff}
 .splash{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:calc(36px + env(safe-area-inset-top)) 24px calc(28px + env(safe-area-inset-bottom));min-height:0}
-.splash .brand{width:220px;height:auto;max-width:70vw;display:block;margin:8vh auto 20px;object-fit:contain;border-radius:0;background:transparent}
-.splash .sub{text-align:center;margin:0 8px 0;max-width:280px}
-.splash-cta{margin-top:auto;width:100%;padding-top:28px}
+.splash .brand{width:220px;height:auto;max-width:70vw;display:block;margin:8vh auto 20px;object-fit:contain;border-radius:0;background:transparent;animation:splashbrand .88s cubic-bezier(.22,1.15,.36,1) both}
+@keyframes splashbrand{0%{opacity:0;transform:scale(.88) rotate(-1.8deg)}55%{opacity:1;transform:scale(1.035) rotate(.5deg)}78%{transform:scale(.992) rotate(-.2deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+.splash .sub{text-align:center;margin:0 8px 0;max-width:280px;animation:splashfade .5s ease .2s both}
+.splash-cta{margin-top:auto;width:100%;padding-top:28px;animation:splashup .48s ease .28s both}
 .splash-cta .btn{margin:0}
+@keyframes splashfade{from{opacity:0}to{opacity:1}}
+@keyframes splashup{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.splash .brand,.splash .sub,.splash-cta{animation:none!important;opacity:1!important;transform:none!important}}
 .brand{width:220px;height:auto;max-width:70vw;display:block;margin:0 auto 12px;object-fit:contain;border-radius:0;background:transparent}
 .hdlogo{width:44px;height:44px;border-radius:0;object-fit:contain;background:transparent;flex:none}
 .hdleft{display:flex;align-items:center;gap:10px;font-weight:800}
