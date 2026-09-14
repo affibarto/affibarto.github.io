@@ -3,6 +3,9 @@ on:
   schedule:
     - cron: "15 4 * * *"
   workflow_dispatch:
+concurrency:
+  group: folder-refresh
+  cancel-in-progress: false
 permissions:
   contents: write
 jobs:
@@ -21,12 +24,27 @@ jobs:
         run: |
           git config user.name "weate-folder"
           git config user.email "weate@users.noreply.github.com"
-          git add bonus.json folder-*.json folder-index.json
-          git diff --cached --quiet && echo "geen wijziging" && exit 0
-          git commit -m "Folder + acties automatisch $(date -u +%F)"
-          for i in 1 2 3; do
-            git pull --rebase origin main && git push && exit 0
+
+          STAGE=/tmp/weate-folder-out
+          mkdir -p "$STAGE"
+          cp -f bonus.json folder-*.json folder-index.json "$STAGE/"
+
+          for i in 1 2 3 4 5; do
+            git rebase --abort 2>/dev/null || true
+            git merge --abort 2>/dev/null || true
+            git fetch origin main
+            git reset --hard origin/main
+            cp -f "$STAGE"/bonus.json "$STAGE"/folder-*.json "$STAGE"/folder-index.json .
+            git add bonus.json folder-*.json folder-index.json
+            if git diff --cached --quiet; then
+              echo "geen wijziging"
+              exit 0
+            fi
+            git commit -m "Folder + acties automatisch $(date -u +%F)"
+            if git push origin HEAD:main; then
+              exit 0
+            fi
             echo "push retry $i"
-            sleep 5
+            sleep $((5 * i))
           done
           exit 1
