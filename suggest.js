@@ -238,11 +238,12 @@ window.closeSuggest=closeSuggest;
 
 document.addEventListener("click",function(e){
   var t=e.target;if(t&&t.nodeType===3)t=t.parentNode;if(!t||!t.closest)return;
-  if(t.id==="sugclose"||t.id==="sugclose2"){e.preventDefault();closeSuggest();return;}
-  if(t.id==="suggo"){e.preventDefault();closeSuggest();if(typeof show==="function")show("bord");return;}
-  if(t.id==="sugall"){e.preventDefault();setAllPick(true);return;}
-  if(t.id==="sugnone"){e.preventDefault();setAllPick(false);return;}
-  if(t.id==="sugaccept"){e.preventDefault();acceptSelected();return;}
+  function hasId(id){return t.id===id||t.closest("#"+id);}
+  if(hasId("sugclose")||hasId("sugclose2")){e.preventDefault();closeSuggest();return;}
+  if(hasId("suggo")){e.preventDefault();closeSuggest();if(typeof show==="function")show("bord");return;}
+  if(hasId("sugall")){e.preventDefault();setAllPick(true);return;}
+  if(hasId("sugnone")){e.preventDefault();setAllPick(false);return;}
+  if(hasId("sugaccept")){e.preventDefault();acceptSelected();return;}
   // Checkbox has its own hit target — do not treat as row swap
   if(t.classList&&t.classList.contains("sugchkbox")){return;}
   if(t.closest&&t.closest("label.sugchk")){return;}
