@@ -135,7 +135,7 @@ var ad=t.closest("[data-act=adddeal]");
 if(ad&&!t.closest("[data-act=exqty]")){
 e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();
 var hit=(window._folderRows||[])[+ad.getAttribute("data-idx")];
-if(hit&&findAlready(hit))return;
+if(hit&&findAlready(hit)){put(hit,1);return;}
 if(hit)consider(hit);
 }
 var gh=t.closest("[data-act=gehaald]");

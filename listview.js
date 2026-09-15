@@ -323,6 +323,7 @@ if(typeof paintBrand==="function"||typeof stampItemBrands==="function"||typeof m
   window.drawList=function(){
     _base();
     if(typeof markList==="function")markList();
+    else if(typeof paintFolderList==="function")paintFolderList();
     if(typeof paintBrand==="function")paintBrand();
     if(typeof stampItemBrands==="function")stampItemBrands();
   };
