@@ -20,23 +20,40 @@ function folderMeta(r){
   return [storeName(r.s),r.b,packOf(r),dealText(r),untilText(r)].filter(Boolean).join(" \u00b7 ");
 }
 var _STOP={voor:1,met:1,van:1,een:1,het:1,de:1,en:1,per:1,stuks:1,pack:1,doos:1,vers:1,diepvries:1,milde:1,halfvolle:1};
+/* Snack / processed class words in a deal — never match fresh produce (Vers).
+   paprika + chips = no; paprika + (plain) paprika = yes. poeder left out on purpose. */
+var _SNACK={chips:1,chip:1,crisps:1,snoep:1,koek:1,koekje:1,reep:1,frisdrank:1,sap:1,yoghurtdrink:1,dip:1,kruidenmix:1};
+/* Core fresh-produce tokens (also detected via CAT aisle Vers). */
+var _FRESH={paprika:1,ui:1,uien:1,tomaat:1,tomaten:1,kerstomaat:1,komkommer:1,sla:1,ijsbergsla:1,aardappel:1,aardappelen:1,wortel:1,wortelen:1,bloemkool:1,boerenkool:1,champignon:1,champignons:1,knoflook:1,gember:1,bananen:1,banaan:1};
+function _words(s){
+  return String(s||"").toLowerCase().replace(/[^\wäöüßà-ÿ0-9]+/g," ").split(/\s+/).filter(Boolean);
+}
 function _tokens(s){
-  return String(s||"").toLowerCase().replace(/[^\wäöüßà-ÿ0-9]+/g," ").split(/\s+/).filter(function(t){
+  return _words(s).filter(function(t){
     return t.length>=5 && !_STOP[t] && !/^\d/.test(t);
   });
 }
+function _itemLabel(cat,fallback){
+  if(cat&&typeof productLabel==="function")return productLabel(cat);
+  if(cat){if(cat.label)return cat.label;if(cat.name)return cat.name;}
+  return fallback||"";
+}
 function boardMatchSets(){
   var listNames=[], bordNames=[], seenL={}, seenB={};
-  function add(arr,seen,name){
+  function add(arr,seen,name,aisle){
     name=String(name||"").trim();
     if(!name)return;
     var key=name.toLowerCase();
     if(seen[key])return;
-    seen[key]=1;arr.push(name);
+    seen[key]=1;arr.push({n:name,aisle:aisle||""});
   }
   try{
     if(typeof buildList==="function"){
-      buildList().forEach(function(i){add(listNames,seenL,i.n);});
+      // Prefer list product names (same strict whole-token match as bord).
+      buildList().forEach(function(i){
+        var label=_itemLabel(i.cat,i.n);
+        add(listNames,seenL,label,i.aisle||(i.cat&&i.cat.aisle)||"");
+      });
     }
   }catch(e){}
   try{
@@ -46,7 +63,8 @@ function boardMatchSets(){
         var rec=recipeBy(slot.id);if(!rec)return;
         (rec.ing||[]).forEach(function(it){
           var cat=(typeof CAT!=="undefined"&&CAT[it.k])||null;
-          add(bordNames,seenB,cat?cat.name:it.k);
+          var label=_itemLabel(cat,it.k);
+          add(bordNames,seenB,label,cat?cat.aisle:"");
         });
       });
     }
@@ -54,20 +72,35 @@ function boardMatchSets(){
   return {list:listNames,bord:bordNames};
 }
 function dealMatchKind(r,sets){
-  var hay=(r.n+" "+(r.b||"")+" "+(r.desc||"")+" "+packOf(r)).toLowerCase();
-  function hit(names){
-    for(var i=0;i<names.length;i++){
-      var n=names[i].toLowerCase();
-      if(n.length>=5 && hay.indexOf(n)>=0)return true;
-      var toks=_tokens(n);
-      for(var j=0;j<toks.length;j++){
-        if(hay.indexOf(toks[j])>=0)return true;
-      }
+  // Whole-token match only — never raw substring into multi-word product names.
+  // e.g. paprika ↛ paprika chips; kipfilet → kipfilet natural.
+  var hayStr=(r.n+" "+(r.b||"")+" "+(r.desc||"")+" "+packOf(r)).toLowerCase();
+  var hayWords=_words(hayStr);
+  var hayToks=_tokens(hayStr);
+  var haySet={};hayToks.forEach(function(t){haySet[t]=1;});
+  var haySnack=hayWords.some(function(w){return !!_SNACK[w];});
+  function entryHits(entry){
+    var name=entry&&entry.n!=null?entry.n:entry;
+    var aisle=entry&&entry.aisle||"";
+    var need=_tokens(name);
+    if(!need.length)return false;
+    // All board/list tokens must appear as whole tokens in the deal.
+    for(var j=0;j<need.length;j++){
+      if(!haySet[need[j]])return false;
+    }
+    var isFresh=aisle==="Vers"||need.some(function(t){return !!_FRESH[t];});
+    // Fresh produce vs snack/extra class → reject (paprika ↔ paprika chips = no).
+    if(isFresh&&haySnack)return false;
+    return true;
+  }
+  function hit(entries){
+    for(var i=0;i<(entries||[]).length;i++){
+      if(entryHits(entries[i]))return true;
     }
     return false;
   }
-  if(hit(sets.list||[]))return "list";
-  if(hit(sets.bord||[]))return "bord";
+  if(hit(sets.list))return "list";
+  if(hit(sets.bord))return "bord";
   return "";
 }
 function drawFolder(){var host=document.getElementById("folderbody");if(!host)return;var line=document.getElementById("folderline");if(line)line.textContent=fullItems().length+" acties";var sc=host.parentNode;if(sc&&!document.getElementById("folderq")){var inp=document.createElement("input");inp.id="folderq";inp.placeholder="Zoek in de folder";inp.value=S.folderQ||"";inp.addEventListener("input",function(){S.folderQ=inp.value;drawFolder();});sc.insertBefore(inp,host);}var pick=document.getElementById("folderpick");if(pick){var stores=(window.FOLDER_INDEX&&window.FOLDER_INDEX.stores&&window.FOLDER_INDEX.stores.length)?window.FOLDER_INDEX.stores:(typeof STORES!=="undefined"&&STORES.length?STORES:[]);pick.innerHTML=["alle"].concat(stores.map(function(s){return s.id;})).map(function(id){var n=id==="alle"?"Alle":storeName(id);return "<button type=button class='chip "+(S.folderStore===id?"on":"")+"' data-act=fstore data-id="+id+">"+n+"</button>";}).join("");}var q=(S.folderQ||"").toLowerCase().trim();var rows=fullItems().filter(function(r){if(S.folderStore&&S.folderStore!=="alle"&&r.s!==S.folderStore)return false;if(!q)return true;return (r.n+" "+(r.b||"")+" "+packOf(r)+" "+(r.deal||"")+" "+(r.desc||"")).toLowerCase().indexOf(q)>=0;});
