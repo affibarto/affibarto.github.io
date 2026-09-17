@@ -174,3 +174,20 @@ padding:4px 8px;font-size:11px;border-radius:999px
 #rings .listrow .btn{flex:none}
 #ringhint{opacity:.75}
 #radd{background:#FFF9F1;border:1px solid #E8D4B8;border-radius:14px;padding:12px}
+
+/* A/B merk popup (v60) */
+#abpanel{z-index:60}
+.abtotals{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 12px}
+.abtot{background:#fff;border:1px solid #E8D4B8;border-radius:16px;padding:14px 12px;text-align:center;box-shadow:0 2px 10px rgba(42,24,16,.05)}
+.abtot.on{border-color:#C45A38;box-shadow:0 4px 14px rgba(196,90,56,.18)}
+.abtot-l{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#7A5C48;margin:0 0 6px}
+.abtot-n{font-size:22px;font-weight:800;color:#2A1810;line-height:1.1}
+.abdelta{background:#FFF9F1;border:1px solid #E8D4B8;border-radius:16px;padding:14px 16px;margin:0 0 8px;text-align:center}
+.abdelta.save{background:#DCE8DD;border-color:#B7CDB9}
+.abdelta-n{display:block;font-size:26px;font-weight:800;color:#2A1810;line-height:1.15}
+.abdelta.save .abdelta-n{color:#3F6B42}
+.abdelta-l{display:block;margin-top:4px;font-size:13px;font-weight:600;color:#7A5C48}
+.abmodes{margin:0 0 4px}
+.abswap{cursor:pointer;width:100%;text-align:left}
+.abswap.onswap{outline:2px solid #C45A38;outline-offset:-2px}
+.abswap .meta{font-size:12px;line-height:1.35}
