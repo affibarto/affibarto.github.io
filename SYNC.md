@@ -1,7 +1,7 @@
 # WeAte sync (huissleutel)
 
 Twee telefoons delen hetzelfde huis via een korte **huissleutel** (code) en Firebase Firestore.
-Zonder `firebase-config.js` blijft alles lokaal op de telefoon — de Sync-sectie op Huis legt uit wat er nog moet.
+`firebase-config.js` staat in de repo (Firebase web-config is publiek; de huissleutel + Firestore-regels zijn het geheim). Zonder geldige config blijft alles lokaal op de telefoon.
 
 ## Wat synct
 
@@ -14,10 +14,9 @@ Plan, mensen, always/extras, weglaten (omit), toegevoegde ingrediënten (ingAdd)
 1. Ga naar [Firebase Console](https://console.firebase.google.com/) → project aanmaken (of bestaand).
 2. **Build → Firestore Database** → database maken (start in productiemodus of test; regels hieronder plakken).
 3. **Projectinstellingen → Je apps → Web-app** toevoegen; kopieer de `firebaseConfig`.
-4. In de repo-root:
-   - Kopieer `firebase-config.example.js` → `firebase-config.js`
-   - Plak je echte config in `window.WEATE_FIREBASE = { ... }`
-   - **Commit `firebase-config.js` niet** (staat in `.gitignore`). Voor GitHub Pages: zet het bestand in de live map via een follow-up (upload/PR alleen example), of host het apart — Pages serveert wat in de repo staat, dus je moet `firebase-config.js` lokaal deployen of tijdelijk toevoegen en daarna weer uit git houden.
+4. Config in de repo: `firebase-config.js` is gecommit (web-config is bedoeld om publiek te zijn).
+   - Alleen regenereren bij **rotatie** van keys/project (kopieer van `firebase-config.example.js` of Firebase Console → web-app config).
+   - Niet opnieuw aanmaken bij elke deploy.
 5. Deploy Firestore-regels (Console → Firestore → Regels), bijvoorbeeld:
 
 ```
