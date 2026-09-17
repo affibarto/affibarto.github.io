@@ -191,3 +191,13 @@ padding:4px 8px;font-size:11px;border-radius:999px
 .abswap{cursor:pointer;width:100%;text-align:left}
 .abswap.onswap{outline:2px solid #C45A38;outline-offset:-2px}
 .abswap .meta{font-size:12px;line-height:1.35}
+
+
+/* Sync / huissleutel */
+.syncbox{background:#fff;border:1px solid #E8D4B8;border-radius:18px;padding:14px 16px;margin:0 0 14px;box-shadow:0 2px 10px rgba(42,24,16,.05)}
+.syncbox .note{margin:0 0 10px}
+.synccodewrap{text-align:center;margin:8px 0 12px}
+.synccode{font-size:28px;font-weight:800;letter-spacing:.18em;font-variant-numeric:tabular-nums;padding:12px 10px;background:#EDE0D0;border-radius:14px;color:#2A1810}
+#syncjoininput{text-transform:uppercase;letter-spacing:.12em;font-weight:700;text-align:center}
+.syncbox code{font-size:12px;background:#EDE0D0;padding:2px 6px;border-radius:6px}
+.syncbox a{color:#C45A38;font-weight:700}
