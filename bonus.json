@@ -1,7 +1,7 @@
 {
   "week": "14–20 sep 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-09-16",
+  "fetched": "2026-09-17",
   "note": "Folder/actie, automatisch. Geen kassaprijs.",
   "ah": {
     "gehakt": {
@@ -16,13 +16,6 @@
       "now": 120,
       "deal": "1 + 1 GRATIS",
       "name": "Grand' Italia Spaghetti all'uovo",
-      "until": "2026-09-20"
-    },
-    "wortel": {
-      "was": 139,
-      "now": 99,
-      "deal": "VOOR 0.99",
-      "name": "AH Winterpeen",
       "until": "2026-09-20"
     },
     "kaas": {
@@ -80,13 +73,6 @@
       "deal": "2E HALVE PRIJS",
       "name": "Venz XXL hagelslag melk",
       "until": "2026-09-20"
-    },
-    "fruit": {
-      "was": 219,
-      "now": 175,
-      "deal": "2 VOOR 3.50",
-      "name": "Chiquita Groene bananen",
-      "until": "2026-09-20"
     }
   },
   "jumbo": {
@@ -98,11 +84,11 @@
       "until": "2026-09-22"
     },
     "melk": {
-      "was": 1074,
-      "now": 966,
-      "deal": "10% korting",
-      "name": "Campina Halfvolle Melk 6 x 500 ml Fles Multipack",
-      "until": "2026-10-06"
+      "was": 369,
+      "now": 184,
+      "deal": "1+1 gratis",
+      "name": "Campina Langlekker Halfvolle Melk Multipack Mini's 6 x 200 ml",
+      "until": "2026-09-22"
     },
     "kaas": {
       "was": 279,
@@ -123,13 +109,6 @@
       "now": 149,
       "deal": "voor 1,49",
       "name": "Parrano  Geraspte Mozzarella",
-      "until": "2026-09-22"
-    },
-    "linzen": {
-      "was": 299,
-      "now": 150,
-      "deal": "2 voor 2,99",
-      "name": "Bonduelle Linzen Bio 310g",
       "until": "2026-09-22"
     }
   },
@@ -176,13 +155,6 @@
       "name": "Tijgerbruin vloerbrood",
       "until": "2026-09-20"
     },
-    "paprika": {
-      "was": 299,
-      "now": 199,
-      "deal": "33% korting",
-      "name": "Puntpaprika rood of mix",
-      "until": "2026-09-20"
-    },
     "mozzarella": {
       "was": 149,
       "now": 149,
@@ -202,13 +174,6 @@
       "now": 499,
       "deal": "folder",
       "name": "Gerookte wilde Sockeye zalm",
-      "until": "2026-09-20"
-    },
-    "yoghurt": {
-      "was": 239,
-      "now": 149,
-      "deal": "37% korting",
-      "name": "ALMHOF Roomyoghurt",
       "until": "2026-09-20"
     }
   },
@@ -246,7 +211,7 @@
       "now": 200,
       "deal": "39% korting",
       "name": "Plus Groene pesto",
-      "until": "2026-09-18"
+      "until": "2026-09-19"
     },
     "spinazie": {
       "was": 349,
@@ -255,12 +220,19 @@
       "name": "Hak Spinazie",
       "until": "2026-09-22"
     },
+    "paprika": {
+      "was": 89,
+      "now": 74,
+      "deal": "17% korting",
+      "name": "Plus Paprika rood",
+      "until": "2026-09-22"
+    },
     "ham": {
       "was": 209,
       "now": 200,
       "deal": "folder",
       "name": "PLUS Puur van smaak Kleintje Achterham",
-      "until": "2026-09-18"
+      "until": "2026-09-19"
     },
     "mozzarella": {
       "was": 299,
@@ -276,18 +248,11 @@
       "name": "Venz Beer Hagelslag",
       "until": "2026-09-18"
     },
-    "komkommer": {
-      "was": 75,
-      "now": 69,
-      "deal": "8% korting",
-      "name": "Plus Komkommer",
-      "until": "2026-09-18"
-    },
-    "linzen": {
-      "was": 149,
-      "now": 100,
-      "deal": "33% korting",
-      "name": "Hak Linzen in pak",
+    "zalm": {
+      "was": 799,
+      "now": 599,
+      "deal": "25% korting",
+      "name": "John West Roze zalm zonder vel en graat MSC",
       "until": "2026-09-18"
     },
     "lasagne": {
@@ -297,11 +262,11 @@
       "name": "La Molisana Lasagnebladen no 219",
       "until": "2026-09-22"
     },
-    "aardappel": {
-      "was": 219,
-      "now": 149,
-      "deal": "32% korting",
-      "name": "Biologisch PLUS Biologische aardappelen",
+    "komkommer": {
+      "was": 75,
+      "now": 69,
+      "deal": "8% korting",
+      "name": "Plus Komkommer",
       "until": "2026-09-18"
     }
   },
@@ -320,25 +285,11 @@
       "name": "Campina Houdbare halfvolle melk langlekker",
       "until": "2026-09-22"
     },
-    "paprika": {
-      "was": 289,
-      "now": 199,
-      "deal": "31% korting",
-      "name": "1 de Beste Zoete puntpaprika rood",
-      "until": "2026-09-22"
-    },
     "rookworst": {
       "was": 109,
       "now": 99,
       "deal": "9% korting",
       "name": "Slagerhuis Gelderse rookworst",
-      "until": "2026-09-22"
-    },
-    "pesto": {
-      "was": 259,
-      "now": 99,
-      "deal": "62% korting",
-      "name": "Grand'Italia Pesto truffel en ricotta",
       "until": "2026-09-22"
     }
   }
