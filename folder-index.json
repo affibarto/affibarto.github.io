@@ -1,7 +1,7 @@
 {
   "week": "14–20 sep 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-09-17",
+  "fetched": "2026-09-18",
   "stores": [
     {
       "id": "dirk",
@@ -78,13 +78,6 @@
       "n": "Picnic",
       "pp": "picnic",
       "file": "folder-picnic.json",
-      "count": 0
-    },
-    {
-      "id": "delhaize",
-      "n": "Delhaize",
-      "pp": "delhaize",
-      "file": "folder-delhaize.json",
       "count": 100
     }
   ]
