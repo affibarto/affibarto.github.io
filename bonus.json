@@ -22,7 +22,7 @@
       "was": 299,
       "now": 250,
       "deal": "2 VOOR 5.00",
-      "name": "AH Emmentaler geraspte kaas",
+      "name": "AH Cheddar geraspte kaas",
       "until": "2026-09-27"
     },
     "boter": {
@@ -53,13 +53,6 @@
       "name": "Hak Spinazie",
       "until": "2026-09-27"
     },
-    "mozzarella": {
-      "was": 279,
-      "now": 250,
-      "deal": "2 VOOR 5.00",
-      "name": "AH Mozzarella geraspt",
-      "until": "2026-09-27"
-    },
     "rookworst": {
       "was": 575,
       "now": 402,
@@ -78,7 +71,7 @@
       "was": 219,
       "now": 175,
       "deal": "2 VOOR 3.50",
-      "name": "Chiquita Groene bananen",
+      "name": "Chiquita Ready to eat bananen",
       "until": "2026-09-27"
     },
     "zalm": {
@@ -150,8 +143,15 @@
       "was": 299,
       "now": 150,
       "deal": "1+1 gratis",
-      "name": "Hak Spinazie met Room Bio 345 g",
+      "name": "Hak Spinazie met Room 345 g",
       "until": "2026-09-29"
+    },
+    "paprika": {
+      "was": 99,
+      "now": 49,
+      "deal": "1+1 gratis",
+      "name": "Jumbo Paprika Rood",
+      "until": "2026-09-22"
     },
     "ham": {
       "was": 355,
@@ -166,16 +166,16 @@
       "deal": "voor 1,49",
       "name": "Parrano  Geraspte Mozzarella",
       "until": "2026-09-22"
+    },
+    "linzen": {
+      "was": 299,
+      "now": 150,
+      "deal": "2 voor 2,99",
+      "name": "Bonduelle Linzen Bio 310g",
+      "until": "2026-09-22"
     }
   },
   "lidl": {
-    "aardappel": {
-      "was": 349,
-      "now": 249,
-      "deal": "28% korting",
-      "name": "Aardappelen extra grof",
-      "until": "2026-09-27"
-    },
     "ei": {
       "was": 749,
       "now": 749,
@@ -220,6 +220,13 @@
       "name": "Arla Lactofree Halfvolle melk",
       "until": "2026-09-29"
     },
+    "kip": {
+      "was": 209,
+      "now": 200,
+      "deal": "multipack",
+      "name": "PLUS Puur van smaak Kleintje Kipfilet",
+      "until": "2026-09-22"
+    },
     "aardappel": {
       "was": 385,
       "now": 249,
@@ -242,10 +249,10 @@
       "until": "2026-09-29"
     },
     "pesto": {
-      "was": 299,
-      "now": 149,
+      "was": 329,
+      "now": 200,
       "deal": "multipack",
-      "name": "Plus Pastasaus groene pesto",
+      "name": "Plus Groene pesto",
       "until": "2026-09-22"
     },
     "spinazie": {
@@ -261,6 +268,13 @@
       "deal": "multipack",
       "name": "Plus IJsbergsla fijn",
       "until": "2026-09-29"
+    },
+    "paprika": {
+      "was": 89,
+      "now": 74,
+      "deal": "multipack",
+      "name": "Plus Paprika rood",
+      "until": "2026-09-22"
     },
     "ham": {
       "was": 209,
@@ -303,7 +317,7 @@
       "was": 269,
       "now": 129,
       "deal": "52% korting",
-      "name": "De Cecco Penne rigate",
+      "name": "De Cecco Spaghetti",
       "until": "2026-09-29"
     },
     "melk": {
@@ -327,13 +341,6 @@
       "name": "Hak Wortelen extra fijn",
       "until": "2026-09-29"
     },
-    "pesto": {
-      "was": 259,
-      "now": 99,
-      "deal": "62% korting",
-      "name": "Grand'Italia Pesto truffel en ricotta",
-      "until": "2026-09-22"
-    },
     "spinazie": {
       "was": 285,
       "now": 99,
@@ -345,7 +352,7 @@
       "was": 189,
       "now": 169,
       "deal": "11% korting",
-      "name": "Bakker van der Akker Vloerbrood zonnepit",
+      "name": "Vloerbrood volkoren heel",
       "until": "2026-09-29"
     },
     "rookworst": {
