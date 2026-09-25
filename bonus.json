@@ -1,9 +1,16 @@
 {
   "week": "21–27 sep 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-09-24",
+  "fetched": "2026-09-25",
   "note": "Folder/actie, automatisch. Geen kassaprijs.",
   "ah": {
+    "pasta": {
+      "was": 249,
+      "now": 125,
+      "deal": "1 + 1 GRATIS",
+      "name": "AH Spaghetti all' uovo",
+      "until": "2026-10-04"
+    },
     "tomaat": {
       "was": 169,
       "now": 99,
@@ -11,12 +18,19 @@
       "name": "Heinz Frito tomatenblokjes",
       "until": "2026-09-27"
     },
+    "melk": {
+      "was": 179,
+      "now": 150,
+      "deal": "2 VOOR 2.99",
+      "name": "Arla Biologisch halfvolle melk",
+      "until": "2026-10-04"
+    },
     "kip": {
-      "was": 449,
-      "now": 399,
-      "deal": "VOOR 3.99",
-      "name": "AH Scharrel kipfilet 2 stuks",
-      "until": "2026-09-27"
+      "was": 369,
+      "now": 299,
+      "deal": "100 GRAM VOOR 2.39",
+      "name": "AH Scharrel kipfilet",
+      "until": "2026-10-04"
     },
     "kaas": {
       "was": 299,
@@ -39,6 +53,20 @@
       "name": "AH Groene pesto",
       "until": "2026-09-27"
     },
+    "rijst": {
+      "was": 279,
+      "now": 209,
+      "deal": "2E HALVE PRIJS",
+      "name": "Fairtrade Original Biologische pandan rijst bio",
+      "until": "2026-10-04"
+    },
+    "wraps": {
+      "was": 549,
+      "now": 412,
+      "deal": "2E HALVE PRIJS",
+      "name": "BFree Meergranen wraps glutenvrij",
+      "until": "2026-10-04"
+    },
     "spinazie": {
       "was": 349,
       "now": 175,
@@ -47,11 +75,11 @@
       "until": "2026-09-27"
     },
     "mozzarella": {
-      "was": 279,
-      "now": 250,
-      "deal": "2 VOOR 5.00",
-      "name": "AH Mozzarella geraspt",
-      "until": "2026-09-27"
+      "was": 379,
+      "now": 284,
+      "deal": "25% KORTING",
+      "name": "Galbani Mozzarella latte di bufala mini",
+      "until": "2026-10-04"
     },
     "rookworst": {
       "was": 575,
@@ -66,6 +94,13 @@
       "deal": "2E HALVE PRIJS",
       "name": "Calvé Pindakaas met stukjes pinda",
       "until": "2026-09-27"
+    },
+    "hagelslag": {
+      "was": 439,
+      "now": 329,
+      "deal": "2E HALVE PRIJS",
+      "name": "Fairtrade Original Hagelslag puur",
+      "until": "2026-10-04"
     },
     "fruit": {
       "was": 219,
@@ -83,6 +118,13 @@
     }
   },
   "jumbo": {
+    "kip": {
+      "was": 339,
+      "now": 170,
+      "deal": "1+1 gratis",
+      "name": "Biologisch Kipfilet ca. 100 g",
+      "until": "2026-09-29"
+    },
     "aardappel": {
       "was": 465,
       "now": 233,
@@ -164,13 +206,6 @@
       "name": "Plus Scharrel kipfilet GVP",
       "until": "2026-10-06"
     },
-    "aardappel": {
-      "was": 385,
-      "now": 249,
-      "deal": "multipack",
-      "name": "Plus Kruimige aardappel",
-      "until": "2026-09-29"
-    },
     "wortel": {
       "was": 185,
       "now": 149,
@@ -211,20 +246,13 @@
       "now": 200,
       "deal": "multipack",
       "name": "Plus Groene pesto",
-      "until": "2026-09-26"
+      "until": "2026-09-27"
     },
     "rijst": {
       "was": 259,
       "now": 129,
       "deal": "1+1",
       "name": "Lassie Poke bowl rijst",
-      "until": "2026-10-06"
-    },
-    "wraps": {
-      "was": 329,
-      "now": 165,
-      "deal": "1+1",
-      "name": "Santa Maria Tortilla wrap met volkorentarwe L 6st",
       "until": "2026-10-06"
     },
     "spinazie": {
