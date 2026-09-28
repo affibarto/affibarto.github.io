@@ -71,7 +71,7 @@ function afterPlanSaved(){
   if(typeof toast==="function")toast("Weekplanning staat");
   if(typeof openSuggest==="function")setTimeout(function(){openSuggest();},80);
 }
-if(typeof modeOf==="function"&&!modeOf._wp){var _m=modeOf;modeOf=function(day,p){ensure();var w=S.weekPlans&&S.weekPlans[weekKey()];if(w&&w[day]&&w[day].who&&w[day].who[p.id])return w[day].who[p.id];return _m(day,p);};modeOf._wp=true;}
+if(typeof defaultSchedMode==="function"&&!defaultSchedMode._wp){var _dsm=defaultSchedMode;defaultSchedMode=function(p,day){ensure();var w=S.weekPlans&&S.weekPlans[weekKey()];if(w&&w[day]&&w[day].who&&w[day].who[p.id])return w[day].who[p.id];return _dsm(p,day);};defaultSchedMode._wp=true;}
 if(typeof drawBord==="function"&&!drawBord._wp){var _db=drawBord;drawBord=function(){_db();banner();};drawBord._wp=true;}
 if(typeof drawHuis==="function"&&!drawHuis._wp){var _dh=drawHuis;drawHuis=function(){_dh();huisRemind();};drawHuis._wp=true;}
 if(typeof eatersOn==="function"&&!eatersOn._wp){var _eo=eatersOn;eatersOn=function(day){var list=_eo(day).filter(function(p){return typeof p.id==="number";});var g=guestsOf(day);for(var i=0;i<g;i++)list.push({id:1000+i,name:"Visite",role:"adult",portion:"normal",diet:[],vetoes:[]});return list;};eatersOn._wp=true;}

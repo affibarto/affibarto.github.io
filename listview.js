@@ -13,7 +13,7 @@ function eatersMain(d){
 if(typeof S==="undefined"||!S.people)return [];
 return S.people.filter(function(p){
 var m=(typeof modeOf==="function")?modeOf(d,p):(p.sched&&p.sched[d])||"eat";
-return m==="eat"||m==="later";
+return m==="eat";
 });
 }
 var _STOP={voor:1,met:1,van:1,een:1,het:1,de:1,en:1,per:1,stuks:1,pack:1,doos:1,vers:1,diepvries:1,milde:1,halfvolle:1,all:1,uovo:1,flavour:1};

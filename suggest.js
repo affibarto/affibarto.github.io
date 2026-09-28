@@ -19,7 +19,7 @@ function eatersFor(day){
   }
   return (S.people||[]).filter(function(p){
     var m=(p.sched&&p.sched[day])||"eat";
-    return m==="eat"||m==="later";
+    return m==="eat";
   });
 }
 
