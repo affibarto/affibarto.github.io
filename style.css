@@ -201,3 +201,13 @@ padding:4px 8px;font-size:11px;border-radius:999px
 #syncjoininput{text-transform:uppercase;letter-spacing:.12em;font-weight:700;text-align:center}
 .syncbox code{font-size:12px;background:#EDE0D0;padding:2px 6px;border-radius:6px}
 .syncbox a{color:#C45A38;font-weight:700}
+
+/* PWA install tip — subtiel, dismissible */
+.pwainstall{position:absolute;left:12px;right:12px;bottom:calc(78px + env(safe-area-inset-bottom));z-index:30;display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:18px;background:#fff;border:1px solid #E8D4B8;box-shadow:0 8px 24px rgba(42,24,16,.12);opacity:0;transform:translateY(10px);transition:opacity .2s ease,transform .2s ease;pointer-events:none}
+.pwainstall.on{opacity:1;transform:none;pointer-events:auto}
+.pwainstall-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.pwainstall-txt b{font-size:14px;font-weight:800;color:#2A1810}
+.pwainstall-txt span{font-size:12px;font-weight:500;color:#7A5C48;line-height:1.35}
+.pwainstall .btn{flex:none;padding:8px 12px}
+.pwainstall-x{flex:none;width:32px;height:32px;border:0;border-radius:10px;background:#EDE0D0;color:#2A1810;font-size:20px;line-height:1;font-family:inherit;font-weight:700}
+.pwainstall-x:active{opacity:.85}
