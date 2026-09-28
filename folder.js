@@ -106,6 +106,27 @@ function _needTokens(entry){
   }
   return _tokens(name);
 }
+/* Catalog aliases → extra whole-word need-sets (still strict: every token must hit title). */
+function _aliasNeedSets(entry){
+  if(!window.WeAteProducts||typeof window.WeAteProducts.aliasesFor!=="function")return [];
+  var key=_catKeyOf(entry&&entry.k)||"";
+  var name=entry&&entry.n!=null?String(entry.n):"";
+  var aliases=window.WeAteProducts.aliasesFor(key||name)||[];
+  var sets=[],seen={};
+  aliases.forEach(function(al){
+    var toks=_tokens(al);
+    if(!toks.length){
+      var w=String(al||"").toLowerCase().replace(/[^\wäöüßà-ÿ0-9]+/g,"");
+      if(w&&(_isToken(w)||_CORE[w]))toks=[w];
+    }
+    if(!toks.length)return;
+    var sig=toks.join("|");
+    if(seen[sig])return;
+    seen[sig]=1;
+    sets.push(toks);
+  });
+  return sets;
+}
 function boardMatchSets(){
   var listNames=[],bordNames=[],seenL={},seenB={};
   function add(arr,seen,name,aisle,k){
@@ -214,17 +235,24 @@ function dealMatchKind(r,sets){
   var titleSet={};titleWords.forEach(function(t){titleSet[t]=1;});
   var titleSnack=titleWords.some(function(w){return !!_SNACK[w];});
   function entryHits(entry,mode){
-    var need=_needTokens(entry);
-    if(!need.length)return false;
-    for(var j=0;j<need.length;j++){
-      if(!titleSet[need[j]])return false;
+    function tryNeed(need){
+      if(!need||!need.length)return false;
+      for(var j=0;j<need.length;j++){
+        if(!titleSet[need[j]])return false;
+      }
+      var simple=_isSimpleEntry(entry,need);
+      if(simple&&titleSnack)return false;
+      if(simple&&_dishReject(titleWords,entry,need))return false;
+      if(mode==="bord"&&!_titleDominated(r.n,need[0]))return false;
+      return true;
     }
-    var simple=_isSimpleEntry(entry,need);
-    if(simple&&titleSnack)return false;
-    if(simple&&_dishReject(titleWords,entry,need))return false;
-    /* Bord-only: stronger — main token in first 3 content title tokens. */
-    if(mode==="bord"&&!_titleDominated(r.n,need[0]))return false;
-    return true;
+    var need=_needTokens(entry);
+    if(tryNeed(need))return true;
+    var sets=_aliasNeedSets(entry);
+    for(var i=0;i<sets.length;i++){
+      if(tryNeed(sets[i]))return true;
+    }
+    return false;
   }
   function hit(entries,mode){
     for(var i=0;i<(entries||[]).length;i++){
