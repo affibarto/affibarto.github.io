@@ -96,6 +96,13 @@ function enrichIngredient(k){
 var catName=nm(k);
 var catPack=normPack(parsePack(catName).pack);
 var catTitle=parsePack(catName).name||catName;
+if(window.WeAteProducts){
+  var pref=window.WeAteProducts.get(k)||window.WeAteProducts.findByName(catTitle);
+  if(pref){
+    catTitle=pref.name||catTitle;
+    if(pref.pack)catPack=normPack(pref.pack);
+  }
+}
 var hit=findBonusHit(k);
 var bonusName=hit&&hit.b&&hit.b.name?String(hit.b.name).trim():"";
 var folder=findFolderHit(k,catName,bonusName);
@@ -128,6 +135,11 @@ var base=parsePack(catName).name.toLowerCase();
 if(base.length>=5&&hay.indexOf(base)>=0)fscore+=4;
 if(fscore>=5){product=folder.n;confident=true;}
 }
+}
+if(!brand&&window.WeAteProducts){
+  var meta=window.WeAteProducts.preferMeta(k);
+  if(meta&&meta.brand)brand=meta.brand;
+  if(!pack&&meta&&meta.pack)pack=normPack(meta.pack);
 }
 if(!brand)brand=guessBrand(product||bonusName,"");
 if(product&&!pack){
@@ -344,9 +356,19 @@ var items=parseSpeak(text);
 if(!items.length){if(typeof toast==="function")toast("Niets herkend");return;}
 S.always=S.always||[];
 items.forEach(function(it){
-var hit=-1;for(var i=0;i<S.always.length;i++){if((S.always[i].n||"").toLowerCase()===it.n)hit=i;}
+var cat=null;
+if(window.WeAteProducts){
+  cat=window.WeAteProducts.findByName(it.n);
+  if(!cat)cat=window.WeAteProducts.upsert({name:it.n,aisle:"Huis"});
+}
+var label=cat?cat.name:it.n;
+var key=cat&&typeof CAT!=="undefined"&&CAT[cat.id]?cat.id:null;
+var hit=-1;for(var i=0;i<S.always.length;i++){
+  if(key&&S.always[i].k===key)hit=i;
+  else if((S.always[i].n||"").toLowerCase()===label.toLowerCase())hit=i;
+}
 if(hit>=0)S.always[hit].q=(+S.always[hit].q||1)+it.q;
-else S.always.push({n:it.n,q:it.q});
+else S.always.push(key?{k:key,n:label,q:it.q}:{n:label,q:it.q});
 });
 if(typeof save==="function")save();
 if(typeof window.drawList==="function")window.drawList();else drawListByMeal();
@@ -411,4 +433,45 @@ if(mic){e.preventDefault();e.stopPropagation();startListen();return;}
 },true);
 window.addSpoken=addSpoken;
 setTimeout(function(){var v=document.getElementById("lijst");if(v&&v.classList.contains("on")&&typeof window.drawList==="function")window.drawList();},0);
+})();
+
+(function(){
+function paintAddProducts(){
+  var box=document.getElementById("aproducts");if(!box||!window.WeAteProducts)return;
+  var inp=document.getElementById("aname");
+  var q=inp?inp.value:"";
+  var hits=window.WeAteProducts.search(q,10);
+  box.innerHTML=hits.map(function(p){
+    var meta=[p.pack,p.aisle].filter(Boolean).join(" · ");
+    return "<button type=button class='chip' data-act=pickprod data-id='"+p.id+"'>"+String(p.name).replace(/</g,"")+(meta?" <span class=meta style=font-weight:500>("+meta+")</span>":"")+"</button>";
+  }).join("");
+}
+var inp=document.getElementById("aname");
+if(inp&&!inp._prodBound){
+  inp._prodBound=1;
+  inp.addEventListener("input",paintAddProducts);
+  inp.addEventListener("focus",paintAddProducts);
+}
+document.addEventListener("click",function(e){
+  var t=e.target;if(t&&t.nodeType===3)t=t.parentNode;
+  if(!t||!t.closest)return;
+  if(t.id==="fab"||t.id==="addAlways"||(t.closest&&(t.closest("#fab")||t.closest("#addAlways")))){
+    setTimeout(paintAddProducts,0);
+  }
+  var pick=t.closest("[data-act=pickprod]");
+  if(pick){
+    e.preventDefault();e.stopPropagation();
+    var id=pick.getAttribute("data-id");
+    var p=window.WeAteProducts&&window.WeAteProducts.get(id);
+    if(!p)return;
+    var an=document.getElementById("aname");if(an)an.value=p.name;
+    if(p.aisle){
+      S.sec=p.aisle==="Vers"||p.aisle==="Koeling"||p.aisle==="Houdbaar"?p.aisle:"Huis";
+      var asec=document.getElementById("asec");
+      if(asec)[].slice.call(asec.children).forEach(function(c){c.classList.toggle("on",c.dataset.s===S.sec);});
+    }
+    paintAddProducts();
+  }
+},true);
+window._paintAddProducts=paintAddProducts;
 })();
