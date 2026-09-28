@@ -211,3 +211,11 @@ padding:4px 8px;font-size:11px;border-radius:999px
 .pwainstall .btn{flex:none;padding:8px 12px}
 .pwainstall-x{flex:none;width:32px;height:32px;border:0;border-radius:10px;background:#EDE0D0;color:#2A1810;font-size:20px;line-height:1;font-family:inherit;font-weight:700}
 .pwainstall-x:active{opacity:.85}
+
+.syncpill{display:inline-flex;align-items:center;margin-left:8px;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.02em;background:#EDE0D0;color:#7A5C48;vertical-align:middle;text-transform:lowercase}
+.syncpill.online{background:#D7E8D5;color:#2F5F34}
+.syncpill.syncing{background:#F3E2C8;color:#8A5A20}
+.syncpill.offline{background:#E8E0D8;color:#6A5848}
+.syncpill.error{background:#F3D2B8;color:#7A3B1A}
+.synctip{background:#EDE0D0;border-radius:14px;padding:12px 14px;margin:0 0 12px}
+#synclast{color:#8A6B56;font-size:12px;margin-top:-4px}
