@@ -8,7 +8,7 @@ Slimme weekvoorstellen, restjes-coach en strengere lijst↔Actie-matching.
 
 | Functie | Offline gedrag |
 |--------|----------------|
-| **A · Slim voorstellen** | Houdt rekening met wie thuis/later/apart is, veto’s & dieet (`hardBlock` / `tasteHits`), sportdrukte (snellere recepten), fijn, opwarm-vriendelijk, keukenvariatie, overlap met je lijst. Geen verzonnen €-besparing. |
+| **A · Slim voorstellen** | Per vrije avond 6–12+ echte recepten uit `REC` (naam + foto), gescoord op veto’s/dieet, sportdrukte, fijn, opwarm, keukenvariatie. Plus **Zelf samenstellen**. Geen lege stubs. |
 | **B · Restjes-coach** | Kiest recepten die je aangevinkte restjes/lijst-items gebruiken (catalogus-aliassen mee). Tips in Barto-toon. |
 | **C · Lijst↔Actie** | Zelfde strenge whole-word match als `folder.js` (géén paprika→chips), plus veilige meervoudsvarianten (`tomaat`/`tomaten`). |
 
@@ -55,7 +55,7 @@ De stub in de repo is minimaal: CORS, JSON in/uit, key alleen in Worker env. Zon
 
 1. Hard refresh (`?v=` bump) of PWA opnieuw openen.
 2. **Huis** → weekschema/sportdagen + eventueel veto’s.
-3. **Bord** → weekplanning zetten → **Slim voorstellen** → vink avonden → op het bord.
+3. **Bord** → weekplanning zetten → **Slim voorstellen** → per avond een recept kiezen (of overslaan / zelf samenstellen) → op het bord.
 4. **Lijst** → **Restjes** → tik restjes → Zoek → open recept.
 5. **Actie** → badges “Op je lijst” / “Past bij je bord”; paprika mag **niet** aan chips plakken.
 6. Optioneel: endpoint zetten, Network-tab: POST naar je worker; zonder endpoint geen AI-calls.
@@ -70,4 +70,4 @@ De stub in de repo is minimaal: CORS, JSON in/uit, key alleen in Worker env. Zon
 }
 ```
 
-Gestructureerd JSON → bestaande partial-accept UI in `suggest.js`.
+Gestructureerd JSON → multi-option UI in `suggest.js` (remote picks worden aangevuld met lokale opties + foto’s).
