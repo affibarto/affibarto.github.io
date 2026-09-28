@@ -3,11 +3,27 @@
 Twee telefoons delen hetzelfde huis via een korte **huissleutel** (code) en Firebase Firestore.
 `firebase-config.js` staat in de repo (Firebase web-config is publiek; de huissleutel + Firestore-regels zijn het geheim). Zonder geldige config blijft alles lokaal op de telefoon.
 
+## Conflictregel (last-write-wins)
+
+- Elk huis is **één Firestore-document** `houses/{huissleutel}`.
+- Bij elke lokale wijziging schrijft WeAte het hele synchroon-pakket opnieuw met `updatedAt = serverTimestamp()` en `updatedBy = deviceId`.
+- **Last-write-wins:** de telefoon met de nieuwste `updatedAt` wint. De andere telefoon neemt die staat over (geen stille merges van losse velden).
+- Echo van je eigen write (zelfde `updatedBy`, recent) wordt genegeerd om flikkeren te voorkomen.
+- Bij eerste koppeling: lege cloud → lokale data uploaden; cloud vol → cloud laden (toast). Nooit stil wissen.
+
+Field-level merge is bewust **niet** in gebruik: plan/lijst/checked horen als geheel bij één huis. `set(..., { merge: true })` voorkomt alleen dat losse metadata-velden verdwijnen; de app-state zelf is LWW.
+
+## Offline-wachtrij
+
+- Zonder netwerk (of bij push-fout “unavailable”) blijven wijzigingen **lokaal** en markeert sync een pending flush.
+- Bij `online` event: pending push wordt automatisch doorgestuurd.
+- Status in de UI: **online** / **sync…** / **offline** / **fout**, plus “Laatste sync: …”.
+
 ## Wat synct
 
 Plan, mensen, always/extras, weglaten (omit), toegevoegde ingrediënten (ingAdd), afgevinkt (checked), merk (brand/itemBrand), winkels, budget, huisnaam, apartPick, gegeten (eaten).
 
-**Niet** synchroon: folder-/bonus-JSON (publiek op de site).
+**Niet** synchroon: folder-/bonus-JSON (publiek op de site), productcatalogus-extras in localStorage (tot sync later).
 
 ## Firebase klaarzetten (Roy)
 
@@ -36,12 +52,12 @@ service cloud.firestore {
 
 6. Herlaad WeAte. Op **Huis → Sync**: “Maak huissleutel” of “Koppel met code”.
 
-## Gebruik
+## Gebruik (twee telefoons)
 
-- **Maak huissleutel** op telefoon 1 → korte code (6–8 tekens A–Z/0–9). Deel die met telefoon 2.
-- **Koppel met code** op telefoon 2 → zelfde huis-document.
-- Bij eerste koppeling: lege cloud → lokale data uploaden; cloud vol + lokale data “leegachtig” → cloud laden; beide rijk → cloud wint + toast “Gegevens van de andere telefoon geladen”.
-- Conflict-MVP: last-write-wins via `updatedAt` (serverTimestamp). Nooit stil wissen.
+1. Telefoon 1 → **Huis → Maak huissleutel** → noteer de code (6–8 tekens).
+2. Telefoon 2 → **Huis → Koppel met code** → zelfde code.
+3. Zet op telefoon 1 iets op het bord of de lijst → binnen een paar seconden zichtbaar op telefoon 2 (als beide online).
+4. Vliegtuigmodus op één telefoon → wijzig lokaal → weer online → sync flusht automatisch.
 
 ## Let op
 

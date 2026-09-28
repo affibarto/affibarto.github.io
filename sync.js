@@ -1,4 +1,7 @@
-/* WeAte house sync — huissleutel + Firestore. Werkt offline zonder firebase-config.js. */
+/* WeAte house sync — huissleutel + Firestore.
+   Conflict rule: last-write-wins on the whole house doc via updatedAt (serverTimestamp).
+   Offline: local changes queue and flush when the browser is online again.
+   Werkt zonder firebase-config.js (alles blijft lokaal). */
 (function () {
   "use strict";
 
@@ -8,6 +11,8 @@
   ];
   var DEBOUNCE_MS = 400;
   var CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  var TIP_KEY = "weate.syncTipSeen";
+  var LAST_SYNC_KEY = "weate.lastSyncAt";
 
   var _db = null;
   var _unsub = null;
@@ -15,12 +20,24 @@
   var _applying = false;
   var _lastLocalWrite = 0;
   var _lastRemoteMs = 0;
-  var _syncStatus = "lokaal";
+  var _lastSyncAt = 0;
+  var _syncStatus = "lokaal"; /* lokaal | online | syncing | error | offline */
   var _deviceId = null;
+  var _pendingFlush = false;
+  var _onlineBound = false;
 
   function cfgOk() {
     var c = window.WEATE_FIREBASE;
     return !!(c && c.apiKey && c.projectId && c.apiKey !== "YOUR_API_KEY");
+  }
+
+  function isOnline() {
+    try {
+      if (typeof navigator !== "undefined" && "onLine" in navigator) {
+        return !!navigator.onLine;
+      }
+    } catch (e) {}
+    return true;
   }
 
   function ensureDeviceId() {
@@ -35,6 +52,20 @@
       _deviceId = "d" + Math.random().toString(36).slice(2, 10);
     }
     return _deviceId;
+  }
+
+  function loadLastSync() {
+    try {
+      var n = +localStorage.getItem(LAST_SYNC_KEY);
+      if (n && isFinite(n)) _lastSyncAt = n;
+    } catch (e) {}
+  }
+
+  function rememberLastSync(ms) {
+    _lastSyncAt = ms || Date.now();
+    try {
+      localStorage.setItem(LAST_SYNC_KEY, String(_lastSyncAt));
+    } catch (e) {}
   }
 
   function makeHouseCode() {
@@ -65,6 +96,9 @@
         firebase.initializeApp(window.WEATE_FIREBASE);
       }
       _db = firebase.firestore();
+      try {
+        _db.enablePersistence({ synchronizeTabs: true }).catch(function () {});
+      } catch (e) {}
       return _db;
     } catch (e) {
       console.warn("WeAte sync: init mislukt", e);
@@ -123,6 +157,7 @@
   function applyRemote(data, opts) {
     opts = opts || {};
     if (!data || typeof S === "undefined") return;
+    /* Last-write-wins: replace all synced fields from the winning doc. */
     SYNC_KEYS.forEach(function (k) {
       if (data[k] !== undefined) S[k] = data[k];
     });
@@ -148,15 +183,59 @@
     return 0;
   }
 
+  function formatLastSync(ms) {
+    if (!ms) return "";
+    var d = new Date(ms);
+    if (!isFinite(d.getTime())) return "";
+    var now = new Date();
+    var pad = function (n) { return n < 10 ? "0" + n : String(n); };
+    var hm = pad(d.getHours()) + ":" + pad(d.getMinutes());
+    var sameDay =
+      d.getFullYear() === now.getFullYear() &&
+      d.getMonth() === now.getMonth() &&
+      d.getDate() === now.getDate();
+    if (sameDay) return "vandaag " + hm;
+    var yest = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
+    var isYest =
+      d.getFullYear() === yest.getFullYear() &&
+      d.getMonth() === yest.getMonth() &&
+      d.getDate() === yest.getDate();
+    if (isYest) return "gisteren " + hm;
+    return pad(d.getDate()) + "-" + pad(d.getMonth() + 1) + " " + hm;
+  }
+
+  function markPending() {
+    _pendingFlush = true;
+    try {
+      if (typeof S !== "undefined") S._syncPending = true;
+    } catch (e) {}
+  }
+
+  function clearPending() {
+    _pendingFlush = false;
+    try {
+      if (typeof S !== "undefined") delete S._syncPending;
+    } catch (e) {}
+  }
+
   function doPush() {
     var db = initFirebase();
     if (!db || !S.syncOn || !S.houseCode || _applying) return Promise.resolve();
     var code = normalizeCode(S.houseCode);
     if (code.length < 6) return Promise.resolve();
+
+    if (!isOnline()) {
+      markPending();
+      _syncStatus = "offline";
+      paintSyncUi();
+      return Promise.resolve();
+    }
+
     _lastLocalWrite = Date.now();
-    _syncStatus = "sync…";
+    _syncStatus = "syncing";
     paintSyncUi();
     var payload = packState();
+    /* LWW marker — server clock. Newer updatedAt wins on every phone. */
     payload.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
     payload.updatedBy = ensureDeviceId();
     return db
@@ -164,14 +243,22 @@
       .doc(code)
       .set(payload, { merge: true })
       .then(function () {
-        _syncStatus = "gekoppeld";
+        clearPending();
+        rememberLastSync(Date.now());
+        _syncStatus = "online";
         paintSyncUi();
       })
       .catch(function (err) {
         console.warn("WeAte sync push", err);
-        _syncStatus = "fout";
+        markPending();
+        var net =
+          !isOnline() ||
+          (err && (err.code === "unavailable" || /network|offline|Failed to fetch/i.test(String(err.message || err))));
+        _syncStatus = net ? "offline" : "error";
         paintSyncUi();
-        if (typeof toast === "function") toast("Sync lukte niet — blijf lokaal bezig");
+        if (typeof toast === "function") {
+          toast(net ? "Offline — wijzigingen wachten op sync" : "Sync lukte niet — blijf lokaal bezig");
+        }
       });
   }
 
@@ -183,6 +270,17 @@
     }, DEBOUNCE_MS);
   }
 
+  function flushQueue() {
+    if (!S || !S.syncOn || !S.houseCode || !cfgOk()) return;
+    if (!_pendingFlush && _syncStatus !== "offline" && _syncStatus !== "error") return;
+    if (!isOnline()) {
+      _syncStatus = "offline";
+      paintSyncUi();
+      return;
+    }
+    doPush();
+  }
+
   function handleSnapshot(snap) {
     if (!snap || !snap.exists) {
       if (stateRichness(S) > 0) doPush();
@@ -190,19 +288,25 @@
     }
     var data = snap.data() || {};
     var rms = remoteMs(data);
+    /* Echo of our own write — skip apply, just confirm. */
     if (data.updatedBy && data.updatedBy === ensureDeviceId() && rms && rms <= _lastLocalWrite + 2000) {
       _lastRemoteMs = Math.max(_lastRemoteMs, rms);
-      _syncStatus = "gekoppeld";
+      rememberLastSync(rms || Date.now());
+      clearPending();
+      _syncStatus = isOnline() ? "online" : "offline";
       paintSyncUi();
       return;
     }
     if (rms && rms <= _lastRemoteMs) return;
+    /* Remote older than our pending local write → push ours (LWW). */
     if (rms && _lastLocalWrite && rms < _lastLocalWrite - 100) {
       doPush();
       return;
     }
     _lastRemoteMs = rms || Date.now();
-    _syncStatus = "gekoppeld";
+    rememberLastSync(rms || Date.now());
+    clearPending();
+    _syncStatus = isOnline() ? "online" : "offline";
     applyRemote(data, {});
     paintSyncUi();
   }
@@ -225,18 +329,18 @@
       return;
     }
     if (!cfgOk()) {
-      _syncStatus = "geen config";
+      _syncStatus = "lokaal";
       paintSyncUi();
       return;
     }
     var db = initFirebase();
     if (!db) {
-      _syncStatus = "geen config";
+      _syncStatus = "lokaal";
       paintSyncUi();
       return;
     }
     var code = normalizeCode(S.houseCode);
-    _syncStatus = "sync…";
+    _syncStatus = isOnline() ? "syncing" : "offline";
     paintSyncUi();
     _unsub = db.collection("houses").doc(code).onSnapshot(
       function (snap) {
@@ -244,10 +348,25 @@
       },
       function (err) {
         console.warn("WeAte sync listen", err);
-        _syncStatus = "fout";
+        markPending();
+        _syncStatus = isOnline() ? "error" : "offline";
         paintSyncUi();
       }
     );
+  }
+
+  function tipSeen() {
+    try {
+      return localStorage.getItem(TIP_KEY) === "1";
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function markTipSeen() {
+    try {
+      localStorage.setItem(TIP_KEY, "1");
+    } catch (e) {}
   }
 
   function paintSyncUi() {
@@ -259,6 +378,9 @@
     var btnJoin = document.getElementById("syncjoin");
     var joinForm = document.getElementById("syncjoinform");
     var btnOff = document.getElementById("syncoff");
+    var lastEl = document.getElementById("synclast");
+    var tip = document.getElementById("synctip");
+    var pill = document.getElementById("syncpill");
     var configured = cfgOk();
 
     if (help) {
@@ -273,13 +395,64 @@
 
     var joined = !!(S && S.syncOn && S.houseCode);
     var label = "Lokaal — alleen op deze telefoon";
-    if (!configured) label = "Lokaal — Firebase nog niet gezet";
-    else if (joined && _syncStatus === "sync…") label = "Sync… — huissleutel " + S.houseCode;
-    else if (joined && _syncStatus === "fout") label = "Sync-fout — huissleutel " + S.houseCode + " (lokaal blijft werken)";
-    else if (joined) label = "Gekoppeld — huissleutel " + S.houseCode;
-    else if (configured) label = "Lokaal — maak of koppel een huissleutel";
+    var pillText = "lokaal";
+    var pillCls = "syncpill";
+
+    if (!configured) {
+      label = "Lokaal — Firebase nog niet gezet";
+      pillText = "lokaal";
+    } else if (joined && _syncStatus === "syncing") {
+      label = "Bezig met sync… — huissleutel " + S.houseCode;
+      pillText = "sync…";
+      pillCls += " syncing";
+    } else if (joined && _syncStatus === "offline") {
+      label = "Offline — wijzigingen wachten (huissleutel " + S.houseCode + ")";
+      pillText = "offline";
+      pillCls += " offline";
+    } else if (joined && _syncStatus === "error") {
+      label = "Sync-fout — huissleutel " + S.houseCode + " (lokaal blijft werken)";
+      pillText = "fout";
+      pillCls += " error";
+    } else if (joined) {
+      label = "Online — huissleutel " + S.houseCode;
+      pillText = "online";
+      pillCls += " online";
+    } else if (configured) {
+      label = "Lokaal — maak of koppel een huissleutel";
+      pillText = "lokaal";
+    }
 
     if (status) status.textContent = label;
+
+    if (lastEl) {
+      var ls = formatLastSync(_lastSyncAt);
+      if (joined && ls) {
+        lastEl.style.display = "block";
+        lastEl.textContent = "Laatste sync: " + ls;
+      } else if (joined && _pendingFlush) {
+        lastEl.style.display = "block";
+        lastEl.textContent = "Wacht op verbinding…";
+      } else {
+        lastEl.style.display = "none";
+        lastEl.textContent = "";
+      }
+    }
+
+    if (pill) {
+      if (joined) {
+        pill.style.display = "inline-flex";
+        pill.className = pillCls;
+        pill.textContent = pillText;
+      } else {
+        pill.style.display = "none";
+      }
+    }
+
+    /* Thin onboarding: tip when sync available but not linked yet. */
+    if (tip) {
+      var showTip = configured && !joined && !tipSeen();
+      tip.style.display = showTip ? "block" : "none";
+    }
 
     if (codeWrap && codeEl) {
       if (joined) {
@@ -313,7 +486,8 @@
     S.houseCode = code;
     S.syncOn = true;
     saveLocalOnly();
-    _syncStatus = "sync…";
+    markTipSeen();
+    _syncStatus = "syncing";
     paintSyncUi();
     doPush().then(function () {
       if (typeof toast === "function") toast("Huissleutel: " + code + " — deel met de andere telefoon");
@@ -336,7 +510,8 @@
       if (typeof toast === "function") toast("Firebase start niet");
       return;
     }
-    _syncStatus = "sync…";
+    markTipSeen();
+    _syncStatus = "syncing";
     paintSyncUi();
     db.collection("houses")
       .doc(code)
@@ -355,26 +530,18 @@
           });
         }
 
-        if (isLocalDefaultish() || stateRichness(remote) >= stateRichness(S)) {
-          applyRemote(remote, {
-            code: code,
-            toast: "Gegevens van de andere telefoon geladen"
-          });
-          _lastRemoteMs = remoteMs(remote) || Date.now();
-          syncStart();
-          return;
-        }
-
+        /* Cloud wins on first join when both have data (documented LWW join rule). */
         applyRemote(remote, {
           code: code,
           toast: "Gegevens van de andere telefoon geladen"
         });
         _lastRemoteMs = remoteMs(remote) || Date.now();
+        rememberLastSync(_lastRemoteMs);
         syncStart();
       })
       .catch(function (err) {
         console.warn("WeAte sync join", err);
-        _syncStatus = "fout";
+        _syncStatus = isOnline() ? "error" : "offline";
         paintSyncUi();
         if (typeof toast === "function") toast("Koppelen lukte niet");
       });
@@ -384,6 +551,7 @@
     syncStop();
     S.syncOn = false;
     S.houseCode = "";
+    clearPending();
     saveLocalOnly();
     _syncStatus = "lokaal";
     _lastRemoteMs = 0;
@@ -415,6 +583,32 @@
     drawHuis._weateSync = true;
   }
 
+  function bindOnline() {
+    if (_onlineBound) return;
+    _onlineBound = true;
+    function onOnline() {
+      if (S && S.syncOn && S.houseCode) {
+        if (typeof toast === "function" && _pendingFlush) toast("Weer online — syncen…");
+        flushQueue();
+        if (!_unsub) syncStart();
+        else paintSyncUi();
+      } else {
+        paintSyncUi();
+      }
+    }
+    function onOffline() {
+      if (S && S.syncOn && S.houseCode) {
+        markPending();
+        _syncStatus = "offline";
+        paintSyncUi();
+      }
+    }
+    try {
+      window.addEventListener("online", onOnline);
+      window.addEventListener("offline", onOffline);
+    } catch (e) {}
+  }
+
   function bindUi() {
     var btnCreate = document.getElementById("synccreate");
     var btnJoin = document.getElementById("syncjoin");
@@ -422,6 +616,7 @@
     var btnOff = document.getElementById("syncoff");
     var joinForm = document.getElementById("syncjoinform");
     var inp = document.getElementById("syncjoininput");
+    var tipDismiss = document.getElementById("synctipok");
 
     if (btnCreate && !btnCreate._bound) {
       btnCreate._bound = 1;
@@ -434,10 +629,12 @@
       btnJoin._bound = 1;
       btnJoin.addEventListener("click", function (e) {
         e.preventDefault();
+        markTipSeen();
         if (joinForm) {
           joinForm.style.display = joinForm.style.display === "none" || !joinForm.style.display ? "block" : "none";
         }
         if (inp) inp.focus();
+        paintSyncUi();
       });
     }
     if (btnGo && !btnGo._bound) {
@@ -463,29 +660,53 @@
         disconnect();
       });
     }
+    if (tipDismiss && !tipDismiss._bound) {
+      tipDismiss._bound = 1;
+      tipDismiss.addEventListener("click", function (e) {
+        e.preventDefault();
+        markTipSeen();
+        paintSyncUi();
+      });
+    }
   }
 
   function boot() {
+    loadLastSync();
     if (typeof S !== "undefined") {
       if (S.houseCode) S.houseCode = normalizeCode(S.houseCode);
       else S.houseCode = S.houseCode || "";
       S.syncOn = !!S.syncOn && !!S.houseCode;
+      if (S._syncPending) _pendingFlush = true;
     }
     wrapSave();
     wrapDrawHuis();
     bindUi();
+    bindOnline();
     paintSyncUi();
-    if (S && S.syncOn && S.houseCode && cfgOk()) syncStart();
+    if (S && S.syncOn && S.houseCode && cfgOk()) {
+      syncStart();
+      if (_pendingFlush || !isOnline()) {
+        /* flush when/if online */
+        flushQueue();
+      }
+    }
   }
 
   window.WeAteSync = {
     start: syncStart,
     push: syncPush,
+    flush: flushQueue,
     paint: paintSyncUi,
     create: createHouse,
     join: joinHouse,
     disconnect: disconnect,
-    configured: cfgOk
+    configured: cfgOk,
+    status: function () {
+      return _syncStatus;
+    },
+    lastSync: function () {
+      return _lastSyncAt;
+    }
   };
 
   if (document.readyState === "loading") {
