@@ -237,3 +237,17 @@ padding:4px 8px;font-size:11px;border-radius:999px
 .sugopt.sugcustom{border-style:dashed;border-color:#C9B29A}
 .sugquick{flex-wrap:wrap;margin-bottom:8px}
 #sugcustom input[type=text]{width:100%;box-sizing:border-box}
+
+/* Custom compose — distinct product pick with thumb + pack + A/B */
+#custchips{display:flex;flex-direction:column;gap:8px;align-items:stretch}
+.prodchip{display:flex;align-items:center;gap:8px;background:#FFF8F0;border:1px solid #E4CBA8;border-radius:14px;padding:6px 8px}
+.prodchip-main{display:flex;align-items:center;gap:10px;flex:1;min-width:0;background:transparent;border:0;padding:0;text-align:left;cursor:pointer;font:inherit;color:inherit}
+.prodchip-body{display:flex;flex-direction:column;gap:2px;min-width:0}
+.prodchip-body b{font-size:14px;line-height:1.2}
+.prodchip-brands{display:flex;gap:4px;flex:none}
+.prodchip-brands .chip{padding:6px 10px;margin:0}
+.prodthumb,.prodph{width:44px;height:44px;min-width:44px;border-radius:10px;object-fit:cover;background:#E4CBA8;display:block}
+.prodph{flex:none}
+.custingrow{align-items:center;gap:10px}
+.custingrow .prodthumb,.custingrow .prodph{width:40px;height:40px;min-width:40px}
+#aproducts .prodchip{margin:0}

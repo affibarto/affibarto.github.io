@@ -498,7 +498,7 @@ function drawCustom(){
   html+="<input id=custq type=text placeholder=\"Zoek of typ product\" value=\""+esc(d.q||"")+"\" style=flex:1>";
   html+="<button type=button class='btn s g' id=custadd>Erbij</button>";
   html+="</div>";
-  html+="<div class=row id=custchips style=margin-bottom:10px></div>";
+  html+="<div id=custchips style=margin-bottom:10px></div>";
   html+="<div id=custing style=margin-bottom:12px></div>";
   html+="<button class='btn g full' id=custsave type=button>Zet op voorstellen</button>";
   html+="<button class='btn w full' id=sugcustomback2 type=button style=margin-top:8px>Terug</button>";
@@ -520,29 +520,71 @@ function drawCustom(){
   }
 }
 
+function custProductMeta(k){
+  var p=null;
+  if(window.WeAteProducts&&typeof WeAteProducts.get==="function")p=WeAteProducts.get(k);
+  var label=(p&&p.name)||k;
+  if(!p&&typeof CAT!=="undefined"&&CAT[k]){
+    label=(typeof productLabel==="function")?productLabel(CAT[k]):(CAT[k].label||CAT[k].name||k);
+  }
+  var pack=(p&&p.pack)||(typeof CAT!=="undefined"&&CAT[k]&&CAT[k].pack)||"";
+  if(!pack&&typeof CAT!=="undefined"&&CAT[k]&&CAT[k].base!=null&&CAT[k].unit){
+    pack=CAT[k].base+" "+CAT[k].unit;
+  }
+  var img=(p&&p.img)||(typeof CAT!=="undefined"&&CAT[k]&&CAT[k].img)||"";
+  var tier="";
+  if(S.itemBrand&&(S.itemBrand[k]==="A"||S.itemBrand[k]==="B"))tier=S.itemBrand[k];
+  else if(p&&p.brandTier)tier=p.brandTier==="huismerk"?"B":p.brandTier;
+  else if(typeof CAT!=="undefined"&&CAT[k]&&CAT[k].brandTier)tier=CAT[k].brandTier;
+  return {label:label,pack:pack,img:img,tier:tier,p:p};
+}
+
 function refreshCustChips(){
   var host=document.getElementById("custchips");if(!host)return;
-  var q=String((S._customDraft&&S._customDraft.q)||"").toLowerCase().trim();
+  var q=String((S._customDraft&&S._customDraft.q)||"").trim();
   var keys=[];
-  if(typeof CAT!=="undefined"){
-    keys=Object.keys(CAT).filter(function(k){
-      var c=CAT[k];
-      var hay=((c.label||"")+" "+c.name+" "+k).toLowerCase();
-      return !q||hay.indexOf(q)>=0;
-    }).slice(0,20);
+  var seen={};
+  function pushId(id){
+    if(!id||seen[id])return;
+    seen[id]=1;keys.push(id);
   }
-  if(!keys.length&&window.WeAteProducts&&typeof WeAteProducts.search==="function"){
+  /* Prefer catalog search so variants (krieltjes ≠ aardappelen) stay distinct. */
+  if(window.WeAteProducts&&typeof WeAteProducts.search==="function"){
     try{
-      (WeAteProducts.search(q)||[]).slice(0,16).forEach(function(p){
-        if(p&&p.id)keys.push(p.id);
-      });
+      (WeAteProducts.search(q,16)||[]).forEach(function(p){if(p&&p.id)pushId(p.id);});
     }catch(e){}
   }
+  if(!keys.length&&typeof CAT!=="undefined"){
+    var ql=q.toLowerCase();
+    Object.keys(CAT).filter(function(k){
+      var c=CAT[k];
+      var hay=((c.label||"")+" "+c.name+" "+k).toLowerCase();
+      return !ql||hay.indexOf(ql)>=0;
+    }).slice(0,16).forEach(pushId);
+  }
+  if(!keys.length){
+    host.innerHTML="<span class=note>Typ een productnaam en tik Erbij.</span>";
+    return;
+  }
   host.innerHTML=keys.map(function(k){
-    var label=(typeof CAT!=="undefined"&&CAT[k])?(CAT[k].label||CAT[k].name):k;
-    if(typeof productLabel==="function"&&CAT&&CAT[k])label=productLabel(CAT[k]);
-    return "<button type=button class='chip' data-act=custcat data-k='"+esc(k)+"'>"+esc(label)+"</button>";
-  }).join("")||"<span class=note>Typ een productnaam en tik Erbij.</span>";
+    var m=custProductMeta(k);
+    var thumb=m.img
+      ?("<img class='prodthumb' alt='' src='"+esc(m.img)+"' loading=lazy/>")
+      :("<span class='prodthumb prodph' aria-hidden=true></span>");
+    var pack=m.pack?("<span class=meta>"+esc(m.pack)+"</span>"):"";
+    var tierA=m.tier==="A"?" on hard":"";
+    var tierB=(m.tier==="B"||m.tier==="huismerk")?" on":"";
+    return "<div class='prodchip' data-k='"+esc(k)+"'>"+
+      "<button type=button class='prodchip-main' data-act=custcat data-k='"+esc(k)+"'>"+
+        thumb+
+        "<span class='prodchip-body'><b>"+esc(m.label)+"</b>"+pack+"</span>"+
+      "</button>"+
+      "<span class='prodchip-brands'>"+
+        "<button type=button class='chip s"+tierA+"' data-act=custbrand data-k='"+esc(k)+"' data-b=A title='A-merk'>A</button>"+
+        "<button type=button class='chip s"+tierB+"' data-act=custbrand data-k='"+esc(k)+"' data-b=B title='Huismerk / B'>B</button>"+
+      "</span>"+
+    "</div>";
+  }).join("");
 }
 
 function refreshCustIng(){
@@ -553,27 +595,89 @@ function refreshCustIng(){
     return;
   }
   host.innerHTML=ing.map(function(it,i){
-    var label=it.k&&typeof CAT!=="undefined"&&CAT[it.k]
-      ?(typeof productLabel==="function"?productLabel(CAT[it.k]):(CAT[it.k].label||CAT[it.k].name))
-      :(it.n||it.k||"?");
-    return "<div class=listrow><div style=flex:1><b>"+esc(label)+"</b></div>"+
+    var label=it.n||it.k||"?";
+    var pack="";
+    var img="";
+    var tier="";
+    if(it.k){
+      var m=custProductMeta(it.k);
+      /* Always keep catalog display name (krieltjes stays krieltjes). */
+      label=m.label||label;
+      pack=m.pack||"";
+      img=m.img||"";
+      if(it.brand==="A"||it.brand==="B")tier=it.brand;
+      else if(S.itemBrand&&(S.itemBrand[it.k]==="A"||S.itemBrand[it.k]==="B"))tier=S.itemBrand[it.k];
+      else tier=m.tier||"";
+    }
+    var thumb=img
+      ?("<img class='prodthumb' alt='' src='"+esc(img)+"' loading=lazy/>")
+      :("<span class='prodthumb prodph' aria-hidden=true></span>");
+    var metaBits=[];
+    if(pack)metaBits.push(pack);
+    if(tier==="A")metaBits.push("A-merk");
+    else if(tier==="B"||tier==="huismerk")metaBits.push("huismerk");
+    var meta=metaBits.length?("<div class=meta>"+esc(metaBits.join(" · "))+"</div>"):"";
+    return "<div class='listrow custingrow'>"+thumb+
+      "<div style=flex:1><b>"+esc(label)+"</b>"+meta+"</div>"+
       "<button type=button class='btn s w' data-act=custrm data-i="+i+">Weg</button></div>";
   }).join("");
 }
 
-function addCustCat(k){
+function ensureCatFromProduct(p){
+  if(!p||!p.id)return null;
+  if(window.WeAteProducts&&typeof WeAteProducts.syncIntoCat==="function"){
+    try{WeAteProducts.syncIntoCat();}catch(e){}
+  }
+  return p.id;
+}
+
+function addCustCat(k,brand){
+  if(!k)return;
+  if(window.WeAteProducts&&typeof WeAteProducts.get==="function"){
+    var p=WeAteProducts.get(k);
+    if(p)ensureCatFromProduct(p);
+  }
   S._customDraft=S._customDraft||{day:DAYS[0],t:"",ing:[],q:""};
   S._customDraft.ing=S._customDraft.ing||[];
   if(S._customDraft.ing.some(function(it){return it.k===k;})){
     if(typeof toast==="function")toast("Staat er al bij");
     return;
   }
-  S._customDraft.ing.push({k:k,q:1});
+  var entry={k:k,q:1};
+  var tier=brand;
+  if(tier!=="A"&&tier!=="B"){
+    var m=custProductMeta(k);
+    if(m.tier==="A"||m.tier==="B")tier=m.tier;
+  }
+  if(tier==="A"||tier==="B"){
+    entry.brand=tier;
+    S.itemBrand=S.itemBrand||{};
+    S.itemBrand[k]=tier;
+  }
+  S._customDraft.ing.push(entry);
   S._customDraft.q="";
   var qEl=document.getElementById("custq");
   if(qEl)qEl.value="";
+  var label=custProductMeta(k).label||k;
+  if(typeof toast==="function")toast(label+" erbij");
   refreshCustChips();
   refreshCustIng();
+}
+
+function setCustBrand(k,brand){
+  if(!k||(brand!=="A"&&brand!=="B"))return;
+  S.itemBrand=S.itemBrand||{};
+  S.itemBrand[k]=brand;
+  var ing=(S._customDraft&&S._customDraft.ing)||[];
+  var hit=ing.filter(function(it){return it.k===k;})[0];
+  if(hit){
+    hit.brand=brand;
+    refreshCustChips();
+    refreshCustIng();
+    if(typeof toast==="function")toast(brand==="A"?"A-merk":"Huismerk");
+    return;
+  }
+  addCustCat(k,brand);
 }
 
 function addCustFree(){
@@ -586,34 +690,31 @@ function addCustFree(){
   S._customDraft=S._customDraft||{day:DAYS[0],t:"",ing:[],q:""};
   S._customDraft.ing=S._customDraft.ing||[];
   var hit=null;
-  if(typeof CAT!=="undefined"){
+  /* Exact catalog match first — keeps krieltjes as krieltjes, never rewrite to parent. */
+  if(window.WeAteProducts&&typeof WeAteProducts.findByName==="function"){
+    var cp=WeAteProducts.findByName(n);
+    if(cp){
+      hit=ensureCatFromProduct(cp)||cp.id;
+    }else if(typeof WeAteProducts.upsert==="function"){
+      var up=WeAteProducts.upsert({name:n,aisle:"Huis"});
+      if(up)hit=ensureCatFromProduct(up)||up.id;
+    }
+  }
+  if(!hit&&typeof CAT!=="undefined"){
     hit=Object.keys(CAT).find(function(k){
       var c=CAT[k];
       return (c.label||"").toLowerCase()===n.toLowerCase()||c.name.toLowerCase()===n.toLowerCase()||k.toLowerCase()===n.toLowerCase();
     })||null;
   }
-  if(!hit&&window.WeAteProducts&&typeof WeAteProducts.findByName==="function"){
-    var cp=WeAteProducts.findByName(n);
-    if(cp&&typeof CAT!=="undefined"&&CAT[cp.id])hit=cp.id;
-    else if(cp&&typeof WeAteProducts.upsert==="function"){
-      /* keep free text if not in CAT */
-    }else if(!cp&&typeof WeAteProducts.upsert==="function"){
-      WeAteProducts.upsert({name:n,aisle:"Huis"});
-    }
-  }
   if(hit){
-    if(S._customDraft.ing.some(function(it){return it.k===hit;})){
-      if(typeof toast==="function")toast("Staat er al bij");
-      return;
-    }
-    S._customDraft.ing.push({k:hit,q:1});
-  }else{
-    if(S._customDraft.ing.some(function(it){return (it.n||"").toLowerCase()===n.toLowerCase();})){
-      if(typeof toast==="function")toast("Staat er al bij");
-      return;
-    }
-    S._customDraft.ing.push({n:n,q:1});
+    addCustCat(hit);
+    return;
   }
+  if(S._customDraft.ing.some(function(it){return (it.n||"").toLowerCase()===n.toLowerCase();})){
+    if(typeof toast==="function")toast("Staat er al bij");
+    return;
+  }
+  S._customDraft.ing.push({n:n,q:1});
   S._customDraft.q="";
   if(qEl)qEl.value="";
   refreshCustChips();
@@ -644,7 +745,16 @@ function saveCustom(){
     reheat:false,
     fijn:true,
     ing:d.ing.map(function(it){
-      if(it.k)return {k:it.k,q:it.q||1};
+      if(it.k){
+        var row={k:it.k,q:it.q||1};
+        var b=it.brand||(S.itemBrand&&S.itemBrand[it.k]);
+        if(b==="A"||b==="B"){
+          row.brand=b;
+          S.itemBrand=S.itemBrand||{};
+          S.itemBrand[it.k]=b;
+        }
+        return row;
+      }
       return {n:it.n,q:it.q||1};
     }),
     st:["Bereid zoals jullie het thuis doen — zelf samengesteld in WeAte."],
@@ -711,6 +821,8 @@ document.addEventListener("click",function(e){
     drawCustom();
     return;
   }
+  var cbrand=t.closest&&t.closest("[data-act=custbrand]");
+  if(cbrand){e.preventDefault();e.stopPropagation();setCustBrand(cbrand.getAttribute("data-k"),cbrand.getAttribute("data-b"));return;}
   var ccat=t.closest&&t.closest("[data-act=custcat]");
   if(ccat){e.preventDefault();addCustCat(ccat.getAttribute("data-k"));return;}
   var crm=t.closest&&t.closest("[data-act=custrm]");
