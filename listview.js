@@ -97,6 +97,7 @@ var catName=nm(k);
 var catPack=normPack(parsePack(catName).pack);
 var catTitle=parsePack(catName).name||catName;
 if(window.WeAteProducts){
+  /* Prefer exact id — krieltjes stays krieltjes (never rewrite to parent category). */
   var pref=window.WeAteProducts.get(k)||window.WeAteProducts.findByName(catTitle);
   if(pref){
     catTitle=pref.name||catTitle;
@@ -442,9 +443,15 @@ function paintAddProducts(){
   var q=inp?inp.value:"";
   var hits=window.WeAteProducts.search(q,10);
   box.innerHTML=hits.map(function(p){
-    var meta=[p.pack,p.aisle].filter(Boolean).join(" · ");
-    return "<button type=button class='chip' data-act=pickprod data-id='"+p.id+"'>"+String(p.name).replace(/</g,"")+(meta?" <span class=meta style=font-weight:500>("+meta+")</span>":"")+"</button>";
-  }).join("");
+    var tier=p.brandTier==="huismerk"?"B":(p.brandTier||"");
+    var meta=[p.pack,tier==="A"?"A-merk":tier==="B"?"huismerk":"",p.aisle].filter(Boolean).join(" · ");
+    var thumb=p.img
+      ?("<img class='prodthumb' alt='' src='"+String(p.img).replace(/'/g,"")+"' loading=lazy/>")
+      :("<span class='prodthumb prodph' aria-hidden=true></span>");
+    return "<button type=button class='prodchip-main' data-act=pickprod data-id='"+p.id+"' style='width:100%;padding:6px 4px'>"+
+      thumb+"<span class='prodchip-body'><b>"+String(p.name).replace(/</g,"")+"</b>"+
+      (meta?"<span class=meta>"+meta+"</span>":"")+"</span></button>";
+  }).join("")||"";
 }
 var inp=document.getElementById("aname");
 if(inp&&!inp._prodBound){

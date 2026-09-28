@@ -34,3 +34,5 @@ const REC=[
 ];
 const APART=[{id:"tosti",t:"Tosti ham & kaas",ing:[{k:"brood",q:0.3},{k:"ham",q:0.3},{k:"kaas",q:0.3},{k:"boter",q:0.1}]},{id:"wrapapart",t:"Wrap ham & kaas",ing:[{k:"wraps",q:0.25},{k:"ham",q:0.3},{k:"kaas",q:0.2}]},{id:"mac",t:"Macaroni met kaas",ing:[{k:"pasta",q:0.25},{k:"kaas",q:0.3}]},{id:"restje",t:"Restje met brood",ing:[{k:"brood",q:0.2}]}];
 const DEFAULT_ALWAYS=[];
+
+if(window.WeAteProducts&&typeof WeAteProducts.syncIntoCat==="function"){try{WeAteProducts.syncIntoCat();}catch(e){}}
