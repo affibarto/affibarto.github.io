@@ -144,7 +144,7 @@ function drawSuggest(list,opts){
     host.innerHTML="<p class=note>Geen vrije avonden met eten thuis, of alles botst met dieet. Kies handmatig op het bord.</p><button class='btn g full' id=suggo type=button>Naar bord</button>";
     return;
   }
-  var html="<p class=note>Vink de avonden die je wilt. Tik de regel om te wisselen van recept. Kok uit wie kan koken \u2014 minder veto\u2019s eerst, keukens afgewisseld.</p>";
+  var html="<p class=note>Vink de avonden die je wilt. Tik om te wisselen. Slim = veto\u2019s, sportdrukte, fijn, keukens afgewisseld (offline of via endpoint).</p>";
   html+="<div class='row sugquick'><button type=button class='chip' id=sugall>Alles</button><button type=button class='chip' id=sugnone>Geen</button></div>";
   S._sugDraft.forEach(function(s,i){
     var taste=s.taste?(" \u00b7 "+s.taste+" smaak"):"";
