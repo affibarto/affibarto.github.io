@@ -222,7 +222,8 @@
     /* Lower is better (like suggest.js). */
     score += taste * 22;
     if (ctx.usedCuisine && ctx.usedCuisine[rec.c]) score += 20;
-    if (ctx.usedId && ctx.usedId[rec.id]) return null;
+    /* Soft: already on board / picked other day — still show in option lists. */
+    if (ctx.usedId && ctx.usedId[rec.id]) score += 10;
     score += Math.max(0, (rec.time || 30) - 35);
     /* Sport / busy evening: prefer sneller. */
     if (ctx.busy && (rec.time || 30) > 30) score += 14;
@@ -248,11 +249,11 @@
   function buildContext(extra) {
     extra = extra || {};
     var days = DAYS.filter(dayNeedsMeal);
-    var want = extra.n || 5;
+    var want = extra.n || 7;
     if (days.length > want) days = days.slice(0, want);
     if (days.length < 3) {
       var all = DAYS.filter(dayNeedsMeal);
-      days = all.slice(0, Math.max(days.length, Math.min(5, all.length)));
+      days = all.slice(0, Math.max(days.length, Math.min(7, all.length)));
     }
     return {
       days: days,
@@ -267,10 +268,18 @@
 
   function localSuggestWeek(ctx) {
     ctx = ctx || buildContext();
-    var days = ctx.days || DAYS.filter(dayNeedsMeal).slice(0, 5);
+    /* Prefer many real options per day (6–12+). Never empty stubs. */
+    var wantDays = (ctx && ctx.n) || 7;
+    var days = ctx.days && ctx.days.length ? ctx.days.slice() : DAYS.filter(dayNeedsMeal);
+    if (days.length > wantDays) days = days.slice(0, wantDays);
+    if (days.length < 3) {
+      var all = DAYS.filter(dayNeedsMeal);
+      days = all.slice(0, Math.max(days.length, Math.min(7, all.length)));
+    }
     var usedCuisine = {};
     var usedId = Object.assign({}, ctx.usedId || usedBoardIds());
     var listK = ctx.listKeys || listKeys();
+    var OPTS = 10;
     var out = [];
 
     days.forEach(function (d, idx) {
@@ -282,7 +291,7 @@
         return p.role === "child" && p.portion === "small";
       });
       var preferReheat = idx >= 2;
-      var best = null, bestScore = 1e9;
+      var scored = [];
       recs().forEach(function (rec) {
         var sc = scoreRecSmart(rec, people, {
           usedCuisine: usedCuisine,
@@ -293,43 +302,69 @@
           listKeys: listK
         });
         if (sc == null) return;
-        if (sc < bestScore) {
-          bestScore = sc;
-          best = rec;
-        }
+        var tasteN = typeof tasteHits === "function" ? tasteHits(rec, people).length : 0;
+        var why = [];
+        if (busy && (rec.time || 30) <= 25) why.push("snel · drukke avond");
+        else if (busy) why.push("drukke avond");
+        if (rec.reheat && preferReheat) why.push("warmt goed op");
+        if (kidsSmall && rec.fijn) why.push("fijn mogelijk");
+        if (tasteN) why.push(tasteN + " smaak-check");
+        scored.push({
+          id: rec.id,
+          t: rec.t,
+          c: rec.c,
+          time: rec.time,
+          img: rec.img || "",
+          taste: tasteN,
+          why: why.join(" · "),
+          score: sc,
+          source: "local"
+        });
       });
-      if (!best) {
-        recs().forEach(function (rec) {
-          if (usedId[rec.id]) return;
-          var sc = scoreRecSmart(rec, people, { usedId: {}, usedCuisine: {}, listKeys: listK });
-          if (sc == null) return;
-          if (sc < bestScore) {
-            bestScore = sc;
-            best = rec;
-          }
+      scored.sort(function (a, b) { return a.score - b.score; });
+      var options = [], seenC = {}, seenI = {};
+      function pushUnique(list) {
+        list.forEach(function (o) {
+          if (seenI[o.id] || options.length >= OPTS) return;
+          if (!o.id || !o.t) return;
+          seenI[o.id] = 1;
+          options.push(o);
+          seenC[o.c] = 1;
         });
       }
-      if (!best) return;
-      usedId[best.id] = 1;
-      usedCuisine[best.c] = 1;
-      var tasteN = typeof tasteHits === "function" ? tasteHits(best, people).length : 0;
-      var why = [];
-      if (busy) why.push("drukke avond → snel");
-      if (best.reheat && preferReheat) why.push("warmt goed op");
-      if (kidsSmall && best.fijn) why.push("fijn mogelijk");
-      if (tasteN) why.push(tasteN + " smaak-check");
+      pushUnique(scored.filter(function (o) { return !seenC[o.c]; }));
+      pushUnique(scored);
+      if (!options.length) {
+        /* Soft fallback: any non-hardBlocked recipe with real name — never "niks". */
+        recs().forEach(function (rec) {
+          if (typeof hardBlock === "function" && hardBlock(rec, people).length) return;
+          if (!rec.id || !rec.t) return;
+          options.push({
+            id: rec.id, t: rec.t, c: rec.c, time: rec.time, img: rec.img || "",
+            taste: 0, why: "", score: 0, source: "local"
+          });
+        });
+        options = options.slice(0, OPTS);
+      }
+      if (!options.length) return;
+      var pick = options[0].id;
+      usedId[pick] = 1;
+      usedCuisine[options[0].c] = 1;
       out.push({
         day: d,
-        id: best.id,
-        t: best.t,
-        c: best.c,
-        time: best.time,
-        taste: tasteN,
-        why: why.join(" · "),
+        id: pick,
+        t: options[0].t,
+        c: options[0].c,
+        time: options[0].time,
+        img: options[0].img,
+        taste: options[0].taste,
+        why: options[0].why,
+        options: options,
+        pick: pick,
+        skip: false,
         source: "local"
       });
     });
-    if (out.length > 5) out = out.slice(0, 5);
     return out;
   }
 
@@ -357,6 +392,7 @@
             t: rec.t,
             c: rec.c,
             time: rec.time,
+            img: rec.img || "",
             taste: typeof tasteHits === "function" ? tasteHits(rec, people).length : 0,
             why: s.why || "",
             source: "remote"
@@ -365,7 +401,51 @@
         if (clean.length < 2) {
           return { ok: true, source: "local-fallback", suggestions: localSuggestWeek(ctx) };
         }
-        return { ok: true, source: "remote", suggestions: clean.slice(0, 5) };
+        /* Expand remote picks with local multi-option lists (photos + variety). */
+        var local = localSuggestWeek(ctx);
+        var byDay = {};
+        clean.forEach(function (s) { byDay[s.day] = s; });
+        var merged = local.map(function (dayEntry) {
+          var rem = byDay[dayEntry.day];
+          if (!rem) return dayEntry;
+          var opts = (dayEntry.options || []).slice();
+          if (!opts.some(function (o) { return o.id === rem.id; })) {
+            opts.unshift({
+              id: rem.id, t: rem.t, c: rem.c, time: rem.time, img: rem.img || "",
+              taste: rem.taste || 0, why: rem.why || "", score: -1, source: "remote"
+            });
+          } else {
+            opts = opts.filter(function (o) { return o.id !== rem.id; });
+            opts.unshift({
+              id: rem.id, t: rem.t, c: rem.c, time: rem.time,
+              img: (opts[0] && opts[0].img) || rem.img || "",
+              taste: rem.taste || 0, why: rem.why || "", score: -1, source: "remote"
+            });
+          }
+          return {
+            day: dayEntry.day,
+            id: rem.id,
+            t: rem.t,
+            c: rem.c,
+            time: rem.time,
+            img: rem.img || (opts[0] && opts[0].img) || "",
+            taste: rem.taste,
+            why: rem.why,
+            options: opts,
+            pick: rem.id,
+            skip: false,
+            source: "remote"
+          };
+        });
+        /* Include remote-only days if any. */
+        clean.forEach(function (s) {
+          if (merged.some(function (m) { return m.day === s.day; })) return;
+          merged.push({
+            day: s.day, id: s.id, t: s.t, c: s.c, time: s.time, img: s.img || "",
+            taste: s.taste, why: s.why, options: [s], pick: s.id, skip: false, source: "remote"
+          });
+        });
+        return { ok: true, source: "remote", suggestions: merged };
       })
       .catch(function () {
         return { ok: true, source: "local-fallback", suggestions: localSuggestWeek(ctx) };
@@ -488,13 +568,15 @@
   /* —— UI: Slim voorstellen + Restjes-coach —— */
   function openSlimSuggest() {
     if (typeof toast === "function") toast(hasRemote() ? "Slim voorstellen…" : "Slim voorstellen (offline)");
-    suggestWeek(buildContext({ n: 5 })).then(function (res) {
+    suggestWeek(buildContext({ n: 7 })).then(function (res) {
       var list = (res && res.suggestions) || [];
       if (typeof openSuggest === "function") {
         openSuggest(list);
         setTimeout(injectUiKnobs, 0);
       } else if (typeof toast === "function") {
-        toast(list.length ? list.length + " voorstellen" : "Geen voorstellen");
+        var nOpts = 0;
+        list.forEach(function (s) { nOpts += (s.options && s.options.length) || (s.id ? 1 : 0); });
+        toast(list.length ? (list.length + " avonden · " + nOpts + " recepten") : "Geen voorstellen");
       }
     });
   }

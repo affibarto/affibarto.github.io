@@ -2,6 +2,7 @@
 if(window._suggest)return;window._suggest=1;
 var DAYS=window.DAYS||["Ma","Di","Wo","Do","Vr","Za","Zo"];
 var DLAB=window.DLAB||{Ma:"Maandag",Di:"Dinsdag",Wo:"Woensdag",Do:"Donderdag",Vr:"Vrijdag",Za:"Zaterdag",Zo:"Zondag"};
+var OPTS_PER_DAY=10;
 
 function todayIdx(){return (new Date().getDay()+6)%7;}
 
@@ -41,55 +42,200 @@ function sortByWeekDay(list){
   });
 }
 function candidateDays(want){
-  want=want||5;
-  // Always Ma→Zo so voorstellen niet "door elkaar" vanaf vandaag lopen
+  want=want||7;
   return DAYS.filter(dayNeedsMeal).slice(0,want);
 }
 
-function scoreRec(rec,people,usedCuisine){
+function recs(){return typeof REC!=="undefined"?REC:[];}
+
+function scoreRec(rec,people,ctx){
+  ctx=ctx||{};
   if(typeof hardBlock==="function"&&hardBlock(rec,people).length)return null;
   var taste=(typeof tasteHits==="function")?tasteHits(rec,people).length:0;
-  var cuisinePen=(usedCuisine[rec.c]?18:0);
-  var timePen=Math.max(0,(rec.time||30)-35);
-  return taste*12+cuisinePen+timePen;
+  var score=taste*12;
+  if(ctx.usedCuisine&&ctx.usedCuisine[rec.c])score+=14;
+  if(ctx.usedId&&ctx.usedId[rec.id])score+=8;
+  score+=Math.max(0,(rec.time||30)-35);
+  if(ctx.busy&&(rec.time||30)>30)score+=12;
+  if(ctx.busy&&(rec.time||30)<=25)score-=8;
+  if(ctx.preferReheat&&rec.reheat)score-=6;
+  if(ctx.kidsSmall&&rec.fijn)score-=5;
+  if(ctx.usedCuisine&&!ctx.usedCuisine[rec.c])score-=2;
+  return score;
+}
+
+function dayBusy(d){
+  var modes={eat:0,later:0,apart:0,skip:0};
+  (S.people||[]).forEach(function(p){
+    var m=(typeof modeOf==="function")?modeOf(d,p):((p.sched&&p.sched[d])||"eat");
+    modes[m]=(modes[m]||0)+1;
+  });
+  var people=eatersFor(d);
+  return (modes.apart+modes.later)>=2||(modes.apart>=1&&people.length<=3);
+}
+
+function optionsForDay(d,ctx){
+  ctx=ctx||{};
+  var people=eatersFor(d);
+  if(!people.length)return [];
+  var kidsSmall=people.some(function(p){return p.role==="child"&&p.portion==="small";});
+  var busy=dayBusy(d);
+  var preferReheat=!!ctx.preferReheat;
+  var usedCuisine=ctx.usedCuisine||{};
+  var usedId=ctx.usedId||{};
+  var preferId=ctx.preferId||null;
+  var scored=[];
+  recs().forEach(function(rec){
+    var sc=scoreRec(rec,people,{
+      usedCuisine:usedCuisine,
+      usedId:usedId,
+      busy:busy,
+      kidsSmall:kidsSmall,
+      preferReheat:preferReheat
+    });
+    if(sc==null)return;
+    if(preferId&&rec.id===preferId)sc-=40;
+    var tasteN=(typeof tasteHits==="function")?tasteHits(rec,people).length:0;
+    var why=[];
+    if(busy&&(rec.time||30)<=25)why.push("snel · drukke avond");
+    else if(busy)why.push("drukke avond");
+    if(rec.reheat&&preferReheat)why.push("warmt goed op");
+    if(kidsSmall&&rec.fijn)why.push("fijn mogelijk");
+    if(tasteN)why.push(tasteN+" smaak-check");
+    scored.push({
+      id:rec.id,
+      t:rec.t,
+      c:rec.c,
+      time:rec.time,
+      img:rec.img||"",
+      taste:tasteN,
+      why:why.join(" · "),
+      score:sc
+    });
+  });
+  scored.sort(function(a,b){return a.score-b.score;});
+  /* Cuisine variety in top slice: take best, then prefer unseen cuisines. */
+  var out=[], seenC={}, seenI={};
+  function pushUnique(list){
+    list.forEach(function(o){
+      if(seenI[o.id]||out.length>=OPTS_PER_DAY)return;
+      seenI[o.id]=1;
+      out.push(o);
+      seenC[o.c]=1;
+    });
+  }
+  /* Prefer preferId first if present. */
+  if(preferId){
+    var pref=scored.filter(function(o){return o.id===preferId;});
+    pushUnique(pref);
+  }
+  /* Pass 1: distinct cuisines */
+  pushUnique(scored.filter(function(o){return !seenC[o.c];}));
+  /* Pass 2: fill remaining by score */
+  pushUnique(scored);
+  /* Fallback: if hardBlock wiped everything, soft-score without cuisine penalty only — still hardBlock. */
+  if(!out.length){
+    recs().forEach(function(rec){
+      if(typeof hardBlock==="function"&&hardBlock(rec,people).length)return;
+      out.push({
+        id:rec.id,t:rec.t,c:rec.c,time:rec.time,img:rec.img||"",
+        taste:(typeof tasteHits==="function")?tasteHits(rec,people).length:0,
+        why:"",score:0
+      });
+    });
+    out=out.slice(0,OPTS_PER_DAY);
+  }
+  return out;
 }
 
 function buildSuggestions(n){
-  n=n||5;
+  n=n||7;
   var days=candidateDays(n);
   if(days.length<3){
     var extra=candidateDays(7);
-    days=extra.slice(0,Math.max(days.length,Math.min(5,extra.length)));
+    days=extra.slice(0,Math.max(days.length,Math.min(7,extra.length)));
   }
   var usedCuisine={};
   var usedId={};
-  var out=[];
-  days.forEach(function(d){
-    var people=eatersFor(d);
-    if(!people.length)return;
-    var best=null,bestScore=1e9;
-    (typeof REC!=="undefined"?REC:[]).forEach(function(rec){
-      if(usedId[rec.id])return;
-      var sc=scoreRec(rec,people,usedCuisine);
-      if(sc==null)return;
-      if(sc<bestScore){bestScore=sc;best=rec;}
+  /* Soft: ids already on board */
+  if(S.plan){
+    DAYS.forEach(function(d){
+      var sl=S.plan[d];
+      if(sl&&sl.id)usedId[sl.id]=1;
     });
-    if(!best){
-      (typeof REC!=="undefined"?REC:[]).forEach(function(rec){
-        if(usedId[rec.id])return;
-        var sc=scoreRec(rec,people,{});
-        if(sc==null)return;
-        if(sc<bestScore){bestScore=sc;best=rec;}
-      });
-    }
-    if(!best)return;
-    usedId[best.id]=1;
-    usedCuisine[best.c]=1;
-    out.push({day:d,id:best.id,t:best.t,c:best.c,time:best.time,taste:(typeof tasteHits==="function")?tasteHits(best,people).length:0});
+  }
+  var out=[];
+  days.forEach(function(d,idx){
+    var opts=optionsForDay(d,{
+      usedCuisine:usedCuisine,
+      usedId:usedId,
+      preferReheat:idx>=2
+    });
+    if(!opts.length)return;
+    var pick=opts[0].id;
+    usedId[pick]=1;
+    usedCuisine[opts[0].c]=1;
+    out.push({day:d,options:opts,pick:pick,skip:false});
   });
-  if(out.length>5)out=out.slice(0,5);
-  if(out.length>=3)return out;
   return out;
+}
+
+/* Accept legacy flat [{day,id,t…}] or new [{day,options,pick}]. */
+function normalizeSuggestList(list){
+  list=list||[];
+  if(!list.length)return [];
+  if(list[0]&&Array.isArray(list[0].options)){
+    return sortByWeekDay(list.map(function(s){
+      var opts=(s.options||[]).filter(function(o){return o&&o.id&&o.t;});
+      var pick=s.skip?null:(s.pick||(opts[0]&&opts[0].id)||null);
+      return {day:s.day,options:opts,pick:pick,skip:!!s.skip};
+    }).filter(function(s){return s.day&&s.options.length;}));
+  }
+  /* Flat AI/local: one preferred id per day → expand with local options. */
+  var byDay={};
+  list.forEach(function(s){
+    if(!s||!s.day)return;
+    byDay[s.day]=s;
+  });
+  var days=Object.keys(byDay);
+  if(!days.length){
+    /* Maybe pure option list without days — ignore */
+    return [];
+  }
+  days=sortByWeekDay(days);
+  var usedCuisine={},usedId={};
+  if(S.plan){
+    DAYS.forEach(function(d){
+      var sl=S.plan[d];
+      if(sl&&sl.id)usedId[sl.id]=1;
+    });
+  }
+  return days.map(function(d,idx){
+    var pref=byDay[d];
+    var preferId=pref&&pref.id;
+    var opts=optionsForDay(d,{
+      usedCuisine:usedCuisine,
+      usedId:usedId,
+      preferReheat:idx>=2,
+      preferId:preferId
+    });
+    /* Ensure preferred id is in list with real catalog fields. */
+    if(preferId&&!opts.some(function(o){return o.id===preferId;})){
+      var rec=(typeof recipeBy==="function")?recipeBy(preferId):null;
+      if(rec&&rec.t){
+        opts.unshift({
+          id:rec.id,t:rec.t,c:rec.c,time:rec.time,img:rec.img||"",
+          taste:pref.taste||0,why:pref.why||"",score:-1
+        });
+      }
+    }
+    if(!opts.length)return null;
+    var pick=preferId&&opts.some(function(o){return o.id===preferId;})?preferId:opts[0].id;
+    usedId[pick]=1;
+    var hit=opts.filter(function(o){return o.id===pick;})[0];
+    if(hit)usedCuisine[hit.c]=1;
+    return {day:d,options:opts,pick:pick,skip:false};
+  }).filter(Boolean);
 }
 
 function panel(){
@@ -107,13 +253,29 @@ function syncPick(list,keep){
   var prev=keep?(S._sugPick||{}):{};
   var next={};
   (list||[]).forEach(function(s){
-    next[s.day]=(prev[s.day]!==undefined)?!!prev[s.day]:true;
+    if(prev[s.day]!==undefined){
+      next[s.day]=prev[s.day];
+    }else{
+      next[s.day]=s.skip?null:(s.pick||null);
+    }
   });
   S._sugPick=next;
 }
 
 function selectedList(){
-  return sortByWeekDay((S._sugDraft||[]).filter(function(s){return S._sugPick&&S._sugPick[s.day];}));
+  return sortByWeekDay((S._sugDraft||[]).filter(function(s){
+    var p=S._sugPick&&S._sugPick[s.day];
+    return p&&p!=="__skip__";
+  }).map(function(s){
+    var pid=S._sugPick[s.day];
+    var opt=(s.options||[]).filter(function(o){return o.id===pid;})[0];
+    if(!opt){
+      var rec=(typeof recipeBy==="function")?recipeBy(pid):null;
+      if(rec)opt={id:rec.id,t:rec.t,c:rec.c,time:rec.time,img:rec.img||""};
+    }
+    if(!opt)return null;
+    return {day:s.day,id:opt.id,t:opt.t,c:opt.c,time:opt.time,taste:opt.taste||0};
+  }).filter(Boolean));
 }
 
 function selectedCount(){
@@ -131,36 +293,75 @@ function refreshAcceptBtn(){
 }
 
 function setAllPick(on){
-  (S._sugDraft||[]).forEach(function(s){S._sugPick[s.day]=!!on;});
+  (S._sugDraft||[]).forEach(function(s){
+    if(on){
+      S._sugPick[s.day]=s.pick||(s.options&&s.options[0]&&s.options[0].id)||null;
+      s.skip=false;
+    }else{
+      S._sugPick[s.day]="__skip__";
+      s.skip=true;
+    }
+  });
   drawSuggest(S._sugDraft,{keepPick:true});
+}
+
+function esc(s){
+  return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
 }
 
 function drawSuggest(list,opts){
   opts=opts||{};
-  S._sugDraft=sortByWeekDay(list||[]);
+  S._sugDraft=normalizeSuggestList(list||[]);
   syncPick(S._sugDraft,!!opts.keepPick);
+  /* Mirror pick into draft */
+  S._sugDraft.forEach(function(s){
+    var p=S._sugPick[s.day];
+    if(p==="__skip__"){s.skip=true;s.pick=null;}
+    else if(p){s.skip=false;s.pick=p;}
+  });
   var host=document.getElementById("sugbody");if(!host)return;
   if(!S._sugDraft.length){
-    host.innerHTML="<p class=note>Geen vrije avonden met eten thuis, of alles botst met dieet. Kies handmatig op het bord.</p><button class='btn g full' id=suggo type=button>Naar bord</button>";
+    host.innerHTML="<p class=note>Geen vrije avonden met eten thuis, of alles botst met dieet. Kies handmatig op het bord, of stel zelf samen.</p>"+
+      "<button class='btn g full' id=sugcustomopen type=button style=margin-top:8px>Zelf samenstellen</button>"+
+      "<button class='btn w full' id=suggo type=button style=margin-top:8px>Naar bord</button>";
     return;
   }
-  var html="<p class=note>Vink de avonden die je wilt. Tik om te wisselen. Slim = veto\u2019s, sportdrukte, fijn, keukens afgewisseld (offline of via endpoint).</p>";
-  html+="<div class='row sugquick'><button type=button class='chip' id=sugall>Alles</button><button type=button class='chip' id=sugnone>Geen</button></div>";
-  S._sugDraft.forEach(function(s,i){
-    var taste=s.taste?(" \u00b7 "+s.taste+" smaak"):"";
+  var html="<p class=note>Per avond: kies uit echte recepten (foto + naam), sla over, of stel zelf samen. Alleen aangevinkte avonden gaan op het bord.</p>";
+  html+="<div class='row sugquick'><button type=button class='chip' id=sugall>Alles</button><button type=button class='chip' id=sugnone>Geen</button><button type=button class='chip' id=sugcustomopen>Zelf samenstellen</button></div>";
+  S._sugDraft.forEach(function(s,di){
+    var pick=S._sugPick[s.day];
+    var skipped=pick==="__skip__";
+    var on=!skipped&&!!pick;
     var cookN="";
     var pool=(typeof cooksOn==="function")?cooksOn():(S.people||[]).filter(function(p){return !!p.canCook;});
     if(pool.length){
       var wkey=(function(){var d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()+3-(d.getDay()+6)%7);var w1=new Date(d.getFullYear(),0,4);var w=1+Math.round(((d-w1)/86400000-(3-(w1.getDay()+6)%7))/7);return d.getFullYear()+"-W"+String(w).padStart(2,"0");})();
       var sl=S.weekPlans&&S.weekPlans[wkey]&&S.weekPlans[wkey][s.day];
       var hit=pool.filter(function(p){return p.id===(sl&&sl.cook);})[0]||pool[0];
-      if(hit)cookN=" \u00b7 kookt "+hit.name;
+      if(hit)cookN=" · kookt "+hit.name;
     }
-    var on=S._sugPick[s.day]!==false;
-    html+="<div class='card sugrow"+(on?"":" dim")+"'>"+
-      "<label class=sugchk><input type=checkbox class=sugchkbox data-i="+i+(on?" checked":"")+" aria-label=\""+DLAB[s.day]+" op het bord\"></label>"+
-      "<button type=button class=sugmain data-act=sugswap data-i="+i+"><div class=p><b>"+DLAB[s.day]+" \u00b7 "+s.t+"</b><div class=meta>"+s.c+" \u00b7 "+(s.time||"?")+" min"+taste+cookN+" \u00b7 tik om te wisselen</div></div></button>"+
+    html+="<div class='sugday"+(skipped?" dim":"")+"' data-di="+di+">";
+    html+="<div class=sugdayhd>"+
+      "<label class=sugchk><input type=checkbox class=sugchkbox data-i="+di+(on?" checked":"")+" aria-label=\""+esc(DLAB[s.day])+" op het bord\"></label>"+
+      "<div class=sugdaytitle><b>"+esc(DLAB[s.day])+"</b><div class=meta>"+(s.options||[]).length+" opties"+cookN+(skipped?" · overgeslagen":"")+"</div></div>"+
+      "<button type=button class='chip' data-act=sugskip data-i="+di+">"+(skipped?"Terug":"Sla over")+"</button>"+
       "</div>";
+    if(!skipped){
+      html+="<div class=sugopts role=list>";
+      (s.options||[]).forEach(function(o,oi){
+        var sel=pick===o.id;
+        html+="<button type=button class='card sugopt"+(sel?" on":"")+"' data-act=sugpick data-i="+di+" data-oi="+oi+" role=listitem>"+
+          (o.img?"<img alt='' src='"+esc(o.img)+"' loading=lazy/>":"<div class=sugph></div>")+
+          "<div class=p><b>"+esc(o.t)+"</b><div class=meta>"+esc(o.c)+" · "+(o.time||"?")+" min"+(o.why?" · "+esc(o.why):"")+(sel?" · gekozen":"")+"</div></div>"+
+          "</button>";
+      });
+      html+="<button type=button class='card sugopt sugcustom' data-act=sugcustomday data-i="+di+">"+
+        "<div class=sugph sugph-plus>+</div>"+
+        "<div class=p><b>Zelf samenstellen</b><div class=meta>Naam + producten · op deze avond</div></div>"+
+        "</button>";
+      html+="</div>";
+    }
+    html+="</div>";
   });
   html+="<button class='btn g full' id=sugaccept type=button style=margin-top:8px>Gekozen op het bord</button>";
   html+="<button class='btn w full' id=sugclose2 type=button style=margin-top:8px>Nog even niet</button>";
@@ -169,10 +370,12 @@ function drawSuggest(list,opts){
 }
 
 function openSuggest(forceList){
-  var list=sortByWeekDay(forceList||buildSuggestions(5));
-  if(list.length>5)list=list.slice(0,5);
-  if(list.length>=3&&list.length<=5){/* ok */}
-  else if(list.length&&list.length<3){/* still show what we have */}
+  var list;
+  if(forceList&&forceList.length){
+    list=normalizeSuggestList(forceList);
+  }else{
+    list=buildSuggestions(7);
+  }
   S._sugPick={};
   panel().classList.add("on");
   drawSuggest(list);
@@ -181,24 +384,28 @@ function openSuggest(forceList){
 function closeSuggest(){
   var el=document.getElementById("suggest");
   if(el)el.classList.remove("on");
+  closeCustom();
 }
 
-function swapOne(i){
-  var cur=S._sugDraft&&S._sugDraft[i];if(!cur)return;
-  var people=eatersFor(cur.day);
-  var usedId={};S._sugDraft.forEach(function(s,j){if(j!==i)usedId[s.id]=1;});
-  var usedCuisine={};S._sugDraft.forEach(function(s,j){if(j!==i)usedCuisine[s.c]=1;});
-  var pool=[];
-  (typeof REC!=="undefined"?REC:[]).forEach(function(rec){
-    if(usedId[rec.id]||rec.id===cur.id)return;
-    var sc=scoreRec(rec,people,usedCuisine);
-    if(sc==null)return;
-    pool.push({rec:rec,sc:sc});
-  });
-  pool.sort(function(a,b){return a.sc-b.sc;});
-  if(!pool.length){if(typeof toast==="function")toast("Geen andere optie");return;}
-  var next=pool[0].rec;
-  S._sugDraft[i]={day:cur.day,id:next.id,t:next.t,c:next.c,time:next.time,taste:(typeof tasteHits==="function")?tasteHits(next,people).length:0};
+function pickOption(di,oi){
+  var s=S._sugDraft&&S._sugDraft[di];if(!s)return;
+  var o=s.options&&s.options[oi];if(!o)return;
+  s.skip=false;
+  s.pick=o.id;
+  S._sugPick[s.day]=o.id;
+  drawSuggest(S._sugDraft,{keepPick:true});
+}
+
+function skipDay(di){
+  var s=S._sugDraft&&S._sugDraft[di];if(!s)return;
+  if(S._sugPick[s.day]==="__skip__"){
+    s.skip=false;
+    s.pick=s.pick||(s.options&&s.options[0]&&s.options[0].id)||null;
+    S._sugPick[s.day]=s.pick;
+  }else{
+    s.skip=true;
+    S._sugPick[s.day]="__skip__";
+  }
   drawSuggest(S._sugDraft,{keepPick:true});
 }
 
@@ -228,27 +435,292 @@ function acceptSelected(){
   closeSuggest();
   if(typeof drawBord==="function")drawBord();
   if(typeof drawList==="function")drawList();
-  if(typeof toast==="function")toast(list.length+" avond"+(list.length===1?"":"en")+" op het bord \u00b7 lijst bijgewerkt");
+  if(typeof toast==="function")toast(list.length+" avond"+(list.length===1?"":"en")+" op het bord · lijst bijgewerkt");
   if(typeof show==="function")show("bord");
+}
+
+/* —— Zelf samenstellen —— */
+function customPanel(){
+  var el=document.getElementById("sugcustom");
+  if(el)return el;
+  el=document.createElement("section");
+  el.className="panel";
+  el.id="sugcustom";
+  el.innerHTML=
+    "<div class=hd><button class='btn s w' id=sugcustomback type=button>Terug</button><b>Zelf samenstellen</b></div>"+
+    "<div class=sc id=sugcustombody></div>";
+  (document.querySelector(".phone")||document.body).appendChild(el);
+  return el;
+}
+
+function closeCustom(){
+  var el=document.getElementById("sugcustom");
+  if(el)el.classList.remove("on");
+}
+
+function openCustom(di){
+  S._customDayIdx=(di==null||di<0)?null:di;
+  /* Default day: first draft day or first needing meal */
+  var day=null;
+  if(S._customDayIdx!=null&&S._sugDraft&&S._sugDraft[S._customDayIdx]){
+    day=S._sugDraft[S._customDayIdx].day;
+  }else if(S._sugDraft&&S._sugDraft[0]){
+    day=S._sugDraft[0].day;
+  }else{
+    day=candidateDays(1)[0]||DAYS[todayIdx()];
+  }
+  S._customDraft={
+    day:day,
+    t:"",
+    ing:[],
+    q:""
+  };
+  customPanel().classList.add("on");
+  drawCustom();
+}
+
+function drawCustom(){
+  var host=document.getElementById("sugcustombody");if(!host)return;
+  var d=S._customDraft||{day:DAYS[0],t:"",ing:[],q:""};
+  var days=candidateDays(7);
+  if(!days.length)days=DAYS.slice();
+  if(days.indexOf(d.day)<0)d.day=days[0];
+  var html="<p class=note>Geef je diner een naam, kies producten uit de catalogus of typ vrij. Past bij wie-eet op die avond.</p>";
+  html+="<label>Avond</label><div class=row style=margin-bottom:10px>";
+  days.forEach(function(day){
+    html+="<button type=button class='chip "+(d.day===day?"on":"")+"' data-act=custday data-d="+day+">"+esc(DLAB[day]||day)+"</button>";
+  });
+  html+="</div>";
+  html+="<label>Naam van het diner</label>";
+  html+="<input id=custname type=text placeholder=\"bijv. Pasta met worst\" value=\""+esc(d.t)+"\"/>";
+  html+="<label style=margin-top:10px>Producten</label>";
+  html+="<div class=row style=gap:8px;margin-bottom:8px>";
+  html+="<input id=custq type=text placeholder=\"Zoek of typ product\" value=\""+esc(d.q||"")+"\" style=flex:1>";
+  html+="<button type=button class='btn s g' id=custadd>Erbij</button>";
+  html+="</div>";
+  html+="<div class=row id=custchips style=margin-bottom:10px></div>";
+  html+="<div id=custing style=margin-bottom:12px></div>";
+  html+="<button class='btn g full' id=custsave type=button>Zet op voorstellen</button>";
+  html+="<button class='btn w full' id=sugcustomback2 type=button style=margin-top:8px>Terug</button>";
+  host.innerHTML=html;
+  refreshCustChips();
+  refreshCustIng();
+  var nameEl=document.getElementById("custname");
+  if(nameEl){
+    nameEl.addEventListener("input",function(){
+      S._customDraft.t=nameEl.value;
+    });
+  }
+  var qEl=document.getElementById("custq");
+  if(qEl){
+    qEl.addEventListener("input",function(){
+      S._customDraft.q=qEl.value;
+      refreshCustChips();
+    });
+  }
+}
+
+function refreshCustChips(){
+  var host=document.getElementById("custchips");if(!host)return;
+  var q=String((S._customDraft&&S._customDraft.q)||"").toLowerCase().trim();
+  var keys=[];
+  if(typeof CAT!=="undefined"){
+    keys=Object.keys(CAT).filter(function(k){
+      var c=CAT[k];
+      var hay=((c.label||"")+" "+c.name+" "+k).toLowerCase();
+      return !q||hay.indexOf(q)>=0;
+    }).slice(0,20);
+  }
+  if(!keys.length&&window.WeAteProducts&&typeof WeAteProducts.search==="function"){
+    try{
+      (WeAteProducts.search(q)||[]).slice(0,16).forEach(function(p){
+        if(p&&p.id)keys.push(p.id);
+      });
+    }catch(e){}
+  }
+  host.innerHTML=keys.map(function(k){
+    var label=(typeof CAT!=="undefined"&&CAT[k])?(CAT[k].label||CAT[k].name):k;
+    if(typeof productLabel==="function"&&CAT&&CAT[k])label=productLabel(CAT[k]);
+    return "<button type=button class='chip' data-act=custcat data-k='"+esc(k)+"'>"+esc(label)+"</button>";
+  }).join("")||"<span class=note>Typ een productnaam en tik Erbij.</span>";
+}
+
+function refreshCustIng(){
+  var host=document.getElementById("custing");if(!host)return;
+  var ing=(S._customDraft&&S._customDraft.ing)||[];
+  if(!ing.length){
+    host.innerHTML="<p class=note>Nog geen producten. Tik chips of typ vrij.</p>";
+    return;
+  }
+  host.innerHTML=ing.map(function(it,i){
+    var label=it.k&&typeof CAT!=="undefined"&&CAT[it.k]
+      ?(typeof productLabel==="function"?productLabel(CAT[it.k]):(CAT[it.k].label||CAT[it.k].name))
+      :(it.n||it.k||"?");
+    return "<div class=listrow><div style=flex:1><b>"+esc(label)+"</b></div>"+
+      "<button type=button class='btn s w' data-act=custrm data-i="+i+">Weg</button></div>";
+  }).join("");
+}
+
+function addCustCat(k){
+  S._customDraft=S._customDraft||{day:DAYS[0],t:"",ing:[],q:""};
+  S._customDraft.ing=S._customDraft.ing||[];
+  if(S._customDraft.ing.some(function(it){return it.k===k;})){
+    if(typeof toast==="function")toast("Staat er al bij");
+    return;
+  }
+  S._customDraft.ing.push({k:k,q:1});
+  S._customDraft.q="";
+  var qEl=document.getElementById("custq");
+  if(qEl)qEl.value="";
+  refreshCustChips();
+  refreshCustIng();
+}
+
+function addCustFree(){
+  var qEl=document.getElementById("custq");
+  var n=((qEl&&qEl.value)||(S._customDraft&&S._customDraft.q)||"").trim();
+  if(!n){
+    if(typeof toast==="function")toast("Typ een product");
+    return;
+  }
+  S._customDraft=S._customDraft||{day:DAYS[0],t:"",ing:[],q:""};
+  S._customDraft.ing=S._customDraft.ing||[];
+  var hit=null;
+  if(typeof CAT!=="undefined"){
+    hit=Object.keys(CAT).find(function(k){
+      var c=CAT[k];
+      return (c.label||"").toLowerCase()===n.toLowerCase()||c.name.toLowerCase()===n.toLowerCase()||k.toLowerCase()===n.toLowerCase();
+    })||null;
+  }
+  if(!hit&&window.WeAteProducts&&typeof WeAteProducts.findByName==="function"){
+    var cp=WeAteProducts.findByName(n);
+    if(cp&&typeof CAT!=="undefined"&&CAT[cp.id])hit=cp.id;
+    else if(cp&&typeof WeAteProducts.upsert==="function"){
+      /* keep free text if not in CAT */
+    }else if(!cp&&typeof WeAteProducts.upsert==="function"){
+      WeAteProducts.upsert({name:n,aisle:"Huis"});
+    }
+  }
+  if(hit){
+    if(S._customDraft.ing.some(function(it){return it.k===hit;})){
+      if(typeof toast==="function")toast("Staat er al bij");
+      return;
+    }
+    S._customDraft.ing.push({k:hit,q:1});
+  }else{
+    if(S._customDraft.ing.some(function(it){return (it.n||"").toLowerCase()===n.toLowerCase();})){
+      if(typeof toast==="function")toast("Staat er al bij");
+      return;
+    }
+    S._customDraft.ing.push({n:n,q:1});
+  }
+  S._customDraft.q="";
+  if(qEl)qEl.value="";
+  refreshCustChips();
+  refreshCustIng();
+}
+
+function saveCustom(){
+  var d=S._customDraft||{};
+  var name=String(d.t||"").trim();
+  var nameEl=document.getElementById("custname");
+  if(nameEl)name=nameEl.value.trim();
+  if(!name){
+    if(typeof toast==="function")toast("Geef je diner een naam");
+    return;
+  }
+  if(!(d.ing&&d.ing.length)){
+    if(typeof toast==="function")toast("Voeg minstens één product toe");
+    return;
+  }
+  var day=d.day||candidateDays(1)[0]||DAYS[0];
+  var id="custom:"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+  var rec={
+    id:id,
+    t:name,
+    c:"Zelf",
+    time:30,
+    img:"",
+    reheat:false,
+    fijn:true,
+    ing:d.ing.map(function(it){
+      if(it.k)return {k:it.k,q:it.q||1};
+      return {n:it.n,q:it.q||1};
+    }),
+    st:["Bereid zoals jullie het thuis doen — zelf samengesteld in WeAte."],
+    custom:true,
+    swap:{}
+  };
+  S.customs=S.customs||{};
+  S.customs[id]=rec;
+  if(typeof save==="function")save();
+
+  /* Ensure suggest draft has this day */
+  S._sugDraft=S._sugDraft||[];
+  var entry=S._sugDraft.filter(function(s){return s.day===day;})[0];
+  var opt={id:id,t:rec.t,c:rec.c,time:rec.time,img:"",taste:0,why:"zelf samengesteld",score:-50};
+  if(!entry){
+    entry={day:day,options:[opt],pick:id,skip:false};
+    S._sugDraft.push(entry);
+    S._sugDraft=sortByWeekDay(S._sugDraft);
+  }else{
+    entry.options=entry.options||[];
+    entry.options.unshift(opt);
+    entry.pick=id;
+    entry.skip=false;
+  }
+  S._sugPick=S._sugPick||{};
+  S._sugPick[day]=id;
+  closeCustom();
+  panel().classList.add("on");
+  drawSuggest(S._sugDraft,{keepPick:true});
+  if(typeof toast==="function")toast(name+" klaar voor "+(DLAB[day]||day));
 }
 
 window.openSuggest=openSuggest;
 window.buildSuggestions=buildSuggestions;
 window.closeSuggest=closeSuggest;
+window.optionsForDay=optionsForDay;
+window.normalizeSuggestList=normalizeSuggestList;
 
 document.addEventListener("click",function(e){
   var t=e.target;if(t&&t.nodeType===3)t=t.parentNode;if(!t||!t.closest)return;
-  function hasId(id){return t.id===id||t.closest("#"+id);}
+  function hasId(id){return t.id===id||(t.closest&&t.closest("#"+id));}
   if(hasId("sugclose")||hasId("sugclose2")){e.preventDefault();closeSuggest();return;}
   if(hasId("suggo")){e.preventDefault();closeSuggest();if(typeof show==="function")show("bord");return;}
   if(hasId("sugall")){e.preventDefault();setAllPick(true);return;}
   if(hasId("sugnone")){e.preventDefault();setAllPick(false);return;}
   if(hasId("sugaccept")){e.preventDefault();acceptSelected();return;}
-  // Checkbox has its own hit target — do not treat as row swap
+  if(hasId("sugcustomopen")){e.preventDefault();openCustom(null);return;}
+  if(hasId("sugcustomback")||hasId("sugcustomback2")){e.preventDefault();closeCustom();return;}
+  if(hasId("custadd")){e.preventDefault();addCustFree();return;}
+  if(hasId("custsave")){e.preventDefault();saveCustom();return;}
   if(t.classList&&t.classList.contains("sugchkbox")){return;}
   if(t.closest&&t.closest("label.sugchk")){return;}
-  var row=t.closest("[data-act=sugswap]");
-  if(row){e.preventDefault();swapOne(+row.getAttribute("data-i"));return;}
+  var skip=t.closest&&t.closest("[data-act=sugskip]");
+  if(skip){e.preventDefault();skipDay(+skip.getAttribute("data-i"));return;}
+  var pick=t.closest&&t.closest("[data-act=sugpick]");
+  if(pick){e.preventDefault();pickOption(+pick.getAttribute("data-i"),+pick.getAttribute("data-oi"));return;}
+  var cday=t.closest&&t.closest("[data-act=sugcustomday]");
+  if(cday){e.preventDefault();openCustom(+cday.getAttribute("data-i"));return;}
+  var cd=t.closest&&t.closest("[data-act=custday]");
+  if(cd){
+    e.preventDefault();
+    S._customDraft=S._customDraft||{t:"",ing:[],q:""};
+    S._customDraft.day=cd.getAttribute("data-d");
+    drawCustom();
+    return;
+  }
+  var ccat=t.closest&&t.closest("[data-act=custcat]");
+  if(ccat){e.preventDefault();addCustCat(ccat.getAttribute("data-k"));return;}
+  var crm=t.closest&&t.closest("[data-act=custrm]");
+  if(crm){
+    e.preventDefault();
+    var i=+crm.getAttribute("data-i");
+    if(S._customDraft&&S._customDraft.ing)S._customDraft.ing.splice(i,1);
+    refreshCustIng();
+    return;
+  }
 },true);
 
 document.addEventListener("change",function(e){
@@ -256,15 +728,20 @@ document.addEventListener("change",function(e){
   var i=+t.getAttribute("data-i");
   var s=S._sugDraft&&S._sugDraft[i];
   if(!s)return;
-  S._sugPick[s.day]=!!t.checked;
-  var row=t.closest(".sugrow");
-  if(row){if(t.checked)row.classList.remove("dim");else row.classList.add("dim");}
-  refreshAcceptBtn();
+  if(t.checked){
+    s.skip=false;
+    s.pick=s.pick||(s.options&&s.options[0]&&s.options[0].id)||null;
+    S._sugPick[s.day]=s.pick;
+  }else{
+    s.skip=true;
+    S._sugPick[s.day]="__skip__";
+  }
+  drawSuggest(S._sugDraft,{keepPick:true});
 },true);
 
 if(typeof show==="function"&&!show._sug){
   var _sh=show;
-  show=function(id){if(id!=="bord"&&id!=="huis")closeSuggest();_sh(id);};
+  show=function(id){if(id!=="bord"&&id!=="huis"){closeSuggest();closeCustom();}_sh(id);};
   show._sug=true;
 }
 })();

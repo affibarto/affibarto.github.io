@@ -51,9 +51,9 @@ function banner(){
   card.id="wpbanner";
   card.className="primary-cta";
   if(!filled()){
-    card.innerHTML="<b>Begin met de weekplanning</b><p class=note style=margin:6px 0 12px>Wie eet wanneer? Daarna zetten we 3–5 avonden voor je klaar.</p><button type=button class='btn g full' id=wpprimary>Weekplanning maken</button>";
+    card.innerHTML="<b>Begin met de weekplanning</b><p class=note style=margin:6px 0 12px>Wie eet wanneer? Daarna krijg je per avond een lijst echte diners — of stel zelf samen.</p><button type=button class='btn g full' id=wpprimary>Weekplanning maken</button>";
   }else{
-    card.innerHTML="<b>Slim voorstellen</b><p class=note style=margin:6px 0 12px>Planning staat. 3–5 diners op veto’s, sportdrukte en wie thuis is — offline slim, of via AI-endpoint als die aanstaat.</p><button type=button class='btn g full' id=wpprimary>Slim voorstellen</button>";
+    card.innerHTML="<b>Slim voorstellen</b><p class=note style=margin:6px 0 12px>Planning staat. Per avond veel echte recepten (met foto) op veto’s, sportdrukte en wie thuis is — of stel zelf samen.</p><button type=button class='btn g full' id=wpprimary>Slim voorstellen</button>";
   }
   sc.insertBefore(card,sc.firstChild);
   if(daysHost){
