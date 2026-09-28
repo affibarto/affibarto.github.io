@@ -6,4 +6,5 @@ window.WEATE_FIREBASE = {
   storageBucket: "YOUR_PROJECT.appspot.com",
   messagingSenderId: "YOUR_SENDER_ID",
   appId: "YOUR_APP_ID"
+  /* Optional: , aiEndpoint: "https://weate-ai.YOUR_SUBDOMAIN.workers.dev"  — see AI.md (no key in frontend) */
 };
