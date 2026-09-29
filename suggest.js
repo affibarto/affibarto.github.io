@@ -548,6 +548,11 @@ function refreshCustChips(){
     if(!id||seen[id])return;
     seen[id]=1;keys.push(id);
   }
+  /* Typeahead-only: empty query → no default product list. */
+  if(!q){
+    host.innerHTML="<span class=note>Typ een productnaam — suggesties verschijnen terwijl je typt.</span>";
+    return;
+  }
   /* Prefer catalog search so variants (krieltjes ≠ aardappelen) stay distinct. */
   if(window.WeAteProducts&&typeof WeAteProducts.search==="function"){
     try{
@@ -559,11 +564,11 @@ function refreshCustChips(){
     Object.keys(CAT).filter(function(k){
       var c=CAT[k];
       var hay=((c.label||"")+" "+c.name+" "+k).toLowerCase();
-      return !ql||hay.indexOf(ql)>=0;
+      return hay.indexOf(ql)>=0;
     }).slice(0,16).forEach(pushId);
   }
   if(!keys.length){
-    host.innerHTML="<span class=note>Typ een productnaam en tik Erbij.</span>";
+    host.innerHTML="<span class=note>Niets gevonden. Typ verder of tik Erbij voor vrije tekst.</span>";
     return;
   }
   host.innerHTML=keys.map(function(k){
@@ -574,11 +579,20 @@ function refreshCustChips(){
     var pack=m.pack?("<span class=meta>"+esc(m.pack)+"</span>"):"";
     var tierA=m.tier==="A"?" on hard":"";
     var tierB=(m.tier==="B"||m.tier==="huismerk")?" on":"";
+    var act="";
+    if(typeof actieBadgeInfo==="function"){
+      var info=actieBadgeInfo(m.p||{id:k,name:m.label});
+      if(info&&info.stores&&info.stores.length){
+        var storeLabel=info.stores.slice(0,2).join("/");
+        act="<button type=button class='badge actie' data-act=gotoactie data-id='"+esc(k)+"' title='Open Actie'>in Actie · "+esc(storeLabel)+"</button>";
+      }
+    }
     return "<div class='prodchip' data-k='"+esc(k)+"'>"+
       "<button type=button class='prodchip-main' data-act=custcat data-k='"+esc(k)+"'>"+
         thumb+
         "<span class='prodchip-body'><b>"+esc(m.label)+"</b>"+pack+"</span>"+
       "</button>"+
+      act+
       "<span class='prodchip-brands'>"+
         "<button type=button class='chip s"+tierA+"' data-act=custbrand data-k='"+esc(k)+"' data-b=A title='A-merk'>A</button>"+
         "<button type=button class='chip s"+tierB+"' data-act=custbrand data-k='"+esc(k)+"' data-b=B title='Huismerk / B'>B</button>"+
@@ -856,4 +870,18 @@ if(typeof show==="function"&&!show._sug){
   show=function(id){if(id!=="bord"&&id!=="huis"){closeSuggest();closeCustom();}_sh(id);};
   show._sug=true;
 }
+
+document.addEventListener("click",function(e){
+  var t=e.target;if(t&&t.nodeType===3)t=t.parentNode;
+  if(!t||!t.closest)return;
+  var go=t.closest("[data-act=gotoactie]");
+  if(!go)return;
+  /* Only handle badges inside compose typeahead. */
+  if(!go.closest("#custchips")&&!go.closest("#sugcustom"))return;
+  e.preventDefault();e.stopPropagation();
+  if(e.stopImmediatePropagation)e.stopImmediatePropagation();
+  var id=go.getAttribute("data-id");
+  var p=window.WeAteProducts&&WeAteProducts.get(id);
+  if(typeof openActieForProduct==="function")openActieForProduct(p||id);
+},true);
 })();
