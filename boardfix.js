@@ -2,8 +2,10 @@
 if(window._boardfix)return;window._boardfix=1;
 function wipeDay(d){
 if(!S.plan||!S.plan[d])return;
+var id=S.plan[d].id;
 S.plan[d]=null;
 if(S.eaten)delete S.eaten[d];
+if(id&&typeof purgeCustomIfUnused==="function")purgeCustomIfUnused(id);
 if(typeof save==="function")save();
 if(typeof drawBord==="function")drawBord();
 if(typeof drawList==="function")drawList();
