@@ -298,3 +298,13 @@ padding:4px 8px;font-size:11px;border-radius:999px
   .btn,.chip,.nav button,.fab,.card,.person,.listrow,.store,.dayrow{transition:none!important}
   .view.on,.panel.on,.toast.on{animation:none!important}
 }
+
+
+/* A/B per-regel op Lijst (v82) */
+.brandbar{flex-wrap:wrap;gap:6px}
+.abpick{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex:none;max-width:46%;}
+.abpick .abchip{padding:4px 8px;font-size:11px;line-height:1.2;white-space:nowrap}
+.abpick .abhint{font-size:10px;opacity:.75;text-align:right;line-height:1.2}
+.listrow .abpick{margin-left:6px}
+#lijst.compact .abpick .abhint{display:none}
+#brandsave{margin:0 0 8px}
