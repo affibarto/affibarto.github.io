@@ -5485,7 +5485,7 @@
     "img": "img/products/mais_kolf.png"
   },
   {
-    "id": "wraps_maïs",
+    "id": "wraps_mais",
     "name": "Maïswraps",
     "brand": null,
     "brandTier": "B",
@@ -5496,7 +5496,7 @@
       "mais wraps"
     ],
     "stores": null,
-    "img": "img/products/wraps_maïs.png"
+    "img": "img/products/wraps_mais.png"
   },
   {
     "id": "maizena",
@@ -7486,7 +7486,7 @@
     "img": "img/products/satesaus_pot.png"
   },
   {
-    "id": "saté_spies",
+    "id": "sate_spies",
     "name": "Satéspiesjes",
     "brand": null,
     "brandTier": "A",
@@ -7498,7 +7498,7 @@
       "kipsaté spies"
     ],
     "stores": null,
-    "img": "img/products/saté_spies.png"
+    "img": "img/products/sate_spies.png"
   },
   {
     "id": "saucijs",
