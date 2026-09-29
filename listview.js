@@ -172,6 +172,8 @@ return parts.filter(function(p){return p&&String(p).trim();}).join(" \u00b7 ");
 function mealMeta(info,mealLabel,needQty){
 var bits=[];
 if(info.brand)bits.push(info.brand);
+else if(info.tier==="A")bits.push("A-merk");
+else if(info.tier==="B")bits.push("huismerk");
 if(info.pack)bits.push("pak: "+info.pack);
 if(info.store)bits.push(info.store);
 if(info.deal)bits.push(info.deal);
@@ -242,10 +244,7 @@ if(S.removed&&S.removed[k])return;
 var need=amountFor(it,scale);
 var info=enrichIngredient(it.k);
 if(typeof productLabel==="function"&&CAT[it.k])info.title=productLabel(CAT[it.k]);
-if((info.tier==="A"||info.tier==="B")){
-S.itemBrand=S.itemBrand||{};
-if(S.itemBrand[k]===undefined){S.itemBrand[k]=info.tier;window._brandDirty=1;}
-}
+/* brandTier uit folder is info, geen override — anders blijft A/B-toggle zonder effect */
 if(!(S.checked&&S.checked[k]))allChecked=false;
 count++;n++;
 rows+=row(k,info.title,mealMeta(info,d+" \u00b7 "+rec.t,need),need);
@@ -290,10 +289,7 @@ if(!(e.brandTier==="A"||e.brandTier==="B")&&typeof window.detectBrandTier==="fun
 var t=window.detectBrandTier({b:e.b||e.brand,brand:e.b||e.brand,n:e.n});
 if(t==="A"||t==="B"){e.brandTier=t;window._brandDirty=1;}
 }
-if((e.brandTier==="A"||e.brandTier==="B")){
-S.itemBrand=S.itemBrand||{};
-if(S.itemBrand[k]===undefined){S.itemBrand[k]=e.brandTier;window._brandDirty=1;}
-}
+/* extras: brandTier blijft op e; itemMode leest via extraBrandTier */
 var prijs=e.line||((e.cents||0)*(e.q||1));
 var right="<div class=qtybox><button type=button class=qtybtn data-act=exqty data-i="+i+" data-d=-1>\u2212</button><span class=qtyn>"+(e.q||1)+"</span><button type=button class=qtybtn data-act=exqty data-i="+i+" data-d=1>+</button></div><div class=price>"+euro(prijs)+"</div>";
 actRows+=row(k,e.n,extraMeta(e),e.q||1,right);

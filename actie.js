@@ -25,7 +25,15 @@ have++;
 return;
 }
 if(typeof unitPrice!=="function"||!i.cat){miss.push(i.n);return;}
-var pr=unitPrice(i.cat,r.id,S.brand,i.k);
+var brand=(typeof effectiveBrand==="function")?effectiveBrand(i):(S.brand||"MIX");
+var pr;
+if(brand==="laagste"){
+  var pA=unitPrice(i.cat,r.id,"A",i.k);
+  var pB=unitPrice(i.cat,r.id,"B",i.k);
+  if(pA==null)pr=pB;else if(pB==null)pr=pA;else pr=Math.min(pA,pB);
+}else{
+  pr=unitPrice(i.cat,r.id,brand,i.k);
+}
 if(pr==null)miss.push(i.n);
 else{total+=Math.round(pr*Math.max(i.q||1,0.5));have++;}
 });

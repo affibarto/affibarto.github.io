@@ -1,4 +1,4 @@
-/* A/B merk popup vóór Zet op het bord / Bijwerken (v60)
+/* A/B merk popup vóór Zet op het bord / Bijwerken (v82)
  * Prijsfilosofie: per ingrediënt de laagste unitPrice over activeStores (winkelselectie),
  * zelfde unitPrice/bonusOf als paintScore/drawStores. Totals = som(best × qty).
  * Indicatie, geen kassaprijs — nooit verzonnen besparingen.
@@ -34,18 +34,19 @@ return typeof STORES!=="undefined"?STORES:[];
 /** Laagste unitPrice over activeStores voor geforceerd merk A of B. */
 function bestForBrand(cat,brand,k){
 if(!cat||typeof unitPrice!=="function")return {cents:null,sid:null,bonus:null};
+var key=(typeof brandKey==="function")?brandKey(k):k;
 S.itemBrand=S.itemBrand||{};
-var prev=S.itemBrand[k];
-var had=Object.prototype.hasOwnProperty.call(S.itemBrand,k);
-S.itemBrand[k]=brand;
+var prev=S.itemBrand[key];
+var had=Object.prototype.hasOwnProperty.call(S.itemBrand,key);
+S.itemBrand[key]=brand;
 var best=null,bestSid=null,bonusHit=null;
 stores().forEach(function(r){
 var sid=r.id||r;
-var pr=unitPrice(cat,sid,brand,k);
+var pr=unitPrice(cat,sid,brand,key);
 if(pr==null||!isFinite(pr))return;
 if(best==null||pr<best){best=pr;bestSid=sid;}
 if(typeof bonusOf==="function"){
-var b=bonusOf(k,sid);
+var b=bonusOf(key,sid);
 if(b&&b.now!=null){
 if(!bonusHit||b.now<bonusHit.now){
 bonusHit={now:b.now,deal:b.deal||"",was:b.was,store:(r.n||sid),sid:sid};
@@ -53,7 +54,7 @@ bonusHit={now:b.now,deal:b.deal||"",was:b.was,store:(r.n||sid),sid:sid};
 }
 }
 });
-if(had)S.itemBrand[k]=prev;else delete S.itemBrand[k];
+if(had)S.itemBrand[key]=prev;else delete S.itemBrand[key];
 return {cents:best,sid:bestSid,bonus:bonusHit};
 }
 
@@ -136,11 +137,11 @@ var deltaHtml;
 if(delta==null){
 deltaHtml="<div class=abdelta><span class=abdelta-n>onbekend</span><span class=abdelta-l>Verschil niet te rekenen</span></div>";
 }else if(delta===0){
-deltaHtml="<div class=abdelta><span class=abdelta-n>"+euro(0)+"</span><span class=abdelta-l>Zelfde indicatie</span></div>";
+deltaHtml="<div class=abdelta><span class=abdelta-n>"+euro(0)+"</span><span class=abdelta-l>Geen A/B-prijsverschil in data</span></div>";
 }else if(delta>0){
-deltaHtml="<div class=abdelta save><span class=abdelta-n>\u2212 "+euro(delta)+"</span><span class=abdelta-l>Huismerk lagere indicatie</span></div>";
+deltaHtml="<div class=abdelta save><span class=abdelta-n>\u2212 "+euro(delta)+"</span><span class=abdelta-l>Verschil A vs huismerk (indicatie)</span></div>";
 }else{
-deltaHtml="<div class=abdelta><span class=abdelta-n>+ "+euro(Math.abs(delta))+"</span><span class=abdelta-l>A-merk hogere indicatie</span></div>";
+deltaHtml="<div class=abdelta><span class=abdelta-n>+ "+euro(Math.abs(delta))+"</span><span class=abdelta-l>Verschil A vs huismerk (indicatie)</span></div>";
 }
 var mode=draft.mode||"MIX";
 var swaps=pickSwaps(lines);
@@ -209,9 +210,14 @@ else if(S.abSkipWeek===abWeekKey()){delete S.abSkipWeek;if(typeof save==="functi
 var day=draft.day,rid=draft.rid,mode=draft.mode||"MIX";
 var rec=typeof recipeBy==="function"?recipeBy(rid):null;
 S.itemBrand=S.itemBrand||{};
-function stampKey(k){
+function stampKey(k,br){
 if(!k)return;
-if(mode==="A"||mode==="B")S.itemBrand[k]=mode;
+var key=(typeof brandKey==="function")?brandKey(k):k;
+var use=(br==="A"||br==="B")?br:((mode==="A"||mode==="B")?mode:"");
+if(use==="A"||use==="B"){
+if(typeof setItemBrand==="function")setItemBrand(key,use);
+else{S.itemBrand=S.itemBrand||{};S.itemBrand[key]=use;}
+}
 }
 if(rec&&rec.ing){
 rec.ing.forEach(function(it){stampKey(it&&it.k);});
@@ -221,7 +227,7 @@ mealAdds(day,rid).forEach(function(it){stampKey(it&&it.k);});
 }
 Object.keys(draft.swaps).forEach(function(k){
 var v=draft.swaps[k];
-if(v==="A"||v==="B")S.itemBrand[k]=v;
+if(v==="A"||v==="B")stampKey(k,v);
 });
 if(mode==="A"||mode==="B")S.brand=mode;
 else if(mode==="MIX"&&(S.brand==="A"||S.brand==="B")){
@@ -234,6 +240,8 @@ S.plan[day].brand=mode;
 if(typeof save==="function")save();
 }
 if(typeof paintBrand==="function")paintBrand();
+if(typeof paintScore==="function")paintScore();
+if(typeof drawList==="function")drawList();
 }
 
 function doPut(){
