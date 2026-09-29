@@ -1,7 +1,8 @@
-/* A/B merk + winkeltotalen (v83)
+/* A/B merk + winkeltotalen (v84)
  * - Strict Actie-match (zelfde regels als folder.js) — géén petfood/rijst-mismatches
  * - Huismerken (1 de Beste, AH, Jumbo, …) = B-tier
  * - Per winkel+regel: priceB ≤ priceA (eerlijke fallback), mix = aisle A/B, goedkoopst = min
+ * - Lijst-rij toont product van gekozen merk (niet alleen chip-prijs)
  * - Indicatie, geen kassaprijs; geen verzonnen "bespaar"
  */
 S.itemBrand = S.itemBrand || {};
@@ -322,6 +323,10 @@ function abPricePair(cat, k) {
   k = brandKey(k);
   var a = bestPriceForBrand(cat, k, "A");
   var b = bestPriceForBrand(cat, k, "B");
+  /* Cross-store invariant: chip-B never above chip-A on the same line */
+  if (a.cents != null && b.cents != null && b.cents > a.cents) {
+    b = { cents: a.cents, meta: a.meta };
+  }
   var paired = a.cents != null && b.cents != null && a.cents !== b.cents;
   var real =
     (a.meta && a.meta.source !== "cat") ||
@@ -335,6 +340,150 @@ function abPricePair(cat, k) {
     aMeta: a.meta,
     bMeta: b.meta
   };
+}
+
+function storeLabel(id) {
+  var s = (typeof STORES !== "undefined" ? STORES : []).filter(function (x) { return x.id === id; })[0];
+  return s ? s.n : (id || "");
+}
+
+function dealFitsBrand(tier, brand) {
+  if (brand !== "A" && brand !== "B") return true;
+  if (!tier) return true;
+  return tier === brand;
+}
+
+function cleanDealLabel(d) {
+  d = String(d || "").trim();
+  if (!d || /^(feed|folder|actie|bonus|promotie)$/i.test(d)) return "";
+  return d;
+}
+
+/**
+ * Best Actie/Folder row for a merkvoorkeur — same strict match as pricing.
+ * Never returns an A-deal when brand is B (and vice versa).
+ */
+function bestDisplayDeal(k, cat, brand) {
+  k = brandKey(k);
+  if (!k) return null;
+  var stores = activeStoreIds();
+  var best = null;
+  function consider(row, exactTier) {
+    if (!row) return;
+    var t = row.tier || detectBrandTier(row) || "";
+    if (!dealFitsBrand(t, brand)) return;
+    var score = (exactTier && t === brand ? 40 : t === brand ? 30 : 10);
+    if (row.now != null && isFinite(row.now)) score += Math.max(0, 20 - row.now / 100);
+    if (!best || score > best._score) {
+      best = {
+        n: row.n || row.name || "",
+        b: row.b || row.brand || "",
+        deal: cleanDealLabel(row.deal),
+        sid: row.sid || row.s || "",
+        now: row.now,
+        tier: t,
+        pack: row.q || row.qty || row.pack || "",
+        _score: score
+      };
+    }
+  }
+  stores.forEach(function (sid) {
+    var bonus = strictBonusDeal(k, cat, sid);
+    if (bonus) consider(bonus, true);
+    if (brand === "A" || brand === "B" || brand === "laagste") {
+      consider(strictFolderDeal(k, cat, brand, sid), true);
+    }
+  });
+  if (best) delete best._score;
+  return best;
+}
+
+/**
+ * Resolve which brand tier the list row should show for this product.
+ * MIX → aisle rule; CHEAP/laagste → cheaper of A/B.
+ */
+function displayBrandFor(k, cat) {
+  k = brandKey(k);
+  var item = { k: k, cat: cat, aisle: (cat && cat.aisle) || "" };
+  var brand = effectiveBrand(item);
+  if (brand === "laagste") {
+    var pair = abPricePair(cat, k);
+    if (pair.a != null && pair.b != null) return pair.b < pair.a ? "B" : "A";
+    if (pair.b != null && pair.a == null) return "B";
+    return "A";
+  }
+  if (brand === "A" || brand === "B") return brand;
+  return "A";
+}
+
+/**
+ * Product line for Lijst: title/brand/pack/store/deal follow A/B choice.
+ * Wrong-tier Actie enrichment is never applied.
+ */
+function lineDisplayInfo(k, cat) {
+  k = brandKey(k);
+  cat = cat || (typeof CAT !== "undefined" ? CAT[k] : null);
+  var brand = displayBrandFor(k, cat);
+  var baseTitle = "";
+  if (typeof productLabel === "function" && cat) baseTitle = productLabel(cat);
+  else if (cat) baseTitle = cat.label || String(cat.name || "").replace(/\s+\d+.*$/, "") || k;
+  else baseTitle = k;
+
+  var pack = "";
+  if (window.WeAteProducts) {
+    var pref = window.WeAteProducts.get(k) || window.WeAteProducts.findByName(baseTitle);
+    if (pref && pref.pack) pack = String(pref.pack).trim();
+  }
+  if (!pack && cat && cat.name) {
+    var m = String(cat.name).match(/(\d+(?:[.,]\d+)?\s*(?:g|kg|ml|cl|l|stuks?|st)|\d+\-pack)\s*$/i);
+    if (m) pack = m[1].replace(/\s+/g, " ").trim();
+  }
+
+  var deal = bestDisplayDeal(k, cat, brand);
+  var info = {
+    title: baseTitle,
+    brand: "",
+    pack: pack,
+    store: "",
+    deal: "",
+    tier: brand === "B" ? "B" : brand === "A" ? "A" : "",
+    brandWant: brand
+  };
+
+  if (deal && deal.n) {
+    var raw = String(deal.n).trim();
+    var pm = raw.match(/^(.*?)[\s,·\-–]+((?:\d+\s*[x×]\s*)?\d+(?:[.,]\d+)?\s*(?:g|kg|ml|cl|l|liter|stuks?|st)|\d+\-pack)\s*$/i);
+    if (pm) {
+      info.title = pm[1].trim() || baseTitle;
+      if (!info.pack) info.pack = pm[2].replace(/\s+/g, " ").trim();
+    } else {
+      info.title = raw || baseTitle;
+    }
+    info.brand = String(deal.b || "").trim();
+    if (!info.brand && deal.n && _HOUSE_BRAND.test(deal.n)) {
+      var hm = String(deal.n).match(_HOUSE_BRAND);
+      if (hm) {
+        info.brand = hm[0].replace(/\s+/g, " ");
+        info.brand = info.brand.charAt(0).toUpperCase() + info.brand.slice(1);
+        if (/^ah$/i.test(info.brand)) info.brand = "AH";
+        if (/^1\s*de\s*beste$/i.test(info.brand)) info.brand = "1 de Beste";
+      }
+    }
+    info.store = storeLabel(deal.sid);
+    info.deal = deal.deal || "";
+    info.tier = deal.tier || info.tier;
+    if (deal.pack && !info.pack) info.pack = String(deal.pack).trim();
+  } else {
+    /* No matching deal for this merk — show staple + tier, never opposite merk Actie */
+    if (brand === "B") {
+      info.brand = "huismerk";
+      info.tier = "B";
+    } else if (brand === "A") {
+      info.brand = "A-merk";
+      info.tier = "A";
+    }
+  }
+  return info;
 }
 
 function setItemBrand(k, brand) {
@@ -395,6 +544,7 @@ if (typeof unitPrice === "function" && !unitPrice._brandWrapped83) {
     if (ov === "A" || ov === "B") brand = ov;
     return priceForBrandPref(cat, retailer, brand, key);
   };
+  unitPrice._brandWrapped84 = true;
   unitPrice._brandWrapped83 = true;
   unitPrice._brandWrapped82 = true;
   unitPrice._wrapped = true;
@@ -532,6 +682,9 @@ window.storeLinePrices = storeLinePrices;
 window.priceForBrandPref = priceForBrandPref;
 window.detectBrandTier = detectBrandTier;
 window.catalogBrandPrice = catalogBrandPrice;
+window.lineDisplayInfo = lineDisplayInfo;
+window.bestDisplayDeal = bestDisplayDeal;
+window.displayBrandFor = displayBrandFor;
 
 try {
   paintBrand();

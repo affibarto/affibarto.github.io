@@ -40,7 +40,8 @@ var _SNACK={
   chips:1,chip:1,crisps:1,snoep:1,koek:1,koekje:1,reep:1,frisdrank:1,sap:1,
   yoghurtdrink:1,dip:1,kruidenmix:1,pringles:1,crackers:1,cracker:1,toastjes:1,
   toastje:1,snack:1,snacks:1,borrel:1,lays:1,lay:1,doritos:1,nachos:1,croky:1,
-  kettle:1,smear:1,smeerkaas:1,fruitgom:1,haribo:1
+  kettle:1,smear:1,smeerkaas:1,fruitgom:1,haribo:1,
+  biscuit:1,chocolade:1,chocolate:1,milka:1,tablet:1,candy:1
 };
 /* Dish/sauce/ready-meal class — reject when board item is a simple ingredient.
    Prefer missing a weak match over a wrong badge. wrap/wraps ignored when board is wraps.
@@ -53,7 +54,9 @@ var _DISH={
   pan:1,wok:1,schotel:1,gerecht:1,maaltijdbox:1,poeder:1,poeders:1,
   carbonara:1,bolognese:1,bolo:1,ragout:1,teriyaki:1,madras:1,kebab:1,tikka:1,
   presto:1,ovenpasta:1,babymaaltijd:1,olvarit:1,cheese:1,mac:1,
-  piccolini:1,piccolinis:1,airfryer:1,nuggets:1,filet:1
+  piccolini:1,piccolinis:1,airfryer:1,nuggets:1,filet:1,
+  /* Sauce/meal kits & English dish tokens — never staple produce/pasta */
+  frito:1,creations:1,sensatie:1,mix:1,kruidenmix:1,good:1,tomato:1,hutspot:1,stamppot:1
 };
 /* Simple staples: dish/sauce/snack reject applies (plus Vers aisle / _FRESH). */
 var _SIMPLE={
@@ -244,6 +247,8 @@ function dealMatchKind(r,sets){
       var simple=_isSimpleEntry(entry,need);
       if(simple&&titleSnack)return false;
       if(simple&&_dishReject(titleWords,entry,need))return false;
+      /* Vers/simple staples: noun must lead the title (list + bord) — blocks peen/ui hutspot kits */
+      if(simple&&!_titleDominated(r.n,need[0]))return false;
       if(mode==="bord"&&!_titleDominated(r.n,need[0]))return false;
       return true;
     }
