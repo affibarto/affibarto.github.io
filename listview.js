@@ -440,7 +440,9 @@ setTimeout(function(){var v=document.getElementById("lijst");if(v&&v.classList.c
 function paintAddProducts(){
   var box=document.getElementById("aproducts");if(!box||!window.WeAteProducts)return;
   var inp=document.getElementById("aname");
-  var q=inp?inp.value:"";
+  var q=inp?String(inp.value||"").trim():"";
+  /* Typeahead-only: empty query → no default product list. */
+  if(!q){box.innerHTML="";return;}
   var hits=window.WeAteProducts.search(q,10);
   box.innerHTML=hits.map(function(p){
     var tier=p.brandTier==="huismerk"?"B":(p.brandTier||"");
@@ -448,9 +450,18 @@ function paintAddProducts(){
     var thumb=p.img
       ?("<img class='prodthumb' alt='' src='"+String(p.img).replace(/'/g,"")+"' loading=lazy/>")
       :("<span class='prodthumb prodph' aria-hidden=true></span>");
-    return "<button type=button class='prodchip-main' data-act=pickprod data-id='"+p.id+"' style='width:100%;padding:6px 4px'>"+
+    var act="";
+    if(typeof actieBadgeInfo==="function"){
+      var info=actieBadgeInfo(p);
+      if(info&&info.stores&&info.stores.length){
+        var storeLabel=info.stores.slice(0,2).join("/");
+        act="<button type=button class='badge actie' data-act=gotoactie data-id='"+p.id+"' title='Open Actie'>in Actie · "+storeLabel.replace(/</g,"")+"</button>";
+      }
+    }
+    return "<div class='prodchip' data-id='"+p.id+"'>"+
+      "<button type=button class='prodchip-main' data-act=pickprod data-id='"+p.id+"'>"+
       thumb+"<span class='prodchip-body'><b>"+String(p.name).replace(/</g,"")+"</b>"+
-      (meta?"<span class=meta>"+meta+"</span>":"")+"</span></button>";
+      (meta?"<span class=meta>"+meta+"</span>":"")+"</span></button>"+act+"</div>";
   }).join("")||"";
 }
 var inp=document.getElementById("aname");
@@ -465,6 +476,16 @@ document.addEventListener("click",function(e){
   if(t.id==="fab"||t.id==="addAlways"||(t.closest&&(t.closest("#fab")||t.closest("#addAlways")))){
     setTimeout(paintAddProducts,0);
   }
+  var goAct=t.closest("[data-act=gotoactie]");
+  if(goAct){
+    e.preventDefault();e.stopPropagation();
+    if(e.stopImmediatePropagation)e.stopImmediatePropagation();
+    var gid=goAct.getAttribute("data-id");
+    var gp=window.WeAteProducts&&window.WeAteProducts.get(gid);
+    var ap=document.getElementById("addp");if(ap)ap.classList.remove("on");
+    if(typeof openActieForProduct==="function")openActieForProduct(gp||gid);
+    return;
+  }
   var pick=t.closest("[data-act=pickprod]");
   if(pick){
     e.preventDefault();e.stopPropagation();
@@ -473,7 +494,8 @@ document.addEventListener("click",function(e){
     if(!p)return;
     var an=document.getElementById("aname");if(an)an.value=p.name;
     if(p.aisle){
-      S.sec=p.aisle==="Vers"||p.aisle==="Koeling"||p.aisle==="Houdbaar"?p.aisle:"Huis";
+      var aisleOk={Vers:1,Koeling:1,Houdbaar:1,Diepvries:1};
+      S.sec=aisleOk[p.aisle]?p.aisle:"Huis";
       var asec=document.getElementById("asec");
       if(asec)[].slice.call(asec.children).forEach(function(c){c.classList.toggle("on",c.dataset.s===S.sec);});
     }

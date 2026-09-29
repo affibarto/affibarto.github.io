@@ -289,9 +289,16 @@ function drawFolder(){var host=document.getElementById("folderbody");if(!host)re
     if(r._match==="list")badge=" <span class='badge match'>Op je lijst</span>";
     else if(r._match==="bord")badge=" <span class='badge bord'>Past bij je bord</span>";
     var img=r.img?"<img class=thumb alt='' referrerpolicy='no-referrer' loading='lazy' onerror=\"this.onerror=null;this.src='';this.style.background='#EDE0D0'\" src=\""+String(r.img).replace(/\"/g,"")+"\">":"<span class=thumb aria-hidden=true></span>";
-    html+="<button type=button class=listrow data-act=adddeal data-idx="+idx+" data-n='"+encodeURIComponent(r.n||"")+"' data-sid='"+(r.s||"")+"' data-now='"+(r.now||0)+"' data-pack='"+encodeURIComponent(packOf(r))+"'>"+img+"<div style=flex:1><b>"+String(r.n||"").replace(/</g,"")+badge+"</b><div class=meta>"+folderMeta(r).replace(/</g,"")+"</div></div><div class=price>"+(r.now?euroc(r.now):"")+"</div></button>";
+    var hlKey=String(r.n||"")+"|"+String(r.s||"");
+    var hl=(S._folderHighlight&&S._folderHighlight===hlKey)?" folder-hl":"";
+    html+="<button type=button class='listrow"+hl+"' data-act=adddeal data-idx="+idx+" data-n='"+encodeURIComponent(r.n||"")+"' data-sid='"+(r.s||"")+"' data-now='"+(r.now||0)+"' data-pack='"+encodeURIComponent(packOf(r))+"'>"+img+"<div style=flex:1><b>"+String(r.n||"").replace(/</g,"")+badge+"</b><div class=meta>"+folderMeta(r).replace(/</g,"")+"</div></div><div class=price>"+(r.now?euroc(r.now):"")+"</div></button>";
   });
-  host.innerHTML=html;if(typeof markFolder==="function")markFolder();}
+  host.innerHTML=html;if(typeof markFolder==="function")markFolder();
+  if(S._folderHighlight){
+    var el=host.querySelector(".folder-hl");
+    if(el&&el.scrollIntoView)el.scrollIntoView({block:"center",behavior:"smooth"});
+  }
+}
 document.addEventListener("click",function(e){var fs=e.target.closest&&e.target.closest("[data-act=fstore]");if(fs){S.folderStore=fs.getAttribute("data-id");drawFolder();}});
 if(typeof show==="function"&&!show._folderWrap){var _show=show;show=function(id){var pan=document.getElementById("storepanel");if(pan)pan.classList.remove("on");_show(id);if(id==="folder")drawFolder();};show._folderWrap=true;}
 function refreshListQuiet(){try{var v=document.getElementById("lijst");if(v&&v.classList.contains("on")&&typeof drawList==="function")drawList();}catch(e){}}
@@ -306,3 +313,58 @@ fetch("folder-index.json",{cache:"no-store"}).then(function(r){return r.json();}
   var fallback=(typeof STORES!=="undefined"?STORES:[]).map(function(s){return s.id;});
   Promise.all(fallback.map(function(s){return fetch("folder-"+s+".json",{cache:"no-store"}).then(function(r){return r.ok?r.json():{items:[]};}).catch(function(){return {items:[]};});})).then(applyFolderFiles).catch(function(){});
 });
+
+/* Product ↔ Actie: reuse strict dealMatchKind; no invented prices. */
+function dealsForProduct(productOrEntry){
+  if(!productOrEntry)return [];
+  var entry;
+  if(typeof productOrEntry==="string"){
+    var p=window.WeAteProducts&&WeAteProducts.get(productOrEntry)||(window.WeAteProducts&&WeAteProducts.findByName(productOrEntry));
+    if(!p)entry={n:productOrEntry,k:"",aisle:""};
+    else entry={n:p.name,k:p.id,aisle:p.aisle||""};
+  }else if(productOrEntry.id||productOrEntry.name){
+    entry={n:productOrEntry.name||productOrEntry.n||"",k:productOrEntry.id||productOrEntry.k||"",aisle:productOrEntry.aisle||""};
+  }else{
+    entry={n:productOrEntry.n||"",k:productOrEntry.k||"",aisle:productOrEntry.aisle||""};
+  }
+  if(!entry.n&&!entry.k)return [];
+  var sets={list:[entry],bord:[]};
+  var hits=[];
+  fullItems().forEach(function(r){
+    if(dealMatchKind(r,sets))hits.push(r);
+  });
+  return hits;
+}
+function actieBadgeInfo(productOrEntry){
+  var hits=dealsForProduct(productOrEntry);
+  if(!hits.length)return null;
+  var stores=[],seen={};
+  hits.forEach(function(r){
+    var id=r.s||"";
+    if(!id||seen[id])return;
+    seen[id]=1;
+    stores.push(storeName(id));
+  });
+  return {count:hits.length,stores:stores,hits:hits,first:hits[0]};
+}
+function openActieForProduct(productOrEntry,deal){
+  var hits=deal?[deal]:dealsForProduct(productOrEntry);
+  var focus=hits[0]||null;
+  var label="";
+  if(focus&&focus.n)label=focus.n;
+  else if(productOrEntry&&productOrEntry.name)label=productOrEntry.name;
+  else if(productOrEntry&&productOrEntry.n)label=productOrEntry.n;
+  else if(typeof productOrEntry==="string")label=productOrEntry;
+  S.folderStore="alle";
+  S.folderQ=label||"";
+  S._folderHighlight=focus?String(focus.n||"")+"|"+String(focus.s||""):"";
+  if(typeof show==="function")show("folder");
+  else{
+    var btn=document.querySelector('[data-go=folder]');
+    if(btn)btn.click();
+  }
+  setTimeout(function(){drawFolder();},0);
+}
+window.dealsForProduct=dealsForProduct;
+window.actieBadgeInfo=actieBadgeInfo;
+window.openActieForProduct=openActieForProduct;
