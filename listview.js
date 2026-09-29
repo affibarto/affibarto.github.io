@@ -52,118 +52,29 @@ function activeStoreList(){
 if(typeof activeStores==="function")return activeStores();
 return (typeof STORES!=="undefined"?STORES:[]);
 }
-function findBonusHit(k){
-if(typeof BONUS==="undefined"||!k)return null;
-var stores=activeStoreList();
-for(var i=0;i<stores.length;i++){
-var sid=stores[i].id||stores[i];
-var b=BONUS[sid]&&BONUS[sid][k];
-if(b&&(b.name||b.deal||b.now))return {sid:sid,store:storeN(sid),b:b};
-}
-return null;
-}
-function findFolderHit(k,catName,preferName){
-var items=(window.FOLDER_FULL&&window.FOLDER_FULL.items)||[];
-if(!items.length)return null;
-var stores=activeStoreList();
-var active={};stores.forEach(function(s){active[s.id||s]=1;});
-var needles=_tokens(catName||"");
-var keyTok=String(k||"").toLowerCase();
-if(keyTok&&keyTok.length>=4&&needles.indexOf(keyTok)<0)needles=needles.concat([keyTok]);
-var prefer=String(preferName||"").toLowerCase();
-var best=null,bestScore=0;
-for(var i=0;i<items.length;i++){
-var r=items[i];if(!r||!r.n)continue;
-if(Object.keys(active).length&&r.s&&!active[r.s])continue;
-var hay=(r.n+" "+(r.b||"")+" "+(r.qty||r.q||"")).toLowerCase();
-var score=0;
-if(prefer&&hay.indexOf(prefer)>=0)score+=8;
-if(keyTok&&hay.indexOf(keyTok)>=0)score+=5;
-for(var j=0;j<needles.length;j++){
-if(hay.indexOf(needles[j])>=0)score+=2;
-}
-if(catName){
-var cn=String(catName).toLowerCase();
-var base=parsePack(cn).name.toLowerCase();
-if(base.length>=5&&hay.indexOf(base)>=0)score+=4;
-}
-if(score>bestScore){bestScore=score;best=r;}
-}
-if(bestScore>=5)return best;
-return null;
-}
 function enrichIngredient(k){
+var cat=(typeof CAT!=="undefined"&&CAT[k])?CAT[k]:null;
+/* Brand-aware display: A→A-merk, B→huismerk, Mix/Goedkoopst→tier for that line.
+   Strict Actie match only (same dealMatchesEntry as scoring) — no Milka-on-uien. */
+if(typeof window.lineDisplayInfo==="function"){
+  return window.lineDisplayInfo(k,cat);
+}
 var catName=nm(k);
 var catPack=normPack(parsePack(catName).pack);
 var catTitle=parsePack(catName).name||catName;
-if(window.WeAteProducts){
-  /* Prefer exact id — krieltjes stays krieltjes (never rewrite to parent category). */
-  var pref=window.WeAteProducts.get(k)||window.WeAteProducts.findByName(catTitle);
-  if(pref){
-    catTitle=pref.name||catTitle;
-    if(pref.pack)catPack=normPack(pref.pack);
-  }
-}
-var hit=findBonusHit(k);
-var bonusName=hit&&hit.b&&hit.b.name?String(hit.b.name).trim():"";
-var folder=findFolderHit(k,catName,bonusName);
-var brand="";
-var pack=catPack;
-var store="";
-var deal="";
-var product="";
-var confident=false;
-if(hit){
-store=hit.store||"";
-deal=String(hit.b.deal||"").trim();
-if(/^(feed|folder|actie|bonus|promotie)$/i.test(deal))deal="";
-if(bonusName){product=bonusName;confident=true;}
-}
-if(folder){
-if(!brand&&folder.b)brand=String(folder.b).trim();
-if(!pack&&(folder.qty||folder.q||folder.pack))pack=normPack(folder.qty||folder.q||folder.pack);
-if(!store&&folder.s)store=storeN(folder.s);
-if(!deal&&folder.deal){
-deal=String(folder.deal).trim();
-if(/^(feed|folder|actie|bonus|promotie)$/i.test(deal))deal="";
-}
-if(!product&&folder.n&&confident===false){
-/* folder-only match: only promote title when strong */
-var fscore=0;
-var hay=(folder.n+" "+(folder.b||"")).toLowerCase();
-if(hay.indexOf(String(k).toLowerCase())>=0)fscore+=5;
-var base=parsePack(catName).name.toLowerCase();
-if(base.length>=5&&hay.indexOf(base)>=0)fscore+=4;
-if(fscore>=5){product=folder.n;confident=true;}
-}
-}
-if(!brand&&window.WeAteProducts){
-  var meta=window.WeAteProducts.preferMeta(k);
-  if(meta&&meta.brand)brand=meta.brand;
-  if(!pack&&meta&&meta.pack)pack=normPack(meta.pack);
-}
-if(!brand)brand=guessBrand(product||bonusName,"");
-if(product&&!pack){
-var pp=parsePack(product);
-if(pp.pack){pack=normPack(pp.pack);product=pp.name||product;}
-}
-var tier="";
-if(typeof window.detectBrandTier==="function"){
-tier=window.detectBrandTier({b:brand,brand:brand,n:product||bonusName||(folder&&folder.n)||""})||"";
-}else if(brand){
-/* assist not loaded yet: crude house vs A */
-var bl=String(brand).toLowerCase();
-if(/^(ah|jumbo|plus|lidl|dirk|aldi|gwoon|picnic|hoogvliet|dekamarkt|vomar|ekoplaza)\b/.test(bl))tier="B";
-else tier="A";
-}
+if(typeof productLabel==="function"&&cat)catTitle=productLabel(cat);
+var brandWant="B";
+if(typeof window.displayBrandFor==="function")brandWant=window.displayBrandFor(k,cat);
+else if(typeof effectiveBrand==="function")brandWant=effectiveBrand({k:k,cat:cat,aisle:cat&&cat.aisle});
+else if(S&&(S.brand==="A"||S.brand==="B"))brandWant=S.brand;
 return {
-title:confident&&product?product:catTitle,
-brand:brand,
-pack:pack,
-store:store,
-deal:deal,
+title:catTitle,
+brand:brandWant==="B"?"huismerk":brandWant==="A"?"A-merk":"",
+pack:catPack,
+store:"",
+deal:"",
 meal:"",
-tier:tier
+tier:brandWant==="B"?"B":brandWant==="A"?"A":""
 };
 }
 function joinMeta(parts){
@@ -243,8 +154,7 @@ var k=it.k+"@"+d;
 if(S.removed&&S.removed[k])return;
 var need=amountFor(it,scale);
 var info=enrichIngredient(it.k);
-if(typeof productLabel==="function"&&CAT[it.k])info.title=productLabel(CAT[it.k]);
-/* brandTier uit folder is info, geen override — anders blijft A/B-toggle zonder effect */
+/* title/brand already follow A/B via lineDisplayInfo — do not reset to bare CAT label */
 if(!(S.checked&&S.checked[k]))allChecked=false;
 count++;n++;
 rows+=row(k,info.title,mealMeta(info,d+" \u00b7 "+rec.t,need),need);
@@ -257,7 +167,8 @@ if(it.k&&S.omit&&S.omit[d+":"+slot.id+":"+it.k])return;
 var need=amountFor(it,scale);
 var title=it.k&&CAT[it.k]?(typeof productLabel==="function"?productLabel(CAT[it.k]):CAT[it.k].name):(it.n||"extra");
 var info=it.k?enrichIngredient(it.k):{title:title,brand:"",pack:"",store:"",deal:"",tier:""};
-info.title=title;
+if(!it.k)info.title=title;
+else if(!info.title)info.title=title;
 if(!(S.checked&&S.checked[k]))allChecked=false;
 count++;n++;
 rows+=row(k,info.title,mealMeta(info,d+" \u00b7 "+rec.t+" \u00b7 erbij",need),need);
