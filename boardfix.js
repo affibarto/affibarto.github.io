@@ -39,21 +39,20 @@ document.addEventListener("mousedown",function(e){if(e.target.closest&&e.target.
 document.addEventListener("mousemove",function(e){if(window._bdrag&&cur)move(e.clientX);},true);
 document.addEventListener("mouseup",function(){if(window._bdrag){window._bdrag=0;end();}},true);
 window.clearList=function(){
-S.extras=[];S.always=[];S.checked={};S.removed={};
-var days=(typeof DAYS!=="undefined"&&DAYS)||["Ma","Di","Wo","Do","Vr","Za","Zo"];
-S.plan=Object.fromEntries(days.map(function(d){return [d,null];}));
-S.eaten={};S.omit={};S.ingAdd={};S.apartPick={};
+/* Alleen open boodschappen: extras + checked. Bord, plan, always en restjes blijven. */
+S.extras=[];
+S.checked={};
+S.removed={};
 if(typeof save==="function")save();
 if(typeof drawList==="function")drawList();
 if(typeof drawBord==="function")drawBord();
-if(typeof drawHuis==="function")drawHuis();
-if(typeof toast==="function")toast("Lijst en bord leeg.");
+if(typeof toast==="function")toast("Lijst leeg. Bord blijft.");
 };
 document.addEventListener("click",function(e){
 if(window._bswiped){window._bswiped=0;if(e.target&&e.target.closest&&e.target.closest("#days")){e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();return;}}
 var t=e.target;if(t&&t.nodeType===3)t=t.parentNode;
 var btn=(t&&t.closest)?t.closest("#clearlist"):(t&&t.id==="clearlist"?t:null);
-if(btn){e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();if(window.confirm("Lijst én bord leegmaken? Alle avondeten van deze week gaan eraf."))window.clearList();}
+if(btn){e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();if(window.confirm("Lijst leegmaken? Open boodschappen en afgevinkte gaan eraf. Bord en weekplan blijven."))window.clearList();}
 },true);
 setTimeout(wrapDays,0);
 })();

@@ -306,6 +306,7 @@ fetch("bonus.json",{cache:"no-store"}).then(function(r){return r.json();}).then(
 function applyFolderFiles(arr){var items=[];arr.forEach(function(d){if(!d)return;(d.items||[]).forEach(function(it){if(it.qty&&!it.q)it.q=it.qty;items.push(it);});});window.FOLDER_FULL={items:items};var f=document.getElementById("folder");if(f&&f.classList.contains("on"))drawFolder();refreshListQuiet();}
 fetch("folder-index.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(idx){
   window.FOLDER_INDEX=idx||{stores:[]};
+  if(idx&&idx.week){try{BONUS_WEEK=idx.week;}catch(e){}window.BONUS_WEEK=idx.week;}
   var stores=(idx&&idx.stores)||[];
   if(!stores.length&&typeof STORES!=="undefined")stores=STORES.map(function(s){return {id:s.id,n:s.n,file:"folder-"+s.id+".json"};});
   return Promise.all(stores.map(function(s){var file=s.file||("folder-"+s.id+".json");return fetch(file,{cache:"no-store"}).then(function(r){return r.ok?r.json():{items:[]};}).catch(function(){return {items:[]};});}));

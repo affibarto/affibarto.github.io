@@ -614,6 +614,19 @@
         });
       }
     } catch (e2) {}
+    /* Gegeten→restje bewaard: optioneel als chip (niet hetzelfde als coach-lijst). */
+    try {
+      if (S.eaten && S.plan && typeof recipeBy === "function") {
+        DAYS.forEach(function (d) {
+          var eg = S.eaten[d];
+          if (!eg || eg.rest !== "rest") return;
+          var sl = S.plan[d];
+          if (!sl || !sl.id) return;
+          var rec = recipeBy(sl.id);
+          if (rec) add("Restje " + rec.t, "rest:" + sl.id, "Restje");
+        });
+      }
+    } catch (e3) {}
     return out.slice(0, 40);
   }
 
@@ -624,7 +637,7 @@
     el.className = "panel";
     el.id = "restjes";
     el.innerHTML =
-      "<div class=hd><button class='btn s w' id=restclose type=button>Sluit</button><b>Restjes-coach</b></div>" +
+      "<div class=hd><button class='btn s w' id=restclose type=button>Sluit</button><b>Wat staat er nog?</b></div>" +
       "<div class=sc id=restbody></div>";
     (document.querySelector(".phone") || document.body).appendChild(el);
     return el;
@@ -635,7 +648,7 @@
     if (!host) return;
     S._restPick = S._restPick || {};
     var cands = leftoverCandidates();
-    var html = "<p class=note>Tik wat je nog hebt. WeAte zoekt recepten die dat opmaken — zonder verzonnen korting.</p>";
+    var html = "<p class=note>Opruimen: tik wat er nog in huis of op de lijst staat. Los van <b>Gegeten → Restje</b> (maaltijd doorzetten naar een andere dag).</p>";
     if (!cands.length) {
       html += "<p class=note>Lijst en bord zijn leeg. Zet eerst iets op de lijst of het bord.</p>";
     } else {
@@ -649,7 +662,7 @@
       });
       html += "</div>";
     }
-    html += "<button class='btn g full' id=restgo type=button>Zoek met restjes</button>";
+    html += "<button class='btn g full' id=restgo type=button>Zoek recepten</button>";
     html += "<div id=resthits style=margin-top:14px></div>";
     html += "<button class='btn w full' id=restclose2 type=button style=margin-top:8px>Terug</button>";
     host.innerHTML = html;
@@ -706,8 +719,7 @@
   }
 
   function injectUiKnobs() {
-    /* Bord banner primary is already "Slim voorstellen" (weekplan.js → WeAteAI). */
-    /* Suggest panel header note + slim refresh. */
+    /* Suggest panel: slim refresh. */
     var sug = document.getElementById("suggest");
     if (sug && !document.getElementById("sugslim")) {
       var hd = sug.querySelector(".hd");
@@ -720,34 +732,37 @@
         hd.appendChild(slim);
       }
     }
-    /* Lijst: restjes entry */
-    var lijstHd = document.querySelector("#lijst .hd");
-    if (lijstHd && !document.getElementById("restentry")) {
+    /* Lijst: Opruimen onder lijstline (header was te vol). */
+    var line = document.getElementById("lijstline");
+    if (line && !document.getElementById("restentry")) {
       var rb = document.createElement("button");
       rb.type = "button";
-      rb.className = "btn s w";
+      rb.className = "chip";
       rb.id = "restentry";
-      rb.textContent = "Restjes";
-      var gear = document.getElementById("listgear");
-      if (gear && gear.parentNode) gear.parentNode.insertBefore(rb, gear);
-      else lijstHd.appendChild(rb);
+      rb.textContent = "Opruimen · wat nog in huis";
+      rb.style.margin = "0 0 8px";
+      if (line.nextSibling) line.parentNode.insertBefore(rb, line.nextSibling);
+      else line.parentNode.appendChild(rb);
+    } else if (document.getElementById("restentry")) {
+      var re = document.getElementById("restentry");
+      if (re.textContent.indexOf("Opruimen") < 0) re.textContent = "Opruimen · wat nog in huis";
     }
-    /* Bord secondary: restjes when there are meals */
+    /* Bord: opruimen-chip als weekplan-banner geen ruimte heeft (volle week). */
     var bordSc = document.querySelector("#bord .sc");
-    if (bordSc && !document.getElementById("restentrybord")) {
-      var meals2 = 0;
-      if (S.plan) DAYS.forEach(function (d) { if (S.plan[d] && S.plan[d].id) meals2++; });
-      if (meals2 > 0 && !document.getElementById("wpbanner")) {
-        var row = document.getElementById("weekline");
-        if (row && !document.getElementById("restentrybord")) {
-          var wrap = document.createElement("div");
-          wrap.className = "row";
-          wrap.style.margin = "0 0 10px";
-          wrap.id = "restentrybord";
-          wrap.innerHTML = "<button type=button class='chip' id=restentry2>Restjes-coach</button><button type=button class='chip' id=slimvoorstellen2>Slim voorstellen</button>";
-          if (row.nextSibling) bordSc.insertBefore(wrap, row.nextSibling);
-          else bordSc.appendChild(wrap);
-        }
+    var wp = document.getElementById("wpbanner");
+    if (bordSc && !document.getElementById("restentrybord") && wp && wp.querySelector("#wpprimary") && !wp.querySelector("#restentry2")) {
+      /* secondary slim already on banner when empty days — skip duplicate */
+    }
+    if (bordSc && !document.getElementById("restentrybord") && !document.getElementById("wpbanner")) {
+      var row = document.getElementById("weekline");
+      if (row) {
+        var wrap = document.createElement("div");
+        wrap.className = "row";
+        wrap.style.margin = "0 0 10px";
+        wrap.id = "restentrybord";
+        wrap.innerHTML = "<button type=button class='chip' id=restentry2>Opruimen</button><button type=button class='chip' id=slimvoorstellen2>Slim voorstellen</button>";
+        if (row.nextSibling) bordSc.insertBefore(wrap, row.nextSibling);
+        else bordSc.appendChild(wrap);
       }
     }
   }
@@ -897,7 +912,8 @@
     openRestjes: openRestjes,
     hasRemote: hasRemote,
     buildContext: buildContext,
-    localSuggestWeek: localSuggestWeek
+    localSuggestWeek: localSuggestWeek,
+    scoreRecSmart: scoreRecSmart
   };
 
   setTimeout(injectUiKnobs, 200);

@@ -88,7 +88,6 @@ el.innerHTML=STORES.map(function(r){return "<button type=button class='chip "+((
 paintStoreCompare();
 }
 function markList(){
-var slot=document.getElementById("folderlijst");if(slot){slot.innerHTML="";slot.style.display="none";}
 paintScore();
 }
 function bump(i,d){

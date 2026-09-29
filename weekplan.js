@@ -41,22 +41,32 @@ function banner(){
   var sc=document.querySelector("#bord .sc");if(!sc)return;
   var old=document.getElementById("wpbanner");if(old)old.remove();
   var meals=boardMealCount();
+  var empty=0;
+  DAYS.forEach(function(d){if(!(S.plan&&S.plan[d]&&S.plan[d].id))empty++;});
   var daysHost=document.getElementById("days");
   if(daysHost){
     if(meals===0)daysHost.classList.add("bord-secondary");
     else daysHost.classList.remove("bord-secondary");
   }
-  if(meals>0)return;
   var card=document.createElement("div");
   card.id="wpbanner";
-  card.className="primary-cta";
-  if(!filled()){
-    card.innerHTML="<b>Begin met de weekplanning</b><p class=note style=margin:6px 0 12px>Wie eet wanneer? Daarna krijg je per avond een lijst echte diners — of stel zelf samen.</p><button type=button class='btn g full' id=wpprimary>Weekplanning maken</button>";
+  if(meals===0){
+    card.className="primary-cta";
+    if(!filled()){
+      card.innerHTML="<b>Begin met de weekplanning</b><p class=note style=margin:6px 0 12px>Wie eet wanneer? Daarna krijg je per avond een lijst echte diners — of stel zelf samen.</p><button type=button class='btn g full' id=wpprimary>Weekplanning maken</button>";
+    }else{
+      card.innerHTML="<b>Slim voorstellen</b><p class=note style=margin:6px 0 12px>Planning staat. Per avond veel echte recepten (met foto) op veto’s, sportdrukte en wie thuis is — of stel zelf samen.</p><button type=button class='btn g full' id=wpprimary>Slim voorstellen</button>";
+    }
+  }else if(empty>0){
+    /* Slim blijft bereikbaar bij lege avonden */
+    card.className="row";
+    card.style.margin="0 0 10px";
+    card.innerHTML="<button type=button class='chip' id=wpprimary>Nog invullen ("+empty+")</button><button type=button class='chip' id=slimvoorstellen2>Slim voorstellen</button>";
   }else{
-    card.innerHTML="<b>Slim voorstellen</b><p class=note style=margin:6px 0 12px>Planning staat. Per avond veel echte recepten (met foto) op veto’s, sportdrukte en wie thuis is — of stel zelf samen.</p><button type=button class='btn g full' id=wpprimary>Slim voorstellen</button>";
+    return; /* week vol — geen banner */
   }
   sc.insertBefore(card,sc.firstChild);
-  if(daysHost){
+  if(daysHost&&meals===0){
     daysHost.querySelectorAll(".dayrow").forEach(function(row){
       if(row.querySelector("[data-act=gegeten]"))return;
       var meta=row.querySelector(".meta");
