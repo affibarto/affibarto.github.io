@@ -256,3 +256,16 @@ padding:4px 8px;font-size:11px;border-radius:999px
 .badge.actie{background:#C45A38;color:#fff;font-weight:700;margin-left:4px;border:0;cursor:pointer;font:inherit;font-size:11px;border-radius:8px;padding:3px 7px;flex:none}
 .prodchip .badge.actie{align-self:center}
 .listrow.folder-hl{outline:2px solid #C45A38;background:#FFF0E8}
+
+/* Bord day thumbs + custom photo compose */
+.daythumb{width:48px;height:48px;min-width:48px;border-radius:12px;object-fit:cover;background:#E4CBA8;flex:none}
+.card.kiescustom{padding:0;overflow:hidden;border-style:dashed;border-color:#C9B29A;margin-bottom:12px}
+.card.kiescustom .sugph{height:72px}
+.card.kiescustom .p{padding:12px 14px 14px}
+.custphoto{margin:0 0 12px}
+.custphoto-prev{width:100%;height:140px;object-fit:cover;border-radius:14px;background:#E4CBA8;display:block;margin-bottom:8px}
+.custphoto-empty{display:flex;align-items:center;justify-content:center;color:#9a7b5a;font-size:13px;font-weight:600}
+.custph-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:4px}
+.custph-grid button{padding:0;border:0;border-radius:12px;overflow:hidden;aspect-ratio:1;cursor:pointer;background:#E4CBA8}
+.custph-grid img{width:100%;height:100%;object-fit:cover;display:block}
+#sugcustom input[type=file]{display:none}

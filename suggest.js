@@ -459,8 +459,8 @@ function closeCustom(){
 }
 
 function openCustom(di){
+  S._customMode="suggest";
   S._customDayIdx=(di==null||di<0)?null:di;
-  /* Default day: first draft day or first needing meal */
   var day=null;
   if(S._customDayIdx!=null&&S._sugDraft&&S._sugDraft[S._customDayIdx]){
     day=S._sugDraft[S._customDayIdx].day;
@@ -469,30 +469,62 @@ function openCustom(di){
   }else{
     day=candidateDays(1)[0]||DAYS[todayIdx()];
   }
-  S._customDraft={
-    day:day,
-    t:"",
-    ing:[],
-    q:""
-  };
+  S._customDraft={day:day,t:"",ing:[],q:"",img:""};
   customPanel().classList.add("on");
   drawCustom();
 }
 
+/** From Bord / Kies: compose for a fixed avond and zet direct op het bord. */
+function openCustomForDay(day){
+  S._customMode="bord";
+  S._customDayIdx=null;
+  day=day||S.day||DAYS[todayIdx()]||DAYS[0];
+  S._customDraft={day:day,t:"",ing:[],q:"",img:""};
+  customPanel().classList.add("on");
+  drawCustom();
+}
+
+function customImgEsc(u){
+  return String(u||"").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
+}
+
 function drawCustom(){
   var host=document.getElementById("sugcustombody");if(!host)return;
-  var d=S._customDraft||{day:DAYS[0],t:"",ing:[],q:""};
-  var days=candidateDays(7);
-  if(!days.length)days=DAYS.slice();
-  if(days.indexOf(d.day)<0)d.day=days[0];
-  var html="<p class=note>Geef je diner een naam, kies producten uit de catalogus of typ vrij. Past bij wie-eet op die avond.</p>";
+  var d=S._customDraft||{day:DAYS[0],t:"",ing:[],q:"",img:""};
+  var bordMode=S._customMode==="bord";
+  var days;
+  if(bordMode){
+    days=[d.day];
+  }else{
+    days=candidateDays(7);
+    if(!days.length)days=DAYS.slice();
+    if(days.indexOf(d.day)<0)d.day=days[0];
+  }
+  var html="<p class=note>Geef je diner een naam, kies producten uit de catalogus of typ vrij. Foto mag — upload of zoek. Past bij wie-eet op die avond.</p>";
   html+="<label>Avond</label><div class=row style=margin-bottom:10px>";
   days.forEach(function(day){
-    html+="<button type=button class='chip "+(d.day===day?"on":"")+"' data-act=custday data-d="+day+">"+esc(DLAB[day]||day)+"</button>";
+    html+="<button type=button class='chip "+(d.day===day?"on":"")+"' data-act=custday data-d="+day+(bordMode?" disabled":"")+">"+esc(DLAB[day]||day)+"</button>";
   });
   html+="</div>";
   html+="<label>Naam van het diner</label>";
   html+="<input id=custname type=text placeholder=\"bijv. Pasta met worst\" value=\""+esc(d.t)+"\"/>";
+  html+="<label style=margin-top:10px>Foto <span class=meta>(optioneel)</span></label>";
+  html+="<div class=custphoto>";
+  if(d.img){
+    html+="<img class=custphoto-prev id=custphprev alt='' src=\""+customImgEsc(d.img)+"\"/>";
+  }else{
+    html+="<div class='custphoto-prev custphoto-empty' id=custphprev>Nog geen foto</div>";
+  }
+  html+="<div class=row style=gap:8px;margin-bottom:8px;flex-wrap:wrap>";
+  html+="<label class='btn s w' style=margin:0;cursor:pointer>Upload<input type=file id=custfile accept=\"image/*\" capture=environment style=display:none></label>";
+  html+="<button type=button class='btn s w' id=custphclear"+(d.img?"":" disabled")+">Weg</button>";
+  html+="</div>";
+  html+="<div class=row style=gap:8px;margin-bottom:8px>";
+  html+="<input id=custphq type=text placeholder=\"Zoek (pasta) of plak foto-URL\" value=\"\" style=flex:1>";
+  html+="<button type=button class='btn s g' id=custphsearch>Zoek</button>";
+  html+="</div>";
+  html+="<div id=custphresults></div>";
+  html+="</div>";
   html+="<label style=margin-top:10px>Producten</label>";
   html+="<div class=row style=gap:8px;margin-bottom:8px>";
   html+="<input id=custq type=text placeholder=\"Zoek of typ product\" value=\""+esc(d.q||"")+"\" style=flex:1>";
@@ -500,7 +532,11 @@ function drawCustom(){
   html+="</div>";
   html+="<div id=custchips style=margin-bottom:10px></div>";
   html+="<div id=custing style=margin-bottom:12px></div>";
-  html+="<button class='btn g full' id=custsave type=button>Zet op voorstellen</button>";
+  if(bordMode){
+    html+="<button class='btn g full' id=custsave type=button>Zet op het bord</button>";
+  }else{
+    html+="<button class='btn g full' id=custsave type=button>Zet op voorstellen</button>";
+  }
   html+="<button class='btn w full' id=sugcustomback2 type=button style=margin-top:8px>Terug</button>";
   host.innerHTML=html;
   refreshCustChips();
@@ -518,6 +554,134 @@ function drawCustom(){
       refreshCustChips();
     });
   }
+  var fileEl=document.getElementById("custfile");
+  if(fileEl){
+    fileEl.addEventListener("change",function(){
+      var f=fileEl.files&&fileEl.files[0];
+      if(!f)return;
+      compressImageFile(f,function(dataUrl){
+        if(!dataUrl){
+          if(typeof toast==="function")toast("Foto lukte niet");
+          return;
+        }
+        S._customDraft.img=dataUrl;
+        drawCustom();
+        if(typeof toast==="function")toast("Foto erbij");
+      });
+    });
+  }
+}
+
+function compressImageFile(file,cb){
+  if(!file||!file.type||file.type.indexOf("image/")!==0){cb(null);return;}
+  var reader=new FileReader();
+  reader.onerror=function(){cb(null);};
+  reader.onload=function(){
+    var img=new Image();
+    img.onerror=function(){cb(null);};
+    img.onload=function(){
+      try{
+        var maxSide=720;
+        var w=img.naturalWidth||img.width,h=img.naturalHeight||img.height;
+        var scale=Math.min(1,maxSide/Math.max(w,h));
+        var cw=Math.max(1,Math.round(w*scale)),ch=Math.max(1,Math.round(h*scale));
+        var canvas=document.createElement("canvas");
+        canvas.width=cw;canvas.height=ch;
+        var ctx=canvas.getContext("2d");
+        ctx.drawImage(img,0,0,cw,ch);
+        var q=0.72,out=canvas.toDataURL("image/jpeg",q);
+        /* Keep localStorage reasonable (~180KB). */
+        var guard=0;
+        while(out.length>180000&&q>0.4&&guard<6){
+          q-=0.08;
+          out=canvas.toDataURL("image/jpeg",q);
+          guard++;
+        }
+        if(out.length>280000){
+          /* Still huge: shrink further */
+          canvas.width=Math.round(cw*0.7);canvas.height=Math.round(ch*0.7);
+          ctx=canvas.getContext("2d");
+          ctx.drawImage(img,0,0,canvas.width,canvas.height);
+          out=canvas.toDataURL("image/jpeg",0.55);
+        }
+        cb(out);
+      }catch(err){cb(null);}
+    };
+    img.src=reader.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function setCustomPhoto(url){
+  if(!url)return;
+  S._customDraft=S._customDraft||{day:DAYS[0],t:"",ing:[],q:"",img:""};
+  S._customDraft.img=url;
+  drawCustom();
+  if(typeof toast==="function")toast("Foto gekozen");
+}
+
+function clearCustomPhoto(){
+  if(!S._customDraft)return;
+  S._customDraft.img="";
+  drawCustom();
+}
+
+function looksLikeImgUrl(s){
+  s=String(s||"").trim();
+  if(!/^https?:\/\//i.test(s))return false;
+  if(/\.(jpe?g|png|webp|gif)(\?|$)/i.test(s))return true;
+  if(/images\.unsplash\.com|images\.pexels\.com|upload\.wikimedia\.org|loremflickr\.com/i.test(s))return true;
+  return /^https?:\/\//i.test(s)&&s.length<500;
+}
+
+function searchCustomPhotos(){
+  var qEl=document.getElementById("custphq");
+  var q=((qEl&&qEl.value)||"").trim();
+  var host=document.getElementById("custphresults");
+  if(!host)return;
+  if(!q){
+    if(typeof toast==="function")toast("Typ een zoekwoord of plak een URL");
+    return;
+  }
+  if(looksLikeImgUrl(q)){
+    setCustomPhoto(q);
+    return;
+  }
+  host.innerHTML="<p class=note>Zoeken…</p>";
+  var term=q+" food dinner";
+  var api="https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrsearch="+encodeURIComponent(term)+"&gsrlimit=9&prop=imageinfo&iiprop=url|mime|size&iiurlwidth=640";
+  fetch(api).then(function(r){return r.json();}).then(function(data){
+    var pages=data&&data.query&&data.query.pages;
+    var urls=[];
+    if(pages){
+      Object.keys(pages).forEach(function(k){
+        var info=pages[k].imageinfo&&pages[k].imageinfo[0];
+        if(!info)return;
+        var mime=info.mime||"";
+        if(mime&&mime.indexOf("image/")!==0)return;
+        if(mime.indexOf("svg")>=0)return;
+        var u=info.thumburl||info.url;
+        if(u)urls.push(u);
+      });
+    }
+    /* Fallback: free Unsplash/Pexels-style picks via loremflickr (no key). */
+    if(!urls.length){
+      var slug=encodeURIComponent(q.replace(/\s+/g,","));
+      for(var i=0;i<6;i++){
+        urls.push("https://loremflickr.com/640/480/"+slug+",food?lock="+(i+1));
+      }
+    }
+    host.innerHTML="<div class=custph-grid>"+urls.slice(0,9).map(function(u){
+      return "<button type=button data-act=custphpick data-u=\""+customImgEsc(u)+"\" title=\"Kies foto\"><img alt='' src=\""+customImgEsc(u)+"\" loading=lazy/></button>";
+    }).join("")+"</div><p class=note style=margin-top:8px>Gratis stock · tik om te kiezen. Of plak een Unsplash/Pexels-URL.</p>";
+  }).catch(function(){
+    var slug=encodeURIComponent(q.replace(/\s+/g,","));
+    var urls=[];
+    for(var i=0;i<6;i++)urls.push("https://loremflickr.com/640/480/"+slug+",food?lock="+(i+11));
+    host.innerHTML="<div class=custph-grid>"+urls.map(function(u){
+      return "<button type=button data-act=custphpick data-u=\""+customImgEsc(u)+"\" title=\"Kies foto\"><img alt='' src=\""+customImgEsc(u)+"\" loading=lazy/></button>";
+    }).join("")+"</div><p class=note style=margin-top:8px>Zoekdienst traag — tip-foto’s. Of plak een Unsplash/Pexels-URL.</p>";
+  });
 }
 
 function custProductMeta(k){
@@ -651,7 +815,7 @@ function addCustCat(k,brand){
     var p=WeAteProducts.get(k);
     if(p)ensureCatFromProduct(p);
   }
-  S._customDraft=S._customDraft||{day:DAYS[0],t:"",ing:[],q:""};
+  S._customDraft=S._customDraft||{day:DAYS[0],t:"",ing:[],q:"",img:""};
   S._customDraft.ing=S._customDraft.ing||[];
   if(S._customDraft.ing.some(function(it){return it.k===k;})){
     if(typeof toast==="function")toast("Staat er al bij");
@@ -701,7 +865,7 @@ function addCustFree(){
     if(typeof toast==="function")toast("Typ een product");
     return;
   }
-  S._customDraft=S._customDraft||{day:DAYS[0],t:"",ing:[],q:""};
+  S._customDraft=S._customDraft||{day:DAYS[0],t:"",ing:[],q:"",img:""};
   S._customDraft.ing=S._customDraft.ing||[];
   var hit=null;
   /* Exact catalog match first — keeps krieltjes as krieltjes, never rewrite to parent. */
@@ -735,30 +899,17 @@ function addCustFree(){
   refreshCustIng();
 }
 
-function saveCustom(){
-  var d=S._customDraft||{};
-  var name=String(d.t||"").trim();
-  var nameEl=document.getElementById("custname");
-  if(nameEl)name=nameEl.value.trim();
-  if(!name){
-    if(typeof toast==="function")toast("Geef je diner een naam");
-    return;
-  }
-  if(!(d.ing&&d.ing.length)){
-    if(typeof toast==="function")toast("Voeg minstens één product toe");
-    return;
-  }
-  var day=d.day||candidateDays(1)[0]||DAYS[0];
+function buildCustomRecipe(name,ing,img){
   var id="custom:"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
   var rec={
     id:id,
     t:name,
     c:"Zelf",
     time:30,
-    img:"",
+    img:img||"",
     reheat:false,
     fijn:true,
-    ing:d.ing.map(function(it){
+    ing:ing.map(function(it){
       if(it.k){
         var row={k:it.k,q:it.q||1};
         var b=it.brand||(S.itemBrand&&S.itemBrand[it.k]);
@@ -775,14 +926,65 @@ function saveCustom(){
     custom:true,
     swap:{}
   };
+  return rec;
+}
+
+function customInUse(id,exceptDay){
+  if(!id||!S.plan)return false;
+  return DAYS.some(function(d){
+    if(exceptDay&&d===exceptDay)return false;
+    return S.plan[d]&&S.plan[d].id===id;
+  });
+}
+
+function purgeCustomIfUnused(id){
+  if(!id||String(id).indexOf("custom:")!==0)return false;
+  if(customInUse(id))return false;
+  if(S.customs&&S.customs[id]){
+    delete S.customs[id];
+    return true;
+  }
+  return false;
+}
+
+function saveCustom(){
+  var d=S._customDraft||{};
+  var name=String(d.t||"").trim();
+  var nameEl=document.getElementById("custname");
+  if(nameEl)name=nameEl.value.trim();
+  if(!name){
+    if(typeof toast==="function")toast("Geef je diner een naam");
+    return;
+  }
+  if(!(d.ing&&d.ing.length)){
+    if(typeof toast==="function")toast("Voeg minstens één product toe");
+    return;
+  }
+  var day=d.day||candidateDays(1)[0]||DAYS[0];
+  var rec=buildCustomRecipe(name,d.ing,d.img||"");
+  var id=rec.id;
   S.customs=S.customs||{};
   S.customs[id]=rec;
   if(typeof save==="function")save();
 
-  /* Ensure suggest draft has this day */
+  if(S._customMode==="bord"){
+    var who=whoFor(day);
+    var kids=(S.people||[]).filter(function(p){return p.role==="child"&&p.portion==="small";}).map(function(p){return p.id;});
+    S.plan[day]={id:id,who:who,fijn:rec.fijn?kids.slice():[],leftover:false};
+    if(S.eaten)delete S.eaten[day];
+    if(typeof save==="function")save();
+    closeCustom();
+    if(typeof drawBord==="function")drawBord();
+    if(typeof drawList==="function")drawList();
+    if(typeof show==="function")show("bord");
+    if(typeof toast==="function")toast(name+" staat op "+(DLAB[day]||day));
+    return;
+  }
+
+  /* Suggest mode: ensure draft has this day */
   S._sugDraft=S._sugDraft||[];
   var entry=S._sugDraft.filter(function(s){return s.day===day;})[0];
-  var opt={id:id,t:rec.t,c:rec.c,time:rec.time,img:"",taste:0,why:"zelf samengesteld",score:-50};
+  var opt={id:id,t:rec.t,c:rec.c,time:rec.time,img:rec.img||"",taste:0,why:"zelf samengesteld",score:-50};
   if(!entry){
     entry={day:day,options:[opt],pick:id,skip:false};
     S._sugDraft.push(entry);
@@ -801,11 +1003,45 @@ function saveCustom(){
   if(typeof toast==="function")toast(name+" klaar voor "+(DLAB[day]||day));
 }
 
+/** Haal custom maaltijd van deze avond; wis uit S.customs als nergens meer. */
+function deleteCustomMeal(day,opts){
+  opts=opts||{};
+  day=day||S.day;
+  var slot=S.plan&&S.plan[day];
+  var id=opts.id||(slot&&slot.id)||S.look;
+  if(!id||String(id).indexOf("custom:")!==0){
+    if(typeof toast==="function")toast("Geen zelfgemaakte maaltijd");
+    return false;
+  }
+  var rec=(S.customs&&S.customs[id])||(typeof recipeBy==="function"&&recipeBy(id));
+  var label=(rec&&rec.t)||"deze maaltijd";
+  var msg="\""+label+"\" van "+(DLAB[day]||day)+" afhalen?";
+  if(!customInUse(id,day)){
+    msg+=" Hij staat nergens anders — dan gooien we hem ook uit je opgeslagen maaltijden.";
+  }
+  if(!opts.skipConfirm&&!window.confirm(msg))return false;
+  if(slot&&slot.id===id){
+    S.plan[day]=null;
+    if(S.eaten)delete S.eaten[day];
+  }
+  var purged=purgeCustomIfUnused(id);
+  if(typeof save==="function")save();
+  if(typeof drawBord==="function")drawBord();
+  if(typeof drawList==="function")drawList();
+  if(typeof show==="function")show("bord");
+  if(typeof toast==="function")toast(purged?(label+" weg · ook uit opgeslagen"):(label+" van het bord"));
+  return true;
+}
+
 window.openSuggest=openSuggest;
 window.buildSuggestions=buildSuggestions;
 window.closeSuggest=closeSuggest;
 window.optionsForDay=optionsForDay;
 window.normalizeSuggestList=normalizeSuggestList;
+window.openCustom=openCustom;
+window.openCustomForDay=openCustomForDay;
+window.deleteCustomMeal=deleteCustomMeal;
+window.purgeCustomIfUnused=purgeCustomIfUnused;
 
 document.addEventListener("click",function(e){
   var t=e.target;if(t&&t.nodeType===3)t=t.parentNode;if(!t||!t.closest)return;
@@ -815,10 +1051,16 @@ document.addEventListener("click",function(e){
   if(hasId("sugall")){e.preventDefault();setAllPick(true);return;}
   if(hasId("sugnone")){e.preventDefault();setAllPick(false);return;}
   if(hasId("sugaccept")){e.preventDefault();acceptSelected();return;}
+  if(hasId("kiescustom")){e.preventDefault();openCustomForDay(S.day);return;}
   if(hasId("sugcustomopen")){e.preventDefault();openCustom(null);return;}
   if(hasId("sugcustomback")||hasId("sugcustomback2")){e.preventDefault();closeCustom();return;}
   if(hasId("custadd")){e.preventDefault();addCustFree();return;}
   if(hasId("custsave")){e.preventDefault();saveCustom();return;}
+  if(hasId("custphclear")){e.preventDefault();clearCustomPhoto();return;}
+  if(hasId("custphsearch")){e.preventDefault();searchCustomPhotos();return;}
+  if(hasId("rdelcustom")){e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();deleteCustomMeal(S.day,{id:S.look});return;}
+  var php=t.closest&&t.closest("[data-act=custphpick]");
+  if(php){e.preventDefault();setCustomPhoto(php.getAttribute("data-u"));return;}
   if(t.classList&&t.classList.contains("sugchkbox")){return;}
   if(t.closest&&t.closest("label.sugchk")){return;}
   var skip=t.closest&&t.closest("[data-act=sugskip]");
@@ -847,6 +1089,12 @@ document.addEventListener("click",function(e){
     refreshCustIng();
     return;
   }
+},true);
+
+document.addEventListener("keydown",function(e){
+  if(e.key!=="Enter")return;
+  var t=e.target;if(!t||!t.id)return;
+  if(t.id==="custphq"){e.preventDefault();searchCustomPhotos();return;}
 },true);
 
 document.addEventListener("change",function(e){
