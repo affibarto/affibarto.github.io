@@ -8,17 +8,57 @@
 
   var SEED = [
   {
+    "id": "bbq_aanmaakblokjes",
+    "name": "Aanmaakblokjes",
+    "brand": null,
+    "brandTier": null,
+    "pack": "1 stuk",
+    "aisle": "Huis",
+    "aliases": [
+      "aanmaakblokjes"
+    ],
+    "stores": null,
+    "img": "img/products/bbq_aanmaakblokjes.png"
+  },
+  {
     "id": "aardappel",
     "name": "Aardappelen",
     "brand": null,
+    "brandTier": "B",
     "pack": "3 kg",
     "aisle": "Vers",
     "aliases": [
       "aardappel"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": "https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=400&q=60"
+  },
+  {
+    "id": "dv_aardappelpuree",
+    "name": "Aardappelpuree diepvries",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "450 g",
+    "aisle": "Diepvries",
+    "aliases": [
+      "diepvries puree",
+      "aardappelpuree dv"
+    ],
+    "stores": null,
+    "img": "img/products/dv_aardappelpuree.png"
+  },
+  {
+    "id": "aardappelsalade",
+    "name": "Aardappelsalade",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "400 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "aardappelsalade"
+    ],
+    "stores": null,
+    "img": "img/products/aardappelsalade.png"
   },
   {
     "id": "aardbei",
@@ -49,9 +89,24 @@
     "img": null
   },
   {
+    "id": "jam_abrikoos",
+    "name": "Abrikozenjam",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "400 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "abrikozenjam",
+      "jam abrikoos"
+    ],
+    "stores": null,
+    "img": "img/products/jam_abrikoos.png"
+  },
+  {
     "id": "ham",
     "name": "Achterham",
     "brand": null,
+    "brandTier": "A",
     "pack": "150 g",
     "aisle": "Koeling",
     "aliases": [
@@ -59,7 +114,6 @@
       "beenham"
     ],
     "stores": null,
-    "brandTier": "A",
     "img": null
   },
   {
@@ -79,6 +133,7 @@
     "id": "afwasmiddel",
     "name": "Afwasmiddel",
     "brand": null,
+    "brandTier": null,
     "pack": "1 L",
     "aisle": "Huis",
     "aliases": [
@@ -86,7 +141,6 @@
       "afwasmiddel"
     ],
     "stores": null,
-    "brandTier": null,
     "img": null
   },
   {
@@ -195,9 +249,36 @@
     "img": null
   },
   {
+    "id": "appelchips",
+    "name": "Appelchips",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "50 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "appelchips"
+    ],
+    "stores": null,
+    "img": "img/products/appelchips.png"
+  },
+  {
+    "id": "appelmoes_pot",
+    "name": "Appelmoes",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "710 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "appelmoes"
+    ],
+    "stores": null,
+    "img": "img/products/appelmoes_pot.png"
+  },
+  {
     "id": "appel",
     "name": "Appels",
     "brand": null,
+    "brandTier": "B",
     "pack": "1 kg",
     "aisle": "Vers",
     "aliases": [
@@ -205,8 +286,47 @@
       "appels"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "B"
+    "img": "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=400&q=60"
+  },
+  {
+    "id": "fruitsap_appel",
+    "name": "Appelsap",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 l",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "appelsap"
+    ],
+    "stores": null,
+    "img": "img/products/fruitsap_appel.png"
+  },
+  {
+    "id": "stroop_appel",
+    "name": "Appelstroop",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "450 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "appelstroop"
+    ],
+    "stores": null,
+    "img": "img/products/stroop_appel.png"
+  },
+  {
+    "id": "artisjok",
+    "name": "Artisjokharten pot",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "390 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "artisjok",
+      "artisjokharten"
+    ],
+    "stores": null,
+    "img": "img/products/artisjok.png"
   },
   {
     "id": "asperge",
@@ -267,6 +387,7 @@
     "id": "azijn",
     "name": "Azijn",
     "brand": null,
+    "brandTier": "B",
     "pack": "1 L",
     "aisle": "Houdbaar",
     "aliases": [
@@ -274,8 +395,90 @@
       "natuurazijn"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
+  },
+  {
+    "id": "babybel",
+    "name": "Babybel kaasjes",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "6 stuks",
+    "aisle": "Koeling",
+    "aliases": [
+      "babybel",
+      "mini kaasjes"
+    ],
+    "stores": null,
+    "img": "img/products/babybel.png"
+  },
+  {
+    "id": "paksoi_baby",
+    "name": "Babypaksoi",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "200 g",
+    "aisle": "Vers",
+    "aliases": [
+      "babypaksoi",
+      "baby paksoi"
+    ],
+    "stores": null,
+    "img": "img/products/paksoi_baby.png"
+  },
+  {
+    "id": "spinazie_baby",
+    "name": "Babyspinazie",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "150 g",
+    "aisle": "Vers",
+    "aliases": [
+      "babyspinazie",
+      "baby spinazie"
+    ],
+    "stores": null,
+    "img": "img/products/spinazie_baby.png"
+  },
+  {
+    "id": "bacon",
+    "name": "Bacon",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "200 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "bacon",
+      "ontbijtspek strips"
+    ],
+    "stores": null,
+    "img": "img/products/bacon.png"
+  },
+  {
+    "id": "bagel",
+    "name": "Bagels",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "4 stuks",
+    "aisle": "Vers",
+    "aliases": [
+      "bagel",
+      "bagels"
+    ],
+    "stores": null,
+    "img": "img/products/bagel.png"
+  },
+  {
+    "id": "bakkerszout",
+    "name": "Bakkerszout",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "500 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "bakkerszout"
+    ],
+    "stores": null,
+    "img": "img/products/bakkerszout.png"
   },
   {
     "id": "bakpoeder",
@@ -291,6 +494,33 @@
     "img": null
   },
   {
+    "id": "bakpoeder_extra",
+    "name": "Bakpoeder 5-pack",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "5 stuks",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "bakpoeder pack"
+    ],
+    "stores": null,
+    "img": "img/products/bakpoeder_extra.png"
+  },
+  {
+    "id": "bakworst",
+    "name": "Bakworst",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "400 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "bakworst",
+      "verse worst"
+    ],
+    "stores": null,
+    "img": "img/products/bakworst.png"
+  },
+  {
     "id": "bami_mix",
     "name": "Bamikruiden",
     "brand": null,
@@ -304,9 +534,38 @@
     "img": null
   },
   {
+    "id": "bami_mix_pak",
+    "name": "Bamikruiden pak",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 stuk",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "bamikruiden pak",
+      "bami mix"
+    ],
+    "stores": null,
+    "img": "img/products/bami_mix_pak.png"
+  },
+  {
+    "id": "dv_bami",
+    "name": "Bamischotel diepvries",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "450 g",
+    "aisle": "Diepvries",
+    "aliases": [
+      "diepvries bami",
+      "bamischotel"
+    ],
+    "stores": null,
+    "img": "img/products/dv_bami.png"
+  },
+  {
     "id": "fruit",
     "name": "Bananen",
     "brand": null,
+    "brandTier": "B",
     "pack": "1 stuks",
     "aisle": "Vers",
     "aliases": [
@@ -316,8 +575,22 @@
       "tros bananen"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "B"
+    "img": "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=400&q=60"
+  },
+  {
+    "id": "barbecuesaus",
+    "name": "Barbecuesaus",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "300 ml",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "bbq saus",
+      "barbecuesaus",
+      "barbecue saus"
+    ],
+    "stores": null,
+    "img": "img/products/barbecuesaus.png"
   },
   {
     "id": "basilicum",
@@ -331,6 +604,20 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "basilicum_pot",
+    "name": "Basilicum potje",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "1 pot",
+    "aisle": "Vers",
+    "aliases": [
+      "basilicum pot",
+      "verse basilicum pot"
+    ],
+    "stores": null,
+    "img": "img/products/basilicum_pot.png"
   },
   {
     "id": "basmatirijst",
@@ -360,6 +647,19 @@
     "img": null
   },
   {
+    "id": "suiker_bruine",
+    "name": "Basterdsuiker bruin",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "500 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "bruine basterdsuiker"
+    ],
+    "stores": null,
+    "img": "img/products/suiker_bruine.png"
+  },
+  {
     "id": "bataat",
     "name": "Bataat",
     "brand": null,
@@ -371,6 +671,62 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "bbq_kruiden",
+    "name": "BBQ-kruiden",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "40 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "bbq kruiden",
+      "grillkruiden"
+    ],
+    "stores": null,
+    "img": "img/products/bbq_kruiden.png"
+  },
+  {
+    "id": "marinade_bbq",
+    "name": "BBQ-marinade",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "250 ml",
+    "aisle": "Koeling",
+    "aliases": [
+      "bbq marinade",
+      "marinade bbq"
+    ],
+    "stores": null,
+    "img": "img/products/marinade_bbq.png"
+  },
+  {
+    "id": "bbq_worst",
+    "name": "BBQ-worst",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "400 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "bbq worst",
+      "grillworst"
+    ],
+    "stores": null,
+    "img": "img/products/bbq_worst.png"
+  },
+  {
+    "id": "bearnaise",
+    "name": "Béarnaisesaus",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "200 ml",
+    "aisle": "Koeling",
+    "aliases": [
+      "bearnaise",
+      "béarnaise"
+    ],
+    "stores": null,
+    "img": "img/products/bearnaise.png"
   },
   {
     "id": "kaas_belegen",
@@ -438,6 +794,32 @@
     "img": null
   },
   {
+    "id": "bieslook_pot",
+    "name": "Bieslook potje",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "1 pot",
+    "aisle": "Vers",
+    "aliases": [
+      "bieslook pot"
+    ],
+    "stores": null,
+    "img": "img/products/bieslook_pot.png"
+  },
+  {
+    "id": "cornflakes_bio",
+    "name": "Biologische cornflakes",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "375 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "bio cornflakes"
+    ],
+    "stores": null,
+    "img": "img/products/cornflakes_bio.png"
+  },
+  {
     "id": "eieren_bio",
     "name": "Biologische eieren",
     "brand": null,
@@ -449,6 +831,19 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "eieren_bio_6",
+    "name": "Biologische eieren 6-pack",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "6 stuks",
+    "aisle": "Koeling",
+    "aliases": [
+      "bio eieren 6"
+    ],
+    "stores": null,
+    "img": "img/products/eieren_bio_6.png"
   },
   {
     "id": "diepvries_bitterballen",
@@ -464,6 +859,19 @@
     "img": null
   },
   {
+    "id": "dv_bitterballen",
+    "name": "Bitterballen diepvries",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "20 stuks",
+    "aisle": "Diepvries",
+    "aliases": [
+      "diepvries bitterballen"
+    ],
+    "stores": null,
+    "img": "img/products/dv_bitterballen.png"
+  },
+  {
     "id": "bladerdeeg",
     "name": "Bladerdeeg",
     "brand": null,
@@ -475,6 +883,19 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "dv_spinazie_blad",
+    "name": "Bladspinazie diepvries",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "450 g",
+    "aisle": "Diepvries",
+    "aliases": [
+      "bladspinazie diepvries"
+    ],
+    "stores": null,
+    "img": "img/products/dv_spinazie_blad.png"
   },
   {
     "id": "bladspinazie",
@@ -505,6 +926,19 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "blauwe_bes_bak",
+    "name": "Blauwe bessen bak",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "125 g",
+    "aisle": "Vers",
+    "aliases": [
+      "blauwe bessen bak"
+    ],
+    "stores": null,
+    "img": "img/products/blauwe_bes_bak.png"
   },
   {
     "id": "druif_blauw",
@@ -548,41 +982,67 @@
     "img": null
   },
   {
+    "id": "bleekselderij_stelen",
+    "name": "Bleekselderij stelen",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 bos",
+    "aisle": "Vers",
+    "aliases": [
+      "bleekselderij bos"
+    ],
+    "stores": null,
+    "img": "img/products/bleekselderij_stelen.png"
+  },
+  {
     "id": "bloem",
     "name": "Bloem",
     "brand": null,
+    "brandTier": "B",
     "pack": "1 kg",
     "aisle": "Houdbaar",
     "aliases": [
       "tarwebloem"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
   },
   {
     "id": "bloemkool",
     "name": "Bloemkool",
     "brand": null,
+    "brandTier": "B",
     "pack": "1 stuk",
     "aisle": "Vers",
     "aliases": [],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1568584711075-3d9217c3f9af?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "B"
+    "img": "https://images.unsplash.com/photo-1568584711075-3d9217c3f9af?auto=format&fit=crop&w=400&q=60"
+  },
+  {
+    "id": "boerenkool_vers_bos",
+    "name": "Boerenkool bos",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "500 g",
+    "aisle": "Vers",
+    "aliases": [
+      "boerenkool bos"
+    ],
+    "stores": null,
+    "img": "img/products/boerenkool_vers_bos.png"
   },
   {
     "id": "boerenkool",
     "name": "Boerenkool gesneden",
     "brand": null,
+    "brandTier": "B",
     "pack": "500g",
     "aisle": "Vers",
     "aliases": [
       "boerenkool"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1459411550239-aeb811961755?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "B"
+    "img": "https://images.unsplash.com/photo-1459411550239-aeb811961755?auto=format&fit=crop&w=400&q=60"
   },
   {
     "id": "bolletjes",
@@ -596,6 +1056,34 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "zoutjes_borrel",
+    "name": "Borrelnootjes",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "200 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "borrelnootjes",
+      "borrel noten"
+    ],
+    "stores": null,
+    "img": "img/products/zoutjes_borrel.png"
+  },
+  {
+    "id": "bospeen",
+    "name": "Bospeen",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 bos",
+    "aisle": "Vers",
+    "aliases": [
+      "bospeen",
+      "jonge wortelen"
+    ],
+    "stores": null,
+    "img": "img/products/bospeen.png"
   },
   {
     "id": "bosui",
@@ -614,16 +1102,43 @@
     "img": "https://images.unsplash.com/photo-1584270354949-c26b0d82b65c?auto=format&fit=crop&w=400&q=60"
   },
   {
+    "id": "dv_bladerdeeg_boter",
+    "name": "Boterbladerdeeg diepvries",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "10 platen",
+    "aisle": "Diepvries",
+    "aliases": [
+      "boterbladerdeeg"
+    ],
+    "stores": null,
+    "img": "img/products/dv_bladerdeeg_boter.png"
+  },
+  {
+    "id": "croissant_boter",
+    "name": "Botercroissants",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "4 stuks",
+    "aisle": "Vers",
+    "aliases": [
+      "botercroissant",
+      "botercroissants"
+    ],
+    "stores": null,
+    "img": "img/products/croissant_boter.png"
+  },
+  {
     "id": "boterhamworst",
     "name": "Boterhamworst",
     "brand": null,
+    "brandTier": null,
     "pack": "150 g",
     "aisle": "Koeling",
     "aliases": [
       "boterhamworst"
     ],
     "stores": null,
-    "brandTier": null,
     "img": null
   },
   {
@@ -643,6 +1158,7 @@
     "id": "braadvlees",
     "name": "Braadlappen / slavink",
     "brand": null,
+    "brandTier": "A",
     "pack": "600g",
     "aisle": "Koeling",
     "aliases": [
@@ -652,8 +1168,7 @@
       "slavinkjes"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "A"
+    "img": "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?auto=format&fit=crop&w=400&q=60"
   },
   {
     "id": "braadworst",
@@ -682,6 +1197,19 @@
     "img": null
   },
   {
+    "id": "bratwurst",
+    "name": "Bratwurst",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "400 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "bratwurst"
+    ],
+    "stores": null,
+    "img": "img/products/bratwurst.png"
+  },
+  {
     "id": "brie",
     "name": "Brie",
     "brand": null,
@@ -698,19 +1226,33 @@
     "id": "broccoli",
     "name": "Broccoli",
     "brand": null,
+    "brandTier": "B",
     "pack": "1 stuk",
     "aisle": "Vers",
     "aliases": [
       "broccoli"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "B"
+    "img": "https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?auto=format&fit=crop&w=400&q=60"
+  },
+  {
+    "id": "dv_broccoli_roosjes",
+    "name": "Broccoliroosjes diepvries",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "400 g",
+    "aisle": "Diepvries",
+    "aliases": [
+      "diepvries broccoli roosjes"
+    ],
+    "stores": null,
+    "img": "img/products/dv_broccoli_roosjes.png"
   },
   {
     "id": "brood",
     "name": "Brood",
     "brand": null,
+    "brandTier": "B",
     "pack": "1 stuks",
     "aisle": "Houdbaar",
     "aliases": [
@@ -718,8 +1260,7 @@
       "sneetjes brood"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "B"
+    "img": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=400&q=60"
   },
   {
     "id": "brood_bruin",
@@ -736,6 +1277,19 @@
     "img": null
   },
   {
+    "id": "bolletjes_bruin",
+    "name": "Bruine bolletjes",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "6 stuks",
+    "aisle": "Vers",
+    "aliases": [
+      "bruine bolletjes"
+    ],
+    "stores": null,
+    "img": "img/products/bolletjes_bruin.png"
+  },
+  {
     "id": "bruine_bonen",
     "name": "Bruine bonen",
     "brand": null,
@@ -747,6 +1301,19 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "bonen_bruine_blik",
+    "name": "Bruine bonen blik",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "400 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "bruine bonen blik"
+    ],
+    "stores": null,
+    "img": "img/products/bonen_bruine_blik.png"
   },
   {
     "id": "bulgur",
@@ -775,6 +1342,34 @@
     "img": null
   },
   {
+    "id": "caesar_dressing",
+    "name": "Caesar dressing",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "250 ml",
+    "aisle": "Koeling",
+    "aliases": [
+      "caesar dressing",
+      "caesar"
+    ],
+    "stores": null,
+    "img": "img/products/caesar_dressing.png"
+  },
+  {
+    "id": "calamari",
+    "name": "Calamariringen",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "400 g",
+    "aisle": "Diepvries",
+    "aliases": [
+      "calamari",
+      "inktvisringen"
+    ],
+    "stores": null,
+    "img": "img/products/calamari.png"
+  },
+  {
     "id": "camembert",
     "name": "Camembert",
     "brand": null,
@@ -788,6 +1383,33 @@
     "img": null
   },
   {
+    "id": "meloen_cantaloupe",
+    "name": "Cantaloupemeloen",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 stuk",
+    "aisle": "Vers",
+    "aliases": [
+      "cantaloupe",
+      "netmeloen"
+    ],
+    "stores": null,
+    "img": "img/products/meloen_cantaloupe.png"
+  },
+  {
+    "id": "carpaccio",
+    "name": "Carpaccio",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "100 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "carpaccio"
+    ],
+    "stores": null,
+    "img": "img/products/carpaccio.png"
+  },
+  {
     "id": "cashewnoten",
     "name": "Cashewnoten",
     "brand": null,
@@ -799,6 +1421,20 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "cayennepeper",
+    "name": "Cayennepeper",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "40 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "cayenne",
+      "cayennepeper"
+    ],
+    "stores": null,
+    "img": "img/products/cayennepeper.png"
   },
   {
     "id": "cervelaat",
@@ -817,14 +1453,28 @@
     "id": "champignon",
     "name": "Champignons",
     "brand": null,
+    "brandTier": "B",
     "pack": "250g",
     "aisle": "Vers",
     "aliases": [
       "champignon"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1504545102780-26774c1bb073?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "B"
+    "img": "https://images.unsplash.com/photo-1504545102780-26774c1bb073?auto=format&fit=crop&w=400&q=60"
+  },
+  {
+    "id": "cheddar",
+    "name": "Cheddar geraspt",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "200 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "cheddar",
+      "cheddar geraspt"
+    ],
+    "stores": null,
+    "img": "img/products/cheddar.png"
   },
   {
     "id": "cherry_tomaat",
@@ -867,6 +1517,20 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "chilisaus",
+    "name": "Chilisaus",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "300 ml",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "chilisaus",
+      "chili saus"
+    ],
+    "stores": null,
+    "img": "img/products/chilisaus.png"
   },
   {
     "id": "chili_vlokken",
@@ -924,6 +1588,7 @@
     "id": "chips",
     "name": "Chips",
     "brand": null,
+    "brandTier": "B",
     "pack": "200 g",
     "aisle": "Houdbaar",
     "aliases": [
@@ -931,7 +1596,6 @@
       "aardappelchips"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
   },
   {
@@ -975,6 +1639,19 @@
     "img": null
   },
   {
+    "id": "rijstwafel_choco",
+    "name": "Choco rijstwafels",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "100 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "choco rijstwafels"
+    ],
+    "stores": null,
+    "img": "img/products/rijstwafel_choco.png"
+  },
+  {
     "id": "chocolademelk",
     "name": "Chocolademelk",
     "brand": null,
@@ -986,6 +1663,19 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "chocolademelk_pak",
+    "name": "Chocolademelk pakjes",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "6 stuks",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "chocolademelk pakjes"
+    ],
+    "stores": null,
+    "img": "img/products/chocolademelk_pak.png"
   },
   {
     "id": "vla_chocolade",
@@ -1001,6 +1691,19 @@
     "img": null
   },
   {
+    "id": "ciabatta",
+    "name": "Ciabatta",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "1 stuk",
+    "aisle": "Vers",
+    "aliases": [
+      "ciabatta"
+    ],
+    "stores": null,
+    "img": "img/products/ciabatta.png"
+  },
+  {
     "id": "citroen",
     "name": "Citroenen",
     "brand": null,
@@ -1014,17 +1717,71 @@
     "img": null
   },
   {
+    "id": "citroen_net",
+    "name": "Citroenen net",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "4 stuks",
+    "aisle": "Vers",
+    "aliases": [
+      "citroenen net"
+    ],
+    "stores": null,
+    "img": "img/products/citroen_net.png"
+  },
+  {
+    "id": "cocktailsaus",
+    "name": "Cocktailsaus",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "250 ml",
+    "aisle": "Koeling",
+    "aliases": [
+      "cocktailsaus"
+    ],
+    "stores": null,
+    "img": "img/products/cocktailsaus.png"
+  },
+  {
+    "id": "worstjes_cocktail",
+    "name": "Cocktailworstjes",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "250 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "cocktailworstjes",
+      "cocktail worstjes"
+    ],
+    "stores": null,
+    "img": "img/products/worstjes_cocktail.png"
+  },
+  {
     "id": "cola",
     "name": "Cola",
     "brand": null,
+    "brandTier": "B",
     "pack": "1,5L",
     "aisle": "Houdbaar",
     "aliases": [
       "cola"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
+  },
+  {
+    "id": "peer_conference",
+    "name": "Conference peren",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 kg",
+    "aisle": "Vers",
+    "aliases": [
+      "conference",
+      "conference peren"
+    ],
+    "stores": null,
+    "img": "img/products/peer_conference.png"
   },
   {
     "id": "cornflakes",
@@ -1043,14 +1800,14 @@
     "id": "courgette",
     "name": "Courgette",
     "brand": null,
+    "brandTier": "B",
     "pack": "1 stuk",
     "aisle": "Vers",
     "aliases": [
       "courgette"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1592419044706-39796d40f98c?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "B"
+    "img": "https://images.unsplash.com/photo-1592419044706-39796d40f98c?auto=format&fit=crop&w=400&q=60"
   },
   {
     "id": "couscous",
@@ -1080,9 +1837,24 @@
     "img": null
   },
   {
+    "id": "cranberrycompote",
+    "name": "Cranberrycompote",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "200 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "cranberrycompote",
+      "cranberry"
+    ],
+    "stores": null,
+    "img": "img/products/cranberrycompote.png"
+  },
+  {
     "id": "room",
     "name": "Crème fraîche",
     "brand": null,
+    "brandTier": "A",
     "pack": "125g",
     "aisle": "Koeling",
     "aliases": [
@@ -1090,8 +1862,20 @@
       "creme fraiche"
     ],
     "stores": null,
-    "brandTier": "A",
     "img": null
+  },
+  {
+    "id": "creme_fraiche_light",
+    "name": "Crème fraîche light",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "125 ml",
+    "aisle": "Koeling",
+    "aliases": [
+      "creme fraiche light"
+    ],
+    "stores": null,
+    "img": "img/products/creme_fraiche_light.png"
   },
   {
     "id": "croissant",
@@ -1105,6 +1889,19 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "croutons",
+    "name": "Croutons",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "100 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "croutons"
+    ],
+    "stores": null,
+    "img": "img/products/croutons.png"
   },
   {
     "id": "cruesli",
@@ -1131,6 +1928,19 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "currysaus_fles",
+    "name": "Currysaus fles",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "500 ml",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "currysaus fles"
+    ],
+    "stores": null,
+    "img": "img/products/currysaus_fles.png"
   },
   {
     "id": "dadels",
@@ -1368,6 +2178,20 @@
     "img": null
   },
   {
+    "id": "mosterd_dijon",
+    "name": "Dijonmosterd",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "200 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "dijon",
+      "dijonmosterd"
+    ],
+    "stores": null,
+    "img": "img/products/mosterd_dijon.png"
+  },
+  {
     "id": "dille",
     "name": "Dille",
     "brand": null,
@@ -1408,6 +2232,19 @@
     "img": null
   },
   {
+    "id": "dv_doperwten_wortel",
+    "name": "Doperwten-wortel diepvries",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "450 g",
+    "aisle": "Diepvries",
+    "aliases": [
+      "doperwten wortel diepvries"
+    ],
+    "stores": null,
+    "img": "img/products/dv_doperwten_wortel.png"
+  },
+  {
     "id": "douchegel",
     "name": "Douchegel",
     "brand": null,
@@ -1419,6 +2256,34 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "dragon",
+    "name": "Dragon vers",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "1 bos",
+    "aisle": "Vers",
+    "aliases": [
+      "dragon",
+      "verse dragon"
+    ],
+    "stores": null,
+    "img": "img/products/dragon.png"
+  },
+  {
+    "id": "gist_droog",
+    "name": "Droge gist",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "3 zakjes",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "droge gist",
+      "instant gist"
+    ],
+    "stores": null,
+    "img": "img/products/gist_droog.png"
   },
   {
     "id": "druiven",
@@ -1435,9 +2300,38 @@
     "img": "https://images.unsplash.com/photo-1537640538966-79f369143f8f?auto=format&fit=crop&w=400&q=60"
   },
   {
+    "id": "chocoladepasta_duo",
+    "name": "Duo chocoladepasta",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "400 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "duo pasta",
+      "duo chocoladepasta"
+    ],
+    "stores": null,
+    "img": "img/products/chocoladepasta_duo.png"
+  },
+  {
+    "id": "edammer",
+    "name": "Edammer kaas",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "300 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "edammer",
+      "edam"
+    ],
+    "stores": null,
+    "img": "img/products/edammer.png"
+  },
+  {
     "id": "ei",
     "name": "Eieren",
     "brand": null,
+    "brandTier": null,
     "pack": "10 stuks",
     "aisle": "Koeling",
     "aliases": [
@@ -1446,8 +2340,20 @@
       "scharreleieren"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?auto=format&fit=crop&w=400&q=60",
-    "brandTier": null
+    "img": "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?auto=format&fit=crop&w=400&q=60"
+  },
+  {
+    "id": "noedels_ei",
+    "name": "Eiernoedels",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "250 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "eiernoedels"
+    ],
+    "stores": null,
+    "img": "img/products/noedels_ei.png"
   },
   {
     "id": "eiersalade",
@@ -1489,6 +2395,19 @@
     "img": null
   },
   {
+    "id": "appel_elstar_los",
+    "name": "Elstar appels los",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 kg",
+    "aisle": "Vers",
+    "aliases": [
+      "elstar los"
+    ],
+    "stores": null,
+    "img": "img/products/appel_elstar_los.png"
+  },
+  {
     "id": "entrecote",
     "name": "Entrecote",
     "brand": null,
@@ -1502,6 +2421,19 @@
     "img": null
   },
   {
+    "id": "fenegriek",
+    "name": "Fenegriek",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "30 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "fenegriek"
+    ],
+    "stores": null,
+    "img": "img/products/fenegriek.png"
+  },
+  {
     "id": "feta",
     "name": "Feta",
     "brand": null,
@@ -1513,6 +2445,19 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "feta_blok",
+    "name": "Feta blok",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "200 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "feta blok"
+    ],
+    "stores": null,
+    "img": "img/products/feta_blok.png"
   },
   {
     "id": "filet_americain",
@@ -1554,6 +2499,33 @@
     "img": null
   },
   {
+    "id": "focaccia",
+    "name": "Focaccia",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "1 stuk",
+    "aisle": "Vers",
+    "aliases": [
+      "focaccia"
+    ],
+    "stores": null,
+    "img": "img/products/focaccia.png"
+  },
+  {
+    "id": "forel",
+    "name": "Forelfilet",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "2 stuks",
+    "aisle": "Koeling",
+    "aliases": [
+      "forel",
+      "forelfilet"
+    ],
+    "stores": null,
+    "img": "img/products/forel.png"
+  },
+  {
     "id": "framboos",
     "name": "Frambozen",
     "brand": null,
@@ -1565,6 +2537,32 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "framboos_vers",
+    "name": "Frambozen vers",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "125 g",
+    "aisle": "Vers",
+    "aliases": [
+      "frambozen vers"
+    ],
+    "stores": null,
+    "img": "img/products/framboos_vers.png"
+  },
+  {
+    "id": "fricandeau",
+    "name": "Fricandeau",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "500 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "fricandeau"
+    ],
+    "stores": null,
+    "img": "img/products/fricandeau.png"
   },
   {
     "id": "frisdrank",
@@ -1596,9 +2594,66 @@
     "img": null
   },
   {
+    "id": "fritessaus",
+    "name": "Fritessaus",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "350 ml",
+    "aisle": "Koeling",
+    "aliases": [
+      "fritessaus",
+      "frietsaus"
+    ],
+    "stores": null,
+    "img": "img/products/fritessaus.png"
+  },
+  {
+    "id": "fruitblik_kids",
+    "name": "Fruit op siroop cupjes",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "4 stuks",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "fruitcupjes",
+      "fruit op siroop"
+    ],
+    "stores": null,
+    "img": "img/products/fruitblik_kids.png"
+  },
+  {
+    "id": "dv_fruitmix",
+    "name": "Fruitmix diepvries",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "500 g",
+    "aisle": "Diepvries",
+    "aliases": [
+      "diepvries fruit",
+      "fruitmix diepvries"
+    ],
+    "stores": null,
+    "img": "img/products/dv_fruitmix.png"
+  },
+  {
+    "id": "fruitreep",
+    "name": "Fruitrepen",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "6 stuks",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "fruitreep",
+      "fruitrepen"
+    ],
+    "stores": null,
+    "img": "img/products/fruitreep.png"
+  },
+  {
     "id": "fruitsap",
     "name": "Fruitsap",
     "brand": null,
+    "brandTier": null,
     "pack": "1L",
     "aisle": "Koeling",
     "aliases": [
@@ -1606,7 +2661,6 @@
       "fruitsap"
     ],
     "stores": null,
-    "brandTier": null,
     "img": null
   },
   {
@@ -1627,14 +2681,27 @@
     "id": "garnalen",
     "name": "Garnalen",
     "brand": null,
+    "brandTier": "A",
     "pack": "200g",
     "aisle": "Koeling",
     "aliases": [
       "garnaal"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "A"
+    "img": "https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=400&q=60"
+  },
+  {
+    "id": "gehaktstaaf",
+    "name": "Gehaktstaaf",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 stuk",
+    "aisle": "Koeling",
+    "aliases": [
+      "gehaktstaaf"
+    ],
+    "stores": null,
+    "img": "img/products/gehaktstaaf.png"
   },
   {
     "id": "geitenkaas",
@@ -1650,6 +2717,46 @@
     "img": null
   },
   {
+    "id": "rode_biet_gekookt",
+    "name": "Gekookte rode bieten",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "500 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "gekookte bieten",
+      "rode bieten gekookt"
+    ],
+    "stores": null,
+    "img": "img/products/rode_biet_gekookt.png"
+  },
+  {
+    "id": "cherry_geel",
+    "name": "Gele cherrytomaten",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "250 g",
+    "aisle": "Vers",
+    "aliases": [
+      "gele cherrytomaten"
+    ],
+    "stores": null,
+    "img": "img/products/cherry_geel.png"
+  },
+  {
+    "id": "courgette_geel",
+    "name": "Gele courgette",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "500 g",
+    "aisle": "Vers",
+    "aliases": [
+      "gele courgette"
+    ],
+    "stores": null,
+    "img": "img/products/courgette_geel.png"
+  },
+  {
     "id": "paprika_geel",
     "name": "Gele paprika",
     "brand": null,
@@ -1663,17 +2770,60 @@
     "img": null
   },
   {
+    "id": "komijn_gemalen",
+    "name": "Gemalen komijn",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "40 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "gemalen komijn",
+      "komijn gemalen"
+    ],
+    "stores": null,
+    "img": "img/products/komijn_gemalen.png"
+  },
+  {
     "id": "gember",
     "name": "Gember",
     "brand": null,
+    "brandTier": "B",
     "pack": "50 g",
     "aisle": "Vers",
     "aliases": [
       "verse gember"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
+  },
+  {
+    "id": "gehakt_gemengd",
+    "name": "Gemengd gehakt",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "500 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "gemengd gehakt",
+      "gehakt gemengd"
+    ],
+    "stores": null,
+    "img": "img/products/gehakt_gemengd.png"
+  },
+  {
+    "id": "sla_gemengd",
+    "name": "Gemengde sla",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "200 g",
+    "aisle": "Vers",
+    "aliases": [
+      "gemengde sla",
+      "sla mix",
+      "salademix"
+    ],
+    "stores": null,
+    "img": "img/products/sla_gemengd.png"
   },
   {
     "id": "visfilet_gemengd",
@@ -1692,6 +2842,7 @@
     "id": "kaas",
     "name": "Geraspte kaas",
     "brand": null,
+    "brandTier": "A",
     "pack": "200g",
     "aisle": "Koeling",
     "aliases": [
@@ -1702,8 +2853,7 @@
       "kaas_geraspt"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "A"
+    "img": "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?auto=format&fit=crop&w=400&q=60"
   },
   {
     "id": "mozzarella_geraspt",
@@ -1719,6 +2869,34 @@
     "img": null
   },
   {
+    "id": "gerookt_paprikapoeder",
+    "name": "Gerookt paprikapoeder",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "40 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "gerookt paprika",
+      "smoked paprika"
+    ],
+    "stores": null,
+    "img": "img/products/gerookt_paprikapoeder.png"
+  },
+  {
+    "id": "tofu_gerookt",
+    "name": "Gerookte tofu",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "200 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "gerookte tofu",
+      "tofu gerookt"
+    ],
+    "stores": null,
+    "img": "img/products/tofu_gerookt.png"
+  },
+  {
     "id": "gerookte_zalm",
     "name": "Gerookte zalm",
     "brand": null,
@@ -1730,6 +2908,19 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "zalm_gerookt_plak",
+    "name": "Gerookte zalm plakken",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "100 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "gerookte zalmplakken"
+    ],
+    "stores": null,
+    "img": "img/products/zalm_gerookt_plak.png"
   },
   {
     "id": "gesneden_andijvie",
@@ -1762,6 +2953,7 @@
     "id": "pastaGF",
     "name": "Glutenvrije pasta",
     "brand": null,
+    "brandTier": "B",
     "pack": "500g",
     "aisle": "Houdbaar",
     "aliases": [
@@ -1769,8 +2961,47 @@
       "pasta glutenvrij"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
+  },
+  {
+    "id": "pasta_glutenfree_penne",
+    "name": "Glutenvrije penne",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "400 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "glutenvrije penne"
+    ],
+    "stores": null,
+    "img": "img/products/pasta_glutenfree_penne.png"
+  },
+  {
+    "id": "goudse_belegen",
+    "name": "Goudse belegen",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "400 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "goudse",
+      "goudse belegen"
+    ],
+    "stores": null,
+    "img": "img/products/goudse_belegen.png"
+  },
+  {
+    "id": "aubergine_graffiti",
+    "name": "Graffiti-aubergine",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 stuk",
+    "aisle": "Vers",
+    "aliases": [
+      "graffiti aubergine"
+    ],
+    "stores": null,
+    "img": "img/products/aubergine_graffiti.png"
   },
   {
     "id": "grapefruit",
@@ -1799,6 +3030,60 @@
     "img": null
   },
   {
+    "id": "yoghurt_grieks_0",
+    "name": "Griekse yoghurt 0%",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "450 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "griekse yoghurt 0",
+      "griekse 0%"
+    ],
+    "stores": null,
+    "img": "img/products/yoghurt_grieks_0.png"
+  },
+  {
+    "id": "courgette_grill",
+    "name": "Grillcourgette",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "500 g",
+    "aisle": "Vers",
+    "aliases": [
+      "grillcourgette"
+    ],
+    "stores": null,
+    "img": "img/products/courgette_grill.png"
+  },
+  {
+    "id": "mais_grill",
+    "name": "Grillmais",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "2 stuks",
+    "aisle": "Vers",
+    "aliases": [
+      "grillmais",
+      "bbq mais"
+    ],
+    "stores": null,
+    "img": "img/products/mais_grill.png"
+  },
+  {
+    "id": "paprika_grill",
+    "name": "Grillpaprika",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "3 stuks",
+    "aisle": "Vers",
+    "aliases": [
+      "grillpaprika"
+    ],
+    "stores": null,
+    "img": "img/products/paprika_grill.png"
+  },
+  {
     "id": "groene_asperge",
     "name": "Groene asperges",
     "brand": null,
@@ -1810,6 +3095,33 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "curry_groenekerrie",
+    "name": "Groene currypasta",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "100 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "groene curry",
+      "groene currypasta"
+    ],
+    "stores": null,
+    "img": "img/products/curry_groenekerrie.png"
+  },
+  {
+    "id": "olijven_groen",
+    "name": "Groene olijven",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "240 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "groene olijven"
+    ],
+    "stores": null,
+    "img": "img/products/olijven_groen.png"
   },
   {
     "id": "paprika_groen",
@@ -1838,6 +3150,19 @@
     "img": null
   },
   {
+    "id": "bouillon_groente_pot",
+    "name": "Groentebouillon pot",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "28 stuks",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "groentebouillon pot"
+    ],
+    "stores": null,
+    "img": "img/products/bouillon_groente_pot.png"
+  },
+  {
     "id": "bouillon_groente",
     "name": "Groentebouillonblokjes",
     "brand": null,
@@ -1851,17 +3176,69 @@
     "img": null
   },
   {
+    "id": "soep_zak_groente",
+    "name": "Groentesoep zak",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 l",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "groentesoep zak"
+    ],
+    "stores": null,
+    "img": "img/products/soep_zak_groente.png"
+  },
+  {
+    "id": "mosterd_grof",
+    "name": "Grove mosterd",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "200 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "grove mosterd"
+    ],
+    "stores": null,
+    "img": "img/products/mosterd_grof.png"
+  },
+  {
+    "id": "paneermeel_grof",
+    "name": "Grove paneermeel",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "400 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "grove paneermeel"
+    ],
+    "stores": null,
+    "img": "img/products/paneermeel_grof.png"
+  },
+  {
     "id": "guacamole",
     "name": "Guacamole",
     "brand": null,
+    "brandTier": null,
     "pack": "200 g",
     "aisle": "Koeling",
     "aliases": [
       "guacamole"
     ],
     "stores": null,
-    "brandTier": null,
     "img": null
+  },
+  {
+    "id": "guacamole_bak",
+    "name": "Guacamole bak",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "150 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "guacamole bak"
+    ],
+    "stores": null,
+    "img": "img/products/guacamole_bak.png"
   },
   {
     "id": "gyros",
@@ -1880,13 +3257,13 @@
     "id": "hagelslag",
     "name": "Hagelslag",
     "brand": null,
+    "brandTier": "B",
     "pack": "400 g",
     "aisle": "Houdbaar",
     "aliases": [
       "chocoladehagel"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
   },
   {
@@ -1902,6 +3279,20 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "melk_halfvol_houdbaar",
+    "name": "Halfvolle houdbare melk",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 l",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "houdbare melk",
+      "uht melk"
+    ],
+    "stores": null,
+    "img": "img/products/melk_halfvol_houdbaar.png"
   },
   {
     "id": "kwark_halfvol",
@@ -1920,6 +3311,7 @@
     "id": "melk",
     "name": "Halfvolle melk",
     "brand": null,
+    "brandTier": "A",
     "pack": "1,5L",
     "aisle": "Koeling",
     "aliases": [
@@ -1929,8 +3321,33 @@
       "melk_halfvol"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "A"
+    "img": "https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=400&q=60"
+  },
+  {
+    "id": "halloumi",
+    "name": "Halloumi",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "225 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "halloumi"
+    ],
+    "stores": null,
+    "img": "img/products/halloumi.png"
+  },
+  {
+    "id": "halvarine",
+    "name": "Halvarine",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "500 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "halvarine"
+    ],
+    "stores": null,
+    "img": "img/products/halvarine.png"
   },
   {
     "id": "hamburgerbroodje",
@@ -1945,6 +3362,21 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "hamburgers_vers",
+    "name": "Hamburgers vers",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "4 stuks",
+    "aisle": "Koeling",
+    "aliases": [
+      "hamburgers",
+      "verse hamburgers",
+      "burger"
+    ],
+    "stores": null,
+    "img": "img/products/hamburgers_vers.png"
   },
   {
     "id": "handzeep",
@@ -1971,6 +3403,20 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "haverdrink_barista",
+    "name": "Haverdrink barista",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "1 l",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "haver barista",
+      "barista haver"
+    ],
+    "stores": null,
+    "img": "img/products/haverdrink_barista.png"
   },
   {
     "id": "havermelk",
@@ -2000,6 +3446,19 @@
     "img": null
   },
   {
+    "id": "havermout_groot",
+    "name": "Havermout groot",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "500 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "havermout groot"
+    ],
+    "stores": null,
+    "img": "img/products/havermout_groot.png"
+  },
+  {
     "id": "brood_heel",
     "name": "Heel brood",
     "brand": null,
@@ -2011,6 +3470,154 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "heilbot",
+    "name": "Heilbotfilet",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "300 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "heilbot",
+      "heilbotfilet"
+    ],
+    "stores": null,
+    "img": "img/products/heilbot.png"
+  },
+  {
+    "id": "andijvie_heel",
+    "name": "Hele andijvie",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 stuk",
+    "aisle": "Vers",
+    "aliases": [
+      "hele andijvie"
+    ],
+    "stores": null,
+    "img": "img/products/andijvie_heel.png"
+  },
+  {
+    "id": "bloemkool_heel",
+    "name": "Hele bloemkool",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 stuk",
+    "aisle": "Vers",
+    "aliases": [
+      "hele bloemkool"
+    ],
+    "stores": null,
+    "img": "img/products/bloemkool_heel.png"
+  },
+  {
+    "id": "broccoli_heel",
+    "name": "Hele broccoli",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 stuk",
+    "aisle": "Vers",
+    "aliases": [
+      "hele broccoli"
+    ],
+    "stores": null,
+    "img": "img/products/broccoli_heel.png"
+  },
+  {
+    "id": "rode_kool_heel",
+    "name": "Hele rode kool",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 stuk",
+    "aisle": "Vers",
+    "aliases": [
+      "hele rode kool"
+    ],
+    "stores": null,
+    "img": "img/products/rode_kool_heel.png"
+  },
+  {
+    "id": "spitskool_heel",
+    "name": "Hele spitskool",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 stuk",
+    "aisle": "Vers",
+    "aliases": [
+      "hele spitskool"
+    ],
+    "stores": null,
+    "img": "img/products/spitskool_heel.png"
+  },
+  {
+    "id": "witte_kool_heel",
+    "name": "Hele witte kool",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 stuk",
+    "aisle": "Vers",
+    "aliases": [
+      "hele witte kool"
+    ],
+    "stores": null,
+    "img": "img/products/witte_kool_heel.png"
+  },
+  {
+    "id": "hoisinsaus",
+    "name": "Hoisinsaus",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "250 ml",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "hoisin",
+      "hoisinsaus"
+    ],
+    "stores": null,
+    "img": "img/products/hoisinsaus.png"
+  },
+  {
+    "id": "pompoen_hokkaido",
+    "name": "Hokkaido-pompoen",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 stuk",
+    "aisle": "Vers",
+    "aliases": [
+      "hokkaido",
+      "hokkaido pompoen"
+    ],
+    "stores": null,
+    "img": "img/products/pompoen_hokkaido.png"
+  },
+  {
+    "id": "hollandaise",
+    "name": "Hollandaisesaus",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "200 ml",
+    "aisle": "Koeling",
+    "aliases": [
+      "hollandaise",
+      "hollandaisesaus"
+    ],
+    "stores": null,
+    "img": "img/products/hollandaise.png"
+  },
+  {
+    "id": "garnalen_hollandse",
+    "name": "Hollandse garnalen",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "100 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "hollandse garnalen",
+      "garnaaltjes"
+    ],
+    "stores": null,
+    "img": "img/products/garnalen_hollandse.png"
   },
   {
     "id": "honing",
@@ -2052,9 +3659,37 @@
     "img": null
   },
   {
+    "id": "room_kook_houdbaar",
+    "name": "Houdbare kookroom",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "200 ml",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "houdbare kookroom"
+    ],
+    "stores": null,
+    "img": "img/products/room_kook_houdbaar.png"
+  },
+  {
+    "id": "houtskoolbriketten",
+    "name": "Houtskoolbriketten",
+    "brand": null,
+    "brandTier": null,
+    "pack": "3 kg",
+    "aisle": "Huis",
+    "aliases": [
+      "houtskool",
+      "briketten"
+    ],
+    "stores": null,
+    "img": "img/products/houtskoolbriketten.png"
+  },
+  {
     "id": "hummus",
     "name": "Hummus",
     "brand": null,
+    "brandTier": null,
     "pack": "200 g",
     "aisle": "Koeling",
     "aliases": [
@@ -2062,8 +3697,48 @@
       "humus"
     ],
     "stores": null,
-    "brandTier": null,
     "img": null
+  },
+  {
+    "id": "hummus_naturel",
+    "name": "Hummus naturel",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "200 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "hummus naturel"
+    ],
+    "stores": null,
+    "img": "img/products/hummus_naturel.png"
+  },
+  {
+    "id": "hummus_spicy",
+    "name": "Hummus spicy",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "200 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "hummus spicy"
+    ],
+    "stores": null,
+    "img": "img/products/hummus_spicy.png"
+  },
+  {
+    "id": "huttenkase",
+    "name": "Hüttenkäse",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "200 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "hüttenkäse",
+      "huttenkase",
+      "cottage cheese"
+    ],
+    "stores": null,
+    "img": "img/products/huttenkase.png"
   },
   {
     "id": "ijs_thee",
@@ -2083,6 +3758,7 @@
     "id": "sla",
     "name": "IJsbergsla",
     "brand": null,
+    "brandTier": "B",
     "pack": "200 g",
     "aisle": "Vers",
     "aliases": [
@@ -2092,8 +3768,7 @@
       "sla_ijsberg"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "B"
+    "img": "https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?auto=format&fit=crop&w=400&q=60"
   },
   {
     "id": "ijsbergsla",
@@ -2107,6 +3782,48 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "dv_ijs_magnum",
+    "name": "IJsjes multipack",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "6 stuks",
+    "aisle": "Diepvries",
+    "aliases": [
+      "ijsjes",
+      "magnum multipack"
+    ],
+    "stores": null,
+    "img": "img/products/dv_ijs_magnum.png"
+  },
+  {
+    "id": "italiaanse_kruiden",
+    "name": "Italiaanse kruiden",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "15 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "italiaanse kruiden",
+      "italian herbs"
+    ],
+    "stores": null,
+    "img": "img/products/italiaanse_kruiden.png"
+  },
+  {
+    "id": "rijst_jasmine",
+    "name": "Jasmine rijst",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 kg",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "jasmine rijst",
+      "jasmin rijst"
+    ],
+    "stores": null,
+    "img": "img/products/rijst_jasmine.png"
   },
   {
     "id": "appel_jonagold",
@@ -2135,6 +3852,19 @@
     "img": null
   },
   {
+    "id": "kaas_jong_belegen_blok",
+    "name": "Jong belegen kaasblok",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "450 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "jong belegen blok"
+    ],
+    "stores": null,
+    "img": "img/products/kaas_jong_belegen_blok.png"
+  },
+  {
     "id": "kaas_jong",
     "name": "Jonge kaas",
     "brand": null,
@@ -2148,9 +3878,24 @@
     "img": null
   },
   {
+    "id": "joppiesaus",
+    "name": "Joppiesaus",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "250 ml",
+    "aisle": "Koeling",
+    "aliases": [
+      "joppiesaus",
+      "joppie"
+    ],
+    "stores": null,
+    "img": "img/products/joppiesaus.png"
+  },
+  {
     "id": "jus",
     "name": "Jus",
     "brand": null,
+    "brandTier": "B",
     "pack": "1 stuks",
     "aisle": "Houdbaar",
     "aliases": [
@@ -2159,13 +3904,13 @@
       "bakje jus"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
   },
   {
     "id": "boterhamkaas",
     "name": "Kaas (beleg)",
     "brand": null,
+    "brandTier": null,
     "pack": "300 g",
     "aisle": "Koeling",
     "aliases": [
@@ -2174,8 +3919,21 @@
       "belegen kaas"
     ],
     "stores": null,
-    "brandTier": null,
     "img": null
+  },
+  {
+    "id": "kaasblokjes_snack",
+    "name": "Kaasblokjes snack",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "150 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "kaasblokjes",
+      "snackkaas"
+    ],
+    "stores": null,
+    "img": "img/products/kaasblokjes_snack.png"
   },
   {
     "id": "kaas_plakken",
@@ -2206,6 +3964,20 @@
     "img": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=400&q=60"
   },
   {
+    "id": "kalfsschnitzel",
+    "name": "Kalfsschnitzel",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "2 stuks",
+    "aisle": "Koeling",
+    "aliases": [
+      "kalfsschnitzel",
+      "schnitzel"
+    ],
+    "stores": null,
+    "img": "img/products/kalfsschnitzel.png"
+  },
+  {
     "id": "kalkoenfilet",
     "name": "Kalkoenfilet",
     "brand": null,
@@ -2230,6 +4002,33 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "dv_maaltijd_kant",
+    "name": "Kant-en-klaar maaltijd diepvries",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 stuk",
+    "aisle": "Diepvries",
+    "aliases": [
+      "diepvries maaltijd kant"
+    ],
+    "stores": null,
+    "img": "img/products/dv_maaltijd_kant.png"
+  },
+  {
+    "id": "pannenkoeken_kant",
+    "name": "Kant-en-klare pannenkoeken",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "8 stuks",
+    "aisle": "Koeling",
+    "aliases": [
+      "kant-en-klare pannenkoeken",
+      "pannenkoeken pak"
+    ],
+    "stores": null,
+    "img": "img/products/pannenkoeken_kant.png"
   },
   {
     "id": "capers",
@@ -2258,6 +4057,19 @@
     "img": null
   },
   {
+    "id": "kardemom",
+    "name": "Kardemom",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "25 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "kardemom"
+    ],
+    "stores": null,
+    "img": "img/products/kardemom.png"
+  },
+  {
     "id": "karnemelk",
     "name": "Karnemelk",
     "brand": null,
@@ -2284,9 +4096,23 @@
     "img": null
   },
   {
+    "id": "kefir",
+    "name": "Kefir",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "1 l",
+    "aisle": "Koeling",
+    "aliases": [
+      "kefir"
+    ],
+    "stores": null,
+    "img": "img/products/kefir.png"
+  },
+  {
     "id": "kerrie",
     "name": "Kerriepasta",
     "brand": null,
+    "brandTier": "B",
     "pack": "1 stuks",
     "aisle": "Houdbaar",
     "aliases": [
@@ -2295,7 +4121,6 @@
       "milde kerrie"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
   },
   {
@@ -2325,9 +4150,23 @@
     "img": null
   },
   {
+    "id": "jam_kers",
+    "name": "Kersenjam",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "400 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "kersenjam"
+    ],
+    "stores": null,
+    "img": "img/products/jam_kers.png"
+  },
+  {
     "id": "tomaatKers",
     "name": "Kerstomaat",
     "brand": null,
+    "brandTier": "B",
     "pack": "250g",
     "aisle": "Vers",
     "aliases": [
@@ -2336,8 +4175,20 @@
       "cherrytomaat"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1592924357228-91b4eada47f4?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "B"
+    "img": "https://images.unsplash.com/photo-1592924357228-91b4eada47f4?auto=format&fit=crop&w=400&q=60"
+  },
+  {
+    "id": "kervel",
+    "name": "Kervel",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "1 bos",
+    "aisle": "Vers",
+    "aliases": [
+      "kervel"
+    ],
+    "stores": null,
+    "img": "img/products/kervel.png"
   },
   {
     "id": "ketchup",
@@ -2353,22 +4204,50 @@
     "img": null
   },
   {
+    "id": "ketchup_light",
+    "name": "Ketchup light",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "500 ml",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "ketchup light"
+    ],
+    "stores": null,
+    "img": "img/products/ketchup_light.png"
+  },
+  {
+    "id": "ketjap_asin",
+    "name": "Ketjap asin",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "250 ml",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "ketjap asin",
+      "zoute ketjap"
+    ],
+    "stores": null,
+    "img": "img/products/ketjap_asin.png"
+  },
+  {
     "id": "ketjap",
     "name": "Ketjap manis",
     "brand": null,
+    "brandTier": "B",
     "pack": "250ml",
     "aisle": "Houdbaar",
     "aliases": [
       "ketjap"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
   },
   {
     "id": "keukenPapier",
     "name": "Keukenpapier",
     "brand": null,
+    "brandTier": null,
     "pack": "2-pack",
     "aisle": "Huis",
     "aliases": [
@@ -2376,8 +4255,20 @@
       "keukenpapier"
     ],
     "stores": null,
-    "brandTier": null,
     "img": null
+  },
+  {
+    "id": "kibbeling",
+    "name": "Kibbeling",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "400 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "kibbeling"
+    ],
+    "stores": null,
+    "img": "img/products/kibbeling.png"
   },
   {
     "id": "kidneybonen",
@@ -2394,6 +4285,20 @@
     "img": null
   },
   {
+    "id": "yoghurt_drink_kids",
+    "name": "Kids yoghurtdrink",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "6 stuks",
+    "aisle": "Koeling",
+    "aliases": [
+      "kids yoghurtdrink",
+      "yoghurtdrink kids"
+    ],
+    "stores": null,
+    "img": "img/products/yoghurt_drink_kids.png"
+  },
+  {
     "id": "kikkererwten",
     "name": "Kikkererwten",
     "brand": null,
@@ -2405,6 +4310,59 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "kikkererwten_blik",
+    "name": "Kikkererwten blik",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "400 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "kikkererwten blik"
+    ],
+    "stores": null,
+    "img": "img/products/kikkererwten_blik.png"
+  },
+  {
+    "id": "koekjes_digestive_kids",
+    "name": "Kinderkoekjes",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "200 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "kinderkoekjes"
+    ],
+    "stores": null,
+    "img": "img/products/koekjes_digestive_kids.png"
+  },
+  {
+    "id": "boterhamworst_kip",
+    "name": "Kipboterhamworst",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "150 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "kipboterhamworst"
+    ],
+    "stores": null,
+    "img": "img/products/boterhamworst_kip.png"
+  },
+  {
+    "id": "kipdijen",
+    "name": "Kipdijen",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 kg",
+    "aisle": "Koeling",
+    "aliases": [
+      "kipdijen",
+      "kippendijen"
+    ],
+    "stores": null,
+    "img": "img/products/kipdijen.png"
   },
   {
     "id": "kipdijfilet",
@@ -2422,9 +4380,38 @@
     "img": "https://images.unsplash.com/photo-1587593810167-a84920ea0781?auto=format&fit=crop&w=400&q=60"
   },
   {
+    "id": "kipdijfilet_gemarineerd",
+    "name": "Kipdijfilet gemarineerd",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "500 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "gemarineerde kipdijfilet",
+      "kipdijfilet marinade"
+    ],
+    "stores": null,
+    "img": "img/products/kipdijfilet_gemarineerd.png"
+  },
+  {
+    "id": "drumsticks",
+    "name": "Kipdrumsticks",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 kg",
+    "aisle": "Koeling",
+    "aliases": [
+      "drumsticks",
+      "kip drumsticks"
+    ],
+    "stores": null,
+    "img": "img/products/drumsticks.png"
+  },
+  {
     "id": "kip",
     "name": "Kipfilet",
     "brand": null,
+    "brandTier": "A",
     "pack": "600 g",
     "aisle": "Koeling",
     "aliases": [
@@ -2433,8 +4420,7 @@
       "kipfilet reepjes"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1604503468506-a8da13d82791?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "A"
+    "img": "https://images.unsplash.com/photo-1604503468506-a8da13d82791?auto=format&fit=crop&w=400&q=60"
   },
   {
     "id": "kipfilet_koud",
@@ -2450,6 +4436,20 @@
     "img": null
   },
   {
+    "id": "kipfilet_plakken",
+    "name": "Kipfilet plakken",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "150 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "kipfilet plakken",
+      "kipfilet beleg"
+    ],
+    "stores": null,
+    "img": "img/products/kipfilet_plakken.png"
+  },
+  {
     "id": "kipgehakt",
     "name": "Kipgehakt",
     "brand": null,
@@ -2461,6 +4461,19 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "kipkruiden",
+    "name": "Kipkruiden",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "40 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "kipkruiden"
+    ],
+    "stores": null,
+    "img": "img/products/kipkruiden.png"
   },
   {
     "id": "diepvries_kipnuggets",
@@ -2475,6 +4488,32 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "dv_kipnuggets",
+    "name": "Kipnuggets diepvries",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "400 g",
+    "aisle": "Diepvries",
+    "aliases": [
+      "diepvries kipnuggets"
+    ],
+    "stores": null,
+    "img": "img/products/dv_kipnuggets.png"
+  },
+  {
+    "id": "bouillon_kip_pot",
+    "name": "Kippenbouillon pot",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "28 stuks",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "kippenbouillon pot"
+    ],
+    "stores": null,
+    "img": "img/products/bouillon_kip_pot.png"
   },
   {
     "id": "bouillon_kip",
@@ -2506,6 +4545,19 @@
     "img": "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?auto=format&fit=crop&w=400&q=60"
   },
   {
+    "id": "soep_blik_kip",
+    "name": "Kippensoep blik",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "400 ml",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "kippensoep blik"
+    ],
+    "stores": null,
+    "img": "img/products/soep_blik_kip.png"
+  },
+  {
     "id": "kippenvleugels",
     "name": "Kippenvleugels",
     "brand": null,
@@ -2518,6 +4570,20 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "kipreepjes",
+    "name": "Kipreepjes",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "400 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "kipreepjes",
+      "kipreep"
+    ],
+    "stores": null,
+    "img": "img/products/kipreepjes.png"
   },
   {
     "id": "kip_saté",
@@ -2534,6 +4600,46 @@
     "img": null
   },
   {
+    "id": "marinade_kipsate",
+    "name": "Kipsaté-marinade",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "200 ml",
+    "aisle": "Koeling",
+    "aliases": [
+      "kipsaté marinade",
+      "sate marinade"
+    ],
+    "stores": null,
+    "img": "img/products/marinade_kipsate.png"
+  },
+  {
+    "id": "kipschnitzel",
+    "name": "Kipschnitzel",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "2 stuks",
+    "aisle": "Koeling",
+    "aliases": [
+      "kipschnitzel"
+    ],
+    "stores": null,
+    "img": "img/products/kipschnitzel.png"
+  },
+  {
+    "id": "kipworst",
+    "name": "Kipworst",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "250 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "kipworst"
+    ],
+    "stores": null,
+    "img": "img/products/kipworst.png"
+  },
+  {
     "id": "kiwi",
     "name": "Kiwi",
     "brand": null,
@@ -2548,9 +4654,39 @@
     "img": "https://images.unsplash.com/photo-1585059899903-4d20e6c6c5d2?auto=format&fit=crop&w=400&q=60"
   },
   {
+    "id": "knackebrod",
+    "name": "Knäckebröd",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "250 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "knäckebröd",
+      "knackebrod",
+      "knäcke"
+    ],
+    "stores": null,
+    "img": "img/products/knackebrod.png"
+  },
+  {
+    "id": "knijpfruit",
+    "name": "Knijpfruit",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "4 stuks",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "knijpfruit",
+      "fruitkuipje knijp"
+    ],
+    "stores": null,
+    "img": "img/products/knijpfruit.png"
+  },
+  {
     "id": "knoflook",
     "name": "Knoflook",
     "brand": null,
+    "brandTier": "B",
     "pack": "1 teen",
     "aisle": "Vers",
     "aliases": [
@@ -2558,8 +4694,34 @@
       "knoflookteen"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
+  },
+  {
+    "id": "knoflook_net",
+    "name": "Knoflook net",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "3 stuks",
+    "aisle": "Vers",
+    "aliases": [
+      "knoflook net"
+    ],
+    "stores": null,
+    "img": "img/products/knoflook_net.png"
+  },
+  {
+    "id": "naan_garlic",
+    "name": "Knoflooknaan",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "2 stuks",
+    "aisle": "Vers",
+    "aliases": [
+      "knoflooknaan",
+      "garlic naan"
+    ],
+    "stores": null,
+    "img": "img/products/naan_garlic.png"
   },
   {
     "id": "knoflookpoeder",
@@ -2573,6 +4735,20 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "knoflooksaus",
+    "name": "Knoflooksaus",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "250 ml",
+    "aisle": "Koeling",
+    "aliases": [
+      "knoflooksaus",
+      "garlic sauce"
+    ],
+    "stores": null,
+    "img": "img/products/knoflooksaus.png"
   },
   {
     "id": "knolselderij",
@@ -2591,6 +4767,7 @@
     "id": "koffie",
     "name": "Koffie",
     "brand": null,
+    "brandTier": "B",
     "pack": "500 g",
     "aisle": "Houdbaar",
     "aliases": [
@@ -2599,7 +4776,6 @@
       "filterkoffie"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
   },
   {
@@ -2645,14 +4821,27 @@
     "id": "kokosmelk",
     "name": "Kokosmelk",
     "brand": null,
+    "brandTier": "B",
     "pack": "400ml",
     "aisle": "Houdbaar",
     "aliases": [
       "kokosmelk"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
+  },
+  {
+    "id": "kokosmelk_light",
+    "name": "Kokosmelk light",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "400 ml",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "kokosmelk light"
+    ],
+    "stores": null,
+    "img": "img/products/kokosmelk_light.png"
   },
   {
     "id": "kokosolie",
@@ -2681,6 +4870,20 @@
     "img": null
   },
   {
+    "id": "ei_kokos",
+    "name": "Kokosyoghurt",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "400 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "kokosyoghurt",
+      "kokos yoghurt"
+    ],
+    "stores": null,
+    "img": "img/products/ei_kokos.png"
+  },
+  {
     "id": "komijn",
     "name": "Komijnzaad",
     "brand": null,
@@ -2698,14 +4901,14 @@
     "id": "komkommer",
     "name": "Komkommer",
     "brand": null,
+    "brandTier": "B",
     "pack": "1 stuks",
     "aisle": "Vers",
     "aliases": [
       "komkommers"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1449300079323-02e209d9d3a6?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "B"
+    "img": "https://images.unsplash.com/photo-1449300079323-02e209d9d3a6?auto=format&fit=crop&w=400&q=60"
   },
   {
     "id": "room_kook",
@@ -2721,6 +4924,45 @@
     "img": null
   },
   {
+    "id": "kookroom_light",
+    "name": "Kookroom light",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "250 ml",
+    "aisle": "Koeling",
+    "aliases": [
+      "kookroom light"
+    ],
+    "stores": null,
+    "img": "img/products/kookroom_light.png"
+  },
+  {
+    "id": "koolrabi",
+    "name": "Koolrabi",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 stuk",
+    "aisle": "Vers",
+    "aliases": [
+      "koolrabi"
+    ],
+    "stores": null,
+    "img": "img/products/koolrabi.png"
+  },
+  {
+    "id": "koriander_bos",
+    "name": "Koriander bos",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 bos",
+    "aisle": "Vers",
+    "aliases": [
+      "koriander bos"
+    ],
+    "stores": null,
+    "img": "img/products/koriander_bos.png"
+  },
+  {
     "id": "koriander_vers",
     "name": "Koriander vers",
     "brand": null,
@@ -2733,6 +4975,19 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "korianderzaad",
+    "name": "Korianderzaad",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "30 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "korianderzaad"
+    ],
+    "stores": null,
+    "img": "img/products/korianderzaad.png"
   },
   {
     "id": "krabsalad",
@@ -2776,6 +5031,19 @@
     "img": "https://images.pexels.com/photos/144248/potatoes-vegetables-erdfrucht-bio-144248.jpeg?auto=compress&cs=tinysrgb&w=400"
   },
   {
+    "id": "krieltjes_kriel",
+    "name": "Krieltjes gewassen",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 kg",
+    "aisle": "Vers",
+    "aliases": [
+      "krieltjes gewassen"
+    ],
+    "stores": null,
+    "img": "img/products/krieltjes_kriel.png"
+  },
+  {
     "id": "diepvries_kroket",
     "name": "Kroketten",
     "brand": null,
@@ -2789,6 +5057,19 @@
     "img": null
   },
   {
+    "id": "dv_kroket",
+    "name": "Kroketten diepvries",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "6 stuks",
+    "aisle": "Diepvries",
+    "aliases": [
+      "diepvries kroket"
+    ],
+    "stores": null,
+    "img": "img/products/dv_kroket.png"
+  },
+  {
     "id": "sla_kropsla",
     "name": "Kropsla",
     "brand": null,
@@ -2800,6 +5081,33 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "dv_kruidenmix",
+    "name": "Kruidenmix diepvries",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "50 g",
+    "aisle": "Diepvries",
+    "aliases": [
+      "diepvries kruiden",
+      "tuinkruiden diepvries"
+    ],
+    "stores": null,
+    "img": "img/products/dv_kruidenmix.png"
+  },
+  {
+    "id": "kruidnagel",
+    "name": "Kruidnagel",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "25 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "kruidnagel"
+    ],
+    "stores": null,
+    "img": "img/products/kruidnagel.png"
   },
   {
     "id": "aardappel_kruimig",
@@ -2818,26 +5126,26 @@
     "id": "kurkuma",
     "name": "Kurkuma",
     "brand": null,
+    "brandTier": "B",
     "pack": "1 stuks",
     "aisle": "Houdbaar",
     "aliases": [
       "kurkuma gemalen"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
   },
   {
     "id": "kwark",
     "name": "Kwark",
     "brand": null,
+    "brandTier": "A",
     "pack": "500g",
     "aisle": "Koeling",
     "aliases": [
       "magere kwark"
     ],
     "stores": null,
-    "brandTier": "A",
     "img": null
   },
   {
@@ -2852,6 +5160,19 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "lamsgehakt",
+    "name": "Lamsgehakt",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "400 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "lamsgehakt"
+    ],
+    "stores": null,
+    "img": "img/products/lamsgehakt.png"
   },
   {
     "id": "lamskotelet",
@@ -2883,6 +5204,7 @@
     "id": "lasagne",
     "name": "Lasagneplaten",
     "brand": null,
+    "brandTier": "B",
     "pack": "1 stuks",
     "aisle": "Houdbaar",
     "aliases": [
@@ -2890,21 +5212,48 @@
       "lasagnebladen"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
   },
   {
     "id": "lasagneGF",
     "name": "Lasagneplaten glutenvrij",
     "brand": null,
+    "brandTier": "B",
     "pack": "1 stuks",
     "aisle": "Houdbaar",
     "aliases": [
       "lasagnegf"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
+  },
+  {
+    "id": "laurierblad",
+    "name": "Laurierblad",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "5 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "laurier",
+      "laurierblad"
+    ],
+    "stores": null,
+    "img": "img/products/laurierblad.png"
+  },
+  {
+    "id": "lekkerbek",
+    "name": "Lekkerbekjes",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "400 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "lekkerbek",
+      "lekkerbekjes"
+    ],
+    "stores": null,
+    "img": "img/products/lekkerbek.png"
   },
   {
     "id": "leverworst",
@@ -2918,6 +5267,20 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "mayonaise_licht",
+    "name": "Light mayonaise",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "350 ml",
+    "aisle": "Koeling",
+    "aliases": [
+      "light mayo",
+      "mayonaise light"
+    ],
+    "stores": null,
+    "img": "img/products/mayonaise_licht.png"
   },
   {
     "id": "lijnzaad",
@@ -2945,6 +5308,19 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "limoen_net",
+    "name": "Limoenen net",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "3 stuks",
+    "aisle": "Vers",
+    "aliases": [
+      "limoenen"
+    ],
+    "stores": null,
+    "img": "img/products/limoen_net.png"
   },
   {
     "id": "pasta_linguine",
@@ -2984,6 +5360,20 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "haring_maatjes",
+    "name": "Maatjesharing",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "4 stuks",
+    "aisle": "Koeling",
+    "aliases": [
+      "maatjesharing",
+      "maatjes"
+    ],
+    "stores": null,
+    "img": "img/products/haring_maatjes.png"
   },
   {
     "id": "pasta_macaroni",
@@ -3042,6 +5432,7 @@
     "id": "mais",
     "name": "Mais",
     "brand": null,
+    "brandTier": "B",
     "pack": "300 g",
     "aisle": "Houdbaar",
     "aliases": [
@@ -3050,7 +5441,6 @@
       "blik mais"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
   },
   {
@@ -3067,6 +5457,48 @@
     "img": null
   },
   {
+    "id": "mais_blik_groot",
+    "name": "Mais blik groot",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "300 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "mais blik groot"
+    ],
+    "stores": null,
+    "img": "img/products/mais_blik_groot.png"
+  },
+  {
+    "id": "mais_kolf",
+    "name": "Maiskolven",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "2 stuks",
+    "aisle": "Vers",
+    "aliases": [
+      "maiskolven",
+      "mais kolf",
+      "corn on the cob"
+    ],
+    "stores": null,
+    "img": "img/products/mais_kolf.png"
+  },
+  {
+    "id": "wraps_mais",
+    "name": "Maïswraps",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "6 stuks",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "maïswraps",
+      "mais wraps"
+    ],
+    "stores": null,
+    "img": "img/products/wraps_mais.png"
+  },
+  {
     "id": "maizena",
     "name": "Maizena",
     "brand": null,
@@ -3078,6 +5510,19 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "maizena_doos",
+    "name": "Maizena doos",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "250 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "maizena doos"
+    ],
+    "stores": null,
+    "img": "img/products/maizena_doos.png"
   },
   {
     "id": "makreel",
@@ -3146,16 +5591,29 @@
     "img": null
   },
   {
+    "id": "mascarpone_bak",
+    "name": "Mascarpone bak",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "250 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "mascarpone bak"
+    ],
+    "stores": null,
+    "img": "img/products/mascarpone_bak.png"
+  },
+  {
     "id": "mayo",
     "name": "Mayonaise",
     "brand": null,
+    "brandTier": "B",
     "pack": "350ml",
     "aisle": "Houdbaar",
     "aliases": [
       "mayo"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
   },
   {
@@ -3170,6 +5628,19 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "stokbrood_meergranen",
+    "name": "Meergranenstokbrood",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 stuk",
+    "aisle": "Vers",
+    "aliases": [
+      "meergranenstokbrood"
+    ],
+    "stores": null,
+    "img": "img/products/stokbrood_meergranen.png"
   },
   {
     "id": "chocolade_melk",
@@ -3212,6 +5683,20 @@
     "img": null
   },
   {
+    "id": "dv_loempia_mini",
+    "name": "Mini loempia's diepvries",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "20 stuks",
+    "aisle": "Diepvries",
+    "aliases": [
+      "mini loempia",
+      "diepvries loempia mini"
+    ],
+    "stores": null,
+    "img": "img/products/dv_loempia_mini.png"
+  },
+  {
     "id": "mosselen",
     "name": "Mosselen",
     "brand": null,
@@ -3241,12 +5726,26 @@
     "id": "mozzarella",
     "name": "Mozzarella",
     "brand": null,
+    "brandTier": "A",
     "pack": "125 g",
     "aisle": "Koeling",
     "aliases": [],
     "stores": null,
-    "brandTier": "A",
     "img": null
+  },
+  {
+    "id": "mozzarella_bol",
+    "name": "Mozzarella bol",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "125 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "mozzarella bol",
+      "verse mozzarella"
+    ],
+    "stores": null,
+    "img": "img/products/mozzarella_bol.png"
   },
   {
     "id": "muesli",
@@ -3275,6 +5774,19 @@
     "img": null
   },
   {
+    "id": "munt_pot",
+    "name": "Munt potje",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "1 pot",
+    "aisle": "Vers",
+    "aliases": [
+      "munt pot"
+    ],
+    "stores": null,
+    "img": "img/products/munt_pot.png"
+  },
+  {
     "id": "naan",
     "name": "Naanbrood",
     "brand": null,
@@ -3291,6 +5803,7 @@
     "id": "nasiMix",
     "name": "Nasi kruidenmix",
     "brand": null,
+    "brandTier": "B",
     "pack": "1 stuks",
     "aisle": "Houdbaar",
     "aliases": [
@@ -3299,8 +5812,35 @@
       "nasi mix"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
+  },
+  {
+    "id": "nasi_mix_pak",
+    "name": "Nasikruiden pak",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 stuk",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "nasikruiden pak",
+      "nasi mix"
+    ],
+    "stores": null,
+    "img": "img/products/nasi_mix_pak.png"
+  },
+  {
+    "id": "dv_nasi",
+    "name": "Nasischotel diepvries",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "450 g",
+    "aisle": "Diepvries",
+    "aliases": [
+      "diepvries nasi",
+      "nasischotel"
+    ],
+    "stores": null,
+    "img": "img/products/dv_nasi.png"
   },
   {
     "id": "yoghurt_naturel",
@@ -3333,11 +5873,11 @@
     "id": "nootmuskaat",
     "name": "Nootmuskaat",
     "brand": null,
+    "brandTier": "B",
     "pack": "1 stuks",
     "aisle": "Houdbaar",
     "aliases": [],
     "stores": null,
-    "brandTier": "B",
     "img": null
   },
   {
@@ -3353,6 +5893,34 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "muesli_noten",
+    "name": "Notenmuesli",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "500 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "notenmuesli",
+      "muesli noten"
+    ],
+    "stores": null,
+    "img": "img/products/muesli_noten.png"
+  },
+  {
+    "id": "oystersaus",
+    "name": "Oestersaus",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "250 ml",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "oestersaus",
+      "oyster sauce"
+    ],
+    "stores": null,
+    "img": "img/products/oystersaus.png"
   },
   {
     "id": "oesterzwam",
@@ -3371,6 +5939,7 @@
     "id": "olie",
     "name": "Olie",
     "brand": null,
+    "brandTier": "B",
     "pack": "1 L",
     "aisle": "Houdbaar",
     "aliases": [
@@ -3379,7 +5948,6 @@
       "olie"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
   },
   {
@@ -3410,6 +5978,20 @@
     "img": null
   },
   {
+    "id": "boter_ongezouten",
+    "name": "Ongezouten roomboter",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "250 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "ongezouten boter",
+      "ongezouten roomboter"
+    ],
+    "stores": null,
+    "img": "img/products/boter_ongezouten.png"
+  },
+  {
     "id": "ontbijtkoek",
     "name": "Ontbijtkoek",
     "brand": null,
@@ -3421,6 +6003,19 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "ontbijtkoek_gesneden",
+    "name": "Ontbijtkoek gesneden",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "400 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "ontbijtkoek gesneden"
+    ],
+    "stores": null,
+    "img": "img/products/ontbijtkoek_gesneden.png"
   },
   {
     "id": "ontbijtspek",
@@ -3449,6 +6044,19 @@
     "img": null
   },
   {
+    "id": "ossenworst",
+    "name": "Ossenworst",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "150 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "ossenworst"
+    ],
+    "stores": null,
+    "img": "img/products/ossenworst.png"
+  },
+  {
     "id": "kaas_oud",
     "name": "Oude kaas",
     "brand": null,
@@ -3460,6 +6068,34 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "kaas_oud_blok",
+    "name": "Oude kaasblok",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "350 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "oude kaasblok"
+    ],
+    "stores": null,
+    "img": "img/products/kaas_oud_blok.png"
+  },
+  {
+    "id": "dv_friet",
+    "name": "Ovenfriet diepvries",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 kg",
+    "aisle": "Diepvries",
+    "aliases": [
+      "ovenfriet",
+      "diepvries friet",
+      "friet diepvries"
+    ],
+    "stores": null,
+    "img": "img/products/dv_friet.png"
   },
   {
     "id": "paksoi",
@@ -3519,6 +6155,7 @@
     "id": "panko",
     "name": "Panko paneermeel",
     "brand": null,
+    "brandTier": "B",
     "pack": "200g",
     "aisle": "Houdbaar",
     "aliases": [
@@ -3526,13 +6163,13 @@
       "paneermeel"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
   },
   {
     "id": "meel",
     "name": "Pannenkoekmix",
     "brand": null,
+    "brandTier": "B",
     "pack": "400 g",
     "aisle": "Houdbaar",
     "aliases": [
@@ -3540,13 +6177,13 @@
       "pannenkoekenmix"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
   },
   {
     "id": "paprika",
     "name": "Paprika",
     "brand": null,
+    "brandTier": "B",
     "pack": "3-pack",
     "aisle": "Vers",
     "aliases": [
@@ -3555,8 +6192,21 @@
       "zoete paprika"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "B"
+    "img": "https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?auto=format&fit=crop&w=400&q=60"
+  },
+  {
+    "id": "paprika_mix",
+    "name": "Paprikamix 3 kleuren",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "3 stuks",
+    "aisle": "Vers",
+    "aliases": [
+      "paprikamix",
+      "paprika mix"
+    ],
+    "stores": null,
+    "img": "img/products/paprika_mix.png"
   },
   {
     "id": "paprikapoeder",
@@ -3570,6 +6220,20 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "parmezaan_stuk",
+    "name": "Parmezaan stuk",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "200 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "parmezaan stuk",
+      "parmigiano"
+    ],
+    "stores": null,
+    "img": "img/products/parmezaan_stuk.png"
   },
   {
     "id": "parmezaan",
@@ -3599,9 +6263,23 @@
     "img": null
   },
   {
+    "id": "passata_groot",
+    "name": "Passata 700 g",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "700 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "passata groot"
+    ],
+    "stores": null,
+    "img": "img/products/passata_groot.png"
+  },
+  {
     "id": "pasta",
     "name": "Pasta",
     "brand": null,
+    "brandTier": "B",
     "pack": "500g",
     "aisle": "Houdbaar",
     "aliases": [
@@ -3611,8 +6289,20 @@
       "fusilli"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1551892374-ecf8754cf8b0?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "B"
+    "img": "https://images.unsplash.com/photo-1551892374-ecf8754cf8b0?auto=format&fit=crop&w=400&q=60"
+  },
+  {
+    "id": "pastasalade",
+    "name": "Pastasalade",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "400 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "pastasalade"
+    ],
+    "stores": null,
+    "img": "img/products/pastasalade.png"
   },
   {
     "id": "pastasaus",
@@ -3626,6 +6316,19 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "pastinaak",
+    "name": "Pastinaak",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "500 g",
+    "aisle": "Vers",
+    "aliases": [
+      "pastinaak"
+    ],
+    "stores": null,
+    "img": "img/products/pastinaak.png"
   },
   {
     "id": "pasta_penne",
@@ -3668,16 +6371,29 @@
     "img": null
   },
   {
+    "id": "perzik_vers",
+    "name": "Perziken vers",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "4 stuks",
+    "aisle": "Vers",
+    "aliases": [
+      "perziken vers"
+    ],
+    "stores": null,
+    "img": "img/products/perzik_vers.png"
+  },
+  {
     "id": "pesto",
     "name": "Pesto",
     "brand": null,
+    "brandTier": "B",
     "pack": "190g",
     "aisle": "Houdbaar",
     "aliases": [
       "groene pesto"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
   },
   {
@@ -3693,6 +6409,19 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "peultjes",
+    "name": "Peultjes",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "250 g",
+    "aisle": "Vers",
+    "aliases": [
+      "peultjes"
+    ],
+    "stores": null,
+    "img": "img/products/peultjes.png"
   },
   {
     "id": "pinda",
@@ -3711,6 +6440,7 @@
     "id": "beleg",
     "name": "Pindakaas",
     "brand": null,
+    "brandTier": "B",
     "pack": "350 g",
     "aisle": "Houdbaar",
     "aliases": [
@@ -3718,13 +6448,26 @@
       "pindasmeer"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
+  },
+  {
+    "id": "pindakaas_met_stukjes",
+    "name": "Pindakaas met stukjes",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "350 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "pindakaas stukjes"
+    ],
+    "stores": null,
+    "img": "img/products/pindakaas_met_stukjes.png"
   },
   {
     "id": "pindasaus",
     "name": "Pindasaus kant-en-klaar",
     "brand": null,
+    "brandTier": "B",
     "pack": "350g",
     "aisle": "Houdbaar",
     "aliases": [
@@ -3733,7 +6476,6 @@
       "satesaus"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
   },
   {
@@ -3751,9 +6493,24 @@
     "img": null
   },
   {
+    "id": "pita_vers",
+    "name": "Pita broodjes",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "6 stuks",
+    "aisle": "Vers",
+    "aliases": [
+      "pita",
+      "pitabroodjes"
+    ],
+    "stores": null,
+    "img": "img/products/pita_vers.png"
+  },
+  {
     "id": "pita",
     "name": "Pitabrood",
     "brand": null,
+    "brandTier": "B",
     "pack": "6 stuks",
     "aisle": "Houdbaar",
     "aliases": [
@@ -3761,13 +6518,39 @@
       "pitabroodjes"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
+  },
+  {
+    "id": "druiven_pitloos",
+    "name": "Pitloze druiven",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "500 g",
+    "aisle": "Vers",
+    "aliases": [
+      "pitloze druiven"
+    ],
+    "stores": null,
+    "img": "img/products/druiven_pitloos.png"
+  },
+  {
+    "id": "dv_pizza_salami",
+    "name": "Pizza salami diepvries",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 stuk",
+    "aisle": "Diepvries",
+    "aliases": [
+      "diepvries pizza salami"
+    ],
+    "stores": null,
+    "img": "img/products/dv_pizza_salami.png"
   },
   {
     "id": "bodem",
     "name": "Pizzabodem",
     "brand": null,
+    "brandTier": null,
     "pack": "1 stuks",
     "aisle": "Koeling",
     "aliases": [
@@ -3775,7 +6558,6 @@
       "pizzabodems"
     ],
     "stores": null,
-    "brandTier": null,
     "img": null
   },
   {
@@ -3803,6 +6585,20 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "peterselie_plat",
+    "name": "Platte peterselie",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 bos",
+    "aisle": "Vers",
+    "aliases": [
+      "platte peterselie",
+      "peterselie plat"
+    ],
+    "stores": null,
+    "img": "img/products/peterselie_plat.png"
   },
   {
     "id": "poedersuiker",
@@ -3874,6 +6670,7 @@
     "id": "prei",
     "name": "Prei",
     "brand": null,
+    "brandTier": "B",
     "pack": "1 stuk",
     "aisle": "Vers",
     "aliases": [
@@ -3881,8 +6678,35 @@
       "preien"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1594282486552-05b4d8040dde?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "B"
+    "img": "https://images.unsplash.com/photo-1594282486552-05b4d8040dde?auto=format&fit=crop&w=400&q=60"
+  },
+  {
+    "id": "pretzel",
+    "name": "Pretzels",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "150 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "pretzel",
+      "pretzels"
+    ],
+    "stores": null,
+    "img": "img/products/pretzel.png"
+  },
+  {
+    "id": "provencaalse_kruiden",
+    "name": "Provençaalse kruiden",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "15 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "provençaalse kruiden",
+      "herbes de provence"
+    ],
+    "stores": null,
+    "img": "img/products/provencaalse_kruiden.png"
   },
   {
     "id": "pruim",
@@ -3896,6 +6720,19 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "pruim_vers",
+    "name": "Pruimen vers",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "500 g",
+    "aisle": "Vers",
+    "aliases": [
+      "pruimen vers"
+    ],
+    "stores": null,
+    "img": "img/products/pruim_vers.png"
   },
   {
     "id": "pudding",
@@ -3977,6 +6814,19 @@
     "img": null
   },
   {
+    "id": "raapstelen_zak",
+    "name": "Raapstelen zak",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "400 g",
+    "aisle": "Vers",
+    "aliases": [
+      "raapstelen zak"
+    ],
+    "stores": null,
+    "img": "img/products/raapstelen_zak.png"
+  },
+  {
     "id": "radijs",
     "name": "Radijs",
     "brand": null,
@@ -4003,20 +6853,75 @@
     "img": null
   },
   {
+    "id": "dv_garnalen_rauwe",
+    "name": "Rauwe garnalen diepvries",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "400 g",
+    "aisle": "Diepvries",
+    "aliases": [
+      "rauwe garnalen diepvries"
+    ],
+    "stores": null,
+    "img": "img/products/dv_garnalen_rauwe.png"
+  },
+  {
+    "id": "rauwkost_salade",
+    "name": "Rauwkostsalade",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "400 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "rauwkost",
+      "rauwkostsalade"
+    ],
+    "stores": null,
+    "img": "img/products/rauwkost_salade.png"
+  },
+  {
+    "id": "refried_beans",
+    "name": "Refried beans",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "400 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "refried beans",
+      "frijoles"
+    ],
+    "stores": null,
+    "img": "img/products/refried_beans.png"
+  },
+  {
     "id": "ricotta",
     "name": "Ricotta",
     "brand": null,
+    "brandTier": "A",
     "pack": "250g",
     "aisle": "Koeling",
     "aliases": [],
     "stores": null,
-    "brandTier": "A",
     "img": null
+  },
+  {
+    "id": "ricotta_bak",
+    "name": "Ricotta bak",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "250 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "ricotta bak"
+    ],
+    "stores": null,
+    "img": "img/products/ricotta_bak.png"
   },
   {
     "id": "rijst",
     "name": "Rijst",
     "brand": null,
+    "brandTier": "B",
     "pack": "1 kg",
     "aisle": "Houdbaar",
     "aliases": [
@@ -4024,8 +6929,20 @@
       "rijst"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "B"
+    "img": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=400&q=60"
+  },
+  {
+    "id": "crackers_rijst",
+    "name": "Rijstcrackers",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "100 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "rijstcrackers"
+    ],
+    "stores": null,
+    "img": "img/products/crackers_rijst.png"
   },
   {
     "id": "rijstnoedels",
@@ -4081,6 +6998,20 @@
     "img": null
   },
   {
+    "id": "curry_rodekerrie",
+    "name": "Rode currypasta",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "100 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "rode curry",
+      "rode currypasta"
+    ],
+    "stores": null,
+    "img": "img/products/curry_rodekerrie.png"
+  },
+  {
     "id": "rode_kool",
     "name": "Rode kool",
     "brand": null,
@@ -4111,13 +7042,13 @@
     "id": "linzen",
     "name": "Rode linzen",
     "brand": null,
+    "brandTier": "B",
     "pack": "400 g",
     "aisle": "Houdbaar",
     "aliases": [
       "linzen"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
   },
   {
@@ -4132,6 +7063,20 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "pesto_rosso",
+    "name": "Rode pesto",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "190 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "rode pesto",
+      "pesto rosso"
+    ],
+    "stores": null,
+    "img": "img/products/pesto_rosso.png"
   },
   {
     "id": "ui_rood",
@@ -4159,6 +7104,20 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "rollade",
+    "name": "Rollade",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "800 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "rollade",
+      "runderrollade"
+    ],
+    "stores": null,
+    "img": "img/products/rollade.png"
   },
   {
     "id": "romanesco",
@@ -4190,19 +7149,20 @@
     "id": "rookworst",
     "name": "Rookworst",
     "brand": null,
+    "brandTier": "A",
     "pack": "1 stuks",
     "aisle": "Koeling",
     "aliases": [
       "gelderse rookworst"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "A"
+    "img": "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=400&q=60"
   },
   {
     "id": "boter",
     "name": "Roomboter",
     "brand": null,
+    "brandTier": "A",
     "pack": "250 g",
     "aisle": "Koeling",
     "aliases": [
@@ -4210,8 +7170,7 @@
       "ongezouten boter"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "A"
+    "img": "https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?auto=format&fit=crop&w=400&q=60"
   },
   {
     "id": "diepvries_ijs",
@@ -4241,6 +7200,46 @@
     "img": null
   },
   {
+    "id": "roomkaas_light",
+    "name": "Roomkaas light",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "200 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "roomkaas light",
+      "light roomkaas"
+    ],
+    "stores": null,
+    "img": "img/products/roomkaas_light.png"
+  },
+  {
+    "id": "rosbief",
+    "name": "Rosbief",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "100 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "rosbief"
+    ],
+    "stores": null,
+    "img": "img/products/rosbief.png"
+  },
+  {
+    "id": "rozemarijn_pot",
+    "name": "Rozemarijn potje",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "1 pot",
+    "aisle": "Vers",
+    "aliases": [
+      "rozemarijn pot"
+    ],
+    "stores": null,
+    "img": "img/products/rozemarijn_pot.png"
+  },
+  {
     "id": "rozemarijn",
     "name": "Rozemarijn vers",
     "brand": null,
@@ -4267,6 +7266,20 @@
     "img": null
   },
   {
+    "id": "rozijnen_doosje",
+    "name": "Rozijnendoosjes",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "6 stuks",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "rozijnendoosjes",
+      "rozijnen kids"
+    ],
+    "stores": null,
+    "img": "img/products/rozijnen_doosje.png"
+  },
+  {
     "id": "rucola",
     "name": "Rucola",
     "brand": null,
@@ -4281,9 +7294,37 @@
     "img": "https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?auto=format&fit=crop&w=400&q=60"
   },
   {
+    "id": "rucola_bak",
+    "name": "Rucola bak",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "75 g",
+    "aisle": "Vers",
+    "aliases": [
+      "rucola bak"
+    ],
+    "stores": null,
+    "img": "img/products/rucola_bak.png"
+  },
+  {
+    "id": "bouillon_rund",
+    "name": "Runderbouillonblokjes",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "12 stuks",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "runderbouillon",
+      "runderbouillonblokjes"
+    ],
+    "stores": null,
+    "img": "img/products/bouillon_rund.png"
+  },
+  {
     "id": "gehakt",
     "name": "Rundergehakt",
     "brand": null,
+    "brandTier": "A",
     "pack": "500g",
     "aisle": "Koeling",
     "aliases": [
@@ -4293,8 +7334,7 @@
       "gehakt_runder"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "A"
+    "img": "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=400&q=60"
   },
   {
     "id": "runderlappen",
@@ -4310,6 +7350,34 @@
     "img": null
   },
   {
+    "id": "runderreepjes",
+    "name": "Runderreepjes",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "400 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "runderreepjes",
+      "biefstukreepjes"
+    ],
+    "stores": null,
+    "img": "img/products/runderreepjes.png"
+  },
+  {
+    "id": "rundervinken",
+    "name": "Rundervinken",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "4 stuks",
+    "aisle": "Koeling",
+    "aliases": [
+      "rundervinken",
+      "vinken"
+    ],
+    "stores": null,
+    "img": "img/products/rundervinken.png"
+  },
+  {
     "id": "salami",
     "name": "Salami",
     "brand": null,
@@ -4323,16 +7391,58 @@
     "img": null
   },
   {
+    "id": "salie",
+    "name": "Salie vers",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "1 bos",
+    "aisle": "Vers",
+    "aliases": [
+      "salie",
+      "verse salie"
+    ],
+    "stores": null,
+    "img": "img/products/salie.png"
+  },
+  {
+    "id": "salsa_heet",
+    "name": "Salsa hot",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "300 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "salsa hot",
+      "hete salsa"
+    ],
+    "stores": null,
+    "img": "img/products/salsa_heet.png"
+  },
+  {
+    "id": "salsa_mild",
+    "name": "Salsa mild",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "300 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "salsa",
+      "salsa mild"
+    ],
+    "stores": null,
+    "img": "img/products/salsa_mild.png"
+  },
+  {
     "id": "sambal",
     "name": "Sambal oelek",
     "brand": null,
+    "brandTier": "B",
     "pack": "200g",
     "aisle": "Houdbaar",
     "aliases": [
       "sambal"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
   },
   {
@@ -4347,6 +7457,48 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "sardines_olie",
+    "name": "Sardines in olie",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "120 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "sardines olie"
+    ],
+    "stores": null,
+    "img": "img/products/sardines_olie.png"
+  },
+  {
+    "id": "satesaus_pot",
+    "name": "Satésaus pot",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "350 ml",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "satésaus",
+      "satesaus pot"
+    ],
+    "stores": null,
+    "img": "img/products/satesaus_pot.png"
+  },
+  {
+    "id": "sate_spies",
+    "name": "Satéspiesjes",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "6 stuks",
+    "aisle": "Koeling",
+    "aliases": [
+      "satéspies",
+      "saté spiesjes",
+      "kipsaté spies"
+    ],
+    "stores": null,
+    "img": "img/products/sate_spies.png"
   },
   {
     "id": "saucijs",
@@ -4375,6 +7527,21 @@
     "img": null
   },
   {
+    "id": "scampi",
+    "name": "Scampi's",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "400 g",
+    "aisle": "Diepvries",
+    "aliases": [
+      "scampi",
+      "scampi's",
+      "grote garnalen"
+    ],
+    "stores": null,
+    "img": "img/products/scampi.png"
+  },
+  {
     "id": "eieren_scharrel",
     "name": "Scharreleieren",
     "brand": null,
@@ -4388,14 +7555,41 @@
     "img": null
   },
   {
+    "id": "eieren_scharrel_10",
+    "name": "Scharreleieren 10-pack",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "10 stuks",
+    "aisle": "Koeling",
+    "aliases": [
+      "scharrel 10"
+    ],
+    "stores": null,
+    "img": "img/products/eieren_scharrel_10.png"
+  },
+  {
+    "id": "scholfilet",
+    "name": "Scholfilet",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "300 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "schol",
+      "scholfilet"
+    ],
+    "stores": null,
+    "img": "img/products/scholfilet.png"
+  },
+  {
     "id": "sesamolie",
     "name": "Sesamolie",
     "brand": null,
+    "brandTier": "B",
     "pack": "150ml",
     "aisle": "Houdbaar",
     "aliases": [],
     "stores": null,
-    "brandTier": "B",
     "img": null
   },
   {
@@ -4455,6 +7649,7 @@
     "id": "sinaasappel",
     "name": "Sinaasappels",
     "brand": null,
+    "brandTier": "B",
     "pack": "1 kg",
     "aisle": "Vers",
     "aliases": [
@@ -4463,8 +7658,7 @@
       "appelsien"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1547514701-42782126185d?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "B"
+    "img": "https://images.unsplash.com/photo-1547514701-42782126185d?auto=format&fit=crop&w=400&q=60"
   },
   {
     "id": "jus_sinaasappel",
@@ -4494,6 +7688,20 @@
     "img": null
   },
   {
+    "id": "skyr",
+    "name": "Skyr naturel",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "450 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "skyr",
+      "skyr naturel"
+    ],
+    "stores": null,
+    "img": "img/products/skyr.png"
+  },
+  {
     "id": "room_slag",
     "name": "Slagroom",
     "brand": null,
@@ -4518,6 +7726,19 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "slavinken_pak",
+    "name": "Slavinken 4-pack",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "4 stuks",
+    "aisle": "Koeling",
+    "aliases": [
+      "slavinken pack"
+    ],
+    "stores": null,
+    "img": "img/products/slavinken_pak.png"
   },
   {
     "id": "smeerkaas",
@@ -4613,6 +7834,33 @@
     "img": null
   },
   {
+    "id": "dv_soepgroente_extra",
+    "name": "Soepgroente diepvries extra",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "500 g",
+    "aisle": "Diepvries",
+    "aliases": [
+      "soepgroente dv"
+    ],
+    "stores": null,
+    "img": "img/products/dv_soepgroente_extra.png"
+  },
+  {
+    "id": "soepstengels",
+    "name": "Soepstengels",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "100 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "soepstengels",
+      "soepstengel"
+    ],
+    "stores": null,
+    "img": "img/products/soepstengels.png"
+  },
+  {
     "id": "sojamelk",
     "name": "Sojamelk",
     "brand": null,
@@ -4629,6 +7877,7 @@
     "id": "soja",
     "name": "Sojasaus",
     "brand": null,
+    "brandTier": "B",
     "pack": "50 ml",
     "aisle": "Houdbaar",
     "aliases": [
@@ -4636,8 +7885,21 @@
       "tamari"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
+  },
+  {
+    "id": "sojasaus_light",
+    "name": "Sojasaus light",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "250 ml",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "sojasaus light",
+      "light soja"
+    ],
+    "stores": null,
+    "img": "img/products/sojasaus_light.png"
   },
   {
     "id": "pasta_spaghetti",
@@ -4651,6 +7913,21 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "spare_ribs",
+    "name": "Spare ribs",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "1 kg",
+    "aisle": "Koeling",
+    "aliases": [
+      "spare ribs",
+      "spareribs",
+      "ribben"
+    ],
+    "stores": null,
+    "img": "img/products/spare_ribs.png"
   },
   {
     "id": "spekblokjes",
@@ -4683,6 +7960,20 @@
     "img": "https://images.unsplash.com/photo-1432139509613-5c4255815697?auto=format&fit=crop&w=400&q=60"
   },
   {
+    "id": "spekreepjes",
+    "name": "Spekreepjes",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "200 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "spekreepjes",
+      "spek reepjes"
+    ],
+    "stores": null,
+    "img": "img/products/spekreepjes.png"
+  },
+  {
     "id": "sperziebonen",
     "name": "Sperziebonen",
     "brand": null,
@@ -4700,6 +7991,7 @@
     "id": "spinazie",
     "name": "Spinazie diepvries",
     "brand": null,
+    "brandTier": "B",
     "pack": "450 g",
     "aisle": "Koeling",
     "aliases": [
@@ -4707,8 +7999,7 @@
       "diepvriesspinazie"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "B"
+    "img": "https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=400&q=60"
   },
   {
     "id": "spinazie_vers",
@@ -4722,6 +8013,19 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "wraps_spinazie",
+    "name": "Spinazie wraps",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "6 stuks",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "spinazie wraps"
+    ],
+    "stores": null,
+    "img": "img/products/wraps_spinazie.png"
   },
   {
     "id": "diepvries_spinazie_blok",
@@ -4777,6 +8081,46 @@
     "img": "https://images.unsplash.com/photo-1615485290397-4e4f4f8c0c8a?auto=format&fit=crop&w=400&q=60"
   },
   {
+    "id": "spruitjes_vers",
+    "name": "Spruitjes vers",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "500 g",
+    "aisle": "Vers",
+    "aliases": [
+      "spruitjes vers"
+    ],
+    "stores": null,
+    "img": "img/products/spruitjes_vers.png"
+  },
+  {
+    "id": "slagroom_spuit",
+    "name": "Spuitbus slagroom",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "250 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "spuitbus slagroom",
+      "spuitslagroom"
+    ],
+    "stores": null,
+    "img": "img/products/slagroom_spuit.png"
+  },
+  {
+    "id": "sriracha",
+    "name": "Sriracha",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "250 ml",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "sriracha"
+    ],
+    "stores": null,
+    "img": "img/products/sriracha.png"
+  },
+  {
     "id": "stokbrood",
     "name": "Stokbrood",
     "brand": null,
@@ -4788,6 +8132,20 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "stoofvlees",
+    "name": "Stoofvlees",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "500 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "stoofvlees",
+      "draadjesvlees"
+    ],
+    "stores": null,
+    "img": "img/products/stoofvlees.png"
   },
   {
     "id": "keukenzout_huis",
@@ -4829,9 +8187,25 @@
     "img": null
   },
   {
+    "id": "sugar_snaps",
+    "name": "Sugar snaps",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "250 g",
+    "aisle": "Vers",
+    "aliases": [
+      "sugar snaps",
+      "sugarsnaps",
+      "peulen"
+    ],
+    "stores": null,
+    "img": "img/products/sugar_snaps.png"
+  },
+  {
     "id": "suiker",
     "name": "Suiker",
     "brand": null,
+    "brandTier": "B",
     "pack": "1 kg",
     "aisle": "Houdbaar",
     "aliases": [
@@ -4839,7 +8213,6 @@
       "kristalsuiker"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
   },
   {
@@ -4872,9 +8245,37 @@
     "img": "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?auto=format&fit=crop&w=400&q=60"
   },
   {
+    "id": "surimi",
+    "name": "Surimi sticks",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "250 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "surimi",
+      "krabsticks"
+    ],
+    "stores": null,
+    "img": "img/products/surimi.png"
+  },
+  {
+    "id": "rijst_sushi",
+    "name": "Sushirijst",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "500 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "sushirijst"
+    ],
+    "stores": null,
+    "img": "img/products/rijst_sushi.png"
+  },
+  {
     "id": "sweetChili",
     "name": "Sweet chili saus",
     "brand": null,
+    "brandTier": "B",
     "pack": "250ml",
     "aisle": "Houdbaar",
     "aliases": [
@@ -4884,8 +8285,21 @@
       "zoete chilisaus"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
+  },
+  {
+    "id": "taco_shells",
+    "name": "Taco shells",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "8 stuks",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "taco shells",
+      "tacoschelpen"
+    ],
+    "stores": null,
+    "img": "img/products/taco_shells.png"
   },
   {
     "id": "taco_kruiden",
@@ -4917,6 +8331,7 @@
     "id": "tandenpasta",
     "name": "Tandenpasta",
     "brand": null,
+    "brandTier": null,
     "pack": "75 ml",
     "aisle": "Huis",
     "aliases": [
@@ -4924,7 +8339,6 @@
       "tandpasta"
     ],
     "stores": null,
-    "brandTier": null,
     "img": null
   },
   {
@@ -4941,9 +8355,51 @@
     "img": null
   },
   {
+    "id": "tempeh_stuk",
+    "name": "Tempeh stuk",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "200 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "tempeh stuk"
+    ],
+    "stores": null,
+    "img": "img/products/tempeh_stuk.png"
+  },
+  {
+    "id": "teriyakisaus",
+    "name": "Teriyakisaus",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "250 ml",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "teriyaki",
+      "teriyakisaus"
+    ],
+    "stores": null,
+    "img": "img/products/teriyakisaus.png"
+  },
+  {
+    "id": "visaus_thai",
+    "name": "Thaise visaus",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "200 ml",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "thaise visaus",
+      "fish sauce"
+    ],
+    "stores": null,
+    "img": "img/products/visaus_thai.png"
+  },
+  {
     "id": "thee",
     "name": "Thee",
     "brand": null,
+    "brandTier": "B",
     "pack": "20 stuks",
     "aisle": "Houdbaar",
     "aliases": [
@@ -4951,8 +8407,21 @@
       "theezakjes"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
+  },
+  {
+    "id": "tijgerbol",
+    "name": "Tijgerbollen",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "4 stuks",
+    "aisle": "Vers",
+    "aliases": [
+      "tijgerbol",
+      "tijgerbollen"
+    ],
+    "stores": null,
+    "img": "img/products/tijgerbol.png"
   },
   {
     "id": "tijgerbrood",
@@ -4968,6 +8437,19 @@
     "img": null
   },
   {
+    "id": "tijm_pot",
+    "name": "Tijm potje",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "1 pot",
+    "aisle": "Vers",
+    "aliases": [
+      "tijm pot"
+    ],
+    "stores": null,
+    "img": "img/products/tijm_pot.png"
+  },
+  {
     "id": "tijm",
     "name": "Tijm vers",
     "brand": null,
@@ -4979,6 +8461,20 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "tilapia",
+    "name": "Tilapiafilet",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "400 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "tilapia",
+      "tilapiafilet"
+    ],
+    "stores": null,
+    "img": "img/products/tilapia.png"
   },
   {
     "id": "tissues",
@@ -5023,6 +8519,7 @@
     "id": "toiletPapier",
     "name": "Toiletpapier",
     "brand": null,
+    "brandTier": null,
     "pack": "6-pack",
     "aisle": "Huis",
     "aliases": [
@@ -5031,13 +8528,13 @@
       "toilet papier"
     ],
     "stores": null,
-    "brandTier": null,
     "img": null
   },
   {
     "id": "toiletreiniger",
     "name": "Toiletreiniger",
     "brand": null,
+    "brandTier": null,
     "pack": "750 ml",
     "aisle": "Huis",
     "aliases": [
@@ -5045,13 +8542,13 @@
       "toiletreiniger"
     ],
     "stores": null,
-    "brandTier": null,
     "img": null
   },
   {
     "id": "tomaatVers",
     "name": "Tomaat (vers)",
     "brand": null,
+    "brandTier": "B",
     "pack": "500 g",
     "aisle": "Vers",
     "aliases": [
@@ -5060,8 +8557,7 @@
       "vleestomaat"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "B"
+    "img": "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?auto=format&fit=crop&w=400&q=60"
   },
   {
     "id": "tomaten",
@@ -5081,6 +8577,7 @@
     "id": "tomaat",
     "name": "Tomatenblokjes",
     "brand": null,
+    "brandTier": "B",
     "pack": "400g",
     "aisle": "Houdbaar",
     "aliases": [
@@ -5089,8 +8586,20 @@
       "passata"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "B"
+    "img": "https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=400&q=60"
+  },
+  {
+    "id": "tomatenblokjes_groot",
+    "name": "Tomatenblokjes 3-pack",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "3 stuks",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "tomatenblokjes 3-pack"
+    ],
+    "stores": null,
+    "img": "img/products/tomatenblokjes_groot.png"
   },
   {
     "id": "tomatenpuree",
@@ -5104,6 +8613,20 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "soep_blik_tomaat",
+    "name": "Tomatensoep blik",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "400 ml",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "tomatensoep blik",
+      "blik tomatensoep"
+    ],
+    "stores": null,
+    "img": "img/products/soep_blik_tomaat.png"
   },
   {
     "id": "tonijn",
@@ -5122,6 +8645,34 @@
     "img": "https://images.unsplash.com/photo-1604503468506-a8da13d82791?auto=format&fit=crop&w=400&q=60"
   },
   {
+    "id": "tonijn_olie",
+    "name": "Tonijn in olie",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "160 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "tonijn olie",
+      "tonijn in olie"
+    ],
+    "stores": null,
+    "img": "img/products/tonijn_olie.png"
+  },
+  {
+    "id": "tonijn_water",
+    "name": "Tonijn in water",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "160 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "tonijn water",
+      "tonijn in water"
+    ],
+    "stores": null,
+    "img": "img/products/tonijn_water.png"
+  },
+  {
     "id": "tonijnsteak",
     "name": "Tonijnsteak",
     "brand": null,
@@ -5138,6 +8689,7 @@
     "id": "tortillaChips",
     "name": "Tortillachips",
     "brand": null,
+    "brandTier": "B",
     "pack": "200 g",
     "aisle": "Houdbaar",
     "aliases": [
@@ -5146,8 +8698,34 @@
       "nachos"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
+  },
+  {
+    "id": "tortilla_chips_naturel",
+    "name": "Tortillachips naturel",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "200 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "tortillachips naturel"
+    ],
+    "stores": null,
+    "img": "img/products/tortilla_chips_naturel.png"
+  },
+  {
+    "id": "tosti_brood",
+    "name": "Tostibrood",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 stuk",
+    "aisle": "Vers",
+    "aliases": [
+      "tostibrood",
+      "tosti brood"
+    ],
+    "stores": null,
+    "img": "img/products/tosti_brood.png"
   },
   {
     "id": "trostomaat",
@@ -5161,6 +8739,20 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "truffelmayo",
+    "name": "Truffelmayonaise",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "200 ml",
+    "aisle": "Koeling",
+    "aliases": [
+      "truffelmayo",
+      "truffel mayonaise"
+    ],
+    "stores": null,
+    "img": "img/products/truffelmayo.png"
   },
   {
     "id": "tunasalade",
@@ -5179,17 +8771,31 @@
     "id": "tzatziki",
     "name": "Tzatziki",
     "brand": null,
+    "brandTier": null,
     "pack": "200 g",
     "aisle": "Koeling",
     "aliases": [],
     "stores": null,
-    "brandTier": null,
     "img": null
+  },
+  {
+    "id": "tzatziki_bak",
+    "name": "Tzatziki bak",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "200 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "tzatziki bak"
+    ],
+    "stores": null,
+    "img": "img/products/tzatziki_bak.png"
   },
   {
     "id": "ui",
     "name": "Uien",
     "brand": null,
+    "brandTier": "B",
     "pack": "1 kg",
     "aisle": "Vers",
     "aliases": [
@@ -5197,8 +8803,7 @@
       "rode ui"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1518977956812-cd3dbadaaf31?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "B"
+    "img": "https://images.unsplash.com/photo-1518977956812-cd3dbadaaf31?auto=format&fit=crop&w=400&q=60"
   },
   {
     "id": "uienpoeder",
@@ -5225,6 +8830,34 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "vanille_extract",
+    "name": "Vanille-extract",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "50 ml",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "vanille extract",
+      "vanilla extract"
+    ],
+    "stores": null,
+    "img": "img/products/vanille_extract.png"
+  },
+  {
+    "id": "dv_ijs_vanille",
+    "name": "Vanille-ijs diepvries",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 l",
+    "aisle": "Diepvries",
+    "aliases": [
+      "vanille ijs",
+      "diepvries vanille-ijs"
+    ],
+    "stores": null,
+    "img": "img/products/dv_ijs_vanille.png"
   },
   {
     "id": "kwark_vanille",
@@ -5294,6 +8927,19 @@
     "img": null
   },
   {
+    "id": "varkensschnitzel",
+    "name": "Varkensschnitzel",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "2 stuks",
+    "aisle": "Koeling",
+    "aliases": [
+      "varkensschnitzel"
+    ],
+    "stores": null,
+    "img": "img/products/varkensschnitzel.png"
+  },
+  {
     "id": "aardappel_vast",
     "name": "Vastkokende aardappelen",
     "brand": null,
@@ -5359,6 +9005,32 @@
     "img": null
   },
   {
+    "id": "fruitsap_sinaasappel_vers",
+    "name": "Vers geperst sinaasappelsap",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "1 l",
+    "aisle": "Koeling",
+    "aliases": [
+      "vers sinaasappelsap"
+    ],
+    "stores": null,
+    "img": "img/products/fruitsap_sinaasappel_vers.png"
+  },
+  {
+    "id": "ananas_vers",
+    "name": "Verse ananas",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 stuk",
+    "aisle": "Vers",
+    "aliases": [
+      "verse ananas"
+    ],
+    "stores": null,
+    "img": "img/products/ananas_vers.png"
+  },
+  {
     "id": "gehaktballen_vers",
     "name": "Verse gehaktballen",
     "brand": null,
@@ -5372,6 +9044,32 @@
     "img": null
   },
   {
+    "id": "gember_vers",
+    "name": "Verse gember",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "150 g",
+    "aisle": "Vers",
+    "aliases": [
+      "verse gember"
+    ],
+    "stores": null,
+    "img": "img/products/gember_vers.png"
+  },
+  {
+    "id": "mosselen_vers",
+    "name": "Verse mosselen",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "2 kg",
+    "aisle": "Koeling",
+    "aliases": [
+      "verse mosselen"
+    ],
+    "stores": null,
+    "img": "img/products/mosselen_vers.png"
+  },
+  {
     "id": "verse_pasta",
     "name": "Verse pasta",
     "brand": null,
@@ -5383,6 +9081,71 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "soep_vers_pompoen",
+    "name": "Verse pompoensoep",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "500 ml",
+    "aisle": "Koeling",
+    "aliases": [
+      "verse pompoensoep"
+    ],
+    "stores": null,
+    "img": "img/products/soep_vers_pompoen.png"
+  },
+  {
+    "id": "sperziebonen_vers",
+    "name": "Verse sperziebonen",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "500 g",
+    "aisle": "Vers",
+    "aliases": [
+      "verse sperziebonen"
+    ],
+    "stores": null,
+    "img": "img/products/sperziebonen_vers.png"
+  },
+  {
+    "id": "soep_vers_tomaat",
+    "name": "Verse tomatensoep",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "500 ml",
+    "aisle": "Koeling",
+    "aliases": [
+      "verse tomatensoep"
+    ],
+    "stores": null,
+    "img": "img/products/soep_vers_tomaat.png"
+  },
+  {
+    "id": "tonijn_vers",
+    "name": "Verse tonijnsteak",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "200 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "verse tonijn"
+    ],
+    "stores": null,
+    "img": "img/products/tonijn_vers.png"
+  },
+  {
+    "id": "visstick_vers",
+    "name": "Verse vissticks",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "300 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "verse vissticks"
+    ],
+    "stores": null,
+    "img": "img/products/visstick_vers.png"
   },
   {
     "id": "boterfolie",
@@ -5399,6 +9162,20 @@
     "img": null
   },
   {
+    "id": "vinaigrette",
+    "name": "Vinaigrette",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "250 ml",
+    "aisle": "Koeling",
+    "aliases": [
+      "vinaigrette",
+      "sladressing"
+    ],
+    "stores": null,
+    "img": "img/products/vinaigrette.png"
+  },
+  {
     "id": "visaus",
     "name": "Visaus",
     "brand": null,
@@ -5410,6 +9187,19 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "viskruiden",
+    "name": "Viskruiden",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "35 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "viskruiden"
+    ],
+    "stores": null,
+    "img": "img/products/viskruiden.png"
   },
   {
     "id": "diepvries_vissticks",
@@ -5425,6 +9215,33 @@
     "img": null
   },
   {
+    "id": "dv_vissticks",
+    "name": "Vissticks diepvries",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "450 g",
+    "aisle": "Diepvries",
+    "aliases": [
+      "diepvries vissticks"
+    ],
+    "stores": null,
+    "img": "img/products/dv_vissticks.png"
+  },
+  {
+    "id": "tomaat_vleestomaat",
+    "name": "Vleestomaten",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "500 g",
+    "aisle": "Vers",
+    "aliases": [
+      "vleestomaat",
+      "vleestomaten"
+    ],
+    "stores": null,
+    "img": "img/products/tomaat_vleestomaat.png"
+  },
+  {
     "id": "bakboter_vloeibaar",
     "name": "Vloeibare bakboter",
     "brand": null,
@@ -5436,6 +9253,98 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "honing_vloeibaar",
+    "name": "Vloeibare honing",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "350 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "vloeibare honing"
+    ],
+    "stores": null,
+    "img": "img/products/honing_vloeibaar.png"
+  },
+  {
+    "id": "beschuit_volkoren",
+    "name": "Volkoren beschuit",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "13 stuks",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "volkoren beschuit"
+    ],
+    "stores": null,
+    "img": "img/products/beschuit_volkoren.png"
+  },
+  {
+    "id": "bloem_volkoren",
+    "name": "Volkoren bloem",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 kg",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "volkoren bloem"
+    ],
+    "stores": null,
+    "img": "img/products/bloem_volkoren.png"
+  },
+  {
+    "id": "crackers_volkoren",
+    "name": "Volkoren crackers",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "250 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "volkoren crackers"
+    ],
+    "stores": null,
+    "img": "img/products/crackers_volkoren.png"
+  },
+  {
+    "id": "pasta_volkoren",
+    "name": "Volkoren pasta",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "500 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "volkoren pasta"
+    ],
+    "stores": null,
+    "img": "img/products/pasta_volkoren.png"
+  },
+  {
+    "id": "toast_volkoren",
+    "name": "Volkoren toast",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 stuk",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "volkoren toast"
+    ],
+    "stores": null,
+    "img": "img/products/toast_volkoren.png"
+  },
+  {
+    "id": "wraps_volkoren",
+    "name": "Volkoren wraps",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "6 stuks",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "volkoren wraps",
+      "wraps volkoren"
+    ],
+    "stores": null,
+    "img": "img/products/wraps_volkoren.png"
   },
   {
     "id": "kwark_vol",
@@ -5490,6 +9399,19 @@
     "img": null
   },
   {
+    "id": "hagelslag_mix",
+    "name": "Vruchtenhagelslag mix",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "400 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "hagelslag mix"
+    ],
+    "stores": null,
+    "img": "img/products/hagelslag_mix.png"
+  },
+  {
     "id": "vuilniszakken",
     "name": "Vuilniszakken",
     "brand": null,
@@ -5519,6 +9441,7 @@
     "id": "wasmiddel",
     "name": "Wasmiddel",
     "brand": null,
+    "brandTier": null,
     "pack": "1,5 kg",
     "aisle": "Huis",
     "aliases": [
@@ -5526,7 +9449,6 @@
       "waspoeder"
     ],
     "stores": null,
-    "brandTier": null,
     "img": null
   },
   {
@@ -5546,6 +9468,7 @@
     "id": "water",
     "name": "Water",
     "brand": null,
+    "brandTier": "B",
     "pack": "1,5L",
     "aisle": "Houdbaar",
     "aliases": [
@@ -5553,7 +9476,6 @@
       "bronwater"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
   },
   {
@@ -5583,6 +9505,20 @@
     "img": null
   },
   {
+    "id": "zalm_wild",
+    "name": "Wilde zalmfilet",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "250 g",
+    "aisle": "Koeling",
+    "aliases": [
+      "wilde zalm",
+      "wild salmon"
+    ],
+    "stores": null,
+    "img": "img/products/zalm_wild.png"
+  },
+  {
     "id": "winterpeen",
     "name": "Winterpeen",
     "brand": null,
@@ -5594,6 +9530,19 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "wortel_winter",
+    "name": "Winterpeen gewassen",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 kg",
+    "aisle": "Vers",
+    "aliases": [
+      "winterpeen gewassen"
+    ],
+    "stores": null,
+    "img": "img/products/wortel_winter.png"
   },
   {
     "id": "brood_wit",
@@ -5622,6 +9571,32 @@
     "img": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=400&q=60"
   },
   {
+    "id": "witlof_stronk",
+    "name": "Witlof 3-stronk",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "3 stuks",
+    "aisle": "Vers",
+    "aliases": [
+      "witlof stronk"
+    ],
+    "stores": null,
+    "img": "img/products/witlof_stronk.png"
+  },
+  {
+    "id": "bolletjes_wit",
+    "name": "Witte bolletjes",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "6 stuks",
+    "aisle": "Vers",
+    "aliases": [
+      "witte bolletjes"
+    ],
+    "stores": null,
+    "img": "img/products/bolletjes_wit.png"
+  },
+  {
     "id": "witte_bonen",
     "name": "Witte bonen",
     "brand": null,
@@ -5633,6 +9608,19 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "bonen_witte_blik",
+    "name": "Witte bonen blik",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "400 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "witte bonen blik"
+    ],
+    "stores": null,
+    "img": "img/products/bonen_witte_blik.png"
   },
   {
     "id": "druif_wit",
@@ -5700,9 +9688,24 @@
     "img": null
   },
   {
+    "id": "dv_wokgroente",
+    "name": "Wokgroente diepvries",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "400 g",
+    "aisle": "Diepvries",
+    "aliases": [
+      "wokgroente diepvries",
+      "diepvries wok"
+    ],
+    "stores": null,
+    "img": "img/products/dv_wokgroente.png"
+  },
+  {
     "id": "noedels",
     "name": "Woknoedels",
     "brand": null,
+    "brandTier": "B",
     "pack": "300 g",
     "aisle": "Houdbaar",
     "aliases": [
@@ -5710,13 +9713,28 @@
       "mie"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
+  },
+  {
+    "id": "worcestersaus",
+    "name": "Worcestersaus",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "150 ml",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "worcester",
+      "worcestersaus",
+      "worcestershire"
+    ],
+    "stores": null,
+    "img": "img/products/worcestersaus.png"
   },
   {
     "id": "wortel",
     "name": "Wortelen",
     "brand": null,
+    "brandTier": "B",
     "pack": "1 kg",
     "aisle": "Vers",
     "aliases": [
@@ -5726,8 +9744,7 @@
       "bospeen"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "B"
+    "img": "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?auto=format&fit=crop&w=400&q=60"
   },
   {
     "id": "wrap_kruiden",
@@ -5746,6 +9763,7 @@
     "id": "wraps",
     "name": "Wraps",
     "brand": null,
+    "brandTier": "B",
     "pack": "8 stuks",
     "aisle": "Houdbaar",
     "aliases": [
@@ -5753,13 +9771,13 @@
       "tortilla wraps"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
   },
   {
     "id": "yoghurt",
     "name": "Yoghurt",
     "brand": null,
+    "brandTier": "A",
     "pack": "1 kg",
     "aisle": "Koeling",
     "aliases": [
@@ -5767,8 +9785,20 @@
       "volle yoghurt"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "A"
+    "img": "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=400&q=60"
+  },
+  {
+    "id": "yoghurtdressing",
+    "name": "Yoghurtdressing",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "250 ml",
+    "aisle": "Koeling",
+    "aliases": [
+      "yoghurtdressing"
+    ],
+    "stores": null,
+    "img": "img/products/yoghurtdressing.png"
   },
   {
     "id": "yoghurtdrink",
@@ -5787,6 +9817,7 @@
     "id": "zalm",
     "name": "Zalmfilet",
     "brand": null,
+    "brandTier": "A",
     "pack": "2 stuks",
     "aisle": "Koeling",
     "aliases": [
@@ -5794,8 +9825,20 @@
       "zalmfilets"
     ],
     "stores": null,
-    "img": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=400&q=60",
-    "brandTier": "A"
+    "img": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=400&q=60"
+  },
+  {
+    "id": "dv_zalm_filet",
+    "name": "Zalmfilet diepvries",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "250 g",
+    "aisle": "Diepvries",
+    "aliases": [
+      "diepvries zalm"
+    ],
+    "stores": null,
+    "img": "img/products/dv_zalm_filet.png"
   },
   {
     "id": "zee_zout",
@@ -5852,6 +9895,19 @@
     "img": "https://images.unsplash.com/photo-1596097635121-14b63b7a0c19?auto=format&fit=crop&w=400&q=60"
   },
   {
+    "id": "zoete_aardappel_oranje",
+    "name": "Zoete aardappel oranje",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 kg",
+    "aisle": "Vers",
+    "aliases": [
+      "zoete aardappel oranje"
+    ],
+    "stores": null,
+    "img": "img/products/zoete_aardappel_oranje.png"
+  },
+  {
     "id": "zoete_puntpaprika",
     "name": "Zoete puntpaprika",
     "brand": null,
@@ -5865,6 +9921,20 @@
     "img": null
   },
   {
+    "id": "ui_zoet",
+    "name": "Zoete uien",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "1 kg",
+    "aisle": "Vers",
+    "aliases": [
+      "zoete uien",
+      "zoete ui"
+    ],
+    "stores": null,
+    "img": "img/products/ui_zoet.png"
+  },
+  {
     "id": "zongedroogde_tomaat",
     "name": "Zongedroogde tomaten",
     "brand": null,
@@ -5876,6 +9946,19 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "zongedroogde_olie",
+    "name": "Zongedroogde tomaten op olie",
+    "brand": null,
+    "brandTier": "A",
+    "pack": "280 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "zongedroogde op olie"
+    ],
+    "stores": null,
+    "img": "img/products/zongedroogde_olie.png"
   },
   {
     "id": "zonnebloemolie",
@@ -5907,6 +9990,7 @@
     "id": "zout",
     "name": "Zout",
     "brand": null,
+    "brandTier": "B",
     "pack": "1 kg",
     "aisle": "Houdbaar",
     "aliases": [
@@ -5914,7 +9998,6 @@
       "keukenzout"
     ],
     "stores": null,
-    "brandTier": "B",
     "img": null
   },
   {
@@ -5929,6 +10012,19 @@
     ],
     "stores": null,
     "img": null
+  },
+  {
+    "id": "olijven_zwart",
+    "name": "Zwarte olijven",
+    "brand": null,
+    "brandTier": "B",
+    "pack": "240 g",
+    "aisle": "Houdbaar",
+    "aliases": [
+      "zwarte olijven"
+    ],
+    "stores": null,
+    "img": "img/products/olijven_zwart.png"
   },
   {
     "id": "peper_zwart",
@@ -5957,7 +10053,7 @@
     "stores": null,
     "img": null
   }
-];
+  ];
 
   var EXTRA_KEY = "weate.products.extra";
   var _byId = {};
