@@ -222,7 +222,6 @@ return "<div class='listsec"+(open?" open":"")+"' data-sec='"+key+"'>"+
 function secFoot(){return "</div></div>";}
 function drawListByMeal(){
 var body=document.getElementById("lijstbody");if(!body)return;
-var slotF=document.getElementById("folderlijst");if(slotF)slotF.innerHTML="";
 applyListCompact();
 S.listOpen=S.listOpen||{};
 var html="";var n=0;
@@ -355,7 +354,7 @@ return {n:part,q:1};
 function addSpoken(text){
 var items=parseSpeak(text);
 if(!items.length){if(typeof toast==="function")toast("Niets herkend");return;}
-S.always=S.always||[];
+S.extras=S.extras||[];
 items.forEach(function(it){
 var cat=null;
 if(window.WeAteProducts){
@@ -363,17 +362,17 @@ if(window.WeAteProducts){
   if(!cat)cat=window.WeAteProducts.upsert({name:it.n,aisle:"Huis"});
 }
 var label=cat?cat.name:it.n;
-var key=cat&&typeof CAT!=="undefined"&&CAT[cat.id]?cat.id:null;
-var hit=-1;for(var i=0;i<S.always.length;i++){
-  if(key&&S.always[i].k===key)hit=i;
-  else if((S.always[i].n||"").toLowerCase()===label.toLowerCase())hit=i;
+var kid=cat?cat.id:null;
+var hit=-1;for(var i=0;i<S.extras.length;i++){
+  if(kid&&S.extras[i].k===kid)hit=i;
+  else if((S.extras[i].n||"").toLowerCase()===label.toLowerCase())hit=i;
 }
-if(hit>=0)S.always[hit].q=(+S.always[hit].q||1)+it.q;
-else S.always.push(key?{k:key,n:label,q:it.q}:{n:label,q:it.q});
+if(hit>=0)S.extras[hit].q=(+S.extras[hit].q||1)+it.q;
+else S.extras.push(kid?{n:label,q:it.q,s:"Huis",k:kid}:{n:label,q:it.q,s:"Huis"});
 });
 if(typeof save==="function")save();
 if(typeof window.drawList==="function")window.drawList();else drawListByMeal();
-if(typeof toast==="function")toast(items.map(function(i){return i.q+"\u00d7 "+i.n;}).join(", "));
+if(typeof toast==="function")toast(items.map(function(i){return i.q+"\u00d7 "+i.n;}).join(", ")+" op de lijst");
 }
 function startListen(){
 var SR=window.SpeechRecognition||window.webkitSpeechRecognition;

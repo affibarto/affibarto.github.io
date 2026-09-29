@@ -49,14 +49,18 @@ function candidateDays(want){
 function recs(){return typeof REC!=="undefined"?REC:[];}
 
 function scoreRec(rec,people,ctx){
+  /* Één scorer: WeAteAI.scoreRecSmart (offline pad). Fallback alleen als AI-module ontbreekt. */
+  if(window.WeAteAI&&typeof WeAteAI.scoreRecSmart==="function"){
+    return WeAteAI.scoreRecSmart(rec,people,ctx||{});
+  }
   ctx=ctx||{};
   if(typeof hardBlock==="function"&&hardBlock(rec,people).length)return null;
   var taste=(typeof tasteHits==="function")?tasteHits(rec,people).length:0;
-  var score=taste*12;
-  if(ctx.usedCuisine&&ctx.usedCuisine[rec.c])score+=14;
-  if(ctx.usedId&&ctx.usedId[rec.id])score+=8;
+  var score=taste*22;
+  if(ctx.usedCuisine&&ctx.usedCuisine[rec.c])score+=20;
+  if(ctx.usedId&&ctx.usedId[rec.id])score+=10;
   score+=Math.max(0,(rec.time||30)-35);
-  if(ctx.busy&&(rec.time||30)>30)score+=12;
+  if(ctx.busy&&(rec.time||30)>30)score+=14;
   if(ctx.busy&&(rec.time||30)<=25)score-=8;
   if(ctx.preferReheat&&rec.reheat)score-=6;
   if(ctx.kidsSmall&&rec.fijn)score-=5;
@@ -415,6 +419,7 @@ function acceptSelected(){
     if(typeof toast==="function")toast("Kies minstens één avond");
     return;
   }
+  S._skipAb=true; /* Slim-bulk: geen A/B-popup per avond */
   list.forEach(function(s){
     var who=whoFor(s.day);
     var kids=(S.people||[]).filter(function(p){return p.role==="child"&&p.portion==="small";}).map(function(p){return p.id;});
@@ -432,6 +437,7 @@ function acceptSelected(){
     }
   });
   if(typeof save==="function")save();
+  S._skipAb=false;
   closeSuggest();
   if(typeof drawBord==="function")drawBord();
   if(typeof drawList==="function")drawList();

@@ -21,7 +21,7 @@ Field-level merge is bewust **niet** in gebruik: plan/lijst/checked horen als ge
 
 ## Wat synct
 
-Plan, mensen, always/extras, weglaten (omit), toegevoegde ingrediënten (ingAdd), afgevinkt (checked), merk (brand/itemBrand), winkels, budget, huisnaam, apartPick, gegeten (eaten).
+Plan, mensen, always/extras, weglaten (omit), toegevoegde ingrediënten (ingAdd), afgevinkt (checked), merk (brand/itemBrand), winkels, budget, huisnaam, apartPick, gegeten (eaten), **weekPlans**, **customs**, listCompact, planRemind.
 
 **Niet** synchroon: folder-/bonus-JSON (publiek op de site), productcatalogus-extras in localStorage (tot sync later).
 

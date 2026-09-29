@@ -6,7 +6,20 @@
 (function(){
 if(window._abPopupOnce)return;window._abPopupOnce=1;
 
-var draft={mode:"MIX",swaps:{},day:null,rid:null};
+var draft={mode:"MIX",swaps:{},day:null,rid:null,remember:false};
+function abWeekKey(){
+try{
+var d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()+3-(d.getDay()+6)%7);
+var w1=new Date(d.getFullYear(),0,4);
+var w=1+Math.round(((d-w1)/86400000-(3-(w1.getDay()+6)%7))/7);
+return d.getFullYear()+"-W"+String(w).padStart(2,"0");
+}catch(e){return "";}
+}
+function shouldSkipAb(){
+if(S&&S._skipAb)return true;
+if(S&&S.abSkipWeek&&S.abSkipWeek===abWeekKey())return true;
+return false;
+}
 
 function euro(c){
 if(c==null||!isFinite(c))return "onbekend";
@@ -166,6 +179,7 @@ body.innerHTML=
 "</div>"+
 "<p class=note style=margin:8px 0 0>"+(mode==="A"?"Hele maaltijd op A-merk (per product nog te overrulen).":mode==="B"?"Hele maaltijd op huismerk (per product nog te overrulen).":"Mix: huidige standaard + je swaps hieronder.")+"</p>"+
 "<div class=sec>Slimme swaps</div>"+swapHtml+
+"<label class=note style='display:flex;align-items:center;gap:8px;margin:12px 0 0'><input type=checkbox id=abremember "+((draft.remember||S.abSkipWeek===abWeekKey())?"checked":"")+"/> Mix onthouden voor deze week (geen popup)</label>"+
 "<button type=button class='btn g full' id=abconfirm style=margin-top:16px>"+confirmLabel+"</button>"+
 "<button type=button class='btn w full' id=abcancel style=margin-top:8px>Annuleer</button>";
 }
@@ -177,6 +191,7 @@ if(typeof hardBlock==="function"&&hardBlock(r,eatersOn(S.day)).length){
 if(typeof toast==="function")toast("Past niet bij een dieet");
 return;
 }
+if(shouldSkipAb()){doPut();return;}
 var day=S.day;
 var prevBrand=(S.plan&&S.plan[day]&&S.plan[day].brand)||S.brand||"MIX";
 if(prevBrand!=="A"&&prevBrand!=="B"&&prevBrand!=="MIX")prevBrand="MIX";
@@ -188,6 +203,9 @@ panel.classList.add("on");
 }
 
 function applyChoiceThenPut(){
+var rem=document.getElementById("abremember");
+if(rem&&rem.checked){S.abSkipWeek=abWeekKey();if(typeof save==="function")save();}
+else if(S.abSkipWeek===abWeekKey()){delete S.abSkipWeek;if(typeof save==="function")save();}
 var day=draft.day,rid=draft.rid,mode=draft.mode||"MIX";
 var rec=typeof recipeBy==="function"?recipeBy(rid):null;
 S.itemBrand=S.itemBrand||{};

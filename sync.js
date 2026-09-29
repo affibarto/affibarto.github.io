@@ -7,7 +7,8 @@
 
   var SYNC_KEYS = [
     "plan", "people", "always", "extras", "omit", "ingAdd", "checked",
-    "brand", "itemBrand", "stores", "budget", "house", "apartPick", "eaten"
+    "brand", "itemBrand", "stores", "budget", "house", "apartPick", "eaten",
+    "weekPlans", "customs", "listCompact", "planRemind"
   ];
   var DEBOUNCE_MS = 400;
   var CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
