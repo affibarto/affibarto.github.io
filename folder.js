@@ -52,7 +52,8 @@ var _DISH={
   wrap:1,wraps:1,burger:1,burgers:1,nugget:1,nuggets:1,kroket:1,kroketten:1,
   pan:1,wok:1,schotel:1,gerecht:1,maaltijdbox:1,poeder:1,poeders:1,
   carbonara:1,bolognese:1,bolo:1,ragout:1,teriyaki:1,madras:1,kebab:1,tikka:1,
-  presto:1,ovenpasta:1,babymaaltijd:1,olvarit:1,cheese:1,mac:1
+  presto:1,ovenpasta:1,babymaaltijd:1,olvarit:1,cheese:1,mac:1,
+  piccolini:1,piccolinis:1,airfryer:1,nuggets:1,filet:1
 };
 /* Simple staples: dish/sauce/snack reject applies (plus Vers aisle / _FRESH). */
 var _SIMPLE={
@@ -369,3 +370,17 @@ function openActieForProduct(productOrEntry,deal){
 window.dealsForProduct=dealsForProduct;
 window.actieBadgeInfo=actieBadgeInfo;
 window.openActieForProduct=openActieForProduct;
+
+/** Strict product↔deal check (same rules as folder badges). Used by brands scoring. */
+function dealMatchesEntry(r, entry){
+  if(!r||!entry)return false;
+  var e={
+    n:entry.n||entry.name||entry.label||"",
+    k:entry.k||entry.id||"",
+    aisle:entry.aisle||""
+  };
+  if(!e.n&&!e.k)return false;
+  return !!dealMatchKind(r,{list:[e],bord:[]});
+}
+window.dealMatchesEntry=dealMatchesEntry;
+window.dealMatchKind=dealMatchKind;

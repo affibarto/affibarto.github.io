@@ -9,6 +9,21 @@ var i=+parts[1];
 if(!isFinite(i))return null;
 return (S.extras||[])[i]||null;
 }
+function lineUnit(cat,storeId,item){
+  var brand=(typeof effectiveBrand==="function")?effectiveBrand(item):(S.brand||"MIX");
+  if(typeof priceForBrandPref==="function"){
+    return priceForBrandPref(cat,storeId,brand,item.k);
+  }
+  if(typeof unitPrice!=="function")return null;
+  if(brand==="laagste"){
+    var pA=unitPrice(cat,storeId,"A",item.k);
+    var pB=unitPrice(cat,storeId,"B",item.k);
+    if(pA==null)return pB;
+    if(pB==null)return pA;
+    return Math.min(pA,pB);
+  }
+  return unitPrice(cat,storeId,brand,item.k);
+}
 function scoreListStores(){
 var stores=typeof activeStores==="function"?activeStores():(STORES||[]);
 if(!stores.length||typeof buildList!=="function")return [];
@@ -24,16 +39,8 @@ have++;
 }else miss.push(i.n);
 return;
 }
-if(typeof unitPrice!=="function"||!i.cat){miss.push(i.n);return;}
-var brand=(typeof effectiveBrand==="function")?effectiveBrand(i):(S.brand||"MIX");
-var pr;
-if(brand==="laagste"){
-  var pA=unitPrice(i.cat,r.id,"A",i.k);
-  var pB=unitPrice(i.cat,r.id,"B",i.k);
-  if(pA==null)pr=pB;else if(pB==null)pr=pA;else pr=Math.min(pA,pB);
-}else{
-  pr=unitPrice(i.cat,r.id,brand,i.k);
-}
+if(!i.cat){miss.push(i.n);return;}
+var pr=lineUnit(i.cat,r.id,i);
 if(pr==null)miss.push(i.n);
 else{total+=Math.round(pr*Math.max(i.q||1,0.5));have++;}
 });

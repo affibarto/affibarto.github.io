@@ -1,7 +1,8 @@
-/* A/B merk: per-regel zichtbaar + winkeltotalen herberekend (v82)
- * - itemBrand keys genormaliseerd (melk@Ma → melk) zodat toggle totals raakt
- * - Echte Folder/Actie A/B-prijzen als die er zijn; anders catalogus-indicatie
- * - Nooit verzonnen "bespaar €X"; wel eerlijk A €x · huismerk €y of "geen A/B-prijs"
+/* A/B merk + winkeltotalen (v83)
+ * - Strict Actie-match (zelfde regels als folder.js) — géén petfood/rijst-mismatches
+ * - Huismerken (1 de Beste, AH, Jumbo, …) = B-tier
+ * - Per winkel+regel: priceB ≤ priceA (eerlijke fallback), mix = aisle A/B, goedkoopst = min
+ * - Indicatie, geen kassaprijs; geen verzonnen "bespaar"
  */
 S.itemBrand = S.itemBrand || {};
 S.brand = S.brand || "MIX";
@@ -10,33 +11,31 @@ function brandKey(k) {
   k = String(k || "");
   if (!k) return "";
   if (/^e:\d+:/.test(k)) return k;
-  /* listview day keys: product@Ma or add:x@Ma#0 */
   var at = k.indexOf("@");
   if (at >= 0) k = k.slice(0, at);
   return k;
 }
 (function migrateBrandKeys(){
-  var ib=S.itemBrand||{};
-  var dirty=false;
-  Object.keys(ib).forEach(function(k){
-    var b=brandKey(k);
-    if(b&&b!==k){
-      if(ib[b]===undefined)ib[b]=ib[k];
+  var ib = S.itemBrand || {};
+  var dirty = false;
+  Object.keys(ib).forEach(function (k) {
+    var b = brandKey(k);
+    if (b && b !== k) {
+      if (ib[b] === undefined) ib[b] = ib[k];
       delete ib[k];
-      dirty=true;
+      dirty = true;
     }
-    if(ib[b]==="auto"){delete ib[b];dirty=true;}
+    if (ib[b] === "auto") { delete ib[b]; dirty = true; }
   });
-  if(dirty&&typeof save==="function")try{save();}catch(e){}
+  if (dirty && typeof save === "function") try { save(); } catch (e) {}
 })();
-
 
 function brandHint() {
   return {
     A: "Standaard A-merk. Per regel hieronder te overrulen.",
     B: "Standaard huismerk. Per regel hieronder te overrulen.",
     MIX: "Mix: vers/koel A, houdbaar huismerk. Per regel te overrulen.",
-    CHEAP: "Laagste indicatie per product. Per regel nog A of B zetten."
+    CHEAP: "Laagste prijs per product (A of huismerk). Per regel nog A of B zetten."
   }[S.brand] || "";
 }
 
@@ -82,14 +81,26 @@ function activeStoreIds() {
   return stores.map(function (r) { return r.id || r; });
 }
 
-/** Catalogus-indicatie zonder Actie (A = base+aExtra, B = ~86%). */
+function productEntry(cat, k) {
+  k = brandKey(k);
+  return {
+    n: (cat && (cat.label || cat.name)) || k,
+    k: k,
+    aisle: (cat && cat.aisle) || ""
+  };
+}
+
+/** Catalogus-indicatie (A = base+aExtra, B ≈ 86%). */
 function catalogBrandPrice(cat, retailer, brand) {
   if (!cat) return null;
   if ((cat.missing || []).includes(retailer)) return null;
   var base = cat[retailer];
   if (base == null) {
     if (retailer === "plus" || retailer === "picnic") base = cat.jumbo;
-    else if (retailer === "dirk" || retailer === "aldi" || retailer === "dekamarkt" || retailer === "hoogvliet" || retailer === "vomar" || retailer === "ekoplaza") base = cat.lidl;
+    else if (
+      retailer === "dirk" || retailer === "aldi" || retailer === "dekamarkt" ||
+      retailer === "hoogvliet" || retailer === "vomar" || retailer === "ekoplaza"
+    ) base = cat.lidl;
     else return null;
   }
   if (base == null || !isFinite(base)) return null;
@@ -103,137 +114,210 @@ function catalogBrandPrice(cat, retailer, brand) {
   return base;
 }
 
-function dealTier(deal) {
+var _HOUSE_BRAND =
+  /^(ah|albert\s*heijn|jumbo|plus|lidl|dirk|aldi|gwoon|g['\u2019]?woon|picnic|hoogvliet|dekamarkt|vomar|ekoplaza|boni|euro\s*shopper|everyday|1\s*de\s*beste|eerlijke\s*prijs|garant|tasty)\b/i;
+
+var _FOOD_LEAD =
+  /^(pasta|spaghetti|penne|melk|kip|kipfilet|rijst|ui|uien|wortel|wortelen|aardappel|aardappelen|kaas|tomaat|tomaten|brood|sla|spinazie|boter|ham|paprika|gehakt|yoghurt|kwark|ei|eieren|zalm|pesto|wraps|wrap|champignon|champignons|komkommer|fruit|hagelslag|lasagne|mozzarella|rookworst|beleg)$/i;
+
+/**
+ * A vs huismerk uit deal brand/naam.
+ * "1 de Beste …", "AH …", "Jumbo …" → B. Merknaam vooraan → A. Anders "".
+ */
+function detectBrandTier(deal) {
   if (!deal) return "";
-  if (typeof detectBrandTier === "function") {
-    return detectBrandTier({
-      b: deal.b || deal.brand || "",
-      brand: deal.b || deal.brand || "",
-      n: deal.n || deal.name || ""
-    }) || "";
-  }
   var brand = String(deal.b || deal.brand || "").trim();
-  var name = String(deal.n || deal.name || "");
-  var bl = (brand || name).toLowerCase();
-  if (/^(ah|jumbo|plus|lidl|dirk|aldi|gwoon|picnic|hoogvliet|dekamarkt|vomar|ekoplaza|boni|euroshopper|everyday)\b/.test(bl)) return "B";
+  var name = String(deal.n || deal.name || "").trim();
+  if (brand && _HOUSE_BRAND.test(brand)) return "B";
+  if (!brand && name && _HOUSE_BRAND.test(name)) return "B";
   if (brand) return "A";
+  if (name) {
+    var first = name.split(/\s+/)[0] || "";
+    if (first && !_FOOD_LEAD.test(first) && !/^\d/.test(first) && /^[A-ZÀ-Ýa-zà-ÿ]/.test(first)) {
+      /* Hak, Knorr, Arla, Campina, De Cecco, … */
+      if (!_HOUSE_BRAND.test(first)) return "A";
+    }
+  }
   return "";
 }
 
-function bonusDeal(k, retailer) {
-  k = brandKey(k);
-  if (!k || typeof bonusOf !== "function") return null;
-  var b = bonusOf(k, retailer);
-  if (!b || b.now == null) return null;
+function dealRowFromBonus(b, retailer) {
+  if (!b) return null;
   return {
+    n: b.name || b.n || "",
+    b: b.brand || b.b || "",
+    brand: b.brand || b.b || "",
+    name: b.name || b.n || "",
     now: b.now,
     was: b.was,
     deal: b.deal || "",
-    n: b.name || "",
-    b: b.brand || "",
-    brand: b.brand || "",
-    name: b.name || "",
+    s: retailer,
     sid: retailer,
     source: "bonus"
   };
 }
 
-/** Zoek Folder-hit voor dit product + gewenst merk (A of B). */
-function folderDealForBrand(k, cat, brand, retailer) {
+/** Bonus alleen als titel strikt bij product past (folder.js-regels). */
+function strictBonusDeal(k, cat, retailer) {
   k = brandKey(k);
-  var items = (window.FOLDER_FULL && window.FOLDER_FULL.items) || [];
-  if (!items.length || (brand !== "A" && brand !== "B")) return null;
-  var needles = [];
-  var label = (cat && (cat.label || cat.name)) || k;
-  if (typeof _tokens === "function") {
-    /* optional shared tokenizer not always exported */
+  if (!k || typeof bonusOf !== "function") return null;
+  var b = bonusOf(k, retailer);
+  if (!b || b.now == null) return null;
+  var row = dealRowFromBonus(b, retailer);
+  var entry = productEntry(cat, k);
+  if (typeof dealMatchesEntry === "function") {
+    if (!dealMatchesEntry(row, entry)) return null;
+  } else {
+    /* Minimale fallback zonder folder.js */
+    var hay = String(row.n || "").toLowerCase();
+    var key = String(k).toLowerCase();
+    if (!hay || (key.length >= 3 && hay.indexOf(key) < 0)) return null;
+    if (/smuldier|purina|pedigree|olvarit|honden|katten|knijpfruit/i.test(hay)) return null;
   }
-  var raw = String(label || "").toLowerCase().replace(/[^\wäöüßà-ÿ0-9]+/g, " ").split(/\s+/).filter(function (t) {
-    return t.length >= 4;
-  });
-  needles = raw.slice(0, 4);
-  if (k && k.length >= 3) needles.push(k.toLowerCase());
-  if (window.WeAteProducts && typeof WeAteProducts.aliasesFor === "function") {
-    try {
-      (WeAteProducts.aliasesFor(k) || []).forEach(function (a) {
-        var t = String(a || "").toLowerCase();
-        if (t.length >= 3) needles.push(t);
-      });
-    } catch (e) {}
-  }
-  var best = null, bestScore = 0;
-  for (var i = 0; i < items.length; i++) {
-    var r = items[i];
+  row.tier = detectBrandTier(row);
+  return row;
+}
+
+/** Strict folder-hit voor gewenst merk bij deze retailer. */
+function strictFolderDeal(k, cat, brand, retailer) {
+  k = brandKey(k);
+  if (typeof dealsForProduct !== "function") return null;
+  if (brand !== "A" && brand !== "B" && brand !== "laagste" && brand) return null;
+  var entry = productEntry(cat, k);
+  var hits = dealsForProduct(entry) || [];
+  var best = null;
+  for (var i = 0; i < hits.length; i++) {
+    var r = hits[i];
     if (!r || r.now == null) continue;
     if (retailer && r.s && r.s !== retailer) continue;
-    var tier = dealTier(r);
-    if (tier !== brand) continue;
-    var hay = (r.n + " " + (r.b || "") + " " + (r.qty || r.q || "")).toLowerCase();
-    var score = 0;
-    for (var j = 0; j < needles.length; j++) {
-      if (needles[j] && hay.indexOf(needles[j]) >= 0) score += needles[j].length >= 5 ? 3 : 2;
+    var t = detectBrandTier(r);
+    if (brand === "A" || brand === "B") {
+      if (t && t !== brand) continue;
+      /* unbranded (t==="") mag voor beide — bekende schaprijjs */
     }
-    if (k && hay.indexOf(String(k).toLowerCase()) >= 0) score += 4;
-    if (score > bestScore) {
-      bestScore = score;
-      best = r;
+    if (!best || r.now < best.now) {
+      best = {
+        now: r.now,
+        was: r.was,
+        deal: r.deal || "",
+        n: r.n || "",
+        b: r.b || "",
+        brand: r.b || "",
+        name: r.n || "",
+        sid: r.s || retailer,
+        s: r.s || retailer,
+        source: "folder",
+        tier: t || ""
+      };
     }
   }
-  if (bestScore < 5 || !best) return null;
-  return {
-    now: best.now,
-    was: best.was,
-    deal: best.deal || "",
-    n: best.n || "",
-    b: best.b || "",
-    brand: best.b || "",
-    name: best.n || "",
-    sid: best.s || retailer,
-    source: "folder"
-  };
+  return best;
 }
 
 /**
- * Beste unit-prijs voor één merk over activeStores.
- * Voorkeur: Actie/Folder die bij het merk past → anders catalogus-indicatie.
+ * Per winkel + product: A- en B-centen.
+ * - Actie/Folder alleen bij strikte match + passende tier
+ * - Ontbrekende B → eerlijk A (of catalogus-B); nooit B > A op dezelfde regel
  */
+function storeLinePrices(cat, retailer, k) {
+  k = brandKey(k);
+  var catalogA = catalogBrandPrice(cat, retailer, "A");
+  var catalogB = catalogBrandPrice(cat, retailer, "B");
+  var a = null, b = null, aSrc = "cat", bSrc = "cat";
+
+  var bonus = strictBonusDeal(k, cat, retailer);
+  if (bonus) {
+    var t = bonus.tier || detectBrandTier(bonus);
+    if (!t) {
+      a = bonus.now; b = bonus.now; aSrc = bSrc = bonus.source || "actie";
+    } else if (t === "A") {
+      a = bonus.now; aSrc = bonus.source || "actie";
+    } else if (t === "B") {
+      b = bonus.now; bSrc = bonus.source || "actie";
+    }
+  }
+
+  if (a == null) {
+    var fdA = strictFolderDeal(k, cat, "A", retailer);
+    if (fdA) { a = fdA.now; aSrc = "folder"; }
+    else { a = catalogA; aSrc = "cat"; }
+  }
+  if (b == null) {
+    var fdB = strictFolderDeal(k, cat, "B", retailer);
+    if (fdB) { b = fdB.now; bSrc = "folder"; }
+    else if (a != null && aSrc !== "cat") {
+      /* Geen huismerk-actie: gebruik bekende A-prijs i.p.v. duurdere catalogus-B */
+      b = a; bSrc = aSrc;
+    } else {
+      b = catalogB; bSrc = "cat";
+    }
+  }
+
+  if (a == null && b != null) { a = b; aSrc = bSrc; }
+  if (b == null && a != null) { b = a; bSrc = aSrc; }
+
+  /* Invariant: huismerk nooit duurder dan A op dezelfde regel */
+  if (a != null && b != null && b > a) {
+    b = a;
+    bSrc = aSrc;
+  }
+
+  return {
+    a: a,
+    b: b,
+    aSrc: aSrc,
+    bSrc: bSrc,
+    paired: a != null && b != null && a !== b,
+    real: (aSrc !== "cat") || (bSrc !== "cat")
+  };
+}
+
+/** unitPrice voor één merkvoorkeur op één winkel. */
+function priceForBrandPref(cat, retailer, brand, k) {
+  var p = storeLinePrices(cat, retailer, k);
+  if (brand === "laagste" || brand === "CHEAP") {
+    if (p.a == null) return p.b;
+    if (p.b == null) return p.a;
+    return Math.min(p.a, p.b);
+  }
+  if (brand === "B") return p.b;
+  if (brand === "A") return p.a;
+  if (brand === "MIX") {
+    var aisle = (cat && cat.aisle) || "";
+    if (aisle === "Vers" || aisle === "Koeling") return p.a;
+    return p.b;
+  }
+  return p.a;
+}
+
 function bestPriceForBrand(cat, k, brand) {
   k = brandKey(k);
   var stores = activeStoreIds();
-  var best = null;
-  var meta = null;
+  var best = null, meta = null;
   stores.forEach(function (sid) {
-    var deal = bonusDeal(k, sid);
-    if (deal) {
-      var t = dealTier(deal);
-      /* Merk-mismatch: Actie niet forceren — zoek folder-alternatief of catalogus. */
-      if (t && brand && brand !== "laagste" && t !== brand) deal = null;
-    }
-    if (!deal) deal = folderDealForBrand(k, cat, brand === "laagste" ? null : brand, sid);
+    var p = storeLinePrices(cat, sid, k);
+    var pr = null, src = "cat";
     if (brand === "laagste") {
-      /* pick later */
-    }
-    var pr = null;
-    var src = "cat";
-    if (deal && deal.now != null) {
-      pr = deal.now;
-      src = deal.source || "actie";
-    } else {
-      pr = catalogBrandPrice(cat, sid, brand === "laagste" ? null : brand);
+      if (p.a == null) { pr = p.b; src = p.bSrc; }
+      else if (p.b == null) { pr = p.a; src = p.aSrc; }
+      else if (p.a <= p.b) { pr = p.a; src = p.aSrc; }
+      else { pr = p.b; src = p.bSrc; }
+    } else if (brand === "B") { pr = p.b; src = p.bSrc; }
+    else if (brand === "A") { pr = p.a; src = p.aSrc; }
+    else {
+      var aisle = (cat && cat.aisle) || "";
+      if (aisle === "Vers" || aisle === "Koeling") { pr = p.a; src = p.aSrc; }
+      else { pr = p.b; src = p.bSrc; }
     }
     if (pr == null || !isFinite(pr)) return;
     if (best == null || pr < best) {
       best = pr;
-      meta = { sid: sid, cents: pr, source: src, deal: deal };
+      meta = { sid: sid, cents: pr, source: src };
     }
   });
   return { cents: best, meta: meta };
 }
 
-/**
- * A/B prijspaar voor één lijstregel.
- * paired=true alleen bij echt verschil (Actie/Folder of catalogus-indicatie).
- */
 function abPricePair(cat, k) {
   k = brandKey(k);
   var a = bestPriceForBrand(cat, k, "A");
@@ -286,14 +370,13 @@ function paintBrand() {
   var s = document.getElementById("brandsave");
   if (s && typeof buildList === "function") {
     var items = buildList().filter(function (i) { return !(S.checked && S.checked[i.k]); });
-    var nA = 0, nB = 0, nPair = 0, nSame = 0;
+    var nA = 0, nB = 0, nPair = 0;
     items.forEach(function (i) {
       var eb = effectiveBrand(i);
       if (eb === "B") nB++;
       else if (eb === "A") nA++;
       var pair = abPricePair(i.cat, i.k);
       if (pair.paired) nPair++;
-      else nSame++;
     });
     s.textContent =
       nA + "× A-merk · " + nB + "× huismerk · " +
@@ -302,46 +385,17 @@ function paintBrand() {
   }
 }
 
-/** Wrap unitPrice: genormaliseerde override + merk-passende Actie. */
-if (typeof unitPrice === "function" && !unitPrice._brandWrapped82) {
+/** Wrap unitPrice: genormaliseerde override + strikte merkprijzen. */
+if (typeof unitPrice === "function" && !unitPrice._brandWrapped83) {
   var _up = unitPrice._raw || unitPrice;
   unitPrice._raw = _up;
   unitPrice = function (cat, retailer, brand, k) {
     var key = brandKey(k);
     var ov = key && S.itemBrand && S.itemBrand[key];
     if (ov === "A" || ov === "B") brand = ov;
-
-    if (brand === "laagste") {
-      /* Tijdelijk override uit zodat A én B berekend worden. */
-      var had = key && S.itemBrand && Object.prototype.hasOwnProperty.call(S.itemBrand, key);
-      var prev = had ? S.itemBrand[key] : null;
-      if (had) delete S.itemBrand[key];
-      var pA = unitPrice(cat, retailer, "A", key);
-      var pB = unitPrice(cat, retailer, "B", key);
-      if (had) S.itemBrand[key] = prev;
-      if (pA == null) return pB;
-      if (pB == null) return pA;
-      return Math.min(pA, pB);
-    }
-
-    /* Actie alleen meenemen als merk past (of onbekend). */
-    if (key) {
-      var deal = bonusDeal(key, retailer);
-      if (deal) {
-        var t = dealTier(deal);
-        if (!brand || brand === "MIX" || !t || t === brand) return deal.now;
-        /* mismatch → folder-alternatief voor dit merk */
-        var alt = folderDealForBrand(key, cat, brand, retailer);
-        if (alt && alt.now != null) return alt.now;
-        return catalogBrandPrice(cat, retailer, brand);
-      }
-      if (brand === "A" || brand === "B") {
-        var fd = folderDealForBrand(key, cat, brand, retailer);
-        if (fd && fd.now != null) return fd.now;
-      }
-    }
-    return catalogBrandPrice(cat, retailer, brand);
+    return priceForBrandPref(cat, retailer, brand, key);
   };
+  unitPrice._brandWrapped83 = true;
   unitPrice._brandWrapped82 = true;
   unitPrice._wrapped = true;
 }
@@ -371,10 +425,11 @@ function abLineHtml(k, cat) {
   }
   var aTxt = pair.a != null ? euroc(pair.a) : "—";
   var bTxt = pair.b != null ? euroc(pair.b) : "—";
+  var esc = String(brandKey(k)).replace(/"/g, "");
   return (
-    "<span class=abpick data-k=\"" + String(brandKey(k)).replace(/"/g, "") + "\">" +
-      "<button type=button class=\"chip s abchip" + aOn + "\" data-act=itembrand data-k=\"" + String(brandKey(k)).replace(/"/g, "") + "\" data-b=A title=\"A-merk\">A " + aTxt + "</button>" +
-      "<button type=button class=\"chip s abchip" + bOn + "\" data-act=itembrand data-k=\"" + String(brandKey(k)).replace(/"/g, "") + "\" data-b=B title=\"Huismerk\">B " + bTxt + "</button>" +
+    "<span class=abpick data-k=\"" + esc + "\">" +
+      "<button type=button class=\"chip s abchip" + aOn + "\" data-act=itembrand data-k=\"" + esc + "\" data-b=A title=\"A-merk\">A " + aTxt + "</button>" +
+      "<button type=button class=\"chip s abchip" + bOn + "\" data-act=itembrand data-k=\"" + esc + "\" data-b=B title=\"Huismerk\">B " + bTxt + "</button>" +
       hint +
     "</span>"
   );
@@ -403,7 +458,6 @@ function stampItemBrands() {
       var wrap = document.createElement("div");
       wrap.innerHTML = html;
       var node = wrap.firstChild;
-      /* zet vóór qtybox/price indien aanwezig, anders achteraan */
       var qty = row.querySelector(".qtybox, .qtyn, .price");
       if (qty) row.insertBefore(node, qty);
       else row.appendChild(node);
@@ -420,7 +474,6 @@ document.addEventListener("click", function (e) {
     var want = ib.getAttribute("data-b");
     var cur = itemMode(k);
     if (want === "A" || want === "B") {
-      /*zelfde tik = terug naar auto (volgt standaard) */
       if (cur === want) setItemBrand(k, "auto");
       else setItemBrand(k, want);
     } else {
@@ -475,6 +528,10 @@ window.paintBrand = paintBrand;
 window.stampItemBrands = stampItemBrands;
 window.setItemBrand = setItemBrand;
 window.bestPriceForBrand = bestPriceForBrand;
+window.storeLinePrices = storeLinePrices;
+window.priceForBrandPref = priceForBrandPref;
+window.detectBrandTier = detectBrandTier;
+window.catalogBrandPrice = catalogBrandPrice;
 
 try {
   paintBrand();
