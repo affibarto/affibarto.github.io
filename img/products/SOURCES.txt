@@ -1,0 +1,5 @@
+# Product thumbnails for WeAte catalog expansion
+# Generated abstract placeholders (not brand packaging, not supermarket scrapes).
+# Soft aisle-colored circles + product name. Free to use with the site.
+# Count: 303 new files, one per new product id.
+# Date: 2026-09-29
