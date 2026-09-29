@@ -5,24 +5,24 @@ bolo: Unsplash photo-1621996346565
 pesto: Unsplash photo-1473093295043
 lasagne: Unsplash photo-1574894709920
 pizza: Unsplash photo-1574071318508
-stamp: Flickr CC (hutspot_flickr2)
-spinazicreme: Unsplash photo-1600891964092
+stamp: Wikimedia 2015_0330_Hutspot_karbonade.jpg (CC BY-SA 4.0)
+spinazicreme: Wikimedia New_York_strip_steak_with_Beurre_Maitre_dHotel_creamed_spinach_and_potatoes.jpg (CC)
 gebakkenaard: Pexels 19748954
 pannenkoek: Pexels 376464
 kerrie: Pexels 7625056
 noodle: Pexels 28460868
-taco: Pexels 7613566
-zalm: Unsplash photo-1485921325833
-gyros: Pexels 4958641
+taco: Pixabay burrito-7217208
+zalm: Pexels 8696472
+gyros: Pexels 6941006
 dal: Pexels 8996219
 boerenkool: Wikimedia Boerenkool_stamppot.jpg
 nasi: Pixabay nasi-goreng-70674
-sate: Pexels 37090658
+sate: Pexels 37095165
 ballen: Pexels 29653148
 bloemkool: Pixabay food-886272
 taiwankip: Wikimedia minced chicken rice bowl
 kipnasi: Unsplash photo-1603133872878
-garnalennasi: Pexels 725991
+garnalennasi: Pexels 34683318
 knoflookkip: Pexels 32986472
 bangbang: Pexels 12916862
 kebabwrap: Unsplash photo-1626700051175
