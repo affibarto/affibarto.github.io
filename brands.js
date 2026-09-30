@@ -1,4 +1,4 @@
-/* A/B merk + winkeltotalen (v84)
+/* A/B merk + winkeltotalen (v85)
  * - Strict Actie-match (zelfde regels als folder.js) — géén petfood/rijst-mismatches
  * - Huismerken (1 de Beste, AH, Jumbo, …) = B-tier
  * - Per winkel+regel: priceB ≤ priceA (eerlijke fallback), mix = aisle A/B, goedkoopst = min
@@ -7,6 +7,24 @@
  */
 S.itemBrand = S.itemBrand || {};
 S.brand = S.brand || "MIX";
+
+/* Memoize expensive Folder/Actie scans — invalidated on folder load / brand / stores. */
+var _priceCache = Object.create(null);
+var _priceCacheGen = 0;
+function clearBrandPriceCache() {
+  _priceCache = Object.create(null);
+  _priceCacheGen++;
+}
+function _pcGet(kind, key) {
+  var row = _priceCache[kind + ":" + key];
+  return row && row.gen === _priceCacheGen ? row.v : undefined;
+}
+function _pcSet(kind, key, v) {
+  _priceCache[kind + ":" + key] = { gen: _priceCacheGen, v: v };
+  return v;
+}
+window.clearBrandPriceCache = clearBrandPriceCache;
+
 
 function brandKey(k) {
   k = String(k || "");
@@ -222,6 +240,9 @@ function strictFolderDeal(k, cat, brand, retailer) {
  */
 function storeLinePrices(cat, retailer, k) {
   k = brandKey(k);
+  var cacheKey = k + "|" + retailer + "|" + ((cat && cat.aisle) || "");
+  var hit = _pcGet("slp", cacheKey);
+  if (hit !== undefined) return hit;
   var catalogA = catalogBrandPrice(cat, retailer, "A");
   var catalogB = catalogBrandPrice(cat, retailer, "B");
   var a = null, b = null, aSrc = "cat", bSrc = "cat";
@@ -263,14 +284,14 @@ function storeLinePrices(cat, retailer, k) {
     bSrc = aSrc;
   }
 
-  return {
+  return _pcSet("slp", cacheKey, {
     a: a,
     b: b,
     aSrc: aSrc,
     bSrc: bSrc,
     paired: a != null && b != null && a !== b,
     real: (aSrc !== "cat") || (bSrc !== "cat")
-  };
+  });
 }
 
 /** unitPrice voor één merkvoorkeur op één winkel. */
@@ -321,6 +342,9 @@ function bestPriceForBrand(cat, k, brand) {
 
 function abPricePair(cat, k) {
   k = brandKey(k);
+  var ck = k + "|" + ((cat && cat.aisle) || "") + "|" + activeStoreIds().join(",");
+  var cached = _pcGet("ab", ck);
+  if (cached !== undefined) return cached;
   var a = bestPriceForBrand(cat, k, "A");
   var b = bestPriceForBrand(cat, k, "B");
   /* Cross-store invariant: chip-B never above chip-A on the same line */
@@ -331,7 +355,7 @@ function abPricePair(cat, k) {
   var real =
     (a.meta && a.meta.source !== "cat") ||
     (b.meta && b.meta.source !== "cat");
-  return {
+  return _pcSet("ab", ck, {
     k: k,
     a: a.cents,
     b: b.cents,
@@ -339,7 +363,7 @@ function abPricePair(cat, k) {
     real: !!real,
     aMeta: a.meta,
     bMeta: b.meta
-  };
+  });
 }
 
 function storeLabel(id) {
@@ -423,6 +447,10 @@ function displayBrandFor(k, cat) {
 function lineDisplayInfo(k, cat) {
   k = brandKey(k);
   cat = cat || (typeof CAT !== "undefined" ? CAT[k] : null);
+  var brandWantKey = (S.itemBrand && S.itemBrand[k]) || S.brand || "";
+  var ldiKey = k + "|" + brandWantKey + "|" + ((cat && cat.aisle) || "") + "|" + activeStoreIds().join(",");
+  var ldiHit = _pcGet("ldi", ldiKey);
+  if (ldiHit !== undefined) return ldiHit;
   var brand = displayBrandFor(k, cat);
   var baseTitle = "";
   if (typeof productLabel === "function" && cat) baseTitle = productLabel(cat);
@@ -483,7 +511,7 @@ function lineDisplayInfo(k, cat) {
       info.tier = "A";
     }
   }
-  return info;
+  return _pcSet("ldi", ldiKey, info);
 }
 
 function setItemBrand(k, brand) {
@@ -492,9 +520,11 @@ function setItemBrand(k, brand) {
   S.itemBrand = S.itemBrand || {};
   if (brand === "A" || brand === "B") S.itemBrand[k] = brand;
   else delete S.itemBrand[k];
+  clearBrandPriceCache();
 }
 
 function refreshBrandUi() {
+  clearBrandPriceCache();
   if (typeof save === "function") save();
   if (typeof drawList === "function") drawList();
   else {
@@ -655,9 +685,15 @@ document.addEventListener("click", function (e) {
 if (typeof drawList === "function" && !drawList._brandWrap) {
   var _dl = drawList;
   drawList = function () {
-    _dl();
-    paintBrand();
-    stampItemBrands();
+    if (window._drawingList) return;
+    window._drawingList = 1;
+    try {
+      _dl();
+      paintBrand();
+      stampItemBrands();
+    } finally {
+      window._drawingList = 0;
+    }
   };
   drawList._brandWrap = true;
 }
@@ -683,6 +719,7 @@ window.priceForBrandPref = priceForBrandPref;
 window.detectBrandTier = detectBrandTier;
 window.catalogBrandPrice = catalogBrandPrice;
 window.lineDisplayInfo = lineDisplayInfo;
+window.clearBrandPriceCache = clearBrandPriceCache;
 window.bestDisplayDeal = bestDisplayDeal;
 window.displayBrandFor = displayBrandFor;
 

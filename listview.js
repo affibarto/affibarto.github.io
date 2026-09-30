@@ -240,11 +240,15 @@ window._enrichIngredient=enrichIngredient;
 if(typeof paintBrand==="function"||typeof stampItemBrands==="function"||typeof markList==="function"){
   var _base=window.drawList;
   window.drawList=function(){
-    _base();
-    if(typeof markList==="function")markList();
-    else if(typeof paintFolderList==="function")paintFolderList();
-    if(typeof paintBrand==="function")paintBrand();
-    if(typeof stampItemBrands==="function")stampItemBrands();
+    if(window._drawingList)return;
+    window._drawingList=1;
+    try{
+      _base();
+      if(typeof markList==="function")markList();
+      else if(typeof paintFolderList==="function")paintFolderList();
+      if(typeof paintBrand==="function")paintBrand();
+      if(typeof stampItemBrands==="function")stampItemBrands();
+    }finally{window._drawingList=0;}
   };
 }
 var WOORD={een:1,"\u00e9\u00e9n":1,twee:2,drie:3,vier:4,vijf:5,zes:6,zeven:7,acht:8,negen:9,tien:10,elf:11,twaalf:12};
