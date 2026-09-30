@@ -166,6 +166,8 @@
     S.syncOn = true;
     saveLocalOnly();
     try {
+      if (typeof clearBrandPriceCache === "function") clearBrandPriceCache();
+      if (typeof clearDealsCache === "function") clearDealsCache();
       if (typeof drawBord === "function") drawBord();
       if (typeof drawList === "function") drawList();
       if (typeof drawHuis === "function") drawHuis();

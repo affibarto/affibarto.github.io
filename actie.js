@@ -121,10 +121,10 @@ var go=t.closest("[data-go]");if(go){closePanel();return;}
 var q=t.closest("[data-act=exqty]");
 if(q){e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();bump(+q.getAttribute("data-i"),+q.getAttribute("data-d"));return;}
 var st=t.closest("[data-act=store]");
-if(st){e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();var id=st.getAttribute("data-id");S.stores=S.stores||{};var on=S.stores[id]!==false;if(on&&typeof activeStores==="function"&&activeStores().length<=1){if(typeof toast==="function")toast("Minstens een winkel");return;}S.stores[id]=!on;if(typeof save==="function")save();paintStores();paintScore();}
+if(st){e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();var id=st.getAttribute("data-id");S.stores=S.stores||{};var on=S.stores[id]!==false;if(on&&typeof activeStores==="function"&&activeStores().length<=1){if(typeof toast==="function")toast("Minstens een winkel");return;}S.stores[id]=!on;if(typeof clearBrandPriceCache==="function")clearBrandPriceCache();if(typeof clearDealsCache==="function")clearDealsCache();if(typeof save==="function")save();paintStores();paintScore();if(typeof drawList==="function"){var v=document.getElementById("lijst");if(v&&v.classList.contains("on"))drawList();}}
 },true);
 if(typeof drawList==="function"&&!drawList._actie){var _dl=drawList;drawList=function(){_dl();markList();};drawList._actie=true;}
 if(typeof drawHuis==="function"&&!drawHuis._actie){var _dh=drawHuis;drawHuis=function(){_dh();paintStores();};drawHuis._actie=true;}
 window.markList=markList;window.paintFolderList=markList;window.bumpExtra=bump;
-setTimeout(function(){markList();paintStores();},0);
+setTimeout(function(){markList();paintStores();},120);
 })();

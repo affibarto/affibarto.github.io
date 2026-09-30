@@ -2,6 +2,12 @@ S.folderStore=S.folderStore||"alle";
 S.folderQ=S.folderQ||"";
 function storeName(id){var s=(typeof STORES!=="undefined"?STORES:[]).filter(function(x){return x.id===id;})[0];if(s)return s.n;var ix=(window.FOLDER_INDEX&&window.FOLDER_INDEX.stores)||[];var t=ix.filter(function(x){return x.id===id;})[0];return t?t.n:id;}
 function fullItems(){return (window.FOLDER_FULL&&window.FOLDER_FULL.items)||[];}
+var _dealsCache=Object.create(null);
+var _dealsCacheGen=0;
+function clearDealsCache(){_dealsCache=Object.create(null);_dealsCacheGen++;if(typeof window.clearBrandPriceCache==="function")try{window.clearBrandPriceCache();}catch(e){}}
+function _dealCacheKey(entry){
+  return String((entry&&entry.k)||"")+"|"+String((entry&&entry.n)||"").toLowerCase()+"|"+String((entry&&entry.aisle)||"");
+}
 function packOf(r){return (r&&(r.q||r.qty||r.pack))||"";}
 function dealText(r){var raw=String(r.deal||"").trim();if(!raw||/^(feed|folder|actie|bonus|promotie)$/i.test(raw))return (r.was&&r.now&&r.was>r.now)?(Math.round(100*(r.was-r.now)/r.was)+"% korting"):"";return raw;}
 function euroc(c){c=+c||0;return "\u20ac"+(c/100).toFixed(2).replace(".",",");}
@@ -307,9 +313,19 @@ function drawFolder(){var host=document.getElementById("folderbody");if(!host)re
 }
 document.addEventListener("click",function(e){var fs=e.target.closest&&e.target.closest("[data-act=fstore]");if(fs){S.folderStore=fs.getAttribute("data-id");drawFolder();}});
 if(typeof show==="function"&&!show._folderWrap){var _show=show;show=function(id){var pan=document.getElementById("storepanel");if(pan)pan.classList.remove("on");_show(id);if(id==="folder")drawFolder();};show._folderWrap=true;}
-function refreshListQuiet(){try{var v=document.getElementById("lijst");if(v&&v.classList.contains("on")&&typeof drawList==="function")drawList();}catch(e){}}
-fetch("bonus.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(d){if(!d)return;if(typeof BONUS!=="undefined"){Object.keys(d).forEach(function(k){if(k==="week"||k==="source"||k==="fetched"||k==="note")return;if(d[k]&&typeof d[k]==="object"&&!Array.isArray(d[k]))BONUS[k]=d[k];});}if(d.week){try{BONUS_WEEK=d.week;}catch(e){window.BONUS_WEEK=d.week;}if(typeof window!=="undefined")window.BONUS_WEEK=d.week;}refreshListQuiet();}).catch(function(){});
-function applyFolderFiles(arr){var items=[];arr.forEach(function(d){if(!d)return;(d.items||[]).forEach(function(it){if(it.qty&&!it.q)it.q=it.qty;items.push(it);});});window.FOLDER_FULL={items:items};var f=document.getElementById("folder");if(f&&f.classList.contains("on"))drawFolder();refreshListQuiet();}
+function refreshListQuiet(){
+  try{
+    var v=document.getElementById("lijst");
+    if(!v||!v.classList.contains("on")||typeof drawList!=="function")return;
+    if(window._rlqTimer)clearTimeout(window._rlqTimer);
+    window._rlqTimer=setTimeout(function(){
+      window._rlqTimer=0;
+      try{drawList();}catch(e){}
+    },80);
+  }catch(e){}
+}
+fetch("bonus.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(d){if(!d)return;if(typeof BONUS!=="undefined"){Object.keys(d).forEach(function(k){if(k==="week"||k==="source"||k==="fetched"||k==="note")return;if(d[k]&&typeof d[k]==="object"&&!Array.isArray(d[k]))BONUS[k]=d[k];});}if(d.week){try{BONUS_WEEK=d.week;}catch(e){window.BONUS_WEEK=d.week;}if(typeof window!=="undefined")window.BONUS_WEEK=d.week;}if(typeof clearBrandPriceCache==="function")clearBrandPriceCache();refreshListQuiet();}).catch(function(){});
+function applyFolderFiles(arr){var items=[];arr.forEach(function(d){if(!d)return;(d.items||[]).forEach(function(it){if(it.qty&&!it.q)it.q=it.qty;items.push(it);});});window.FOLDER_FULL={items:items};clearDealsCache();var f=document.getElementById("folder");if(f&&f.classList.contains("on"))drawFolder();refreshListQuiet();}
 fetch("folder-index.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(idx){
   window.FOLDER_INDEX=idx||{stores:[]};
   if(idx&&idx.week){try{BONUS_WEEK=idx.week;}catch(e){}window.BONUS_WEEK=idx.week;}
@@ -335,11 +351,16 @@ function dealsForProduct(productOrEntry){
     entry={n:productOrEntry.n||"",k:productOrEntry.k||"",aisle:productOrEntry.aisle||""};
   }
   if(!entry.n&&!entry.k)return [];
+  var ck=_dealCacheKey(entry);
+  var cached=_dealsCache[ck];
+  if(cached&&cached.gen===_dealsCacheGen)return cached.hits;
   var sets={list:[entry],bord:[]};
   var hits=[];
-  fullItems().forEach(function(r){
-    if(dealMatchKind(r,sets))hits.push(r);
-  });
+  var items=fullItems();
+  for(var i=0;i<items.length;i++){
+    if(dealMatchKind(items[i],sets))hits.push(items[i]);
+  }
+  _dealsCache[ck]={gen:_dealsCacheGen,hits:hits};
   return hits;
 }
 function actieBadgeInfo(productOrEntry){
@@ -373,6 +394,7 @@ function openActieForProduct(productOrEntry,deal){
   setTimeout(function(){drawFolder();},0);
 }
 window.dealsForProduct=dealsForProduct;
+window.clearDealsCache=clearDealsCache;
 window.actieBadgeInfo=actieBadgeInfo;
 window.openActieForProduct=openActieForProduct;
 
