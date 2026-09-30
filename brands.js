@@ -526,14 +526,27 @@ function setItemBrand(k, brand) {
 function refreshBrandUi() {
   clearBrandPriceCache();
   if (typeof save === "function") save();
-  if (typeof drawList === "function") drawList();
-  else {
-    paintBrand();
-    stampItemBrands();
-  }
-  if (typeof paintScore === "function") paintScore();
-  if (typeof paintStores === "function") paintStores();
-  else if (typeof drawStores === "function") drawStores();
+  /* Chip bar state: paint immediately; heavy list rebuild after paint */
+  try {
+    document.querySelectorAll(".brandbar .chip").forEach(function (c) {
+      c.classList.toggle("on", c.dataset.b === S.brand);
+      if (c.dataset.b === "A") c.classList.toggle("hard", S.brand === "A");
+    });
+  } catch (e) {}
+  var run = function () {
+    if (typeof drawList === "function") {
+      var v = document.getElementById("lijst");
+      if (v && v.classList.contains("on")) drawList();
+    } else {
+      if (typeof paintBrand === "function") paintBrand();
+      if (typeof stampItemBrands === "function") stampItemBrands();
+    }
+    if (typeof paintScore === "function") paintScore();
+    if (typeof paintStores === "function") paintStores();
+    else if (typeof drawStores === "function") drawStores();
+  };
+  if (typeof afterPaint === "function") afterPaint(run);
+  else setTimeout(run, 0);
 }
 
 function paintBrand() {
@@ -682,18 +695,29 @@ document.addEventListener("click", function (e) {
   refreshBrandUi();
 });
 
-if (typeof drawList === "function" && !drawList._brandWrap) {
+/* listview.js owns deferred paintBrand/stampItemBrands — avoid double wrap */
+if (typeof drawList === "function" && !drawList._brandWrap && !drawList._listviewWrap) {
   var _dl = drawList;
   drawList = function () {
     if (window._drawingList) return;
     window._drawingList = 1;
     try {
       _dl();
-      paintBrand();
-      stampItemBrands();
     } finally {
       window._drawingList = 0;
     }
+    var enrich = function () {
+      if (window._drawingList) return;
+      window._drawingList = 1;
+      try {
+        paintBrand();
+        stampItemBrands();
+      } finally {
+        window._drawingList = 0;
+      }
+    };
+    if (typeof afterPaint === "function") afterPaint(enrich);
+    else setTimeout(enrich, 0);
   };
   drawList._brandWrap = true;
 }
