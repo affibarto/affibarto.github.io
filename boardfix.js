@@ -19,7 +19,7 @@ function wrapDays(){
 var host=document.getElementById("days");if(!host)return;
 host.querySelectorAll(".dayrow").forEach(function(row){
 if(row.closest(".swipewrap"))return;
-if(!row.querySelector("[data-act=gegeten]"))return;
+if(!row.querySelector("[data-act=gegeten]")&&!row.classList.contains("day-uit")&&!row.classList.contains("day-later")&&!row.classList.contains("day-anders")&&!row.classList.contains("day-weg"))return;
 var wrap=document.createElement("div");
 wrap.className="swipewrap right";
 wrap.setAttribute("data-d",row.getAttribute("data-d"));

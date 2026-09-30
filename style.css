@@ -308,3 +308,156 @@ padding:4px 8px;font-size:11px;border-radius:999px
 .listrow .abpick{margin-left:6px}
 #lijst.compact .abpick .abhint{display:none}
 #brandsave{margin:0 0 8px}
+
+/* ——— v88 design pass + avondstatus ——— */
+:root{
+  --cream:#F6EADF;
+  --cream-deep:#EFD9C0;
+  --ink:#2A1810;
+  --ink-soft:#5A4034;
+  --terracotta:#C45A38;
+  --terracotta-deep:#A8482E;
+  --sage:#5F8A62;
+  --card:#FFFCFA;
+  --line:#E6D2B6;
+  --glow:rgba(196,90,56,.14);
+}
+html,body{background:#1A100C}
+.phone{
+  background:linear-gradient(180deg,#F8EEE0 0%,var(--cream) 42%,#F0DCC4 100%);
+}
+.view,.panel{background:transparent}
+.view.on,.panel.on{background:linear-gradient(180deg,#F8EEE0 0%,var(--cream) 50%,#F0DCC4 100%)}
+
+.hd b,.hdleft b,h1,#rtitle,#huisnaam,.primary-cta b{
+  font-family:Fraunces,Outfit,Georgia,serif;
+  font-weight:700;
+  letter-spacing:-.02em;
+}
+.dayrow b,.listrow b,.card .p b,.sugopt .p b,.seclabel{
+  font-family:Fraunces,Outfit,Georgia,serif;
+  font-weight:700;
+}
+
+.card,.person,.listrow,.store,.dayrow{
+  background:var(--card);
+  border-color:var(--line);
+  box-shadow:0 3px 12px rgba(42,24,16,.055),0 1px 0 rgba(255,255,255,.65) inset;
+}
+.dayrow{
+  position:relative;
+  padding:12px 12px 12px 14px;
+  gap:10px;
+}
+.dayrow::before{
+  content:"";
+  position:absolute;left:0;top:10px;bottom:10px;width:3px;
+  border-radius:0 4px 4px 0;
+  background:transparent;
+}
+.dayrow.day-filled::before{background:var(--terracotta)}
+.dayrow.day-uit::before{background:#3D6B8C}
+.dayrow.day-later::before{background:#C4A046}
+.dayrow.day-anders::before{background:#B07A4A}
+.dayrow.day-weg::before{background:#8A6B56}
+.dayrow.day-empty{opacity:.92}
+.dayrow.day-uit,.dayrow.day-later,.dayrow.day-anders,.dayrow.day-weg{
+  background:linear-gradient(135deg,#FFFCFA 0%,#F3E8DA 100%);
+}
+
+.badge.avond{
+  display:inline-block;margin-left:6px;vertical-align:middle;
+  font-size:10.5px;font-weight:700;letter-spacing:.02em;
+  border-radius:999px;padding:3px 8px;text-transform:none;
+}
+.badge.avond-uit{background:#D6E6F0;color:#2A5368}
+.badge.avond-later{background:#F5E6C0;color:#7A5A18}
+.badge.avond-anders{background:#F3D2B8;color:#7A3B1A}
+.badge.avond-weg{background:#E8E0D8;color:#5A4034}
+
+.daythumb-status{
+  display:grid;place-items:center;
+  background:linear-gradient(145deg,#E8D4B8,#D4B896);
+  font-size:18px;line-height:1;
+}
+.daythumb-status::after{content:"🍽"}
+.daythumb-uit{background:linear-gradient(145deg,#C5D9E6,#9BB8CC)}
+.daythumb-uit::after{content:"🍽"}
+.daythumb-later{background:linear-gradient(145deg,#E8D9A8,#D4C078)}
+.daythumb-later::after{content:"⏳"}
+.daythumb-anders{background:linear-gradient(145deg,#E8C8A8,#D4A878)}
+.daythumb-anders::after{content:"↔️"}
+.daythumb-weg{background:linear-gradient(145deg,#D8D0C8,#C0B4A8)}
+.daythumb-weg::after{content:"🚪"}
+
+.avondtap{flex:none;font-size:11.5px;padding:6px 10px;white-space:nowrap}
+.avondstrip{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:12px 12px 10px;
+  margin:0 0 12px;
+  box-shadow:0 3px 12px rgba(42,24,16,.05);
+}
+.avondstrip .sec{margin-top:0}
+.avondrow{margin:0 0 4px}
+.avondnote{margin:10px 0 0}
+.chip.avond-uit-chip.on{background:#3D6B8C;box-shadow:0 2px 8px rgba(61,107,140,.25)}
+
+.nav{
+  background:rgba(255,252,250,.94);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border:1px solid var(--line);
+  box-shadow:0 8px 28px rgba(42,24,16,.12);
+  border-radius:20px;
+  padding:5px;
+}
+.nav button{
+  font-size:11.5px;
+  letter-spacing:.02em;
+  padding:11px 0 10px;
+  border-radius:15px;
+}
+.nav button.on{
+  background:linear-gradient(180deg,#D06642 0%,var(--terracotta) 100%);
+  box-shadow:0 4px 14px rgba(196,90,56,.32);
+}
+
+.btn{
+  background:linear-gradient(180deg,#D06642 0%,var(--terracotta) 100%);
+  box-shadow:0 3px 10px rgba(196,90,56,.22);
+}
+.btn.g{background:linear-gradient(180deg,#6B9A6E 0%,var(--sage) 100%);box-shadow:0 3px 10px rgba(95,138,98,.2)}
+.btn.w{background:var(--card);box-shadow:0 1px 4px rgba(42,24,16,.05)}
+.primary-cta{
+  background:linear-gradient(165deg,#FFFCFA 0%,#FFF0E4 100%);
+  border:2px solid var(--terracotta);
+  box-shadow:0 8px 22px var(--glow);
+  border-radius:18px;
+}
+.chip.on{background:linear-gradient(180deg,#D06642 0%,var(--terracotta) 100%)}
+
+.empty-list .ghost{
+  font-family:Fraunces,Outfit,Georgia,serif;
+  font-size:16px;font-weight:700;color:var(--ink);
+  opacity:1;margin:8px 0 14px;
+}
+.empty-list .emptycta{
+  border-radius:16px;
+  transition:transform .12s ease,box-shadow .12s ease;
+}
+.empty-list .emptycta:active{transform:scale(.98)}
+
+#bord #weekline,#lijst #lijstline{
+  font-weight:500;color:var(--ink-soft);
+}
+.listsec .sechead{background:linear-gradient(180deg,#F8EEE0 70%,rgba(248,238,224,0))}
+#lijst.compact .listsec .sechead{background:linear-gradient(180deg,#F8EEE0 70%,rgba(248,238,224,0))}
+
+.splash{
+  background:radial-gradient(120% 70% at 50% 16%,#FFF8EE 0%,#F4E6D2 52%,#E8C9A8 100%);
+}
+.toast{background:#2A1810;border:1px solid rgba(255,255,255,.06)}
+
+/* Keep A/B + brand totals untouched — only visual chrome above */
