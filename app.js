@@ -11,18 +11,18 @@ function defaultState(){return{house:"De Barto's",houseCode:"",syncOn:false,budg
 function load(){try{const raw=localStorage.getItem(KEY)||localStorage.getItem("weate.bartos.v1");if(raw){const s=JSON.parse(raw);if(s.people&&s.people.length){s.removed=s.removed||{};s.stores=s.stores||{};STORES.forEach(function(r){if(s.stores[r.id]===undefined)s.stores[r.id]=!!CORE_STORES[r.id];});if(!s.storesCoreV80){var allOn=STORES.every(function(r){return s.stores[r.id]!==false;});if(allOn){STORES.forEach(function(r){s.stores[r.id]=!!CORE_STORES[r.id];});}s.storesCoreV80=true;}s.always=Array.isArray(s.always)?s.always:[];s.ingAdd=s.ingAdd||{};s.omit=s.omit||{};if(!s.wipedStaples){s.always=[];s.wipedStaples=true;}s.houseCode=s.houseCode||"";s.syncOn=!!s.syncOn&&!!s.houseCode;s.itemBrand=s.itemBrand||{};s.customs=s.customs||{};return migrateCanCook(s);}}}catch(e){}return defaultState();}
 function afterPaint(fn){if(typeof fn!=="function")return;if(typeof requestAnimationFrame==="function"){requestAnimationFrame(function(){setTimeout(fn,0);});}else setTimeout(fn,0);}
 window.afterPaint=afterPaint;
-var _viewDirty={bord:1,lijst:1,huis:1,kies:1};
+var _viewDirty={bord:1,lijst:1,huis:1,kies:1,folder:1};
 function markDirty(){for(var i=0;i<arguments.length;i++){var k=arguments[i];if(k)_viewDirty[k]=1;}}
 window.markDirty=markDirty;
 var _saveTimer=0;
 function saveNow(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
-function save(){_viewDirty.bord=1;_viewDirty.lijst=1;_viewDirty.huis=1;_viewDirty.kies=1;if(_saveTimer)clearTimeout(_saveTimer);_saveTimer=setTimeout(function(){_saveTimer=0;saveNow();},0);}
+function save(){_viewDirty.bord=1;_viewDirty.lijst=1;_viewDirty.huis=1;_viewDirty.kies=1;_viewDirty.folder=1;try{if(typeof window!=="undefined"){window._folderDirty=1;}}catch(e){}if(_saveTimer)clearTimeout(_saveTimer);_saveTimer=setTimeout(function(){_saveTimer=0;saveNow();},0);}
 window.saveNow=saveNow;
 try{document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden"&&_saveTimer){clearTimeout(_saveTimer);_saveTimer=0;saveNow();}});}catch(e){}
 function migrateCanCook(s){(s.people||[]).forEach(function(p){if(typeof p.canCook!=="boolean")p.canCook=(p.role==="adult"||p.role==="guest");});return s;}
 function cooksOn(){return (S.people||[]).filter(function(p){return !!p.canCook;});}
 const $=id=>document.getElementById(id);
-function show(id){document.querySelectorAll(".view").forEach(v=>v.classList.toggle("on",v.id===id));document.querySelectorAll(".nav").forEach(nav=>{nav.querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.go===id));});function paint(){if(id==="bord"&&_viewDirty.bord){_viewDirty.bord=0;drawBord();}if(id==="lijst"&&_viewDirty.lijst){_viewDirty.lijst=0;if(typeof drawList==="function")drawList();}if(id==="huis"&&_viewDirty.huis){_viewDirty.huis=0;drawHuis();}if(id==="kies"&&_viewDirty.kies){_viewDirty.kies=0;drawKies();}}if(id==="lijst"||id==="bord")afterPaint(paint);else paint();}
+function show(id){document.querySelectorAll(".view").forEach(v=>v.classList.toggle("on",v.id===id));document.querySelectorAll(".nav").forEach(nav=>{nav.querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.go===id));});function paint(){if(id==="bord"&&_viewDirty.bord){_viewDirty.bord=0;drawBord();}if(id==="lijst"&&_viewDirty.lijst){_viewDirty.lijst=0;if(typeof drawList==="function")drawList();}if(id==="huis"&&_viewDirty.huis){_viewDirty.huis=0;drawHuis();}if(id==="kies"&&_viewDirty.kies){_viewDirty.kies=0;drawKies();}if(id==="folder"&&_viewDirty.folder){if(typeof drawFolder==="function")drawFolder();}}if(id==="lijst"||id==="bord"||id==="folder")afterPaint(paint);else paint();}
 function toast(t){const el=$("toast");if(!el)return;el.textContent=t;el.classList.add("on");clearTimeout(window._tt);window._tt=setTimeout(()=>el.classList.remove("on"),2200);}
 function defaultSchedMode(p,day){if(p.sched&&p.sched[day])return p.sched[day];return (p.role==="guest"||p.temp)?"skip":"eat";}
 function modeOf(day,p){const draft=S.whoDraft;if(draft&&S._whoDay===day&&draft[p.id]!=null&&draft[p.id]!=="")return draft[p.id];const slot=S.plan[day];if(slot&&slot.who&&slot.who[p.id]!=null&&slot.who[p.id]!=="")return slot.who[p.id];return defaultSchedMode(p,day);}

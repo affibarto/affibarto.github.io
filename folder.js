@@ -4,7 +4,7 @@ function storeName(id){var s=(typeof STORES!=="undefined"?STORES:[]).filter(func
 function fullItems(){return (window.FOLDER_FULL&&window.FOLDER_FULL.items)||[];}
 var _dealsCache=Object.create(null);
 var _dealsCacheGen=0;
-function clearDealsCache(){_dealsCache=Object.create(null);_dealsCacheGen++;if(typeof window.clearBrandPriceCache==="function")try{window.clearBrandPriceCache();}catch(e){}}
+function clearDealsCache(){_dealsCache=Object.create(null);_dealsCacheGen++;_folderMatchCache={sig:"",map:null};_folderHtmlCache={key:"",html:"",rows:null};_folderDirty=1;try{window._folderDirty=1;}catch(e){}try{if(typeof markDirty==="function")markDirty("folder");}catch(e){}if(typeof window.clearBrandPriceCache==="function")try{window.clearBrandPriceCache();}catch(e){}}
 function _dealCacheKey(entry){
   return String((entry&&entry.k)||"")+"|"+String((entry&&entry.n)||"").toLowerCase()+"|"+String((entry&&entry.aisle)||"");
 }
@@ -276,43 +276,281 @@ function dealMatchKind(r,sets){
   if(hit(sets.bord,"bord"))return "bord";
   return "";
 }
-function drawFolder(){var host=document.getElementById("folderbody");if(!host)return;var line=document.getElementById("folderline");if(line)line.textContent=fullItems().length+" acties";var sc=host.parentNode;if(sc&&!document.getElementById("folderq")){var inp=document.createElement("input");inp.id="folderq";inp.placeholder="Zoek in de folder";inp.value=S.folderQ||"";inp.addEventListener("input",function(){S.folderQ=inp.value;drawFolder();});sc.insertBefore(inp,host);}var pick=document.getElementById("folderpick");if(pick){var stores=(window.FOLDER_INDEX&&window.FOLDER_INDEX.stores&&window.FOLDER_INDEX.stores.length)?window.FOLDER_INDEX.stores:(typeof STORES!=="undefined"&&STORES.length?STORES:[]);pick.innerHTML=["alle"].concat(stores.map(function(s){return s.id;})).map(function(id){var n=id==="alle"?"Alle":storeName(id);return "<button type=button class='chip "+(S.folderStore===id?"on":"")+"' data-act=fstore data-id="+id+">"+n+"</button>";}).join("");}var q=(S.folderQ||"").toLowerCase().trim();var rows=fullItems().filter(function(r){if(S.folderStore&&S.folderStore!=="alle"&&r.s!==S.folderStore)return false;if(!q)return true;return (r.n+" "+(r.b||"")+" "+packOf(r)+" "+(r.deal||"")+" "+(r.desc||"")).toLowerCase().indexOf(q)>=0;});
+var _folderDirty=1;try{window._folderDirty=1;}catch(e){}
+var _folderMatchCache={sig:"",map:null};
+var _folderHtmlCache={key:"",html:"",rows:null};
+var _folderPaintGen=0;
+var _folderQTimer=0;
+var _folderShellReady=0;
+var _IMG_PLACE="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+function invalidateFolderPaint(){
+  _folderDirty=1;try{window._folderDirty=1;}catch(e){}
+  _folderHtmlCache={key:"",html:"",rows:null};
+  _folderMatchCache={sig:"",map:null};
+  try{if(typeof markDirty==="function")markDirty("folder");}catch(e){}
+}
+function folderSetsSig(sets){
+  function part(arr){
+    return (arr||[]).map(function(e){
+      return String((e&&e.k)||"")+":"+String((e&&e.n)||"").toLowerCase()+":"+String((e&&e.aisle)||"");
+    }).join("|");
+  }
+  return part(sets&&sets.list)+"##"+part(sets&&sets.bord)+"##"+_dealsCacheGen;
+}
+function ensureFolderMatches(items,sets){
+  var sig=folderSetsSig(sets);
+  if(_folderMatchCache.sig===sig&&_folderMatchCache.map&&_folderMatchCache.map.length===items.length){
+    var map=_folderMatchCache.map;
+    for(var i=0;i<items.length;i++)items[i]._match=map[i]||"";
+    return sig;
+  }
+  var out=new Array(items.length);
+  for(var j=0;j<items.length;j++){
+    var m=dealMatchKind(items[j],sets)||"";
+    items[j]._match=m;
+    out[j]=m;
+  }
+  _folderMatchCache={sig:sig,map:out};
+  return sig;
+}
+function folderPaintKey(matchSig){
+  return String(S.folderStore||"alle")+"|"+String(S.folderQ||"").toLowerCase().trim()+"|"+(matchSig||"")+"|"+String(S._folderHighlight||"");
+}
+function ensureFolderShell(){
+  var host=document.getElementById("folderbody");
+  if(!host)return;
+  var sc=host.parentNode;
+  if(sc&&!document.getElementById("folderq")){
+    var inp=document.createElement("input");
+    inp.id="folderq";
+    inp.placeholder="Zoek in de folder";
+    inp.value=S.folderQ||"";
+    inp.addEventListener("input",function(){
+      S.folderQ=inp.value;
+      if(_folderQTimer)clearTimeout(_folderQTimer);
+      _folderQTimer=setTimeout(function(){
+        _folderQTimer=0;
+        invalidateFolderPaint();
+        drawFolder({force:1,reason:"q"});
+      },120);
+    });
+    sc.insertBefore(inp,host);
+  }else{
+    var qel=document.getElementById("folderq");
+    if(qel&&qel.value!==(S.folderQ||""))qel.value=S.folderQ||"";
+  }
+  var pick=document.getElementById("folderpick");
+  if(pick){
+    var stores=(window.FOLDER_INDEX&&window.FOLDER_INDEX.stores&&window.FOLDER_INDEX.stores.length)?window.FOLDER_INDEX.stores:(typeof STORES!=="undefined"&&STORES.length?STORES:[]);
+    var ids=["alle"].concat(stores.map(function(s){return s.id;}));
+    var html=ids.map(function(id){
+      var n=id==="alle"?"Alle":storeName(id);
+      return "<button type=button class='chip "+(S.folderStore===id?"on":"")+"' data-act=fstore data-id="+id+">"+n+"</button>";
+    }).join("");
+    if(pick.getAttribute("data-rendered")!==String(S.folderStore)+"|"+ids.join(",")){
+      pick.innerHTML=html;
+      pick.setAttribute("data-rendered",String(S.folderStore)+"|"+ids.join(","));
+    }else{
+      pick.querySelectorAll("[data-act=fstore]").forEach(function(b){
+        b.classList.toggle("on",b.getAttribute("data-id")===S.folderStore);
+      });
+    }
+  }
+  var line=document.getElementById("folderline");
+  if(line)line.textContent=fullItems().length+" acties";
+  _folderShellReady=1;
+}
+function folderRowHtml(r,idx,eagerImg){
+  var badge="";
+  if(r._match==="list")badge=" <span class='badge match'>Op je lijst</span>";
+  else if(r._match==="bord")badge=" <span class='badge bord'>Past bij je bord</span>";
+  var img;
+  if(r.img){
+    var src=String(r.img).replace(/\"/g,"");
+    if(eagerImg){
+      img="<img class=thumb alt='' referrerpolicy='no-referrer' loading='lazy' decoding='async' onerror=\"this.onerror=null;this.removeAttribute('src');this.style.background='#EDE0D0'\" src=\""+src+"\">";
+    }else{
+      img="<img class=thumb alt='' referrerpolicy='no-referrer' decoding='async' data-src=\""+src+"\" src=\""+_IMG_PLACE+"\" onerror=\"this.onerror=null;this.removeAttribute('src');this.removeAttribute('data-src');this.style.background='#EDE0D0'\">";
+    }
+  }else img="<span class=thumb aria-hidden=true></span>";
+  var hlKey=String(r.n||"")+"|"+String(r.s||"");
+  var hl=(S._folderHighlight&&S._folderHighlight===hlKey)?" folder-hl":"";
+  return "<button type=button class='listrow"+hl+"' data-act=adddeal data-idx="+idx+" data-n='"+encodeURIComponent(r.n||"")+"' data-sid='"+(r.s||"")+"' data-now='"+(r.now||0)+"' data-pack='"+encodeURIComponent(packOf(r))+"'>"+img+"<div style=flex:1><b>"+String(r.n||"").replace(/</g,"")+badge+"</b><div class=meta>"+folderMeta(r).replace(/</g,"")+"</div></div><div class=price>"+(r.now?euroc(r.now):"")+"</div></button>";
+}
+function buildFolderHtml(rows){
+  if(!rows.length)return "<p class=note>Nog geen folderregels.</p>";
+  var html="",lastSec="";
+  rows.forEach(function(r,idx){
+    var sec=(r._match==="list"||r._match==="bord")?"match":"rest";
+    if(sec!==lastSec){
+      if(sec==="match")html+="<div class=sec>Past bij je bord</div>";
+      else if(lastSec==="match")html+="<div class=sec>Meer acties</div>";
+      lastSec=sec;
+    }
+    html+=folderRowHtml(r,idx,idx<24);
+  });
+  return html;
+}
+function hydrateFolderImages(host){
+  if(!host)return;
+  var imgs=host.querySelectorAll("img.thumb[data-src]");
+  if(!imgs.length)return;
+  var i=0;
+  function pump(){
+    var n=0;
+    while(i<imgs.length&&n<16){
+      var el=imgs[i++];
+      var ds=el.getAttribute("data-src");
+      if(ds){el.setAttribute("src",ds);el.removeAttribute("data-src");}
+      n++;
+    }
+    if(i<imgs.length){
+      if(typeof requestAnimationFrame==="function")requestAnimationFrame(pump);
+      else setTimeout(pump,0);
+    }
+  }
+  if(typeof afterPaint==="function")afterPaint(pump);else setTimeout(pump,0);
+}
+function finishFolderPaint(host){
+  if(typeof markFolder==="function")markFolder();
+  hydrateFolderImages(host);
+  if(S._folderHighlight){
+    var el=host.querySelector(".folder-hl");
+    if(el&&el.scrollIntoView)el.scrollIntoView({block:"center",behavior:"smooth"});
+  }
+}
+function paintFolderBodyChunked(host,rows){
+  window._folderRows=rows;
+  _folderPaintGen++;
+  var gen=_folderPaintGen;
+  if(!rows.length){
+    host.innerHTML="<p class=note>Nog geen folderregels.</p>";
+    finishFolderPaint(host);
+    return;
+  }
+  /* Instant shell: matched deals + first rest chunk, then append. */
+  var matched=[],rest=[];
+  rows.forEach(function(r){
+    if(r._match==="list"||r._match==="bord")matched.push(r);else rest.push(r);
+  });
+  var FIRST=Math.max(matched.length, Math.min(28, rows.length));
+  var first=rows.slice(0,FIRST);
+  var html=buildFolderHtml(first);
+  /* If first batch omitted Meer-acties header because rest starts later, fix when appending. */
+  host.innerHTML=html;
+  var offset=FIRST;
+  function appendMore(){
+    if(gen!==_folderPaintGen)return;
+    if(offset>=rows.length){
+      _folderHtmlCache={key:folderPaintKey(_folderMatchCache.sig),html:host.innerHTML,rows:rows.slice()};
+      finishFolderPaint(host);
+      return;
+    }
+    var next=rows.slice(offset, offset+40);
+    var chunk="",lastSec=offset>0&&(rows[offset-1]._match==="list"||rows[offset-1]._match==="bord")?"match":(offset>0?"rest":"");
+    next.forEach(function(r,i){
+      var idx=offset+i;
+      var sec=(r._match==="list"||r._match==="bord")?"match":"rest";
+      if(sec!==lastSec){
+        if(sec==="match")chunk+="<div class=sec>Past bij je bord</div>";
+        else if(lastSec==="match"||(lastSec===""&&matched.length&&sec==="rest"))chunk+="<div class=sec>Meer acties</div>";
+        lastSec=sec;
+      }
+      chunk+=folderRowHtml(r,idx,false);
+    });
+    host.insertAdjacentHTML("beforeend",chunk);
+    offset+=next.length;
+    if(typeof afterPaint==="function")afterPaint(appendMore);
+    else setTimeout(appendMore,0);
+  }
+  if(offset<rows.length){
+    if(typeof afterPaint==="function")afterPaint(appendMore);
+    else setTimeout(appendMore,0);
+  }else{
+    _folderHtmlCache={key:folderPaintKey(_folderMatchCache.sig),html:host.innerHTML,rows:rows.slice()};
+    finishFolderPaint(host);
+  }
+}
+function drawFolder(opts){
+  opts=opts||{};
+  var host=document.getElementById("folderbody");
+  if(!host)return;
+  ensureFolderShell();
+  var force=!!opts.force;
+  if(!force){
+    try{
+      if(typeof _viewDirty!=="undefined"&&_viewDirty&&!_viewDirty.folder&&!_folderDirty&&host.childNodes.length){
+        return;
+      }
+    }catch(e){}
+    if(!_folderDirty&&host.childNodes.length&&opts.reason!=="q"&&opts.reason!=="store")return;
+  }
+  var items=fullItems();
   var sets=boardMatchSets();
-  rows.forEach(function(r){r._match=dealMatchKind(r,sets);});
+  var matchSig=ensureFolderMatches(items,sets);
+  var q=(S.folderQ||"").toLowerCase().trim();
+  var rows=items.filter(function(r){
+    if(S.folderStore&&S.folderStore!=="alle"&&r.s!==S.folderStore)return false;
+    if(!q)return true;
+    return (r.n+" "+(r.b||"")+" "+packOf(r)+" "+(r.deal||"")+" "+(r.desc||"")).toLowerCase().indexOf(q)>=0;
+  });
   rows.sort(function(a,b){
     var ra=a._match==="list"?0:a._match==="bord"?1:2;
     var rb=b._match==="list"?0:b._match==="bord"?1:2;
     if(ra!==rb)return ra-rb;
     return 0;
   });
-  window._folderRows=rows.slice(0,200);
-  if(!rows.length){host.innerHTML="<p class=note>Nog geen folderregels.</p>";return;}
-  var html="";var lastSec="";
-  window._folderRows.forEach(function(r,idx){
-    var sec="";
-    if(r._match==="list"||r._match==="bord")sec="match";
-    else sec="rest";
-    if(sec!==lastSec){
-      if(sec==="match")html+="<div class=sec>Past bij je bord</div>";
-      else if(lastSec==="match")html+="<div class=sec>Meer acties</div>";
-      lastSec=sec;
-    }
-    var badge="";
-    if(r._match==="list")badge=" <span class='badge match'>Op je lijst</span>";
-    else if(r._match==="bord")badge=" <span class='badge bord'>Past bij je bord</span>";
-    var img=r.img?"<img class=thumb alt='' referrerpolicy='no-referrer' loading='lazy' onerror=\"this.onerror=null;this.src='';this.style.background='#EDE0D0'\" src=\""+String(r.img).replace(/\"/g,"")+"\">":"<span class=thumb aria-hidden=true></span>";
-    var hlKey=String(r.n||"")+"|"+String(r.s||"");
-    var hl=(S._folderHighlight&&S._folderHighlight===hlKey)?" folder-hl":"";
-    html+="<button type=button class='listrow"+hl+"' data-act=adddeal data-idx="+idx+" data-n='"+encodeURIComponent(r.n||"")+"' data-sid='"+(r.s||"")+"' data-now='"+(r.now||0)+"' data-pack='"+encodeURIComponent(packOf(r))+"'>"+img+"<div style=flex:1><b>"+String(r.n||"").replace(/</g,"")+badge+"</b><div class=meta>"+folderMeta(r).replace(/</g,"")+"</div></div><div class=price>"+(r.now?euroc(r.now):"")+"</div></button>";
-  });
-  host.innerHTML=html;if(typeof markFolder==="function")markFolder();
-  if(S._folderHighlight){
-    var el=host.querySelector(".folder-hl");
-    if(el&&el.scrollIntoView)el.scrollIntoView({block:"center",behavior:"smooth"});
+  rows=rows.slice(0,200);
+  var key=folderPaintKey(matchSig);
+  if(_folderHtmlCache.key===key&&_folderHtmlCache.html&&_folderHtmlCache.rows){
+    window._folderRows=_folderHtmlCache.rows;
+    host.innerHTML=_folderHtmlCache.html;
+    _folderDirty=0;try{window._folderDirty=0;}catch(e){}
+    try{if(typeof _viewDirty!=="undefined")_viewDirty.folder=0;}catch(e){}
+    finishFolderPaint(host);
+    return;
   }
+  /* Show lightweight placeholder only when body empty — keep prior paint visible otherwise. */
+  if(!host.childNodes.length){
+    host.innerHTML="<p class=note>Folder laden…</p>";
+  }
+  function paint(){
+    paintFolderBodyChunked(host,rows);
+    _folderDirty=0;try{window._folderDirty=0;}catch(e){}
+    try{if(typeof _viewDirty!=="undefined")_viewDirty.folder=0;}catch(e){}
+  }
+  if(opts.sync)paint();
+  else if(typeof afterPaint==="function")afterPaint(paint);
+  else setTimeout(paint,0);
 }
-document.addEventListener("click",function(e){var fs=e.target.closest&&e.target.closest("[data-act=fstore]");if(fs){S.folderStore=fs.getAttribute("data-id");drawFolder();}});
-if(typeof show==="function"&&!show._folderWrap){var _show=show;show=function(id){var pan=document.getElementById("storepanel");if(pan)pan.classList.remove("on");_show(id);if(id==="folder")drawFolder();};show._folderWrap=true;}
+window.drawFolder=drawFolder;
+window.invalidateFolderPaint=invalidateFolderPaint;
+document.addEventListener("click",function(e){
+  var fs=e.target.closest&&e.target.closest("[data-act=fstore]");
+  if(fs){
+    S.folderStore=fs.getAttribute("data-id");
+    invalidateFolderPaint();
+    drawFolder({force:1,reason:"store"});
+  }
+});
+if(typeof show==="function"&&!show._folderWrap){
+  var _show=show;
+  show=function(id){
+    var pan=document.getElementById("storepanel");
+    if(pan)pan.classList.remove("on");
+    if(id==="folder")ensureFolderShell();
+    _show(id);
+    /* Body paint: app.js dirty-scoped show → drawFolder via afterPaint. */
+    if(id==="folder"){
+      var host=document.getElementById("folderbody");
+      var empty=!(host&&host.childNodes.length);
+      var dirty=_folderDirty;
+      try{if(typeof _viewDirty!=="undefined"&&_viewDirty&&_viewDirty.folder)dirty=1;}catch(e){}
+      if(empty&&!dirty)drawFolder({force:1});
+    }
+  };
+  show._folderWrap=true;
+}
 function refreshListQuiet(){
   try{
     var v=document.getElementById("lijst");
@@ -325,7 +563,7 @@ function refreshListQuiet(){
   }catch(e){}
 }
 fetch("bonus.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(d){if(!d)return;if(typeof BONUS!=="undefined"){Object.keys(d).forEach(function(k){if(k==="week"||k==="source"||k==="fetched"||k==="note")return;if(d[k]&&typeof d[k]==="object"&&!Array.isArray(d[k]))BONUS[k]=d[k];});}if(d.week){try{BONUS_WEEK=d.week;}catch(e){window.BONUS_WEEK=d.week;}if(typeof window!=="undefined")window.BONUS_WEEK=d.week;}if(typeof clearBrandPriceCache==="function")clearBrandPriceCache();refreshListQuiet();}).catch(function(){});
-function applyFolderFiles(arr){var items=[];arr.forEach(function(d){if(!d)return;(d.items||[]).forEach(function(it){if(it.qty&&!it.q)it.q=it.qty;items.push(it);});});window.FOLDER_FULL={items:items};clearDealsCache();var f=document.getElementById("folder");if(f&&f.classList.contains("on"))drawFolder();refreshListQuiet();}
+function applyFolderFiles(arr){var items=[];arr.forEach(function(d){if(!d)return;(d.items||[]).forEach(function(it){if(it.qty&&!it.q)it.q=it.qty;items.push(it);});});window.FOLDER_FULL={items:items};clearDealsCache();invalidateFolderPaint();var f=document.getElementById("folder");if(f&&f.classList.contains("on"))drawFolder({force:1});refreshListQuiet();}
 fetch("folder-index.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(idx){
   window.FOLDER_INDEX=idx||{stores:[]};
   if(idx&&idx.week){try{BONUS_WEEK=idx.week;}catch(e){}window.BONUS_WEEK=idx.week;}
@@ -386,12 +624,13 @@ function openActieForProduct(productOrEntry,deal){
   S.folderStore="alle";
   S.folderQ=label||"";
   S._folderHighlight=focus?String(focus.n||"")+"|"+String(focus.s||""):"";
+  invalidateFolderPaint();
   if(typeof show==="function")show("folder");
   else{
     var btn=document.querySelector('[data-go=folder]');
     if(btn)btn.click();
   }
-  setTimeout(function(){drawFolder();},0);
+  setTimeout(function(){drawFolder({force:1,sync:1});},0);
 }
 window.dealsForProduct=dealsForProduct;
 window.clearDealsCache=clearDealsCache;

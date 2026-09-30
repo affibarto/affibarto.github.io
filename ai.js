@@ -830,30 +830,8 @@
   }, true);
 
   /* Hook folder draw to use improved matcher. */
+  /* drawFolder already uses patched dealMatchKind — no second rematch pass (Actie snappy). */
   if (typeof drawFolder === "function" && !drawFolder._aiMatch) {
-    var _df = drawFolder;
-    drawFolder = function () {
-      _df();
-      /* applyDealMatches already used inside patched path if we patch earlier —
-         ensure rows got plural-aware rematch when folder used stock matcher. */
-      try {
-        if (window._folderRows && typeof boardMatchSets === "function") {
-          applyDealMatches(window._folderRows, boardMatchSets());
-          /* Re-badge visible rows without full redraw loop: update badge text. */
-          document.querySelectorAll("#folderbody [data-act=adddeal]").forEach(function (btn) {
-            var hit = window._folderRows[+btn.getAttribute("data-idx")];
-            if (!hit) return;
-            var b = btn.querySelector("b");
-            if (!b) return;
-            var name = String(hit.n || "").replace(/</g, "");
-            var badge = "";
-            if (hit._match === "list") badge = " <span class='badge match'>Op je lijst</span>";
-            else if (hit._match === "bord") badge = " <span class='badge bord'>Past bij je bord</span>";
-            b.innerHTML = name + badge;
-          });
-        }
-      } catch (err) {}
-    };
     drawFolder._aiMatch = true;
   }
 
