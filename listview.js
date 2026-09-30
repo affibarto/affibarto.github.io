@@ -142,7 +142,7 @@ var days=typeof DAYS!=="undefined"?DAYS:["Ma","Di","Wo","Do","Vr","Za","Zo"];
 var today=todayCode();
 var dayBlocks=[];
 days.forEach(function(d){
-var slot=S.plan&&S.plan[d];if(!slot||!slot.id||slot.leftover)return;
+var slot=S.plan&&S.plan[d];if(!slot||!slot.id||slot.leftover)return;if(slot.avond&&slot.avond!=="thuis")return;
 var rec=typeof recipeBy==="function"?recipeBy(slot.id):null;if(!rec)return;
 var who=eatersMain(d);
 var scale=(typeof portions==="function")?portions(who.length?who:(S.people||[]))/4:1;
@@ -225,9 +225,9 @@ var line=document.getElementById("lijstline");if(line)line.textContent=n?n+" ope
 if(!html){
   var micOk=!!(window.SpeechRecognition||window.webkitSpeechRecognition||document.getElementById("mic"));
   body.innerHTML="<div class=empty-list>"+
-    "<p class=\"sub ghost\">Nog stil hier. Zet avondeten op het bord, tik een actie, of zeg wat erbij moet.</p>"+
-    "<button type=button class=\"card emptycta\" data-go=\"bord\"><div class=p><b>Naar Bord</b><div class=meta>Kies of laat voorstellen zetten</div></div></button>"+
-    "<button type=button class=\"card emptycta\" data-go=\"folder\"><div class=p><b>Naar Actie</b><div class=meta>Folderhits van alle supers…</div></div></button>"+
+    "<p class=\"sub ghost\">Nog stil hier. Zet avondeten op het Bord — of tik Uit eten als jullie weggaan.</p>"+
+    "<button type=button class=\"card emptycta\" data-go=\"bord\"><div class=p><b>Naar het Bord</b><div class=meta>Zet avondeten — of tik Uit eten</div></div></button>"+
+    "<button type=button class=\"card emptycta\" data-go=\"folder\"><div class=p><b>Naar Actie</b><div class=meta>Folderhits die passen bij jullie week</div></div></button>"+
     "<button type=button class=\"card emptycta\" id=emptymic><div class=p><b>"+(micOk?"Spreek in":"Typ iets in")+"</b><div class=meta>"+(micOk?"Zeg wat er op de lijst moet":"Via + of typ een product")+"</div></div></button>"+
     "</div>";
 }else body.innerHTML=html;

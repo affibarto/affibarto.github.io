@@ -160,7 +160,7 @@ function boardMatchSets(){
     /* Same omit/leftover/removed scope as buildList recipe ingredients (+ mealAdds). */
     if(S&&S.plan&&typeof recipeBy==="function"){
       Object.keys(S.plan).forEach(function(d){
-        var slot=S.plan[d];if(!slot||!slot.id||slot.leftover)return;
+        var slot=S.plan[d];if(!slot||!slot.id||slot.leftover)return;if(slot.avond&&slot.avond!=="thuis")return;
         var rec=recipeBy(slot.id);if(!rec)return;
         (rec.ing||[]).forEach(function(it){
           if(S.omit&&S.omit[d+":"+slot.id+":"+it.k])return;

@@ -81,6 +81,8 @@
   function dayNeedsMeal(d) {
     var slot = S.plan && S.plan[d];
     if (slot && slot.id) return false;
+    if (slot && slot.avond && slot.avond !== "thuis") return false;
+    if (typeof WeAteAvond !== "undefined" && WeAteAvond.isStatusOnly && WeAteAvond.isStatusOnly(d)) return false;
     return eatersFor(d).length > 0;
   }
 

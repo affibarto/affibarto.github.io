@@ -18,7 +18,10 @@ function filled(){var w=S.weekPlans&&S.weekPlans[weekKey()];return !!(w&&w._done
 function boardMealCount(){
   var n=0;
   if(!S.plan)return 0;
-  DAYS.forEach(function(d){if(S.plan[d]&&S.plan[d].id)n++;});
+  DAYS.forEach(function(d){
+    if(typeof dayIsFilled==="function"){if(dayIsFilled(d))n++;}
+    else if(S.plan[d]&&(S.plan[d].id||(S.plan[d].avond&&S.plan[d].avond!=="thuis")))n++;
+  });
   return n;
 }
 function panel(){var el=document.getElementById("weekplan");if(el)return el;el=document.createElement("section");el.className="panel";el.id="weekplan";el.innerHTML="<div class=hd><button class='btn s w' id=wpclose>Later</button><b>Weekplanning</b></div><div class=sc id=wpbody></div>";(document.querySelector(".phone")||document.body).appendChild(el);return el;}
@@ -42,7 +45,10 @@ function banner(){
   var old=document.getElementById("wpbanner");if(old)old.remove();
   var meals=boardMealCount();
   var empty=0;
-  DAYS.forEach(function(d){if(!(S.plan&&S.plan[d]&&S.plan[d].id))empty++;});
+  DAYS.forEach(function(d){
+    var filled=typeof dayIsFilled==="function"?dayIsFilled(d):(S.plan&&S.plan[d]&&(S.plan[d].id||(S.plan[d].avond&&S.plan[d].avond!=="thuis")));
+    if(!filled)empty++;
+  });
   var daysHost=document.getElementById("days");
   if(daysHost){
     if(meals===0)daysHost.classList.add("bord-secondary");
@@ -53,9 +59,9 @@ function banner(){
   if(meals===0){
     card.className="primary-cta";
     if(!filled()){
-      card.innerHTML="<b>Begin met de weekplanning</b><p class=note style=margin:6px 0 12px>Wie eet wanneer? Daarna krijg je per avond een lijst echte diners — of stel zelf samen.</p><button type=button class='btn g full' id=wpprimary>Weekplanning maken</button>";
+      card.innerHTML="<b>Eerst even de week zetten</b><p class=note style=margin:6px 0 12px>Wie is er thuis, wie eet uit, wie komt later? Daarna echte diners — of stel zelf samen.</p><button type=button class='btn g full' id=wpprimary>Weekplanning maken</button>";
     }else{
-      card.innerHTML="<b>Slim voorstellen</b><p class=note style=margin:6px 0 12px>Planning staat. Per avond veel echte recepten (met foto) op veto’s, sportdrukte en wie thuis is — of stel zelf samen.</p><button type=button class='btn g full' id=wpprimary>Slim voorstellen</button>";
+      card.innerHTML="<b>Wat eten we?</b><p class=note style=margin:6px 0 12px>Planning staat. Per avond echte recepten — of tik Uit eten als jullie die avond de deur uit gaan.</p><button type=button class='btn g full' id=wpprimary>Slim voorstellen</button>";
     }
   }else if(empty>0){
     /* Slim blijft bereikbaar bij lege avonden */
