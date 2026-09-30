@@ -103,6 +103,7 @@ el.innerHTML=STORES.map(function(r){return "<button type=button class='chip "+((
 paintStoreCompare();
 }
 function markList(){
+/* Called from deferred drawList enrich — keep sync here */
 paintScore();
 }
 function bump(i,d){
@@ -111,7 +112,8 @@ e.q=Math.max(0,(+e.q||1)+d);
 if(e.q<=0)S.extras.splice(i,1);else e.line=(e.cents||0)*e.q;
 if(typeof save==="function")save();
 if(typeof markFolder==="function")markFolder();
-if(typeof drawList==="function")drawList();
+var run=function(){if(typeof drawList==="function")drawList();};
+if(typeof afterPaint==="function")afterPaint(run);else run();
 }
 document.addEventListener("click",function(e){
 var t=e.target;if(t&&t.nodeType===3)t=t.parentNode;if(!t||!t.closest)return;
@@ -121,9 +123,10 @@ var go=t.closest("[data-go]");if(go){closePanel();return;}
 var q=t.closest("[data-act=exqty]");
 if(q){e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();bump(+q.getAttribute("data-i"),+q.getAttribute("data-d"));return;}
 var st=t.closest("[data-act=store]");
-if(st){e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();var id=st.getAttribute("data-id");S.stores=S.stores||{};var on=S.stores[id]!==false;if(on&&typeof activeStores==="function"&&activeStores().length<=1){if(typeof toast==="function")toast("Minstens een winkel");return;}S.stores[id]=!on;if(typeof clearBrandPriceCache==="function")clearBrandPriceCache();if(typeof clearDealsCache==="function")clearDealsCache();if(typeof save==="function")save();paintStores();paintScore();if(typeof drawList==="function"){var v=document.getElementById("lijst");if(v&&v.classList.contains("on"))drawList();}}
+if(st){e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();var id=st.getAttribute("data-id");S.stores=S.stores||{};var on=S.stores[id]!==false;if(on&&typeof activeStores==="function"&&activeStores().length<=1){if(typeof toast==="function")toast("Minstens een winkel");return;}S.stores[id]=!on;if(typeof clearBrandPriceCache==="function")clearBrandPriceCache();if(typeof clearDealsCache==="function")clearDealsCache();if(typeof save==="function")save();paintStores();var run=function(){paintScore();if(typeof drawList==="function"){var v=document.getElementById("lijst");if(v&&v.classList.contains("on"))drawList();}};if(typeof afterPaint==="function")afterPaint(run);else setTimeout(run,0);}
 },true);
-if(typeof drawList==="function"&&!drawList._actie){var _dl=drawList;drawList=function(){_dl();markList();};drawList._actie=true;}
+/* listview.js owns drawList wrap + deferred markList — skip double wrap */
+if(typeof drawList==="function"&&!drawList._actie&&!drawList._listviewWrap){var _dl=drawList;drawList=function(){_dl();if(typeof afterPaint==="function")afterPaint(markList);else markList();};drawList._actie=true;}
 if(typeof drawHuis==="function"&&!drawHuis._actie){var _dh=drawHuis;drawHuis=function(){_dh();paintStores();};drawHuis._actie=true;}
 window.markList=markList;window.paintFolderList=markList;window.bumpExtra=bump;
 setTimeout(function(){markList();paintStores();},120);

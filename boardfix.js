@@ -8,7 +8,11 @@ if(S.eaten)delete S.eaten[d];
 if(id&&typeof purgeCustomIfUnused==="function")purgeCustomIfUnused(id);
 if(typeof save==="function")save();
 if(typeof drawBord==="function")drawBord();
-if(typeof drawList==="function")drawList();
+var v=document.getElementById("lijst");
+if(v&&v.classList.contains("on")&&typeof drawList==="function"){
+  if(typeof afterPaint==="function")afterPaint(function(){drawList();});
+  else drawList();
+}
 if(typeof toast==="function")toast("Van het bord");
 }
 function wrapDays(){
@@ -44,8 +48,9 @@ S.extras=[];
 S.checked={};
 S.removed={};
 if(typeof save==="function")save();
-if(typeof drawList==="function")drawList();
 if(typeof drawBord==="function")drawBord();
+var run=function(){if(typeof drawList==="function")drawList();};
+if(typeof afterPaint==="function")afterPaint(run);else run();
 if(typeof toast==="function")toast("Lijst leeg. Bord blijft.");
 };
 document.addEventListener("click",function(e){

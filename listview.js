@@ -232,25 +232,37 @@ if(!html){
     "</div>";
 }else body.innerHTML=html;
 if(window._brandDirty){window._brandDirty=0;if(typeof save==="function")save();}
-if(typeof paintScore==="function")paintScore();
+/* paintScore/stamp/brand deferred via drawList wrap — keep first paint snappy */
 }
 window.drawList=drawListByMeal;
 window._enrichIngredient=enrichIngredient;
 // re-apply brands/actie wraps that ran before listview overwrote drawList
-if(typeof paintBrand==="function"||typeof stampItemBrands==="function"||typeof markList==="function"){
+// Heavy work (A/B chips, score, brand hint) runs AFTER first paint.
+(function(){
   var _base=window.drawList;
-  window.drawList=function(){
+  window.drawList=function(opts){
     if(window._drawingList)return;
+    opts=opts||{};
+    try{if(typeof _viewDirty!=="undefined")_viewDirty.lijst=0;}catch(e){}
     window._drawingList=1;
-    try{
-      _base();
-      if(typeof markList==="function")markList();
-      else if(typeof paintFolderList==="function")paintFolderList();
-      if(typeof paintBrand==="function")paintBrand();
-      if(typeof stampItemBrands==="function")stampItemBrands();
-    }finally{window._drawingList=0;}
+    try{_base();}
+    finally{window._drawingList=0;}
+    function enrich(){
+      if(window._drawingList)return;
+      window._drawingList=1;
+      try{
+        if(typeof stampItemBrands==="function")stampItemBrands();
+        if(typeof paintBrand==="function")paintBrand();
+        if(typeof markList==="function")markList();
+        else if(typeof paintScore==="function")paintScore();
+      }finally{window._drawingList=0;}
+    }
+    if(opts.syncEnrich)enrich();
+    else if(typeof afterPaint==="function")afterPaint(enrich);
+    else setTimeout(enrich,0);
   };
-}
+  window.drawList._listviewWrap=1;
+})();
 var WOORD={een:1,"\u00e9\u00e9n":1,twee:2,drie:3,vier:4,vijf:5,zes:6,zeven:7,acht:8,negen:9,tien:10,elf:11,twaalf:12};
 function parseSpeak(text){
 text=String(text||"").toLowerCase().replace(/\ben\b/g,",").replace(/[+/]/g,",");

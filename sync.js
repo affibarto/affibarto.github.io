@@ -10,7 +10,7 @@
     "brand", "itemBrand", "stores", "budget", "house", "apartPick", "eaten",
     "weekPlans", "customs", "listCompact", "planRemind"
   ];
-  var DEBOUNCE_MS = 400;
+  var DEBOUNCE_MS = 900;
   var CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
   var TIP_KEY = "weate.syncTipSeen";
   var LAST_SYNC_KEY = "weate.lastSyncAt";
@@ -168,11 +168,19 @@
     try {
       if (typeof clearBrandPriceCache === "function") clearBrandPriceCache();
       if (typeof clearDealsCache === "function") clearDealsCache();
-      if (typeof drawBord === "function") drawBord();
-      if (typeof drawList === "function") drawList();
-      if (typeof drawHuis === "function") drawHuis();
-      if (typeof paintBrand === "function") paintBrand();
-      if (typeof paintStores === "function") paintStores();
+      var redraw = function () {
+        try {
+          if (typeof drawBord === "function") drawBord();
+          if (typeof drawList === "function") drawList();
+          if (typeof drawHuis === "function") drawHuis();
+          if (typeof paintBrand === "function") paintBrand();
+          if (typeof paintStores === "function") paintStores();
+        } catch (e2) {
+          console.warn("WeAte sync: redraw", e2);
+        }
+      };
+      if (typeof afterPaint === "function") afterPaint(redraw);
+      else setTimeout(redraw, 0);
     } catch (e) {
       console.warn("WeAte sync: redraw", e);
     }
