@@ -137,27 +137,32 @@ function drawListByMeal(){
 var body=document.getElementById("lijstbody");if(!body)return;
 applyListCompact();
 S.listOpen=S.listOpen||{};
-var html="";var n=0;
+var html="";var n=0;var openN=0;
 var days=typeof DAYS!=="undefined"?DAYS:["Ma","Di","Wo","Do","Vr","Za","Zo"];
-var today=todayCode();
-var dayBlocks=[];
+var AISLE_ORDER=["Vers","Koeling","Diepvries","Houdbaar","Huis"];
+var AISLE_LAB={Vers:"Groenten en fruit",Koeling:"Koeling",Diepvries:"Diepvries",Houdbaar:"Houdbaar",Huis:"Huis"};
+var buckets={};
+function pushRow(aisle,htmlRow,isOpen){
+  if(!buckets[aisle])buckets[aisle]={rows:"",n:0,open:0};
+  buckets[aisle].rows+=htmlRow;
+  buckets[aisle].n++;
+  n++;
+  if(isOpen){buckets[aisle].open++;openN++;}
+}
 days.forEach(function(d){
 var slot=S.plan&&S.plan[d];if(!slot||!slot.id||slot.leftover)return;if(slot.avond&&slot.avond!=="thuis")return;
 var rec=typeof recipeBy==="function"?recipeBy(slot.id):null;if(!rec)return;
 var who=eatersMain(d);
 var scale=(typeof portions==="function")?portions(who.length?who:(S.people||[]))/4:1;
-var shopped=!!(S.shopped&&S.shopped[d]);
-var rows="";var count=0;var allChecked=true;
 (rec.ing||[]).forEach(function(it){
 if(S.omit&&S.omit[d+":"+slot.id+":"+it.k])return;
 var k=it.k+"@"+d;
 if(S.removed&&S.removed[k])return;
 var need=amountFor(it,scale);
 var info=enrichIngredient(it.k);
-/* title/brand already follow A/B via lineDisplayInfo — do not reset to bare CAT label */
-if(!(S.checked&&S.checked[k]))allChecked=false;
-count++;n++;
-rows+=row(k,info.title,mealMeta(info,d+" \u00b7 "+rec.t,need),need);
+var isOpen=!(S.checked&&S.checked[k]);
+var aisle=(typeof CAT!=="undefined"&&CAT[it.k]&&CAT[it.k].aisle)||"Huis";
+pushRow(aisle,row(k,info.title,mealMeta(info,d+" · "+rec.t,need),need),isOpen);
 });
 var adds=(S.ingAdd&&S.ingAdd[d+":"+slot.id])||[];
 adds.forEach(function(it,idx){
@@ -169,59 +174,48 @@ var title=it.k&&CAT[it.k]?(typeof productLabel==="function"?productLabel(CAT[it.
 var info=it.k?enrichIngredient(it.k):{title:title,brand:"",pack:"",store:"",deal:"",tier:""};
 if(!it.k)info.title=title;
 else if(!info.title)info.title=title;
-if(!(S.checked&&S.checked[k]))allChecked=false;
-count++;n++;
-rows+=row(k,info.title,mealMeta(info,d+" \u00b7 "+rec.t+" \u00b7 erbij",need),need);
+var isOpen=!(S.checked&&S.checked[k]);
+var aisle=(it.k&&typeof CAT!=="undefined"&&CAT[it.k]&&CAT[it.k].aisle)||"Huis";
+pushRow(aisle,row(k,info.title,mealMeta(info,d+" · "+rec.t+" · erbij",need),need),isOpen);
 });
-if(!count)allChecked=false;
-dayBlocks.push({d:d,rec:rec,shopped:shopped,done:shopped||allChecked,rows:rows,count:count});
 });
-var firstOpen=null;
-for(var i=0;i<dayBlocks.length;i++){
-if(!dayBlocks[i].done){firstOpen=dayBlocks[i].d;break;}
-}
-var todayIn=dayBlocks.some(function(b){return b.d===today&&!b.done;});
-dayBlocks.forEach(function(b){
-var defOpen=false;
-if(!b.done){
-if(todayIn)defOpen=(b.d===today);
-else defOpen=(b.d===firstOpen);
-}
-var open=b.done?secIsOpen(b.d,false):secIsOpen(b.d,defOpen);
-var label=b.d+" \u00b7 "+b.rec.t+" \u00b7 "+b.count+(b.shopped?" \u00b7 gehaald":"");
-var right="<button type=button class='btn s w' data-act=gehaald data-d="+b.d+">"+(b.shopped?"Ok":"Gehaald")+"</button>";
-html+=secHead(b.d,label,open,right)+b.rows+secFoot();
+AISLE_ORDER.forEach(function(a){
+var b=buckets[a];if(!b||!b.n)return;
+var open=secIsOpen("aisle:"+a,true);
+html+=secHead("aisle:"+a,(AISLE_LAB[a]||a),open,"")+b.rows+secFoot();
 });
 var extras=S.extras||[];
 var actRows="";var actN=0;
 extras.forEach(function(e,i){
 var k="e:"+i+":"+e.n;if(S.removed&&S.removed[k])return;actN++;n++;
+if(!(S.checked&&S.checked[k]))openN++;
 if(!(e.brandTier==="A"||e.brandTier==="B")&&typeof window.detectBrandTier==="function"){
 var t=window.detectBrandTier({b:e.b||e.brand,brand:e.b||e.brand,n:e.n});
 if(t==="A"||t==="B"){e.brandTier=t;window._brandDirty=1;}
 }
-/* extras: brandTier blijft op e; itemMode leest via extraBrandTier */
 var prijs=e.line||((e.cents||0)*(e.q||1));
-var right="<div class=qtybox><button type=button class=qtybtn data-act=exqty data-i="+i+" data-d=-1>\u2212</button><span class=qtyn>"+(e.q||1)+"</span><button type=button class=qtybtn data-act=exqty data-i="+i+" data-d=1>+</button></div><div class=price>"+euro(prijs)+"</div>";
+var right="<div class=qtybox><button type=button class=qtybtn data-act=exqty data-i="+i+" data-d=-1>−</button><span class=qtyn>"+(e.q||1)+"</span><button type=button class=qtybtn data-act=exqty data-i="+i+" data-d=1>+</button></div><div class=price>"+euro(prijs)+"</div>";
 actRows+=row(k,e.n,extraMeta(e),e.q||1,right);
 });
 if(actN){
 var actOpen=secIsOpen("actie",actN<=5);
-html+=secHead("actie","Actie \u00b7 "+actN,actOpen,"")+actRows+secFoot();
+html+=secHead("actie","Actie · "+actN,actOpen,"")+actRows+secFoot();
 }
 var exRows="";var extraN=0;
 (S.always||[]).forEach(function(a){
 var k=a.k&&typeof CAT!=="undefined"&&CAT[a.k]?a.k:("x:"+a.n);
 if(S.removed&&S.removed[k])return;
 extraN++;n++;
+if(!(S.checked&&S.checked[k]))openN++;
 var disp=alwaysDisplay(a);
 exRows+=row(k,disp.title,disp.meta,qty(a.q||1));
 });
 if(extraN){
 var exOpen=secIsOpen("extra",extraN<=5);
-html+=secHead("extra","Extra \u00b7 "+extraN,exOpen,"")+exRows+secFoot();
+html+=secHead("extra","Extra · "+extraN,exOpen,"")+exRows+secFoot();
 }
-var line=document.getElementById("lijstline");if(line)line.textContent=n?n+" open":"";
+var line=document.getElementById("lijstline");if(line)line.textContent=n?(openN+" open"):"";
+window._listCounts={open:openN,total:n,bought:Math.max(0,n-openN)};
 if(!html){
   var micOk=!!(window.SpeechRecognition||window.webkitSpeechRecognition||document.getElementById("mic"));
   body.innerHTML="<div class=empty-list>"+
@@ -232,7 +226,6 @@ if(!html){
     "</div>";
 }else body.innerHTML=html;
 if(window._brandDirty){window._brandDirty=0;if(typeof save==="function")save();}
-/* paintScore/stamp/brand deferred via drawList wrap — keep first paint snappy */
 }
 window.drawList=drawListByMeal;
 window._enrichIngredient=enrichIngredient;
