@@ -1,7 +1,7 @@
 {
-  "week": "28–4 oct 2026",
+  "week": "12–18 oct 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-09-30",
+  "fetched": "2026-10-12",
   "stores": [
     {
       "id": "dirk",
@@ -79,6 +79,41 @@
       "pp": "picnic",
       "file": "folder-picnic.json",
       "count": 100
+    },
+    {
+      "id": "gewoon_coop",
+      "n": "Gewoon Coop",
+      "pp": "gewoon_coop",
+      "file": "folder-gewoon_coop.json",
+      "count": 92
+    },
+    {
+      "id": "mcd",
+      "n": "Mcd",
+      "pp": "mcd",
+      "file": "folder-mcd.json",
+      "count": 85
+    },
+    {
+      "id": "nettorama",
+      "n": "Nettorama",
+      "pp": "nettorama",
+      "file": "folder-nettorama.json",
+      "count": 100
+    },
+    {
+      "id": "poiesz",
+      "n": "Poiesz",
+      "pp": "poiesz",
+      "file": "folder-poiesz.json",
+      "count": 100
+    },
+    {
+      "id": "spar",
+      "n": "Spar",
+      "pp": "spar",
+      "file": "folder-spar.json",
+      "count": 53
     }
   ]
 }
