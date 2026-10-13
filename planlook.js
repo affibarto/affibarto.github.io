@@ -65,12 +65,33 @@
       fn(d, rec, slot, scale, who);
     });
   }
+  /* One price model for Bord + Lijst: rank like the list (scoreListStores), price lines via lineUnit. */
+  var _scCache = { t: 0, v: null };
+  function topScore() {
+    if (typeof scoreListStores !== "function") return null;
+    var now = Date.now();
+    if (_scCache.v && now - _scCache.t < 400) return _scCache.v;
+    var sc = null;
+    try { sc = scoreListStores(); } catch (e) { sc = null; }
+    _scCache = { t: now, v: sc && sc.length && sc[0].nItems ? sc[0] : null };
+    return _scCache.v;
+  }
+  window.weTopStore = topScore;
+  window.weLineCents = function (k, cat, q) {
+    var top = topScore();
+    if (top && typeof lineUnit === "function" && cat) {
+      var u = null;
+      try { u = lineUnit(cat, top.id, { k: k, cat: cat, q: q }); } catch (e) { u = null; }
+      if (u != null) return Math.round(u * q);
+    }
+    return Math.round(unitCents(cat) * q);
+  };
   function recipeCents(rec, scale) {
     var sum = 0;
     (rec.ing || []).forEach(function (it) {
       if (!it.k) return;
       var cat = typeof CAT !== "undefined" && CAT[it.k];
-      sum += Math.round(unitCents(cat) * ((+it.q || 1) * scale));
+      sum += window.weLineCents(it.k, cat, (+it.q || 1) * scale);
     });
     return sum;
   }
@@ -97,11 +118,14 @@
         });
       });
     });
+    var _top = topScore();
+    if (_top) { cents = _top.total; }
     var best = null;
     Object.keys(byStore).forEach(function (id) {
       var row = byStore[id];
       if (!best || row.cents < best.cents) best = { id: id, n: row.n, cents: row.cents };
     });
+    if (_top) best = { id: _top.id, n: _top.n, cents: _top.total };
     return { cents: cents, lines: lines, bought: bought, best: best };
   }
   function paintHome() {
@@ -119,7 +143,7 @@
     var budget = Math.max(1, +S.budget || 120);
     var euros = st.cents / 100;
     var pct = Math.max(0, Math.min(100, Math.round((euros / budget) * 100)));
-    var storeTxt = (st.lines && st.best) ? ("gepland voor " + st.best.n) : "jullie winkels";
+    var storeTxt = (st.lines && st.best) ? ("goedkoopst bij " + st.best.n) : "jullie winkels";
     var bought = (window._listCounts && window._listCounts.total) ? window._listCounts.bought : st.bought;
     var total = (window._listCounts && window._listCounts.total) ? window._listCounts.total : st.lines;
     home.innerHTML =
@@ -202,6 +226,7 @@
       try { paintHome(); } catch (e) {}
     };
     drawBord._planlook = true;
+    try { if (typeof _viewDirty !== "undefined") _viewDirty.bord = 1; if (document.getElementById("days") && document.getElementById("days").children.length) drawBord(); } catch (e) {}
   }
   if (typeof drawList === "function" && !drawList._planlook) {
     var _dl = drawList;

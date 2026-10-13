@@ -9,17 +9,18 @@
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
 <title>WeAte — De Barto's</title>
-<!-- cache v=89 plan layout + swipe -->
+<!-- cache v=90 premium depth redesign -->
 <link rel="manifest" href="manifest.webmanifest"/>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet"/>
-<link rel="icon" type="image/png" href="favicon.png?v=89"/>
-<link rel="icon" href="favicon.ico?v=89"/>
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=89"/>
-<link rel="stylesheet" href="style.css?v=89"/>
+<link rel="icon" type="image/png" href="favicon.png?v=90"/>
+<link rel="icon" href="favicon.ico?v=90"/>
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=90"/>
+<link rel="stylesheet" href="style.css?v=90"/>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..600,0..100&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="premium.css?v=90"/>
 <link rel="stylesheet" href="depth.css?v=90"/>
 <link rel="stylesheet" href="type.css?v=90"/>
+<link rel="stylesheet" href="app.css?v=90"/>
 <style>
 .qtybox{display:flex;align-items:center;gap:6px;flex:none}
 .qtybtn{width:34px;height:34px;border:0;border-radius:10px;background:#EDE0D0;font:700 18px Outfit,sans-serif;color:#2A1810}
@@ -36,7 +37,7 @@
   <section class="view on" id="splash">
     <div class="splash">
       <div class="splash-mark" aria-hidden="true"></div>
-      <img class="brand" src="logo.png?v=89" alt="WeAte" width="360" height="374"/>
+      <div class="wm" role="img" aria-label="WeAte"><svg class="wm-plate" viewBox="0 0 200 200" aria-hidden="true"><defs><radialGradient id="pl" cx="45%" cy="35%" r="70%"><stop offset="0" stop-color="#FFFDF9"/><stop offset=".7" stop-color="#F6E9DB"/><stop offset="1" stop-color="#E9D3BE"/></radialGradient><linearGradient id="rim" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#CB5E3B"/><stop offset="1" stop-color="#8E3519"/></linearGradient></defs><circle cx="100" cy="100" r="92" fill="url(#rim)"/><circle cx="100" cy="100" r="80" fill="url(#pl)"/><circle cx="100" cy="100" r="58" fill="none" stroke="#B4472A" stroke-opacity=".18" stroke-width="1.5"/><path d="M58 62v30a8 8 0 0 0 16 0V62M66 62v76M142 62c-10 6-12 22-12 34h12v42" fill="none" stroke="#8E3519" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/></svg><span class="wm-text">We<em>Ate</em></span></div>
       <p class="splash-tag">Avondeten, samen geregeld</p>
       <p class="splash-house">De Barto's</p>
       <div class="splash-cta">
@@ -45,7 +46,7 @@
     </div>
   </section>
   <section class="view" id="bord">
-    <div class="hd"><div class="hdleft"><img class="hdlogo" src="logo-192.png?v=89" alt=""/><b>Bord</b></div></div>
+    <div class="hd"><div class="hdleft"><img class="hdlogo" src="logo-192.png?v=90" alt=""/><b>Bord</b></div></div>
     <div class="sc"><p class="sub" id="weekline"></p><div id="days"></div></div>
     <nav class="nav"><button class="on" data-go="bord">Bord</button><button data-go="lijst">Lijst</button><button data-go="folder">Actie</button><button data-go="huis">Huis</button></nav>
   </section>
@@ -80,7 +81,7 @@
     </div>
   </section>
   <section class="view" id="lijst">
-    <div class="hd"><div class="hdleft"><img class="hdlogo" src="logo-192.png?v=89" alt=""/><b>Lijst</b></div><button class="btn s w on" type="button" id="listcompact" aria-pressed="true">Compact</button><button class="btn s w" type="button" id="clearlist">Leeg</button><button class="btn s w" id="listgear" type="button">Winkels</button></div>
+    <div class="hd"><div class="hdleft"><img class="hdlogo" src="logo-192.png?v=90" alt=""/><b>Lijst</b></div><button class="btn s w on" type="button" id="listcompact" aria-pressed="true">Compact</button><button class="btn s w" type="button" id="clearlist">Leeg</button><button class="btn s w" id="listgear" type="button">Winkels</button></div>
     <div class="sc">
       <p class="sub" id="lijstline"></p>
       <div class="sec">A-merk of huismerk</div>
@@ -100,7 +101,7 @@
     <nav class="nav"><button data-go="bord">Bord</button><button class="on" data-go="lijst">Lijst</button><button data-go="folder">Actie</button><button data-go="huis">Huis</button></nav>
   </section>
   <section class="view" id="folder">
-    <div class="hd"><div class="hdleft"><img class="hdlogo" src="logo-192.png?v=89" alt=""/><b>Actie</b></div><span class="sub" id="folderline"></span></div>
+    <div class="hd"><div class="hdleft"><img class="hdlogo" src="logo-192.png?v=90" alt=""/><b>Actie</b></div><span class="sub" id="folderline"></span></div>
     <div class="sc">
       <p class="note">Prijs blijft staan. Bij 1+1 of 2e halve prijs vragen we het even.</p>
       <div class="row" id="folderpick" style="margin-bottom:12px"></div>
@@ -137,7 +138,7 @@
     </div>
   </section>
   <section class="view" id="huis">
-    <div class="hd"><div class="hdleft"><img class="hdlogo" src="logo-192.png?v=89" alt=""/><b>Huis</b></div></div>
+    <div class="hd"><div class="hdleft"><img class="hdlogo" src="logo-192.png?v=90" alt=""/><b>Huis</b></div></div>
     <div class="sc">
       <h1 id="huisnaam">De Barto's</h1>
       <div id="people"></div>
@@ -254,29 +255,29 @@
   });
 })();
 </script>
-<script src="products.js?v=89"></script>
-<script src="recipes.js?v=89"></script>
-<script src="app.js?v=89"></script>
-<script src="weekplan.js?v=89"></script>
-<script src="suggest.js?v=89"></script>
-<script src="folder.js?v=89"></script>
-<script src="ai.js?v=89"></script>
-<script src="brands.js?v=89"></script>
-<script src="listfix.js?v=89"></script>
-<script src="actie.js?v=89"></script>
-<script src="nearby.js?v=89"></script>
-<script src="listview.js?v=89"></script>
-<script src="avond.js?v=89"></script>
-<script src="boardfix.js?v=89"></script>
-<script src="assist.js?v=89"></script>
-<script src="abpopup.js?v=89"></script>
-<script src="firebase-config.js?v=89"></script>
+<script src="products.js?v=90"></script>
+<script src="recipes.js?v=90"></script>
+<script src="app.js?v=90"></script>
+<script src="weekplan.js?v=90"></script>
+<script src="suggest.js?v=90"></script>
+<script src="folder.js?v=90"></script>
+<script src="ai.js?v=90"></script>
+<script src="brands.js?v=90"></script>
+<script src="listfix.js?v=90"></script>
+<script src="actie.js?v=90"></script>
+<script src="nearby.js?v=90"></script>
+<script src="listview.js?v=90"></script>
+<script src="avond.js?v=90"></script>
+<script src="boardfix.js?v=90"></script>
+<script src="assist.js?v=90"></script>
+<script src="abpopup.js?v=90"></script>
+<script src="firebase-config.js?v=90"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-<script src="sync.js?v=89"></script>
-<script src="planlook.js?v=89"></script>
-<script src="swipe.js?v=89"></script>
+<script src="sync.js?v=90"></script>
+<script src="planlook.js?v=90"></script>
+<script src="swipe.js?v=90"></script>
 <script src="depth.js?v=90"></script>
-<script src="pwa.js?v=89"></script>
+<script src="pwa.js?v=90"></script>
 </body>
 </html>

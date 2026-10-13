@@ -10060,7 +10060,16 @@
   var _list = [];
   var _hay = [];
 
+  var _normC = Object.create(null), _normN = 0, _fbnC = Object.create(null), _alC = Object.create(null);
   function norm(s) {
+    var key = String(s || "");
+    var hit = _normC[key];
+    if (hit !== undefined) return hit;
+    if (_normN > 20000) { _normC = Object.create(null); _normN = 0; }
+    _normN++;
+    return (_normC[key] = _norm0(key));
+  }
+  function _norm0(s) {
     return String(s || "")
       .toLowerCase()
       .replace(/['\u2019]/g, "")
@@ -10094,6 +10103,7 @@
   }
 
   function indexAll() {
+    _fbnC = Object.create(null); _alC = Object.create(null);
     _byId = {};
     _list = [];
     SEED.forEach(function (p) {
@@ -10151,6 +10161,11 @@
   }
 
   function findByName(name) {
+    var ck = String(name || "");
+    if (ck in _fbnC) return _fbnC[ck];
+    return (_fbnC[ck] = _findByName0(name));
+  }
+  function _findByName0(name) {
     var n = norm(name);
     if (!n) return null;
     var i, p, a;
@@ -10234,6 +10249,11 @@
   }
 
   function aliasesFor(idOrName) {
+    var ck = String(idOrName || "");
+    if (!_alC[ck]) _alC[ck] = _aliasesFor0(idOrName);
+    return _alC[ck].slice();
+  }
+  function _aliasesFor0(idOrName) {
     var p = get(idOrName) || findByName(idOrName);
     if (!p) return [];
     var out = [p.id, p.name].concat(p.aliases || []);

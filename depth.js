@@ -27,3 +27,15 @@
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',hook);else hook();
 })();
+/* Prewarm Actie matching while idle so the first Actie open is instant */
+(function(){
+  function warm(){try{if(window._folderDirty&&typeof drawFolder==="function"&&!document.querySelector('#folder.on'))drawFolder();}catch(e){}}
+  var ric=window.requestIdleCallback||function(f){return setTimeout(f,1200)};
+  window.addEventListener('load',function(){setTimeout(function(){ric(warm,{timeout:4000})},2500)});
+})();
+(function(){
+  if(typeof markDirty!=="function"||markDirty._warm)return;
+  var md=markDirty,t=0,ric=window.requestIdleCallback||function(f){return setTimeout(f,600)};
+  markDirty=function(v){var r=md.apply(this,arguments);if([].indexOf.call(arguments,"folder")>=0){clearTimeout(t);t=setTimeout(function(){ric(function(){try{if(window._folderDirty&&!document.querySelector('#folder.on'))drawFolder();}catch(e){}},{timeout:3000})},800);}return r;};
+  markDirty._warm=1;window.markDirty=markDirty;
+})();

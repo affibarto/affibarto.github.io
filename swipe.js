@@ -31,7 +31,7 @@
     var sum = 0;
     (rec.ing || []).forEach(function (it) {
       var cat = typeof CAT !== "undefined" && CAT[it.k];
-      sum += Math.round(unitCents(cat) * ((+it.q || 1) * scale));
+      sum += window.weLineCents ? window.weLineCents(it.k, cat, (+it.q || 1) * scale) : Math.round(unitCents(cat) * ((+it.q || 1) * scale));
     });
     return sum;
   }
