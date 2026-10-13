@@ -103,3 +103,4 @@
 .statcard b{white-space:nowrap}.statcard:first-child b{font-size:24px!important}.statcard:first-child b span{font:500 13px var(--f-ui)!important;opacity:.7}
 .plancard,.dayrow{border-left:0!important}
 #kies .avondstrip>*:first-child:not(.row){display:none!important}
+.dayrow.plancard::before{display:none!important}
