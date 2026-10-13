@@ -104,3 +104,4 @@
 .plancard,.dayrow{border-left:0!important}
 #kies .avondstrip>*:first-child:not(.row){display:none!important}
 .dayrow.plancard::before{display:none!important}
+#bord .swipewrap{background:transparent!important;border-radius:var(--r-m)!important;overflow:visible!important}#bord .swipewrap .swipebg{display:none}
