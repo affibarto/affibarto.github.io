@@ -14,7 +14,7 @@
 #bord,#kies{background:radial-gradient(120% 60% at 100% 0,#F8E6D8 0,transparent 60%),var(--p-bg)!important;font-family:var(--f-ui);color:var(--p-ink)}
 #bord .sc,#kies .sc{padding:8px 20px 150px}
 /* header */
-#bord .hd{display:none}
+
 #planhome .eyebrow{font:600 12px/1 var(--f-ui);letter-spacing:.14em;color:var(--p-ink3);margin:18px 0 6px}
 #planhome .greet{font:400 40px/1.02 var(--f-display);font-variation-settings:"opsz" 144,"SOFT" 100;letter-spacing:-.02em;color:var(--p-ink);margin:0 0 14px}
 #planhome .greet::first-line{font-style:normal}
