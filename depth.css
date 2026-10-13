@@ -63,3 +63,4 @@
 .swipecard.back{transform:translateY(-20px) scale(.93)!important;transform-origin:50% 0}
 .swipecard.back2{transform:translateY(-38px) scale(.86)!important;transform-origin:50% 0}
 .dayrow.today{transform:translateY(-2px) scale(1.01)}
+.swipestack{margin-top:54px!important}
