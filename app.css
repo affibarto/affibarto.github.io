@@ -83,5 +83,5 @@ input[type=checkbox],input[type=radio]{width:22px!important;height:22px!importan
 #splash img.brand{filter:drop-shadow(0 4px 6px rgba(110,35,12,.18)) drop-shadow(0 30px 40px rgba(142,53,25,.28))}
 /* Roy's original logo on Bord header (same asset, unaltered) */
 #planhome{position:relative}
-#planhome::before{content:"";position:absolute;right:0;top:12px;width:64px;height:66px;background:url("logo.png?v=91") center/contain no-repeat;filter:drop-shadow(0 4px 8px rgba(110,45,18,.28))}
+#planhome::before{content:"";position:absolute;right:0;top:12px;width:64px;height:66px;background:url("logo.png?v=92") center/contain no-repeat;filter:drop-shadow(0 4px 8px rgba(110,45,18,.28))}
 #planhome .greet{padding-right:72px}

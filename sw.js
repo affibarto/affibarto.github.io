@@ -1,41 +1,41 @@
 /* WeAte service worker — shell offline, APIs stay online */
-const CACHE = 'weate-shell-v91';
+const CACHE = 'weate-shell-v92';
 const SHELL = [
   './',
   './index.html',
   './manifest.webmanifest',
-  './style.css?v=91',
-  './premium.css?v=91',
-  './depth.css?v=91',
-  './type.css?v=91',
-  './app.css?v=91',
-  './depth.js?v=91',
-  './products.js?v=91',
-  './recipes.js?v=91',
-  './app.js?v=91',
-  './weekplan.js?v=91',
-  './suggest.js?v=91',
-  './folder.js?v=91',
-  './ai.js?v=91',
-  './brands.js?v=91',
-  './listfix.js?v=91',
-  './actie.js?v=91',
-  './nearby.js?v=91',
-  './listview.js?v=91',
-  './avond.js?v=91',
-  './boardfix.js?v=91',
-  './assist.js?v=91',
-  './abpopup.js?v=91',
-  './firebase-config.js?v=91',
-  './sync.js?v=91',
-  './pwa.js?v=91',
-  './planlook.js?v=91',
-  './swipe.js?v=91',
-  './logo.png?v=91',
-  './logo-192.png?v=91',
-  './favicon.png?v=91',
-  './favicon.ico?v=91',
-  './apple-touch-icon.png?v=91',
+  './style.css?v=92',
+  './premium.css?v=92',
+  './depth.css?v=92',
+  './type.css?v=92',
+  './app.css?v=92',
+  './depth.js?v=92',
+  './products.js?v=92',
+  './recipes.js?v=92',
+  './app.js?v=92',
+  './weekplan.js?v=92',
+  './suggest.js?v=92',
+  './folder.js?v=92',
+  './ai.js?v=92',
+  './brands.js?v=92',
+  './listfix.js?v=92',
+  './actie.js?v=92',
+  './nearby.js?v=92',
+  './listview.js?v=92',
+  './avond.js?v=92',
+  './boardfix.js?v=92',
+  './assist.js?v=92',
+  './abpopup.js?v=92',
+  './firebase-config.js?v=92',
+  './sync.js?v=92',
+  './pwa.js?v=92',
+  './planlook.js?v=92',
+  './swipe.js?v=92',
+  './logo.png?v=92',
+  './logo-192.png?v=92',
+  './favicon.png?v=92',
+  './favicon.ico?v=92',
+  './apple-touch-icon.png?v=92',
   './icon-192.png',
   './icon-512.png',
   './icon-192-maskable.png',
@@ -74,13 +74,15 @@ function shouldBypass(url) {
   return false;
 }
 
+self.addEventListener('message', (e) => { if (e.data === 'skipWaiting') self.skipWaiting(); });
+
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE).then((cache) =>
-      cache.addAll(SHELL).catch((err) => {
+      cache.addAll(SHELL.map((u) => new Request(u, { cache: 'reload' }))).catch((err) => {
         console.warn('[WeAte SW] shell precache partial', err);
         return Promise.all(
-          SHELL.map((u) => cache.add(u).catch(() => null))
+          SHELL.map((u) => cache.add(new Request(u, { cache: 'reload' })).catch(() => null))
         );
       })
     ).then(() => self.skipWaiting())
@@ -106,7 +108,7 @@ self.addEventListener('fetch', (event) => {
   // Network-first for HTML / navigations
   if (isHtmlNav(request, url)) {
     event.respondWith(
-      fetch(request)
+      fetch(request, { cache: 'no-store' })
         .then((res) => {
           if (res && res.ok) {
             const copy = res.clone();
@@ -126,19 +128,18 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Cache-first for versioned / shell static assets
+  // Network-first for shell assets (JS/CSS/images); cache only as offline fallback
   if (isShellAsset(url.href)) {
     event.respondWith(
-      caches.match(request).then((cached) => {
-        if (cached) return cached;
-        return fetch(request).then((res) => {
+      fetch(request, { cache: 'no-cache' })
+        .then((res) => {
           if (res && res.ok) {
             const copy = res.clone();
             caches.open(CACHE).then((c) => c.put(request, copy)).catch(() => {});
           }
           return res;
-        });
-      })
+        })
+        .catch(() => caches.match(request).then((c) => c || caches.match(request, { ignoreSearch: true })))
     );
   }
 });

@@ -11,10 +11,45 @@
     return secure;
   }
 
+  var APP_V = (function () {
+    var m = document.querySelector('link[href*="style.css?v="]');
+    return m ? (m.getAttribute('href').split('v=')[1] || '') : '';
+  })();
+  var _reloading = false;
+  function reloadOnce() {
+    if (_reloading) return;
+    try {
+      var k = 'weate.swReloadAt', last = +sessionStorage.getItem(k) || 0;
+      if (Date.now() - last < 15000) return;
+      sessionStorage.setItem(k, String(Date.now()));
+    } catch (e) {}
+    _reloading = true;
+    location.reload();
+  }
+  /* iOS standalone resumes a suspended page instead of navigating: check the live version ourselves. */
+  function checkLiveVersion() {
+    if (!APP_V) return;
+    fetch('./index.html?vc=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.ok ? r.text() : ''; })
+      .then(function (t) {
+        var m = t && t.match(/style\.css\?v=(\d+)/);
+        if (m && m[1] !== APP_V) reloadOnce();
+      }).catch(function () {});
+  }
   function registerSW() {
     if (!canRegisterSW()) return;
-    navigator.serviceWorker.register('./sw.js', { scope: './' }).catch(function (err) {
+    var hadController = !!navigator.serviceWorker.controller;
+    navigator.serviceWorker.register('./sw.js', { scope: './', updateViaCache: 'none' }).then(function (reg) {
+      function upd() { try { reg.update(); } catch (e) {} checkLiveVersion(); }
+      upd();
+      document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible') upd(); });
+      window.addEventListener('pageshow', function (e) { if (e.persisted) upd(); });
+      window.addEventListener('focus', upd);
+    }).catch(function (err) {
       console.warn('[WeAte] SW register mislukt', err);
+    });
+    navigator.serviceWorker.addEventListener('controllerchange', function () {
+      if (hadController) reloadOnce();
+      hadController = true;
     });
   }
 
