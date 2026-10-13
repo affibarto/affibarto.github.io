@@ -57,3 +57,7 @@
 .planround{text-shadow:none!important;color:transparent!important;font-size:0!important}
 .statcard:first-child b{font-size:22px!important;padding-right:2px}
 #bord .chip{padding:8px 14px!important}
+/* descender fix for clipped/gradient text */
+#planhome .greet{line-height:1.15!important;padding-bottom:.15em!important;margin-bottom:calc(14px - .15em)!important;overflow:visible!important}
+.statcard:first-child b{line-height:1.2!important;padding-bottom:.12em!important;margin-bottom:-.12em!important;overflow:visible!important}
+.dayrow b,.swipebody b,.statlink b{line-height:1.18!important;padding-bottom:.06em;overflow:visible!important}
