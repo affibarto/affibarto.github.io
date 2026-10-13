@@ -83,5 +83,29 @@ input[type=checkbox],input[type=radio]{width:22px!important;height:22px!importan
 #splash img.brand{filter:drop-shadow(0 4px 6px rgba(110,35,12,.18)) drop-shadow(0 30px 40px rgba(142,53,25,.28))}
 /* Roy's original logo on Bord header (same asset, unaltered) */
 #planhome{position:relative}
-#planhome::before{content:"";position:absolute;right:0;top:12px;width:64px;height:66px;background:url("logo.png?v=92") center/contain no-repeat;filter:drop-shadow(0 4px 8px rgba(110,45,18,.28))}
+#planhome::before{content:"";position:absolute;right:0;top:12px;width:64px;height:66px;background:url("logo.png?v=93") center/contain no-repeat;filter:drop-shadow(0 4px 8px rgba(110,45,18,.28))}
 #planhome .greet{padding-right:72px}
+/* ——— v93: iOS safe-area layout + crisp type ——— */
+:root{--nav-h:76px;--nav-gap:8px;--safe-b:env(safe-area-inset-bottom,0px);
+  --t-emboss:0 1px 0 rgba(255,255,255,.75);--t-press:0 1px 0 rgba(255,255,255,.6)}
+html,body{background:#FBF4EA!important}
+
+.nav{bottom:calc(var(--nav-gap) + var(--safe-b))!important;min-height:var(--nav-h);box-sizing:border-box;z-index:40!important}
+#plancta{bottom:calc(var(--nav-gap) + var(--safe-b) + var(--nav-h) + 12px)!important;z-index:45!important}
+.fab{bottom:calc(var(--nav-gap) + var(--safe-b) + var(--nav-h) + 12px)!important;z-index:45!important}
+.toast{bottom:calc(var(--nav-gap) + var(--safe-b) + var(--nav-h) + 76px)!important;z-index:60!important}
+.pwainstall{bottom:calc(var(--nav-gap) + var(--safe-b) + var(--nav-h) + 12px)!important}
+#bord .sc{padding-bottom:calc(var(--nav-gap) + var(--safe-b) + var(--nav-h) + 96px)!important}
+#lijst .sc,#folder .sc,#huis .sc{padding-bottom:calc(var(--nav-gap) + var(--safe-b) + var(--nav-h) + 84px)!important}
+/* crisp display text: no filters, no blurred shadows */
+#planhome .greet{filter:none!important;background:none!important;-webkit-text-fill-color:#1F1410!important;color:#1F1410!important;text-shadow:0 1px 0 rgba(255,255,255,.8)!important;-webkit-font-smoothing:antialiased}
+#planhome .eyebrow,.daycap,.statk,.swipelead,.sec,.seclabel,label{text-shadow:0 1px 0 rgba(255,255,255,.7)!important;color:#7A5646!important}
+.daycap.today{color:#A4401F!important}
+.hd b,#huisnaam,.panel h1,.view h1,#kies .hd b,.dayrow b,.statlink b,.card b,.listrow b,.sugopt b{text-shadow:0 1px 0 rgba(255,255,255,.75)!important;filter:none!important}
+.statcard:first-child b{filter:none!important;background:none!important;-webkit-text-fill-color:#FFF8F2!important;color:#FFF8F2!important;text-shadow:0 1px 0 rgba(90,22,5,.55)!important}
+.statcard:first-child .statk{text-shadow:0 1px 0 rgba(90,22,5,.4)!important;color:rgba(255,238,228,.9)!important}
+.swipebody b{text-shadow:0 1px 2px rgba(20,8,3,.6)!important}
+.chip,.btn,.swipelinks button{text-shadow:none!important}
+.btn:not(.w):not(.s):not(.ghost){text-shadow:0 -1px 0 rgba(80,20,5,.35)!important}
+.dayrow.today{transform:none!important}
+.statcard:first-child{transform:none!important}

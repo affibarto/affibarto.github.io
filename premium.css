@@ -45,7 +45,7 @@
 .dayrow .daythumb{width:64px!important;height:64px!important;border-radius:16px!important;object-fit:cover}
 .dayrow .chip{border-radius:999px!important}
 /* floating CTA + nav: glass */
-#plancta{bottom:96px!important}
+
 .planpill{background:var(--p-ink)!important;color:#FBF6EF!important;border-radius:999px!important;font:700 15px var(--f-ui)!important;letter-spacing:.01em;box-shadow:var(--sh-3)!important;display:flex;align-items:center;justify-content:center;gap:10px}
 .planpill::before{content:"";width:18px;height:18px;background:currentColor;-webkit-mask:var(--ic-swipe) center/contain no-repeat;mask:var(--ic-swipe) center/contain no-repeat}
 .planround{background:rgba(255,253,250,.8)!important;backdrop-filter:blur(16px);color:transparent!important;border:1px solid var(--p-line)!important;box-shadow:var(--sh-2)!important;position:relative}
