@@ -62,7 +62,7 @@ var top=scores.slice(0,3);
 var rows=top.map(function(s,i){
 var rank=(i+1)+") ";
 var cov=s.cov!=null?(s.cov+"%"):"";
-var head=rank+s.n+" "+euro(s.total);
+var head=rank+s.n;
 if(i===0)head="<b>"+head+"</b>";
 return "<div class=listrow style=margin:0 0 6px><div style=flex:1>"+head+(cov?"<div class=meta>"+cov+" dekking</div>":"")+"</div><div class=price>"+euro(s.total)+"</div></div>";
 }).join("");

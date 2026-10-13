@@ -762,7 +762,7 @@
         wrap.className = "row";
         wrap.style.margin = "0 0 10px";
         wrap.id = "restentrybord";
-        wrap.innerHTML = "<button type=button class='chip' id=restentry2>Opruimen</button><button type=button class='chip' id=slimvoorstellen2>Slim voorstellen</button>";
+        wrap.innerHTML = "<button type=button class='chip' id=restentry2>Opruimen</button>";
         if (row.nextSibling) bordSc.insertBefore(wrap, row.nextSibling);
         else bordSc.appendChild(wrap);
       }

@@ -44,8 +44,8 @@ const FOOD_LEAD =
 
 const STOP = { voor: 1, met: 1, van: 1, een: 1, het: 1, de: 1, en: 1, per: 1, stuks: 1, pack: 1, doos: 1, vers: 1 };
 const CORE = { kaas: 1, melk: 1, ui: 1, uien: 1, ei: 1, eieren: 1, ham: 1, sla: 1, rijst: 1, kip: 1, kipfilet: 1, pasta: 1, boter: 1, gehakt: 1, brood: 1, zalm: 1, spinazie: 1, yoghurt: 1, tomaat: 1, tomaten: 1, paprika: 1, mozzarella: 1 };
-const SNACK = { chips: 1, chip: 1, snoep: 1, koek: 1, reep: 1, snack: 1, pringles: 1, biscuit: 1, chocolade: 1, milka: 1, tablet: 1 };
-const DISH = { saus: 1, sauce: 1, soep: 1, salade: 1, salad: 1, maaltijd: 1, pizza: 1, wrap: 1, wraps: 1, burger: 1, nugget: 1, pan: 1, schotel: 1, poeder: 1, carbonara: 1, bolognese: 1, frito: 1, creations: 1, sensatie: 1, piccolinis: 1, olvarit: 1, mix: 1, kruidenmix: 1, good: 1, tomato: 1, hutspot: 1, stamppot: 1 };
+const SNACK = { chips: 1, chip: 1, snoep: 1, koek: 1, reep: 1, snack: 1, pringles: 1, biscuit: 1, chocolade: 1, milka: 1, tablet: 1, peanuts: 1, pinda: 1, pindas: 1, nootjes: 1, noten: 1, nuts: 1 };
+const DISH = { saus: 1, sauce: 1, soep: 1, salade: 1, salad: 1, maaltijd: 1, pizza: 1, wrap: 1, wraps: 1, burger: 1, nugget: 1, pan: 1, schotel: 1, poeder: 1, carbonara: 1, bolognese: 1, frito: 1, creations: 1, sensatie: 1, piccolinis: 1, olvarit: 1, mix: 1, kruidenmix: 1, good: 1, tomato: 1, hutspot: 1, stamppot: 1, trattoria: 1, toscana: 1, rondo: 1, rondos: 1, schnitzel: 1 };
 const SIMPLE = { pasta: 1, pesto: 1, spinazie: 1, tomaat: 1, paprika: 1, kaas: 1, melk: 1, boter: 1, rijst: 1, gehakt: 1, kip: 1, ui: 1, uien: 1, sla: 1, ham: 1, aardappel: 1, wortel: 1, brood: 1, yoghurt: 1 };
 const FRESH = { paprika: 1, ui: 1, uien: 1, tomaat: 1, sla: 1, aardappel: 1, wortel: 1, spinazie: 1 };
 

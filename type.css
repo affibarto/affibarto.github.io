@@ -1,0 +1,63 @@
+/* ——— WeAte v90 · TYPE + BUTTON depth ——— */
+:root{
+  --t-emboss:0 1px 0 rgba(255,255,255,.85),0 -1px 0 rgba(120,50,20,.06),0 2px 3px rgba(110,45,18,.10),0 8px 18px rgba(140,60,25,.12);
+  --t-press:0 1px 0 rgba(255,255,255,.75);
+  --t-photo:0 1px 1px rgba(20,8,3,.55),0 2px 10px rgba(20,8,3,.45),0 0 28px rgba(20,8,3,.25);
+  /* button tiers */
+  --b-hl:inset 0 1px 0 rgba(255,255,255,.95);
+  --b-sec-bg:linear-gradient(180deg,#FFFEFB 0%,#F8EDE2 100%);
+  --b-sec-sh:var(--b-hl),inset 0 -1px 0 rgba(140,70,35,.07),0 1px 1px rgba(110,45,18,.08),0 3px 6px -1px rgba(110,45,18,.10),0 10px 18px -10px rgba(120,48,20,.25);
+  --b-pri-bg:linear-gradient(180deg,#CB5E3B 0%,#A9442A 55%,#8E3519 100%);
+  --b-pri-sh:inset 0 1px 0 rgba(255,215,195,.55),inset 0 -2px 4px rgba(80,22,6,.3),0 1px 2px rgba(110,35,12,.3),0 8px 18px -6px rgba(142,53,25,.55);
+  --b-ghost-bg:linear-gradient(180deg,rgba(255,252,247,.55),rgba(248,236,224,.45));
+  --b-ghost-sh:inset 0 1px 0 rgba(255,255,255,.8),inset 0 0 0 1px rgba(140,70,35,.10),0 2px 6px -3px rgba(110,45,18,.18);
+  --b-in:inset 0 2px 4px rgba(110,45,18,.22),inset 0 1px 1px rgba(110,45,18,.15),0 0 0 rgba(0,0,0,0);
+}
+/* display titles: soft emboss */
+#planhome .greet,#kies .hd b,.dayrow b,.statlink b,#bord .card:has(#wpprimary) b{
+  color:#22150F!important;text-shadow:var(--t-emboss)!important}
+#planhome .greet{background:linear-gradient(180deg,#3A2418 0%,#1C110C 70%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 1px 0 rgba(255,255,255,.9)) drop-shadow(0 6px 10px rgba(140,60,25,.18));text-shadow:none!important}
+/* letterpress labels */
+#planhome .eyebrow,.daycap,.statk,.swipelead{text-shadow:0 1px 0 rgba(255,255,255,.9),0 -1px 0 rgba(110,45,18,.12)!important;color:#8A6655!important}
+.daycap.today{color:#A4401F!important}
+/* cost: gradient fill + glow */
+.statcard:first-child b{background:linear-gradient(180deg,#FFFFFF 0%,#FFE6D6 60%,#FFC9AE 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 1px 0 rgba(120,35,10,.6)) drop-shadow(0 4px 10px rgba(70,18,4,.45)) drop-shadow(0 0 14px rgba(255,200,170,.25))}
+.statcard:first-child b span{-webkit-text-fill-color:rgba(255,236,224,.8)}
+.statcard:first-child .statk{color:rgba(255,236,224,.82)!important;text-shadow:0 -1px 0 rgba(80,20,5,.45),0 1px 0 rgba(255,210,190,.18)!important}
+/* text on photos */
+.swipebody b{text-shadow:var(--t-photo)!important}
+.swipefacts,.swipemeta{text-shadow:0 1px 2px rgba(20,8,3,.6)!important}
+.swipebody .plantag{text-shadow:0 1px 1px rgba(20,8,3,.4)!important}
+/* ===== button system ===== */
+/* secondary (default): chips, Terug, Gegeten, links, tiles */
+.chip:not(.avondstrip .chip),.dayrow .chip,.dayrow button,#kies .hd .btn,.swipelinks button,.statlink,.planround,.swipebtn.no,.swipebtn.ghost{
+  background:var(--b-sec-bg)!important;box-shadow:var(--b-sec-sh)!important;border:1px solid rgba(140,70,35,.10)!important;
+  color:#4A3329!important;text-shadow:var(--t-press)!important;transition:transform .18s var(--ease),box-shadow .18s var(--ease)!important}
+.statlink{border-color:rgba(255,255,255,.8)!important}
+/* primary */
+.btn.g,#wpprimary.btn,.swipebtn.yes,#start{background:var(--b-pri-bg)!important;box-shadow:var(--b-pri-sh)!important;color:#fff!important;border:0!important;text-shadow:0 -1px 0 rgba(80,20,5,.5)!important}
+#bord #wpprimary.chip{background:linear-gradient(180deg,#FBE9DE,#F2D3C1)!important;color:#7E2E14!important;border-color:rgba(160,70,35,.2)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 1px 1px rgba(142,53,25,.12),0 6px 12px -6px rgba(142,53,25,.35)!important}
+/* dark primary pill */
+.planpill{background:linear-gradient(180deg,#3A2A22 0%,#1F140F 55%,#140C08 100%)!important;text-shadow:0 -1px 0 rgba(0,0,0,.6)!important;
+  box-shadow:inset 0 1px 0 rgba(255,235,220,.22),inset 0 -2px 4px rgba(0,0,0,.4),0 2px 4px rgba(30,12,5,.3),0 18px 36px -12px rgba(60,20,8,.55)!important}
+/* ghost: segmented + nav */
+.avondstrip .row{box-shadow:inset 0 1px 3px rgba(110,45,18,.14),inset 0 0 0 1px rgba(140,70,35,.08),0 1px 0 rgba(255,255,255,.9)!important}
+.avondstrip .chip{text-shadow:var(--t-press)!important;color:#6A5146!important}
+.avondstrip .chip.on{background:var(--b-sec-bg)!important;box-shadow:var(--b-sec-sh)!important;color:#1F1410!important}
+.nav button{text-shadow:var(--t-press)!important}
+.nav button.on{background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(250,232,220,.6))!important;border-radius:20px!important;box-shadow:inset 0 1px 0 #fff,0 4px 10px -4px rgba(142,53,25,.3)!important}
+.nav button.on::before{filter:drop-shadow(0 1px 0 #fff)}
+/* pressed: inset */
+.chip:active,.dayrow button:active,#kies .hd .btn:active,.swipelinks button:active,.statlink:active,.planround:active,.swipebtn.no:active,.swipebtn.ghost:active{
+  transform:translateY(1px)!important;box-shadow:var(--b-in)!important;background:linear-gradient(180deg,#F3E4D6,#FAF1E8)!important}
+.swipebtn.yes:active,.btn.g:active,#start:active{transform:translateY(1px) scale(.97)!important;box-shadow:inset 0 3px 8px rgba(70,18,4,.45),0 2px 4px rgba(110,35,12,.3)!important}
+.planpill:active{box-shadow:inset 0 3px 8px rgba(0,0,0,.5),0 4px 10px -4px rgba(60,20,8,.5)!important}
+.planround{text-shadow:none!important;color:transparent!important;font-size:0!important}
+.statcard:first-child b{font-size:22px!important;padding-right:2px}
+#bord .chip{padding:8px 14px!important}
+/* descender fix for clipped/gradient text */
+#planhome .greet{line-height:1.15!important;padding-bottom:.15em!important;margin-bottom:calc(14px - .15em)!important;overflow:visible!important}
+.statcard:first-child b{line-height:1.2!important;padding-bottom:.12em!important;margin-bottom:-.12em!important;overflow:visible!important}
+.dayrow b,.swipebody b,.statlink b{line-height:1.18!important;padding-bottom:.06em;overflow:visible!important}

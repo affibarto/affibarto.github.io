@@ -47,7 +47,7 @@ var _SNACK={
   yoghurtdrink:1,dip:1,kruidenmix:1,pringles:1,crackers:1,cracker:1,toastjes:1,
   toastje:1,snack:1,snacks:1,borrel:1,lays:1,lay:1,doritos:1,nachos:1,croky:1,
   kettle:1,smear:1,smeerkaas:1,fruitgom:1,haribo:1,
-  biscuit:1,chocolade:1,chocolate:1,milka:1,tablet:1,candy:1
+  biscuit:1,chocolade:1,chocolate:1,milka:1,tablet:1,candy:1,peanuts:1,pinda:1,pindas:1,nootjes:1,noten:1,nuts:1
 };
 /* Dish/sauce/ready-meal class — reject when board item is a simple ingredient.
    Prefer missing a weak match over a wrong badge. wrap/wraps ignored when board is wraps.
@@ -62,7 +62,7 @@ var _DISH={
   presto:1,ovenpasta:1,babymaaltijd:1,olvarit:1,cheese:1,mac:1,
   piccolini:1,piccolinis:1,airfryer:1,nuggets:1,filet:1,
   /* Sauce/meal kits & English dish tokens — never staple produce/pasta */
-  frito:1,creations:1,sensatie:1,mix:1,kruidenmix:1,good:1,tomato:1,hutspot:1,stamppot:1
+  frito:1,creations:1,sensatie:1,mix:1,trattoria:1,toscana:1,rondo:1,rondos:1,schnitzel:1,kruidenmix:1,good:1,tomato:1,hutspot:1,stamppot:1
 };
 /* Simple staples: dish/sauce/snack reject applies (plus Vers aisle / _FRESH). */
 var _SIMPLE={
@@ -76,8 +76,13 @@ var _FRESH={
   aardappel:1,aardappelen:1,wortel:1,wortelen:1,bloemkool:1,boerenkool:1,
   champignon:1,champignons:1,knoflook:1,gember:1,bananen:1,banaan:1,spinazie:1
 };
+var _wordsC=Object.create(null),_wordsN=0;
 function _words(s){
-  return String(s||"").toLowerCase().replace(/[^\wäöüßà-ÿ0-9]+/g," ").split(/\s+/).filter(Boolean);
+  var k=String(s||"");var h=_wordsC[k];
+  if(h)return h.slice();
+  if(++_wordsN>30000){_wordsC=Object.create(null);_wordsN=0;}
+  h=_wordsC[k]=k.toLowerCase().replace(/[^\wäöüßà-ÿ0-9]+/g," ").split(/\s+/).filter(Boolean);
+  return h.slice();
 }
 function _isToken(t){
   if(!t||_STOP[t]||/^\d/.test(t))return false;
@@ -282,6 +287,8 @@ var _folderHtmlCache={key:"",html:"",rows:null};
 var _folderPaintGen=0;
 var _folderQTimer=0;
 var _folderShellReady=0;
+function _fbLabel(n){var w=String(n||"").replace(/[^A-Za-zÀ-ÿ ]/g," ").trim().split(/\s+/);return (w[w.length-1]||"").slice(0,6).replace(/</g,"");}
+window.wFb=function(el){try{el.onerror=null;var b=el.closest(".listrow");var n=b?decodeURIComponent(b.getAttribute("data-n")||""):"";var sp=document.createElement("span");sp.className="thumb imgfb";sp.setAttribute("aria-hidden","true");sp.textContent=_fbLabel(n);el.replaceWith(sp);}catch(e){}};
 var _IMG_PLACE="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
 function invalidateFolderPaint(){
   _folderDirty=1;try{window._folderDirty=1;}catch(e){}
@@ -368,11 +375,11 @@ function folderRowHtml(r,idx,eagerImg){
   if(r.img){
     var src=String(r.img).replace(/\"/g,"");
     if(eagerImg){
-      img="<img class=thumb alt='' referrerpolicy='no-referrer' loading='lazy' decoding='async' onerror=\"this.onerror=null;this.removeAttribute('src');this.style.background='#EDE0D0'\" src=\""+src+"\">";
+      img="<img class=thumb alt='' referrerpolicy='no-referrer' loading='lazy' decoding='async' onerror=\"wFb(this)\" src=\""+src+"\">";
     }else{
-      img="<img class=thumb alt='' referrerpolicy='no-referrer' decoding='async' data-src=\""+src+"\" src=\""+_IMG_PLACE+"\" onerror=\"this.onerror=null;this.removeAttribute('src');this.removeAttribute('data-src');this.style.background='#EDE0D0'\">";
+      img="<img class=thumb alt='' referrerpolicy='no-referrer' decoding='async' data-src=\""+src+"\" src=\""+_IMG_PLACE+"\" onerror=\"wFb(this)\">";
     }
-  }else img="<span class=thumb aria-hidden=true></span>";
+  }else img="<span class='thumb imgfb' aria-hidden=true>"+_fbLabel(r.n)+"</span>";
   var hlKey=String(r.n||"")+"|"+String(r.s||"");
   var hl=(S._folderHighlight&&S._folderHighlight===hlKey)?" folder-hl":"";
   return "<button type=button class='listrow"+hl+"' data-act=adddeal data-idx="+idx+" data-n='"+encodeURIComponent(r.n||"")+"' data-sid='"+(r.s||"")+"' data-now='"+(r.now||0)+"' data-pack='"+encodeURIComponent(packOf(r))+"'>"+img+"<div style=flex:1><b>"+String(r.n||"").replace(/</g,"")+badge+"</b><div class=meta>"+folderMeta(r).replace(/</g,"")+"</div></div><div class=price>"+(r.now?euroc(r.now):"")+"</div></button>";
