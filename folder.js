@@ -288,7 +288,20 @@ var _folderPaintGen=0;
 var _folderQTimer=0;
 var _folderShellReady=0;
 function _fbLabel(n){var w=String(n||"").replace(/[^A-Za-zÀ-ÿ ]/g," ").trim().split(/\s+/);return (w[w.length-1]||"").slice(0,6).replace(/</g,"");}
-window.wFb=function(el){try{el.onerror=null;var b=el.closest(".listrow");var n=b?decodeURIComponent(b.getAttribute("data-n")||""):"";var sp=document.createElement("span");sp.className="thumb imgfb";sp.setAttribute("aria-hidden","true");sp.textContent=_fbLabel(n);el.replaceWith(sp);}catch(e){}};
+window.wFb=function(el){try{var o=el.getAttribute("data-orig");if(o&&!el.getAttribute("data-retry")){el.setAttribute("data-retry","1");el.src=o;return;}el.onerror=null;var b=el.closest(".listrow");var n=b?decodeURIComponent(b.getAttribute("data-n")||""):"";var sp=document.createElement("span");sp.className="thumb imgfb";sp.setAttribute("aria-hidden","true");sp.textContent=_fbLabel(n);el.replaceWith(sp);}catch(e){}};
+/* v94: shop CDNs serve 1000–4096px PNGs (Dirk ~1.5 MB each). Ask their own resizers for ~200px thumbs (64px @3x). */
+function thumbUrl(u){
+  try{
+    var x=new URL(u);var h=x.hostname;
+    if(h==="web-fileserver.dirk.nl"||h==="web-fileserver.dekamarkt.nl"||h==="images.poiesz-supermarkten.nl"){if(!x.searchParams.has("width"))x.searchParams.set("width","200");return x.href;}
+    if(h==="static.ah.nl"){var r=x.searchParams.get("rendition");if(r&&/^\d+x\d+_/.test(r)){x.searchParams.set("rendition",r.replace(/^\d+x\d+/,"200x200"));return x.href;}return u;}
+    if(/\.scene7\.com$/.test(h)){if(!x.searchParams.has("wid")){x.searchParams.set("wid","200");x.searchParams.set("hei","200");}return x.href;}
+    if(h==="images.ctfassets.net"){x.searchParams.set("w","200");x.searchParams.set("h","200");return x.href;}
+  }catch(e){}
+  return u;
+}
+window.thumbUrl=thumbUrl;
+var _folderLimit=200;
 var _IMG_PLACE="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
 function invalidateFolderPaint(){
   _folderDirty=1;try{window._folderDirty=1;}catch(e){}
@@ -321,7 +334,7 @@ function ensureFolderMatches(items,sets){
   return sig;
 }
 function folderPaintKey(matchSig){
-  return String(S.folderStore||"alle")+"|"+String(S.folderQ||"").toLowerCase().trim()+"|"+(matchSig||"")+"|"+String(S._folderHighlight||"");
+  return String(S.folderStore||"alle")+"|"+String(S.folderQ||"").toLowerCase().trim()+"|"+(matchSig||"")+"|"+String(S._folderHighlight||"")+"|"+_folderLimit;
 }
 function ensureFolderShell(){
   var host=document.getElementById("folderbody");
@@ -349,18 +362,14 @@ function ensureFolderShell(){
   var pick=document.getElementById("folderpick");
   if(pick){
     var stores=(window.FOLDER_INDEX&&window.FOLDER_INDEX.stores&&window.FOLDER_INDEX.stores.length)?window.FOLDER_INDEX.stores:(typeof STORES!=="undefined"&&STORES.length?STORES:[]);
-    var ids=["alle"].concat(stores.map(function(s){return s.id;}));
-    var html=ids.map(function(id){
-      var n=id==="alle"?"Alle":storeName(id);
-      return "<button type=button class='chip "+(S.folderStore===id?"on":"")+"' data-act=fstore data-id="+id+">"+n+"</button>";
-    }).join("");
-    if(pick.getAttribute("data-rendered")!==String(S.folderStore)+"|"+ids.join(",")){
-      pick.innerHTML=html;
-      pick.setAttribute("data-rendered",String(S.folderStore)+"|"+ids.join(","));
-    }else{
-      pick.querySelectorAll("[data-act=fstore]").forEach(function(b){
-        b.classList.toggle("on",b.getAttribute("data-id")===S.folderStore);
-      });
+    var ids=stores.map(function(s){return s.id;});
+    window._folderStoreIds=ids;
+    if(S.folderStore!=="alle"&&ids.length&&ids.indexOf(S.folderStore)<0)S.folderStore="alle";
+    var lab=S.folderStore&&S.folderStore!=="alle"?storeName(S.folderStore):"Alle winkels";
+    var key=lab+"|"+ids.join(",");
+    if(pick.getAttribute("data-rendered")!==key){
+      pick.innerHTML="<div class=storedd-wrap><button type=button class=storedd data-act=fsdd aria-haspopup=listbox aria-expanded=false><span class=storedd-ic aria-hidden=true></span><span class=storedd-l>"+lab+"</span><span class=storedd-chev aria-hidden=true></span></button><div class=storemenu role=listbox aria-label='Winkel kiezen'></div></div>";
+      pick.setAttribute("data-rendered",key);
     }
   }
   var line=document.getElementById("folderline");
@@ -374,11 +383,9 @@ function folderRowHtml(r,idx,eagerImg){
   var img;
   if(r.img){
     var src=String(r.img).replace(/\"/g,"");
-    if(eagerImg){
-      img="<img class=thumb alt='' referrerpolicy='no-referrer' loading='lazy' decoding='async' onerror=\"wFb(this)\" src=\""+src+"\">";
-    }else{
-      img="<img class=thumb alt='' referrerpolicy='no-referrer' decoding='async' data-src=\""+src+"\" src=\""+_IMG_PLACE+"\" onerror=\"wFb(this)\">";
-    }
+    var th=thumbUrl(src);
+    /* v94: small real src directly + native lazy below the fold (no hidden data-src hydration that fetched every full-size photo at once). */
+    img="<img class=thumb alt='' referrerpolicy='no-referrer' decoding='async'"+(eagerImg?"":" loading='lazy'")+(th!==src?" data-orig=\""+src+"\"":"")+" onerror=\"wFb(this)\" src=\""+th+"\">";
   }else img="<span class='thumb imgfb' aria-hidden=true>"+_fbLabel(r.n)+"</span>";
   var hlKey=String(r.n||"")+"|"+String(r.s||"");
   var hl=(S._folderHighlight&&S._folderHighlight===hlKey)?" folder-hl":"";
@@ -394,7 +401,7 @@ function buildFolderHtml(rows){
       else if(lastSec==="match")html+="<div class=sec>Meer acties</div>";
       lastSec=sec;
     }
-    html+=folderRowHtml(r,idx,idx<24);
+    html+=folderRowHtml(r,idx,idx<6);
   });
   return html;
 }
@@ -426,6 +433,11 @@ function finishFolderPaint(host){
     if(el&&el.scrollIntoView)el.scrollIntoView({block:"center",behavior:"smooth"});
   }
 }
+function folderMoreHtml(n){
+  var tot=window._folderTotal||0;
+  if(tot<=n)return "";
+  return "<button type=button class='btn full w fmore' data-act=fmore>Meer acties tonen <span class=fmore-n>"+n+" van "+tot+"</span></button>";
+}
 function paintFolderBodyChunked(host,rows){
   window._folderRows=rows;
   _folderPaintGen++;
@@ -449,6 +461,7 @@ function paintFolderBodyChunked(host,rows){
   function appendMore(){
     if(gen!==_folderPaintGen)return;
     if(offset>=rows.length){
+      host.insertAdjacentHTML("beforeend",folderMoreHtml(rows.length));
       _folderHtmlCache={key:folderPaintKey(_folderMatchCache.sig),html:host.innerHTML,rows:rows.slice()};
       finishFolderPaint(host);
       return;
@@ -474,6 +487,7 @@ function paintFolderBodyChunked(host,rows){
     if(typeof afterPaint==="function")afterPaint(appendMore);
     else setTimeout(appendMore,0);
   }else{
+    host.insertAdjacentHTML("beforeend",folderMoreHtml(rows.length));
     _folderHtmlCache={key:folderPaintKey(_folderMatchCache.sig),html:host.innerHTML,rows:rows.slice()};
     finishFolderPaint(host);
   }
@@ -507,7 +521,14 @@ function drawFolder(opts){
     if(ra!==rb)return ra-rb;
     return 0;
   });
-  rows=rows.slice(0,200);
+  /* Alle winkels: interleave chains so every store shows up (was: first 200 = only Dirk + AH). */
+  var top=[],byS={},order=[];
+  rows.forEach(function(r){if(r._match==="list"||r._match==="bord"){top.push(r);return;}var k=r.s||"";if(!byS[k]){byS[k]=[];order.push(k);}byS[k].push(r);});
+  var mixed=top.slice(),more=true,i=0;
+  while(more){more=false;for(var j=0;j<order.length;j++){var a=byS[order[j]];if(i<a.length){mixed.push(a[i]);more=true;}}i++;}
+  rows=mixed;
+  window._folderTotal=rows.length;
+  rows=rows.slice(0,_folderLimit);
   var key=folderPaintKey(matchSig);
   if(_folderHtmlCache.key===key&&_folderHtmlCache.html&&_folderHtmlCache.rows){
     window._folderRows=_folderHtmlCache.rows;
@@ -532,19 +553,56 @@ function drawFolder(opts){
 }
 window.drawFolder=drawFolder;
 window.invalidateFolderPaint=invalidateFolderPaint;
+/* v94 Actie store dropdown (uitklaplijst): one pill instead of 20 chips. Single choice, default Alle winkels. */
+function _ddEsc(t){return String(t||"").replace(/[<>&"]/g,"");}
+function storeMenuHtml(){
+  var ids=(window._folderStoreIds||[]).slice();
+  var cnt={},tot=0;try{fullItems().forEach(function(r){cnt[r.s]=(cnt[r.s]||0)+1;tot++;});}catch(e){}
+  var mine=[];try{if(typeof activeStores==="function"&&typeof STORES!=="undefined"){var act=activeStores();if(act.length<STORES.length)mine=act.map(function(x){return x.id;}).filter(function(x){return ids.indexOf(x)>=0;});}}catch(e){}
+  var rest=ids.filter(function(x){return mine.indexOf(x)<0;});
+  var cur=S.folderStore||"alle";
+  function row(id,label,n){return "<button type=button role=option class='ddrow"+(cur===id?" on":"")+"' aria-selected="+(cur===id)+" data-act=fsopt data-id="+id+"><span class=ddn>"+_ddEsc(label)+"</span><span class=ddc>"+n+"</span><span class=ddck aria-hidden=true></span></button>";}
+  var h=row("alle","Alle winkels",tot);
+  if(mine.length){h+="<div class=ddsec>Jullie winkels</div>"+mine.map(function(id){return row(id,storeName(id),cnt[id]||0);}).join("")+"<div class=ddsec>Overige winkels</div>";}
+  else h+="<div class=ddsec>Winkels</div>";
+  h+=rest.map(function(id){return row(id,storeName(id),cnt[id]||0);}).join("");
+  return h;
+}
+function storeMenuOpen(){var w=document.querySelector("#folderpick .storedd-wrap");return !!(w&&w.classList.contains("open"));}
+function toggleStoreMenu(on){
+  var w=document.querySelector("#folderpick .storedd-wrap");if(!w)return;
+  if(on===undefined)on=!w.classList.contains("open");
+  var m=w.querySelector(".storemenu"),bt=w.querySelector(".storedd");
+  if(on&&m){m.innerHTML=storeMenuHtml();}
+  w.classList.toggle("open",!!on);
+  if(bt)bt.setAttribute("aria-expanded",on?"true":"false");
+  if(on&&m){var o=m.querySelector(".ddrow.on");if(o&&o.offsetTop>m.clientHeight-40)m.scrollTop=o.offsetTop-m.clientHeight/2;}
+}
+function pickFolderStore(id){
+  S.folderStore=id||"alle";_folderLimit=200;
+  toggleStoreMenu(false);
+  try{if(typeof save==="function")save();}catch(e){}
+  invalidateFolderPaint();drawFolder({force:1,reason:"store"});
+  var sc=document.querySelector("#folder .sc"),pk=document.getElementById("folderpick");
+  if(sc&&pk&&sc.scrollTop>pk.offsetTop)sc.scrollTop=Math.max(0,pk.offsetTop-12);
+}
+window.toggleStoreMenu=toggleStoreMenu;window.pickFolderStore=pickFolderStore;
 document.addEventListener("click",function(e){
-  var fs=e.target.closest&&e.target.closest("[data-act=fstore]");
-  if(fs){
-    S.folderStore=fs.getAttribute("data-id");
-    invalidateFolderPaint();
-    drawFolder({force:1,reason:"store"});
-  }
+  var t=e.target.closest&&e.target.closest("[data-act]");
+  var a=t?t.getAttribute("data-act"):"";
+  if(a==="fsdd"){e.preventDefault();toggleStoreMenu();return;}
+  if(a==="fsopt"){e.preventDefault();pickFolderStore(t.getAttribute("data-id"));return;}
+  if(a==="fmore"){e.preventDefault();_folderLimit+=200;invalidateFolderPaint();drawFolder({force:1,reason:"store"});return;}
+  if(storeMenuOpen()&&!(e.target.closest&&e.target.closest("#folderpick .storedd-wrap")))toggleStoreMenu(false);
 });
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&storeMenuOpen())toggleStoreMenu(false);});
+document.addEventListener("input",function(e){if(e.target&&e.target.id==="folderq")_folderLimit=200;},true);
 if(typeof show==="function"&&!show._folderWrap){
   var _show=show;
   show=function(id){
     var pan=document.getElementById("storepanel");
     if(pan)pan.classList.remove("on");
+    try{toggleStoreMenu(false);}catch(e){}
     if(id==="folder")ensureFolderShell();
     _show(id);
     /* Body paint: app.js dirty-scoped show → drawFolder via afterPaint. */
@@ -628,7 +686,7 @@ function openActieForProduct(productOrEntry,deal){
   else if(productOrEntry&&productOrEntry.name)label=productOrEntry.name;
   else if(productOrEntry&&productOrEntry.n)label=productOrEntry.n;
   else if(typeof productOrEntry==="string")label=productOrEntry;
-  S.folderStore="alle";
+  S.folderStore="alle";_folderLimit=200;
   S.folderQ=label||"";
   S._folderHighlight=focus?String(focus.n||"")+"|"+String(focus.s||""):"";
   invalidateFolderPaint();
