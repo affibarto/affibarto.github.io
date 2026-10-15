@@ -13,6 +13,7 @@ KNOWN = {
     "albert_heijn": ("ah", "Albert Heijn"),
     "aldi": ("aldi", "Aldi"),
     "dekamarkt": ("dekamarkt", "Dekamarkt"),
+    "delhaize": ("delhaize", "Delhaize"),
     "dirk": ("dirk", "Dirk"),
     "ekoplaza": ("ekoplaza", "Ekoplaza"),
     "hoogvliet": ("hoogvliet", "Hoogvliet"),
@@ -25,7 +26,7 @@ KNOWN = {
 # Preferred chip / STORES order
 ORDER = [
     "dirk", "ah", "lidl", "jumbo", "plus",
-    "aldi", "dekamarkt", "ekoplaza", "hoogvliet", "vomar", "picnic",
+    "aldi", "dekamarkt", "delhaize", "ekoplaza", "hoogvliet", "vomar", "picnic",
 ]
 PER_STORE_CAP = 100
 META_KEYS = {"week", "source", "fetched", "note"}
