@@ -1,7 +1,7 @@
 {
   "week": "12–18 oct 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-10-15",
+  "fetched": "2026-10-16",
   "note": "Folder/actie, automatisch. Geen kassaprijs.",
   "ah": {
     "pasta": {
@@ -353,11 +353,11 @@
       "until": "2026-10-19"
     },
     "boter": {
-      "was": 315,
-      "now": 125,
-      "deal": "2 voor 2,49",
-      "name": "Tante Fanny Vers roomboter croissantdeeg",
-      "until": "2026-10-19"
+      "was": 439,
+      "now": 199,
+      "deal": "per stuk 1,99",
+      "name": "Vers afbak Roomboter appeltaart",
+      "until": "2026-10-18"
     },
     "rijst": {
       "was": 265,
@@ -549,10 +549,10 @@
       "until": "2026-10-18"
     },
     "boter": {
-      "was": 698,
-      "now": 500,
-      "deal": "28% korting",
-      "name": "Bakker Dam Amandeltongen, koggetjes en/of roomboter assortiment",
+      "was": 299,
+      "now": 199,
+      "deal": "33% korting",
+      "name": "Met roomboter",
       "until": "2026-10-18"
     },
     "spinazie": {
@@ -764,18 +764,11 @@
     }
   },
   "lidl": {
-    "gehakt": {
-      "was": 999,
-      "now": 999,
-      "deal": "folder",
-      "name": "Extra mager rundergehakt",
-      "until": "2026-10-18"
-    },
     "pasta": {
       "was": 74,
       "now": 67,
       "deal": "9% korting",
-      "name": "COMBINO Spaghetti",
+      "name": "ITALIAMO Spaghetti",
       "until": "2026-10-18"
     },
     "kip": {
@@ -923,21 +916,21 @@
       "now": 300,
       "deal": "multipack",
       "name": "PLUS Korenlanders Roomboter margrietjes",
-      "until": "2026-10-17"
+      "until": "2026-10-18"
     },
     "pesto": {
       "was": 329,
       "now": 200,
       "deal": "multipack",
       "name": "Plus Groene pesto",
-      "until": "2026-10-17"
+      "until": "2026-10-18"
     },
     "rijst": {
       "was": 1199,
       "now": 600,
       "deal": "1+1",
       "name": "Lucovitaal Rode gist rijst",
-      "until": "2026-10-17"
+      "until": "2026-10-18"
     },
     "spinazie": {
       "was": 375,
@@ -958,7 +951,7 @@
       "now": 200,
       "deal": "multipack",
       "name": "PLUS Puur van smaak Kleintje Achterham",
-      "until": "2026-10-17"
+      "until": "2026-10-18"
     },
     "mozzarella": {
       "was": 399,
@@ -1133,9 +1126,9 @@
   },
   "spar": {
     "gehakt": {
-      "was": 1038,
+      "was": 858,
       "now": 699,
-      "deal": "33% korting",
+      "deal": "19% korting",
       "name": "Rundergehakt naturel of mager",
       "until": "2026-10-21"
     },

@@ -1,7 +1,7 @@
 {
   "week": "12–18 oct 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-10-15",
+  "fetched": "2026-10-16",
   "stores": [
     {
       "id": "dirk",
@@ -148,7 +148,7 @@
       "n": "Spar",
       "pp": "spar",
       "file": "folder-spar.json",
-      "count": 53
+      "count": 63
     }
   ]
 }
