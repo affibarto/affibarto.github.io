@@ -1,7 +1,7 @@
 {
   "week": "12–18 oct 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-10-16",
+  "fetched": "2026-10-17",
   "stores": [
     {
       "id": "dirk",
@@ -99,35 +99,28 @@
       "n": "Boons Markt",
       "pp": "boons_markt",
       "file": "folder-boons_markt.json",
-      "count": 86
+      "count": 100
     },
     {
       "id": "coop",
       "n": "Coop",
       "pp": "coop",
       "file": "folder-coop.json",
-      "count": 70
-    },
-    {
-      "id": "dagwinkel",
-      "n": "Dagwinkel",
-      "pp": "dagwinkel",
-      "file": "folder-dagwinkel.json",
-      "count": 30
+      "count": 100
     },
     {
       "id": "gewoon_coop",
       "n": "Gewoon Coop",
       "pp": "gewoon_coop",
       "file": "folder-gewoon_coop.json",
-      "count": 92
+      "count": 100
     },
     {
       "id": "mcd",
       "n": "Mcd",
       "pp": "mcd",
       "file": "folder-mcd.json",
-      "count": 85
+      "count": 100
     },
     {
       "id": "nettorama",
