@@ -1,7 +1,7 @@
 {
-  "week": "12–18 oct 2026",
+  "week": "19–25 oct 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-10-18",
+  "fetched": "2026-10-19",
   "stores": [
     {
       "id": "dirk",
@@ -22,7 +22,7 @@
       "n": "Lidl",
       "pp": "lidl",
       "file": "folder-lidl.json",
-      "count": 100
+      "count": 71
     },
     {
       "id": "jumbo",
@@ -99,28 +99,21 @@
       "n": "Boons Markt",
       "pp": "boons_markt",
       "file": "folder-boons_markt.json",
-      "count": 100
-    },
-    {
-      "id": "coop",
-      "n": "Coop",
-      "pp": "coop",
-      "file": "folder-coop.json",
-      "count": 100
+      "count": 86
     },
     {
       "id": "gewoon_coop",
       "n": "Gewoon Coop",
       "pp": "gewoon_coop",
       "file": "folder-gewoon_coop.json",
-      "count": 100
+      "count": 94
     },
     {
       "id": "mcd",
       "n": "Mcd",
       "pp": "mcd",
       "file": "folder-mcd.json",
-      "count": 100
+      "count": 84
     },
     {
       "id": "nettorama",
@@ -141,7 +134,7 @@
       "n": "Spar",
       "pp": "spar",
       "file": "folder-spar.json",
-      "count": 63
+      "count": 100
     }
   ]
 }
