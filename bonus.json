@@ -1,7 +1,7 @@
 {
   "week": "19–25 oct 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-10-19",
+  "fetched": "2026-10-20",
   "note": "Folder/actie, automatisch. Geen kassaprijs.",
   "ah": {
     "gehakt": {
@@ -290,11 +290,11 @@
       "until": "2026-10-26"
     },
     "pasta": {
-      "was": 195,
+      "was": 175,
       "now": 99,
       "deal": "per stuk 0,99",
-      "name": "Honig Kruidenmix macaroni & spaghetti",
-      "until": "2026-10-19"
+      "name": "Olvarit 18+ Maanden Spaghetti Tomaat Ham",
+      "until": "2026-10-26"
     },
     "tomaat": {
       "was": 165,
@@ -317,26 +317,26 @@
       "name": "Met passie geteeld Aardappelen kruimig",
       "until": "2026-10-26"
     },
-    "boter": {
-      "was": 315,
-      "now": 125,
-      "deal": "2 voor 2,49",
-      "name": "Tante Fanny Vers roomboter croissantdeeg",
-      "until": "2026-10-19"
-    },
     "rijst": {
-      "was": 265,
-      "now": 199,
-      "deal": "25% KORTING",
-      "name": "Go-Tan Rijst noodles mihoen",
-      "until": "2026-10-19"
-    },
-    "spinazie": {
-      "was": 215,
+      "was": 149,
       "now": 99,
       "deal": "per stuk 0,99",
-      "name": "Honig Lasagne verdi spinazie",
-      "until": "2026-10-19"
+      "name": "Olvarit 6+ Maanden Wortel Kip Rijst",
+      "until": "2026-10-26"
+    },
+    "spinazie": {
+      "was": 179,
+      "now": 99,
+      "deal": "450 gram 0,99",
+      "name": "Spinazie ongewassen",
+      "until": "2026-10-26"
+    },
+    "paprika": {
+      "was": 495,
+      "now": 165,
+      "deal": "1+2 GRATIS",
+      "name": "Unox Paprika tomatensoep extra rijkgevuld",
+      "until": "2026-10-26"
     },
     "mozzarella": {
       "was": 389,
@@ -345,18 +345,11 @@
       "name": "Grand'Italia Gnocchi mozzarella e pomodoro",
       "until": "2026-10-26"
     },
-    "beleg": {
-      "was": 295,
-      "now": 199,
-      "deal": "per stuk 1,99",
-      "name": "Bio+ 100% pindakaas met stukjes",
-      "until": "2026-10-19"
-    },
     "zalm": {
-      "was": 149,
-      "now": 99,
-      "deal": "per stuk 0,99",
-      "name": "Olvarit Pasta-spinazie-zalm 8+ Maanden",
+      "was": 599,
+      "now": 399,
+      "deal": "per stuk 3,99",
+      "name": "Iglo Roerbaksensatie tagliatelle zalm",
       "until": "2026-10-26"
     },
     "champignon": {
@@ -365,13 +358,6 @@
       "deal": "250 gram 1,49",
       "name": "Kastanje champignons",
       "until": "2026-10-26"
-    },
-    "lasagne": {
-      "was": 179,
-      "now": 99,
-      "deal": "per stuk 0,99",
-      "name": "Honig Lasagnebladen",
-      "until": "2026-10-19"
     }
   },
   "delhaize": {},
@@ -755,13 +741,6 @@
       "name": "De Ruijter Hagelslag Royaal 390 g",
       "until": "2026-10-20"
     },
-    "fruit": {
-      "was": 269,
-      "now": 202,
-      "deal": "2e halve prijs",
-      "name": "Venz Rimboe Bananen Split 200g",
-      "until": "2026-10-20"
-    },
     "zalm": {
       "was": 309,
       "now": 200,
@@ -1018,6 +997,13 @@
     }
   },
   "poiesz": {
+    "gehakt": {
+      "was": 649,
+      "now": 399,
+      "deal": "aanbieding",
+      "name": "Noordertrots Rundergehakt Gekruid",
+      "until": "2026-10-24"
+    },
     "pasta": {
       "was": 209,
       "now": 104,
