@@ -1,7 +1,7 @@
 {
   "week": "19–25 oct 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-10-22",
+  "fetched": "2026-10-23",
   "note": "Folder/actie, automatisch. Geen kassaprijs.",
   "ah": {
     "gehakt": {
@@ -26,32 +26,46 @@
       "until": "2026-10-25"
     },
     "kip": {
-      "was": 579,
-      "now": 399,
-      "deal": "VOOR 3.99",
-      "name": "AH Kipfilet pepersaus",
-      "until": "2026-10-25"
+      "was": 499,
+      "now": 250,
+      "deal": "2 + 2 gratis",
+      "name": "Knorr Tratorria kipfilet Toscana",
+      "until": "2026-11-01"
+    },
+    "aardappel": {
+      "was": 129,
+      "now": 99,
+      "deal": "2 VOOR 1.99",
+      "name": "AH Iets kruimige aardappelen",
+      "until": "2026-11-01"
     },
     "kaas": {
-      "was": 299,
-      "now": 250,
-      "deal": "2 VOOR 5.00",
-      "name": "AH Cheddar geraspte kaas",
-      "until": "2026-10-25"
+      "was": 279,
+      "now": 149,
+      "deal": "VOOR 1.49",
+      "name": "Parrano Geraspte kaas snippers robusto",
+      "until": "2026-11-01"
     },
     "boter": {
-      "was": 89,
-      "now": 49,
-      "deal": "2 VOOR 0.99",
-      "name": "AH Roomboter appelflap",
-      "until": "2026-10-25"
+      "was": 499,
+      "now": 349,
+      "deal": "30% KORTING",
+      "name": "Becel Met roomboter smeerbaar",
+      "until": "2026-11-01"
     },
     "yoghurt": {
-      "was": 149,
-      "now": 112,
-      "deal": "25% KORTING",
-      "name": "Almhof Hoekje choco balls naturel yoghurt",
-      "until": "2026-10-25"
+      "was": 249,
+      "now": 200,
+      "deal": "2 VOOR 3.99",
+      "name": "Activia Yoghurt naturel",
+      "until": "2026-11-01"
+    },
+    "pesto": {
+      "was": 299,
+      "now": 200,
+      "deal": "3 VOOR 5.99",
+      "name": "AH Groene pesto",
+      "until": "2026-11-01"
     },
     "rijst": {
       "was": 359,
@@ -59,6 +73,13 @@
       "deal": "2E HALVE PRIJS",
       "name": "Lassie Basmati rijst voordeelpak",
       "until": "2026-10-25"
+    },
+    "wraps": {
+      "was": 289,
+      "now": 145,
+      "deal": "2 + 2 gratis",
+      "name": "Knorr Wortel wraps met 35% wortel",
+      "until": "2026-11-01"
     },
     "spinazie": {
       "was": 399,
@@ -75,11 +96,11 @@
       "until": "2026-10-25"
     },
     "mozzarella": {
-      "was": 399,
-      "now": 300,
-      "deal": "2 VOOR 5.99",
-      "name": "AH Mozzarella tomaat S",
-      "until": "2026-10-25"
+      "was": 259,
+      "now": 129,
+      "deal": "2 + 2 gratis",
+      "name": "Knorr Spaghetteria pomodoro mozzarella",
+      "until": "2026-11-01"
     },
     "rookworst": {
       "was": 399,
@@ -154,9 +175,9 @@
       "until": "2026-11-01"
     },
     "ui": {
-      "was": 199,
+      "was": 289,
       "now": 289,
-      "deal": "folder",
+      "deal": "OP=OP",
       "name": "Uien",
       "until": "2026-11-01"
     },
@@ -210,7 +231,7 @@
       "until": "2026-10-25"
     },
     "komkommer": {
-      "was": 139,
+      "was": 149,
       "now": 129,
       "deal": "-13%",
       "name": "Biologische komkommer",
@@ -285,6 +306,13 @@
       "name": "Melkan Italiaanse Gorgonzola, Burrata, Grana Padano, (mini) mozzarella, Parmigiano Reggiano of strooikaas",
       "until": "2026-10-25"
     },
+    "zalm": {
+      "was": 350,
+      "now": 299,
+      "deal": "15% korting",
+      "name": "JONGENS VAN DE FANT WARM GEROOKTE ZALMMOOT OF GETRANCHEERDE ZALM",
+      "until": "2026-10-25"
+    },
     "komkommer": {
       "was": 79,
       "now": 69,
@@ -307,6 +335,13 @@
       "deal": "16% korting",
       "name": "Jongens van de klei Aardappelen kruimig of vastkokend",
       "until": "2026-10-25"
+    },
+    "wortel": {
+      "was": 738,
+      "now": 300,
+      "deal": "59% korting",
+      "name": "Gesneden koolraap, pompoenblokjes of wortelen",
+      "until": "2026-11-01"
     },
     "boter": {
       "was": 396,
@@ -345,6 +380,13 @@
     }
   },
   "dagwinkel": {
+    "wortel": {
+      "was": 219,
+      "now": 199,
+      "deal": "9% korting",
+      "name": "Gesneden koolraap, pompoenblokjes of wortelen",
+      "until": "2026-11-01"
+    },
     "paprika": {
       "was": 540,
       "now": 399,
@@ -597,6 +639,13 @@
       "now": 111,
       "deal": "26% korting",
       "name": "Melkan Italiaanse Gorgonzola, Burrata, Grana Padano, (mini) mozzarella, Parmigiano Reggiano of strooikaas",
+      "until": "2026-10-25"
+    },
+    "zalm": {
+      "was": 350,
+      "now": 299,
+      "deal": "15% korting",
+      "name": "JONGENS VAN DE FANT WARM GEROOKTE ZALMMOOT OF GETRANCHEERDE ZALM",
       "until": "2026-10-25"
     },
     "komkommer": {
@@ -852,6 +901,13 @@
       "name": "Melkan Italiaanse gorgonzola, burrata, grana padano, (mini) mozzarella, parmigiano reggiano of strooikaas",
       "until": "2026-10-25"
     },
+    "zalm": {
+      "was": 350,
+      "now": 299,
+      "deal": "15% korting",
+      "name": "JONGENS VAN DE FANT WARM GEROOKTE ZALMMOOT OF GETRANCHEERDE ZALM",
+      "until": "2026-10-25"
+    },
     "komkommer": {
       "was": 99,
       "now": 69,
@@ -946,7 +1002,7 @@
       "now": 600,
       "deal": "1+1",
       "name": "Lucovitaal Rode gist rijst",
-      "until": "2026-10-24"
+      "until": "2026-10-25"
     },
     "spinazie": {
       "was": 299,
