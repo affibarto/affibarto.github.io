@@ -1,7 +1,7 @@
 {
   "week": "19–25 oct 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-10-23",
+  "fetched": "2026-10-24",
   "note": "Folder/actie, automatisch. Geen kassaprijs.",
   "ah": {
     "gehakt": {
@@ -381,9 +381,9 @@
   },
   "dagwinkel": {
     "wortel": {
-      "was": 219,
+      "was": 399,
       "now": 199,
-      "deal": "9% korting",
+      "deal": "50% korting",
       "name": "Gesneden koolraap, pompoenblokjes of wortelen",
       "until": "2026-11-01"
     },
@@ -498,11 +498,11 @@
       "until": "2026-10-27"
     },
     "pasta": {
-      "was": 249,
-      "now": 249,
-      "deal": "folder",
-      "name": "Daily Chef Spaghetti bolognese",
-      "until": "2026-10-27"
+      "was": 449,
+      "now": 349,
+      "deal": "22% korting",
+      "name": "Prima Spaghetti bolognese",
+      "until": "2026-11-03"
     },
     "kip": {
       "was": 679,
@@ -517,6 +517,13 @@
       "deal": "8% korting",
       "name": "1 de Beste Aardappelen kruimig",
       "until": "2026-10-27"
+    },
+    "ui": {
+      "was": 169,
+      "now": 149,
+      "deal": "12% korting",
+      "name": "1 de Beste Uien",
+      "until": "2026-11-03"
     },
     "rijst": {
       "was": 589,
@@ -552,6 +559,13 @@
       "deal": "31% korting",
       "name": "Daily Chef Penne gerookte zalm",
       "until": "2026-10-27"
+    },
+    "komkommer": {
+      "was": 188,
+      "now": 99,
+      "deal": "47% korting",
+      "name": "Bieze Rauwkost komkommer",
+      "until": "2026-11-03"
     }
   },
   "ekoplaza": {
@@ -692,6 +706,13 @@
       "name": "Chio Pom-Bär paprika",
       "until": "2026-10-27"
     },
+    "ham": {
+      "was": 499,
+      "now": 299,
+      "deal": "40% korting",
+      "name": "Kipfilet of achterham",
+      "until": "2026-11-03"
+    },
     "mozzarella": {
       "was": 369,
       "now": 185,
@@ -700,11 +721,11 @@
       "until": "2026-10-27"
     },
     "rookworst": {
-      "was": 479,
-      "now": 229,
-      "deal": "52% korting",
-      "name": "Hoogvliet Slagers rookworst XL",
-      "until": "2026-10-27"
+      "was": 539,
+      "now": 279,
+      "deal": "48% korting",
+      "name": "Rookworst",
+      "until": "2026-11-03"
     },
     "zalm": {
       "was": 599,
@@ -1002,7 +1023,7 @@
       "now": 600,
       "deal": "1+1",
       "name": "Lucovitaal Rode gist rijst",
-      "until": "2026-10-25"
+      "until": "2026-10-26"
     },
     "spinazie": {
       "was": 299,
@@ -1105,7 +1126,7 @@
       "until": "2026-10-24"
     },
     "boter": {
-      "was": 559,
+      "was": 569,
       "now": 419,
       "deal": "25% korting: 4.19",
       "name": "g'woon Roomboter Appeltaart",
@@ -1178,6 +1199,13 @@
     }
   },
   "vomar": {
+    "pasta": {
+      "was": 358,
+      "now": 250,
+      "deal": "30% korting",
+      "name": "Bami/Nasi- of Macaroni/Spaghetti Groenten",
+      "until": "2026-10-31"
+    },
     "kip": {
       "was": 399,
       "now": 299,
@@ -1212,6 +1240,13 @@
       "deal": "27% korting",
       "name": "Wraps",
       "until": "2026-10-24"
+    },
+    "spinazie": {
+      "was": 179,
+      "now": 89,
+      "deal": "50% korting",
+      "name": "Hollandse gewassen spinazie",
+      "until": "2026-10-31"
     },
     "paprika": {
       "was": 349,
