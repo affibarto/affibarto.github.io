@@ -1,29 +1,22 @@
 {
-  "week": "19–25 oct 2026",
+  "week": "26–1 nov 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-10-25",
+  "fetched": "2026-10-26",
   "note": "Folder/actie, automatisch. Geen kassaprijs.",
   "ah": {
-    "gehakt": {
-      "was": 599,
-      "now": 300,
-      "deal": "2e gratis",
-      "name": "AH Greenfields Rundergehakt",
-      "until": "2026-10-25"
-    },
     "pasta": {
-      "was": 359,
-      "now": 179,
-      "deal": "2e gratis",
-      "name": "Honig Basis macaroni & spaghetti voordeel",
-      "until": "2026-10-25"
+      "was": 249,
+      "now": 125,
+      "deal": "1 + 1 gratis",
+      "name": "AH Spaghetti all' uovo",
+      "until": "2026-11-01"
     },
     "melk": {
-      "was": 199,
-      "now": 99,
-      "deal": "2e gratis",
-      "name": "Campina Langlekker halfvolle melk calcium plus",
-      "until": "2026-10-25"
+      "was": 956,
+      "now": 860,
+      "deal": "10% volume voordeel",
+      "name": "Arla Biologisch halfvolle melk 4-pack",
+      "until": "2026-11-01"
     },
     "kip": {
       "was": 499,
@@ -68,11 +61,11 @@
       "until": "2026-11-01"
     },
     "rijst": {
-      "was": 359,
-      "now": 269,
-      "deal": "2e Halve Prijs",
-      "name": "Lassie Basmati rijst voordeelpak",
-      "until": "2026-10-25"
+      "was": 749,
+      "now": 487,
+      "deal": "35% korting",
+      "name": "Care Rode gist rijst, Q10 & maretak",
+      "until": "2026-11-01"
     },
     "wraps": {
       "was": 289,
@@ -82,18 +75,18 @@
       "until": "2026-11-01"
     },
     "spinazie": {
-      "was": 399,
-      "now": 200,
-      "deal": "2e gratis",
-      "name": "AH Crispy mini börek spinazie feta",
-      "until": "2026-10-25"
+      "was": 299,
+      "now": 199,
+      "deal": "VOOR 1.99",
+      "name": "AH Borrelbrood feta spinazie",
+      "until": "2026-11-01"
     },
     "paprika": {
-      "was": 608,
-      "now": 508,
-      "deal": "1 euro korting",
-      "name": "AH Scharrel kipfilet à la minute paprika",
-      "until": "2026-10-25"
+      "was": 499,
+      "now": 250,
+      "deal": "2 + 2 gratis",
+      "name": "Unox Paprika tomatensoep",
+      "until": "2026-11-01"
     },
     "mozzarella": {
       "was": 259,
@@ -103,63 +96,42 @@
       "until": "2026-11-01"
     },
     "rookworst": {
-      "was": 399,
-      "now": 200,
-      "deal": "2e gratis",
-      "name": "AH Loaded rookworst kaas en ui",
-      "until": "2026-10-25"
-    },
-    "beleg": {
-      "was": 625,
-      "now": 250,
-      "deal": "2 voor 4.99",
-      "name": "Calvé Extra crunchy pindakaas",
-      "until": "2026-10-25"
-    },
-    "hagelslag": {
-      "was": 439,
-      "now": 329,
-      "deal": "2e Halve Prijs",
-      "name": "Fairtrade Original Hagelslag puur",
-      "until": "2026-10-25"
+      "was": 599,
+      "now": 499,
+      "deal": "VOOR 4.99",
+      "name": "Brandt & Levie Rookworst Varken",
+      "until": "2026-11-01"
     },
     "fruit": {
       "was": 199,
       "now": 175,
       "deal": "2 voor 3.50",
       "name": "Chiquita Ready to eat bananen",
-      "until": "2026-10-25"
+      "until": "2026-11-01"
     },
     "zalm": {
-      "was": 799,
-      "now": 599,
-      "deal": "25% korting",
-      "name": "AH Gerookte zalm",
-      "until": "2026-10-25"
+      "was": 415,
+      "now": 225,
+      "deal": "2 voor 4.49",
+      "name": "Johma Zalm salade",
+      "until": "2026-11-01"
     },
     "komkommer": {
       "was": 249,
       "now": 200,
       "deal": "2 voor 4.00",
       "name": "AH Rauwkost komkommer",
-      "until": "2026-10-25"
+      "until": "2026-11-01"
     },
     "champignon": {
-      "was": 299,
-      "now": 150,
-      "deal": "2e gratis",
-      "name": "AH Luxe wok Japans champignons peultjes",
-      "until": "2026-10-25"
+      "was": 199,
+      "now": 125,
+      "deal": "2 voor 2.49",
+      "name": "AH Roerbakgroente Italiaans champignons",
+      "until": "2026-11-01"
     }
   },
   "aldi": {
-    "gehakt": {
-      "was": 899,
-      "now": 899,
-      "deal": "OP=OP",
-      "name": "Extra mager rundergehakt",
-      "until": "2026-10-25"
-    },
     "kip": {
       "was": 189,
       "now": 189,
@@ -182,11 +154,11 @@
       "until": "2026-11-01"
     },
     "kaas": {
-      "was": 219,
-      "now": 149,
-      "deal": "TOT -31%",
-      "name": "Gouda geraspte kaas",
-      "until": "2026-10-25"
+      "was": 175,
+      "now": 119,
+      "deal": "-31%",
+      "name": "Geraspte kaas",
+      "until": "2026-11-01"
     },
     "boter": {
       "was": 259,
@@ -196,25 +168,25 @@
       "until": "2026-11-01"
     },
     "paprika": {
-      "was": 449,
-      "now": 449,
+      "was": 99,
+      "now": 99,
       "deal": "OP=OP",
-      "name": "Gyros met paprika",
-      "until": "2026-10-25"
+      "name": "Wavy blends paprika of knoflook & kruiden",
+      "until": "2026-11-01"
     },
     "ham": {
-      "was": 219,
-      "now": 219,
+      "was": 169,
+      "now": 169,
       "deal": "OP=OP",
-      "name": "Slagersachterham",
-      "until": "2026-10-25"
+      "name": "Gekookte achterham",
+      "until": "2026-11-01"
     },
     "rookworst": {
-      "was": 269,
-      "now": 149,
-      "deal": "-44%",
-      "name": "Slagersrookworst",
-      "until": "2026-10-25"
+      "was": 199,
+      "now": 199,
+      "deal": "OP=OP",
+      "name": "Scharrelkiprookworst",
+      "until": "2026-11-01"
     },
     "beleg": {
       "was": 249,
@@ -223,12 +195,12 @@
       "name": "Pindakaas",
       "until": "2026-11-05"
     },
-    "zalm": {
-      "was": 169,
-      "now": 169,
-      "deal": "OP=OP",
-      "name": "High protein zalm- of tonijnsalade",
-      "until": "2026-10-25"
+    "fruit": {
+      "was": 115,
+      "now": 85,
+      "deal": "-26%",
+      "name": "Bananen",
+      "until": "2026-11-01"
     },
     "komkommer": {
       "was": 149,
@@ -248,77 +220,91 @@
     }
   },
   "boni": {
+    "kip": {
+      "was": 175,
+      "now": 175,
+      "deal": "folder",
+      "name": "Coburger, kipfilet naturel, tuinkruiden of gerookt",
+      "until": "2026-11-01"
+    },
     "boter": {
-      "was": 99,
-      "now": 99,
-      "deal": "folder",
-      "name": "Roomboter croissants, tijgerbollen, petit pains wit of bruin of kaiserbroodjes",
-      "until": "2026-10-25"
-    },
-    "spinazie": {
-      "was": 99,
-      "now": 99,
-      "deal": "folder",
-      "name": "Gewassen spinazie",
-      "until": "2026-10-25"
-    },
-    "paprika": {
-      "was": 499,
-      "now": 499,
-      "deal": "folder",
-      "name": "Kipshoarma met paprika of kipgyros met ui",
-      "until": "2026-10-25"
+      "was": 398,
+      "now": 358,
+      "deal": "10% korting",
+      "name": "Campina botergoud ongezouten roomboter",
+      "until": "2026-11-01"
     },
     "rookworst": {
-      "was": 80,
-      "now": 80,
+      "was": 250,
+      "now": 250,
       "deal": "folder",
-      "name": "Slagershuis rookworst Gelders of mager",
-      "until": "2026-10-25"
+      "name": "Slagersrookworst fijn, grof of kip",
+      "until": "2026-11-01"
+    },
+    "komkommer": {
+      "was": 199,
+      "now": 199,
+      "deal": "folder",
+      "name": "Mini komkommers",
+      "until": "2026-11-01"
     }
   },
   "boons_markt": {
-    "kip": {
-      "was": 470,
-      "now": 235,
+    "gehakt": {
+      "was": 970,
+      "now": 485,
       "deal": "1+1",
-      "name": "Slagerskwaliteit achterham en/of scharrel kipfilet naturel flinterdun",
-      "until": "2026-10-25"
+      "name": "Mager rundergehakt",
+      "until": "2026-11-01"
     },
-    "sla": {
-      "was": 298,
+    "pasta": {
+      "was": 79,
+      "now": 79,
+      "deal": "folder",
+      "name": "g'woon spaghetti vlugkokend",
+      "until": "2026-11-01"
+    },
+    "tomaat": {
+      "was": 135,
+      "now": 135,
+      "deal": "folder",
+      "name": "g'woon tomatenblokjes met knoflook en ui",
+      "until": "2026-11-01"
+    },
+    "rijst": {
+      "was": 199,
+      "now": 129,
+      "deal": "35% korting",
+      "name": "Lassie toverrijst of zilvervliesrijst",
+      "until": "2026-11-01"
+    },
+    "wraps": {
+      "was": 349,
+      "now": 299,
+      "deal": "14% korting",
+      "name": "Alle verse wraps",
+      "until": "2026-11-01"
+    },
+    "spinazie": {
+      "was": 338,
       "now": 250,
-      "deal": "16% korting",
-      "name": "Aardappelpartjes met schil, mini krieltjes met kruidenbotersmaak, ijsbergsla fijn en/of melange",
-      "until": "2026-10-25"
+      "deal": "26% korting",
+      "name": "Boerenkool, hutspot, andijvie, spinazie, stamppotaardappelen of vastkokende aardappelen",
+      "until": "2026-11-01"
     },
     "ham": {
-      "was": 470,
-      "now": 235,
-      "deal": "1+1",
-      "name": "Slagerskwaliteit achterham en/of scharrel kipfilet naturel flinterdun",
-      "until": "2026-10-25"
-    },
-    "mozzarella": {
-      "was": 145,
-      "now": 108,
-      "deal": "26% korting",
-      "name": "Melkan Italiaanse Gorgonzola, Burrata, Grana Padano, (mini) mozzarella, Parmigiano Reggiano of strooikaas",
-      "until": "2026-10-25"
+      "was": 230,
+      "now": 199,
+      "deal": "13% korting",
+      "name": "Achterham populair of kalkoenfilet",
+      "until": "2026-11-01"
     },
     "zalm": {
-      "was": 350,
-      "now": 299,
-      "deal": "15% korting",
-      "name": "JONGENS VAN DE FANT WARM GEROOKTE ZALMMOOT OF GETRANCHEERDE ZALM",
-      "until": "2026-10-25"
-    },
-    "komkommer": {
-      "was": 79,
-      "now": 69,
-      "deal": "13% korting",
-      "name": "Komkommer",
-      "until": "2026-10-25"
+      "was": 599,
+      "now": 399,
+      "deal": "33% korting",
+      "name": "Pokébowl zalm original, spicy tuna of kip",
+      "until": "2026-11-01"
     }
   },
   "coop": {
@@ -327,14 +313,7 @@
       "now": 750,
       "deal": "28% korting",
       "name": "Kipfilet",
-      "until": "2026-10-25"
-    },
-    "aardappel": {
-      "was": 298,
-      "now": 250,
-      "deal": "16% korting",
-      "name": "Jongens van de klei Aardappelen kruimig of vastkokend",
-      "until": "2026-10-25"
+      "until": "2026-11-01"
     },
     "wortel": {
       "was": 738,
@@ -355,35 +334,21 @@
       "now": 200,
       "deal": "49% korting",
       "name": "Hendrickx de Bakker Roomboter appelflap",
-      "until": "2026-10-25"
-    },
-    "wraps": {
-      "was": 100,
-      "now": 100,
-      "deal": "folder",
-      "name": "Banderos Tortilla wraps",
-      "until": "2026-10-25"
+      "until": "2026-11-01"
     },
     "paprika": {
       "was": 100,
       "now": 100,
       "deal": "folder",
       "name": "Frietsticks paprika",
-      "until": "2026-10-25"
+      "until": "2026-11-01"
     },
     "ei": {
       "was": 499,
       "now": 325,
       "deal": "35% korting",
       "name": "Noaber Ei Scharreleieren",
-      "until": "2026-10-25"
-    },
-    "komkommer": {
-      "was": 170,
-      "now": 100,
-      "deal": "41% korting",
-      "name": "Versuniek Farmer, komkommer of sellerie salade",
-      "until": "2026-10-25"
+      "until": "2026-11-01"
     }
   },
   "dagwinkel": {
@@ -393,20 +358,6 @@
       "deal": "50% korting",
       "name": "Gesneden koolraap, pompoenblokjes of wortelen",
       "until": "2026-11-01"
-    },
-    "paprika": {
-      "was": 540,
-      "now": 399,
-      "deal": "26% korting",
-      "name": "Weidenaar Shoarma met paprika strips",
-      "until": "2026-10-25"
-    },
-    "komkommer": {
-      "was": 189,
-      "now": 100,
-      "deal": "47% korting",
-      "name": "Versuniek Farmer, komkommer of sellerie salade",
-      "until": "2026-10-25"
     }
   },
   "dekamarkt": {
@@ -467,11 +418,11 @@
       "until": "2026-11-02"
     },
     "rijst": {
-      "was": 149,
+      "was": 249,
       "now": 99,
       "deal": "per stuk 0,99",
-      "name": "Olvarit 6+ Maanden Wortel Kip Rijst",
-      "until": "2026-10-26"
+      "name": "Lassie Basmatirijst builtjes",
+      "until": "2026-11-02"
     },
     "spinazie": {
       "was": 339,
@@ -495,11 +446,11 @@
       "until": "2026-10-26"
     },
     "rookworst": {
-      "was": 534,
-      "now": 267,
-      "deal": "50% KORTING",
-      "name": "Unox Rookworst kip",
-      "until": "2026-10-25"
+      "was": 371,
+      "now": 371,
+      "deal": "275 gram 2,99",
+      "name": "DekaVers Rookworst fijn",
+      "until": "2026-11-02"
     },
     "hagelslag": {
       "was": 395,
@@ -572,13 +523,6 @@
       "now": 69,
       "deal": "40% korting",
       "name": "Vers afbak Borek stick spinazie feta",
-      "until": "2026-10-27"
-    },
-    "paprika": {
-      "was": 289,
-      "now": 199,
-      "deal": "31% korting",
-      "name": "1 de Beste Zoete puntpaprika rood",
       "until": "2026-10-27"
     },
     "mozzarella": {
@@ -662,47 +606,40 @@
     }
   },
   "gewoon_coop": {
-    "kip": {
-      "was": 490,
-      "now": 245,
+    "gehakt": {
+      "was": 1010,
+      "now": 505,
       "deal": "1+1",
-      "name": "Slagerskwaliteit achterham en/of scharrel kipfilet naturel flinterdun",
-      "until": "2026-10-25"
+      "name": "Mager rundergehakt",
+      "until": "2026-11-01"
     },
-    "sla": {
-      "was": 298,
+    "rijst": {
+      "was": 209,
+      "now": 129,
+      "deal": "38% korting",
+      "name": "Lassie toverrijst of zilvervliesrijst",
+      "until": "2026-11-01"
+    },
+    "spinazie": {
+      "was": 358,
       "now": 250,
-      "deal": "16% korting",
-      "name": "Aardappelpartjes met schil, mini krieltjes met kruidenbotersmaak, ijsbergsla fijn en/of melange",
-      "until": "2026-10-25"
+      "deal": "30% korting",
+      "name": "Boerenkool, hutspot, andijvie, spinazie, stamppotaardappelen of vastkokende aardappelen",
+      "until": "2026-11-01"
     },
     "ham": {
-      "was": 490,
-      "now": 245,
-      "deal": "1+1",
-      "name": "Slagerskwaliteit achterham en/of scharrel kipfilet naturel flinterdun",
-      "until": "2026-10-25"
-    },
-    "mozzarella": {
-      "was": 149,
-      "now": 111,
-      "deal": "26% korting",
-      "name": "Melkan Italiaanse Gorgonzola, Burrata, Grana Padano, (mini) mozzarella, Parmigiano Reggiano of strooikaas",
-      "until": "2026-10-25"
+      "was": 230,
+      "now": 199,
+      "deal": "13% korting",
+      "name": "Achterham populair of kalkoenfilet",
+      "until": "2026-11-01"
     },
     "zalm": {
-      "was": 350,
-      "now": 299,
-      "deal": "15% korting",
-      "name": "JONGENS VAN DE FANT WARM GEROOKTE ZALMMOOT OF GETRANCHEERDE ZALM",
-      "until": "2026-10-25"
-    },
-    "komkommer": {
-      "was": 99,
-      "now": 69,
-      "deal": "30% korting",
-      "name": "Komkommer",
-      "until": "2026-10-25"
+      "was": 625,
+      "now": 399,
+      "deal": "36% korting",
+      "name": "Pokébowl zalm original, spicy tuna of kip",
+      "until": "2026-11-01"
     }
   },
   "hoogvliet": {
@@ -913,128 +850,100 @@
       "name": "Extra mager rundergehakt",
       "until": "2026-11-22"
     },
-    "kip": {
-      "was": 949,
-      "now": 949,
-      "deal": "folder",
-      "name": "Kipfilet",
-      "until": "2026-10-25"
-    },
     "boter": {
       "was": 249,
       "now": 249,
       "deal": "folder",
       "name": "- Ovenverse roomboter appeltaart",
       "until": "2026-11-01"
-    },
-    "spinazie": {
-      "was": 179,
-      "now": 99,
-      "deal": "44% korting",
-      "name": "Gewassen spinazie",
-      "until": "2026-10-25"
-    },
-    "ham": {
-      "was": 179,
-      "now": 149,
-      "deal": "16% korting",
-      "name": "ZWAGERMAN Achterham",
-      "until": "2026-10-25"
-    },
-    "rookworst": {
-      "was": 269,
-      "now": 215,
-      "deal": "20% korting",
-      "name": "SAINT ALBY Verse rookworst",
-      "until": "2026-10-25"
-    },
-    "hagelslag": {
-      "was": 339,
-      "now": 249,
-      "deal": "26% korting",
-      "name": "Heinz De Ruijter hagelslag",
-      "until": "2026-10-29"
-    },
-    "zalm": {
-      "was": 595,
-      "now": 449,
-      "deal": "24% korting",
-      "name": "OCEAN SEA Gerookte zalm",
-      "until": "2026-10-25"
     }
   },
   "mcd": {
-    "kip": {
-      "was": 478,
-      "now": 239,
+    "gehakt": {
+      "was": 970,
+      "now": 485,
       "deal": "1+1",
-      "name": "Slagerskwaliteit achterham en/of scharrel kipfilet naturel flinterdun",
-      "until": "2026-10-25"
+      "name": "Mager rundergehakt",
+      "until": "2026-11-01"
     },
-    "sla": {
-      "was": 318,
+    "pasta": {
+      "was": 79,
+      "now": 79,
+      "deal": "folder",
+      "name": "g'woon spaghetti vlugkokend",
+      "until": "2026-11-01"
+    },
+    "tomaat": {
+      "was": 135,
+      "now": 135,
+      "deal": "folder",
+      "name": "g'woon tomatenblokjes met knoflook en ui",
+      "until": "2026-11-01"
+    },
+    "rijst": {
+      "was": 205,
+      "now": 129,
+      "deal": "37% korting",
+      "name": "Lassie toverrijst of zilvervliesrijst",
+      "until": "2026-11-01"
+    },
+    "spinazie": {
+      "was": 358,
       "now": 250,
-      "deal": "21% korting",
-      "name": "Aardappelpartjes met schil, mini krieltjes met kruidenbotersmaak, ijsbergsla fijn en/of melange",
-      "until": "2026-10-25"
+      "deal": "30% korting",
+      "name": "Boerenkool, hutspot, andijvie, spinazie, stamppotaardappelen of vastkokende aardappelen",
+      "until": "2026-11-01"
     },
     "ham": {
-      "was": 478,
-      "now": 239,
-      "deal": "1+1",
-      "name": "Slagerskwaliteit achterham en/of scharrel kipfilet naturel flinterdun",
-      "until": "2026-10-25"
-    },
-    "mozzarella": {
-      "was": 149,
-      "now": 111,
-      "deal": "26% korting",
-      "name": "Melkan Italiaanse gorgonzola, burrata, grana padano, (mini) mozzarella, parmigiano reggiano of strooikaas",
-      "until": "2026-10-25"
+      "was": 230,
+      "now": 199,
+      "deal": "13% korting",
+      "name": "Achterham populair of kalkoenfilet",
+      "until": "2026-11-01"
     },
     "zalm": {
-      "was": 350,
-      "now": 299,
-      "deal": "15% korting",
-      "name": "JONGENS VAN DE FANT WARM GEROOKTE ZALMMOOT OF GETRANCHEERDE ZALM",
-      "until": "2026-10-25"
-    },
-    "komkommer": {
-      "was": 99,
-      "now": 69,
-      "deal": "30% korting",
-      "name": "Komkommer",
-      "until": "2026-10-25"
+      "was": 609,
+      "now": 399,
+      "deal": "34% korting",
+      "name": "Pokébowl zalm original, spicy tuna of kip",
+      "until": "2026-11-01"
     }
   },
   "nettorama": {
-    "boter": {
-      "was": 99,
-      "now": 99,
+    "kip": {
+      "was": 175,
+      "now": 175,
       "deal": "folder",
-      "name": "Roomboter croissants, tijgerbollen, petit pains wit of bruin of kaiserbroodjes",
-      "until": "2026-10-25"
+      "name": "Gerookte slagersham, coburger, kipfilet naturel, tuinkruiden of gerookt",
+      "until": "2026-11-01"
     },
-    "spinazie": {
-      "was": 99,
-      "now": 99,
-      "deal": "folder",
-      "name": "Gewassen spinazie",
-      "until": "2026-10-25"
+    "boter": {
+      "was": 398,
+      "now": 358,
+      "deal": "10% korting",
+      "name": "Campina botergoud ongezouten roomboter",
+      "until": "2026-11-01"
     },
     "paprika": {
-      "was": 499,
-      "now": 499,
+      "was": 399,
+      "now": 399,
       "deal": "folder",
-      "name": "Kipshoarma met paprika of kipgyros met ui",
-      "until": "2026-10-25"
+      "name": "Shoarmavlees of gyrosvlees met paprika",
+      "until": "2026-11-01"
     },
     "rookworst": {
-      "was": 80,
-      "now": 80,
+      "was": 250,
+      "now": 250,
       "deal": "folder",
-      "name": "Slagershuis rookworst Gelders of mager",
-      "until": "2026-10-25"
+      "name": "Slagersrookworst fijn, grof of kip",
+      "until": "2026-11-01"
+    },
+    "komkommer": {
+      "was": 199,
+      "now": 199,
+      "deal": "folder",
+      "name": "Mini komkommers",
+      "until": "2026-11-01"
     }
   },
   "picnic": {},
@@ -1145,11 +1054,11 @@
       "until": "2026-10-27"
     },
     "zalm": {
-      "was": 699,
-      "now": 399,
-      "deal": "multipack",
-      "name": "Uit de keuken van Poké bowl zalm",
-      "until": "2026-10-25"
+      "was": 799,
+      "now": 599,
+      "deal": "25% korting",
+      "name": "Plus Gerookte Noorse zalm",
+      "until": "2026-10-27"
     },
     "komkommer": {
       "was": 249,
@@ -1319,11 +1228,11 @@
       "until": "2026-10-31"
     },
     "boter": {
-      "was": 100,
-      "now": 100,
+      "was": 349,
+      "now": 349,
       "deal": "limited",
-      "name": "Versgebakken Roomboter Croissants",
-      "until": "2026-10-25"
+      "name": "Echte Boter Roomboter",
+      "until": "2026-10-30"
     },
     "spinazie": {
       "was": 179,
