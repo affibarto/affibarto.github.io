@@ -1,7 +1,7 @@
 {
   "week": "26–1 nov 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-10-26",
+  "fetched": "2026-10-27",
   "note": "Folder/actie, automatisch. Geen kassaprijs.",
   "ah": {
     "pasta": {
@@ -117,7 +117,7 @@
       "until": "2026-11-01"
     },
     "komkommer": {
-      "was": 249,
+      "was": 259,
       "now": 200,
       "deal": "2 voor 4.00",
       "name": "AH Rauwkost komkommer",
@@ -361,26 +361,12 @@
     }
   },
   "dekamarkt": {
-    "gehakt": {
-      "was": 599,
-      "now": 599,
-      "deal": "400 gram 4,99",
-      "name": "DekaVers rundergehakt mager",
-      "until": "2026-10-26"
-    },
     "pasta": {
-      "was": 175,
-      "now": 99,
-      "deal": "per stuk 0,99",
-      "name": "Olvarit 18+ Maanden Spaghetti Tomaat Ham",
-      "until": "2026-10-26"
-    },
-    "tomaat": {
-      "was": 165,
-      "now": 99,
-      "deal": "per stuk 0,99",
-      "name": "Heinz Tomatenblokjes knoflook",
-      "until": "2026-10-26"
+      "was": 195,
+      "now": 150,
+      "deal": "2 voor 2,99",
+      "name": "Honig Kruidenmix macaroni & spaghetti",
+      "until": "2026-11-02"
     },
     "melk": {
       "was": 175,
@@ -388,13 +374,6 @@
       "deal": "per stuk 1,49",
       "name": "Arla Bio halfvolle melk",
       "until": "2026-11-02"
-    },
-    "kip": {
-      "was": 615,
-      "now": 399,
-      "deal": "per stuk 3,99",
-      "name": "Iglo Gegrilde kipfilet ping & klaar met rosti en sperziebonen",
-      "until": "2026-10-26"
     },
     "aardappel": {
       "was": 379,
@@ -431,19 +410,12 @@
       "name": "Hak Spinazie",
       "until": "2026-11-02"
     },
-    "paprika": {
-      "was": 495,
-      "now": 165,
-      "deal": "1+2 GRATIS",
-      "name": "Unox Paprika tomatensoep extra rijkgevuld",
-      "until": "2026-10-26"
-    },
     "mozzarella": {
-      "was": 389,
-      "now": 199,
-      "deal": "per stuk 1,99",
-      "name": "Grand'Italia Gnocchi mozzarella e pomodoro",
-      "until": "2026-10-26"
+      "was": 349,
+      "now": 250,
+      "deal": "2 voor 4,99",
+      "name": "Valess Tomaat mozzarella",
+      "until": "2026-11-02"
     },
     "rookworst": {
       "was": 371,
@@ -460,18 +432,11 @@
       "until": "2026-11-02"
     },
     "zalm": {
-      "was": 599,
-      "now": 399,
-      "deal": "per stuk 3,99",
-      "name": "Iglo Roerbaksensatie tagliatelle zalm",
-      "until": "2026-10-26"
-    },
-    "champignon": {
-      "was": 179,
-      "now": 149,
-      "deal": "250 gram 1,49",
-      "name": "Kastanje champignons",
-      "until": "2026-10-26"
+      "was": 409,
+      "now": 219,
+      "deal": "per stuk 2,19",
+      "name": "Johma Zalm salade",
+      "until": "2026-11-02"
     }
   },
   "delhaize": {},
@@ -678,13 +643,6 @@
       "name": "Chio Pom-Bär paprika",
       "until": "2026-10-27"
     },
-    "ham": {
-      "was": 499,
-      "now": 299,
-      "deal": "40% korting",
-      "name": "Kipfilet of achterham",
-      "until": "2026-11-03"
-    },
     "mozzarella": {
       "was": 369,
       "now": 185,
@@ -693,11 +651,11 @@
       "until": "2026-10-27"
     },
     "rookworst": {
-      "was": 539,
-      "now": 279,
-      "deal": "48% korting",
-      "name": "Rookworst",
-      "until": "2026-11-03"
+      "was": 479,
+      "now": 229,
+      "deal": "52% korting",
+      "name": "Hoogvliet Slagers rookworst XL",
+      "until": "2026-10-27"
     },
     "zalm": {
       "was": 599,
@@ -914,7 +872,7 @@
       "was": 175,
       "now": 175,
       "deal": "folder",
-      "name": "Gerookte slagersham, coburger, kipfilet naturel, tuinkruiden of gerookt",
+      "name": "Gerookte slagersham*, coburger, kipfilet naturel, tuinkruiden of gerookt",
       "until": "2026-11-01"
     },
     "boter": {
@@ -922,13 +880,6 @@
       "now": 358,
       "deal": "10% korting",
       "name": "Campina botergoud ongezouten roomboter",
-      "until": "2026-11-01"
-    },
-    "paprika": {
-      "was": 399,
-      "now": 399,
-      "deal": "folder",
-      "name": "Shoarmavlees of gyrosvlees met paprika",
       "until": "2026-11-01"
     },
     "rookworst": {

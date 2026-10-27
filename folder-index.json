@@ -1,7 +1,7 @@
 {
   "week": "26–1 nov 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-10-26",
+  "fetched": "2026-10-27",
   "stores": [
     {
       "id": "dirk",
@@ -107,6 +107,13 @@
       "pp": "coop",
       "file": "folder-coop.json",
       "count": 64
+    },
+    {
+      "id": "gewoon_coop",
+      "n": "Gewoon Coop",
+      "pp": "gewoon_coop",
+      "file": "folder-gewoon_coop.json",
+      "count": 80
     },
     {
       "id": "nettorama",
