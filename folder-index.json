@@ -1,7 +1,7 @@
 {
   "week": "26–1 nov 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-10-28",
+  "fetched": "2026-10-29",
   "stores": [
     {
       "id": "dirk",
@@ -22,7 +22,7 @@
       "n": "Lidl",
       "pp": "lidl",
       "file": "folder-lidl.json",
-      "count": 37
+      "count": 36
     },
     {
       "id": "jumbo",
@@ -155,7 +155,7 @@
       "n": "Spar",
       "pp": "spar",
       "file": "folder-spar.json",
-      "count": 51
+      "count": 36
     }
   ]
 }
