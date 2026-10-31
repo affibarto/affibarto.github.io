@@ -1,7 +1,7 @@
 {
   "week": "26–1 nov 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-10-30",
+  "fetched": "2026-10-31",
   "note": "Folder/actie, automatisch. Geen kassaprijs.",
   "ah": {
     "gehakt": {
@@ -357,13 +357,6 @@
     }
   },
   "coop": {
-    "kip": {
-      "was": 1049,
-      "now": 750,
-      "deal": "28% korting",
-      "name": "Kipfilet",
-      "until": "2026-10-30"
-    },
     "aardappel": {
       "was": 439,
       "now": 299,
@@ -505,11 +498,25 @@
   "delhaize": {},
   "dirk": {
     "pasta": {
-      "was": 449,
-      "now": 349,
-      "deal": "22% korting",
-      "name": "Prima Spaghetti bolognese",
-      "until": "2026-11-03"
+      "was": 289,
+      "now": 179,
+      "deal": "38% korting",
+      "name": "Daily Chef Spaghetti",
+      "until": "2026-11-10"
+    },
+    "kip": {
+      "was": 539,
+      "now": 462,
+      "deal": "14% korting",
+      "name": "Vleeschmeesters Actie kipfilet 2 stuks",
+      "until": "2026-11-10"
+    },
+    "aardappel": {
+      "was": 119,
+      "now": 99,
+      "deal": "17% korting",
+      "name": "1 de Beste Aardappelen kruimig",
+      "until": "2026-11-10"
     },
     "ui": {
       "was": 169,
@@ -517,6 +524,27 @@
       "deal": "12% korting",
       "name": "1 de Beste Uien",
       "until": "2026-11-03"
+    },
+    "yoghurt": {
+      "was": 239,
+      "now": 199,
+      "deal": "17% korting",
+      "name": "Activia Yoghurt naturel",
+      "until": "2026-11-10"
+    },
+    "rijst": {
+      "was": 269,
+      "now": 129,
+      "deal": "52% korting",
+      "name": "Tilda Rijst basmati pure",
+      "until": "2026-11-10"
+    },
+    "brood": {
+      "was": 189,
+      "now": 169,
+      "deal": "11% korting",
+      "name": "Vloerbrood volkoren heel",
+      "until": "2026-11-10"
     },
     "paprika": {
       "was": 125,
@@ -526,11 +554,11 @@
       "until": "2026-11-03"
     },
     "mozzarella": {
-      "was": 145,
-      "now": 99,
-      "deal": "32% korting",
-      "name": "Galbani Mozzarella",
-      "until": "2026-11-03"
+      "was": 389,
+      "now": 189,
+      "deal": "PROBEER PRIJS",
+      "name": "Grand'Italia Gnocchi mozzarella e pomodoro",
+      "until": "2026-11-10"
     },
     "zalm": {
       "was": 249,
@@ -545,6 +573,13 @@
       "deal": "47% korting",
       "name": "Bieze Rauwkost komkommer",
       "until": "2026-11-03"
+    },
+    "champignon": {
+      "was": 179,
+      "now": 149,
+      "deal": "17% korting",
+      "name": "1 de Beste Kastanje champignons gesneden",
+      "until": "2026-11-10"
     }
   },
   "ekoplaza": {
@@ -994,8 +1029,8 @@
       "was": 349,
       "now": 300,
       "deal": "multipack",
-      "name": "Feestelijk PLUS Roomboter kerstkransjes",
-      "until": "2026-10-30"
+      "name": "PLUS Korenlanders Roomboter margrietjes",
+      "until": "2026-11-02"
     },
     "pesto": {
       "was": 299,
@@ -1009,7 +1044,7 @@
       "now": 600,
       "deal": "1+1",
       "name": "Lucovitaal Rode gist rijst",
-      "until": "2026-11-01"
+      "until": "2026-11-02"
     },
     "spinazie": {
       "was": 299,
@@ -1019,11 +1054,11 @@
       "until": "2026-11-03"
     },
     "paprika": {
-      "was": 229,
-      "now": 167,
-      "deal": "multipack",
-      "name": "Plus Paprika krokantje",
-      "until": "2026-11-01"
+      "was": 349,
+      "now": 262,
+      "deal": "25% korting",
+      "name": "Hak Easy Eats pasta Paprika mascarpone",
+      "until": "2026-11-03"
     },
     "ham": {
       "was": 295,
@@ -1047,11 +1082,11 @@
       "until": "2026-11-03"
     },
     "hagelslag": {
-      "was": 329,
-      "now": 247,
-      "deal": "1+1",
-      "name": "De Ruijter Chocoladehagelslag puur",
-      "until": "2026-10-30"
+      "was": 269,
+      "now": 199,
+      "deal": "multipack",
+      "name": "Plus Chocoladehagelslag puur Fairtrade",
+      "until": "2026-11-03"
     },
     "zalm": {
       "was": 699,
