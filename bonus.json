@@ -1,7 +1,7 @@
 {
   "week": "2–8 nov 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-11-02",
+  "fetched": "2026-11-03",
   "note": "Folder/actie, automatisch. Geen kassaprijs.",
   "ah": {
     "gehakt": {
@@ -75,10 +75,10 @@
       "until": "2026-11-08"
     },
     "mozzarella": {
-      "was": 539,
-      "now": 269,
+      "was": 339,
+      "now": 170,
       "deal": "2e gratis",
-      "name": "Bonduelle Pasta pronto gnocchi tomaat mozzarella",
+      "name": "Bonduelle Pasta pronto gnocchi tomaat & mozzarella",
       "until": "2026-11-08"
     },
     "rookworst": {
@@ -301,13 +301,6 @@
       "name": "Börek spinazie/feta of kaasstengel",
       "until": "2026-11-08"
     },
-    "ei": {
-      "was": 499,
-      "now": 325,
-      "deal": "35% korting",
-      "name": "Scharreleieren",
-      "until": "2026-11-02"
-    },
     "mozzarella": {
       "was": 275,
       "now": 199,
@@ -361,33 +354,12 @@
       "name": "Daily Chef Spaghetti",
       "until": "2026-11-09"
     },
-    "melk": {
-      "was": 175,
-      "now": 149,
-      "deal": "per stuk 1,49",
-      "name": "Arla Bio halfvolle melk",
-      "until": "2026-11-02"
-    },
     "kip": {
       "was": 225,
       "now": 149,
       "deal": "100 gram 1,49",
       "name": "DekaVers Kipfilet flinterdun",
       "until": "2026-11-09"
-    },
-    "aardappel": {
-      "was": 379,
-      "now": 249,
-      "deal": "3 kilo 2,49",
-      "name": "Kruimige aardappelen",
-      "until": "2026-11-02"
-    },
-    "wortel": {
-      "was": 195,
-      "now": 97,
-      "deal": "1+1 GRATIS",
-      "name": "Hak Wortelen extra fijn",
-      "until": "2026-11-02"
     },
     "ui": {
       "was": 129,
@@ -403,26 +375,12 @@
       "name": "Parrano Geraspte kaas",
       "until": "2026-11-09"
     },
-    "boter": {
-      "was": 439,
-      "now": 299,
-      "deal": "per stuk 2,99",
-      "name": "Vers afbak Roomboter appeltaart",
-      "until": "2026-11-02"
-    },
-    "rijst": {
-      "was": 249,
-      "now": 99,
-      "deal": "per stuk 0,99",
-      "name": "Lassie Basmatirijst builtjes",
-      "until": "2026-11-02"
-    },
     "spinazie": {
-      "was": 339,
-      "now": 170,
-      "deal": "1+1 GRATIS",
-      "name": "Hak Spinazie",
-      "until": "2026-11-02"
+      "was": 379,
+      "now": 225,
+      "deal": "2 voor 4,49",
+      "name": "Vivera Spinazie kaas filet 2 stuks",
+      "until": "2026-11-09"
     },
     "sla": {
       "was": 95,
@@ -438,33 +396,12 @@
       "name": "DekaVers Achterham flinterdun",
       "until": "2026-11-09"
     },
-    "mozzarella": {
-      "was": 349,
-      "now": 250,
-      "deal": "2 voor 4,99",
-      "name": "Valess Tomaat mozzarella",
-      "until": "2026-11-02"
-    },
-    "rookworst": {
-      "was": 371,
-      "now": 371,
-      "deal": "275 gram 2,99",
-      "name": "DekaVers Rookworst fijn",
-      "until": "2026-11-02"
-    },
-    "hagelslag": {
-      "was": 395,
-      "now": 296,
-      "deal": "2e halve PRIJS",
-      "name": "Venz Hagelslag puur",
-      "until": "2026-11-02"
-    },
     "zalm": {
-      "was": 409,
-      "now": 219,
-      "deal": "per stuk 2,19",
-      "name": "Johma Zalm salade",
-      "until": "2026-11-02"
+      "was": 329,
+      "now": 149,
+      "deal": "per kuip 1,49",
+      "name": "DekaVers Salade gerookte zalm",
+      "until": "2026-11-09"
     },
     "komkommer": {
       "was": 179,
@@ -765,10 +702,10 @@
       "until": "2026-11-24"
     },
     "rijst": {
-      "was": 155,
-      "now": 116,
-      "deal": "3+1 gratis",
-      "name": "Olvarit Pompoen Kip Rijst 8+ Maanden 200 g",
+      "was": 499,
+      "now": 375,
+      "deal": "2 voor 7,49",
+      "name": "Jumbo Rijst Zoetzure Kip 450 g",
       "until": "2026-11-10"
     },
     "spinazie": {
@@ -861,7 +798,7 @@
       "was": 249,
       "now": 199,
       "deal": "20% korting",
-      "name": "ZWAGERMAN Slagersachterham",
+      "name": "Zwagerman Slagersachterham",
       "until": "2026-11-08"
     },
     "mozzarella": {
@@ -875,7 +812,7 @@
       "was": 389,
       "now": 389,
       "deal": "folder",
-      "name": "NAUTICA Gerookte zalm",
+      "name": "Nautica Gerookte zalm",
       "until": "2026-11-08"
     }
   },
@@ -884,7 +821,7 @@
       "was": 279,
       "now": 199,
       "deal": "29% korting",
-      "name": "Kipfilet naturel of bacon",
+      "name": "KIPFILET NATUREL OF BACON",
       "until": "2026-11-08"
     }
   },
