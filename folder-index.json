@@ -1,7 +1,7 @@
 {
   "week": "2–8 nov 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-11-03",
+  "fetched": "2026-11-04",
   "stores": [
     {
       "id": "dirk",
@@ -149,13 +149,6 @@
       "pp": "poiesz",
       "file": "folder-poiesz.json",
       "count": 100
-    },
-    {
-      "id": "spar",
-      "n": "Spar",
-      "pp": "spar",
-      "file": "folder-spar.json",
-      "count": 36
     }
   ]
 }
