@@ -1,7 +1,7 @@
 {
   "week": "2–8 nov 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-11-05",
+  "fetched": "2026-11-06",
   "note": "Folder/actie, automatisch. Geen kassaprijs.",
   "ah": {
     "gehakt": {
@@ -12,11 +12,11 @@
       "until": "2026-11-08"
     },
     "pasta": {
-      "was": 329,
-      "now": 165,
-      "deal": "2e gratis",
-      "name": "The Frosbro's Spaghetti bolognese",
-      "until": "2026-11-08"
+      "was": 1799,
+      "now": 600,
+      "deal": "1 + 2 GRATIS",
+      "name": "Sloggi Pc spaghetti top maat M",
+      "until": "2026-11-15"
     },
     "melk": {
       "was": 179,
@@ -61,11 +61,11 @@
       "until": "2026-11-08"
     },
     "spinazie": {
-      "was": 499,
-      "now": 375,
-      "deal": "VOOR 3.75",
-      "name": "AH Stamppot spinazie gehaktballetjes",
-      "until": "2026-11-08"
+      "was": 399,
+      "now": 200,
+      "deal": "1 + 1 gratis",
+      "name": "AH Quiche zalm spinazie",
+      "until": "2026-11-15"
     },
     "paprika": {
       "was": 249,
@@ -75,11 +75,11 @@
       "until": "2026-11-08"
     },
     "mozzarella": {
-      "was": 339,
-      "now": 170,
-      "deal": "2e gratis",
-      "name": "Bonduelle Pasta pronto gnocchi tomaat & mozzarella",
-      "until": "2026-11-08"
+      "was": 399,
+      "now": 199,
+      "deal": "2 euro korting",
+      "name": "Crosta Mollica Garlic & mozzarella flatbread",
+      "until": "2026-11-15"
     },
     "rookworst": {
       "was": 399,
@@ -117,18 +117,18 @@
       "until": "2026-11-08"
     },
     "komkommer": {
-      "was": 259,
-      "now": 200,
-      "deal": "2 voor 4.00",
-      "name": "AH Rauwkost komkommer",
-      "until": "2026-11-08"
+      "was": 299,
+      "now": 199,
+      "deal": "VOOR 1.99",
+      "name": "Philadelphia Feta komkommer",
+      "until": "2026-11-15"
     },
     "champignon": {
-      "was": 229,
-      "now": 200,
-      "deal": "2 voor 3.99",
+      "was": 199,
+      "now": 125,
+      "deal": "2 voor 2.49",
       "name": "AH Roerbakgroente Italiaans champignons",
-      "until": "2026-11-08"
+      "until": "2026-11-15"
     },
     "linzen": {
       "was": 349,
@@ -201,13 +201,6 @@
       "deal": "TOT -43%",
       "name": "Rookworst",
       "until": "2026-11-08"
-    },
-    "beleg": {
-      "was": 249,
-      "now": 249,
-      "deal": "OP=OP",
-      "name": "Pindakaas",
-      "until": "2026-11-05"
     },
     "zalm": {
       "was": 149,
@@ -300,11 +293,39 @@
   },
   "boons_markt": {
     "kip": {
-      "was": 279,
+      "was": 319,
       "now": 199,
-      "deal": "29% korting",
-      "name": "Kipfilet naturel of bacon",
-      "until": "2026-11-08"
+      "deal": "38% korting",
+      "name": "Flinterdunne beenham of kipfilet",
+      "until": "2026-11-15"
+    },
+    "aardappel": {
+      "was": 399,
+      "now": 299,
+      "deal": "25% korting",
+      "name": "Hollandse kruimige aardappelen",
+      "until": "2026-11-15"
+    },
+    "wortel": {
+      "was": 179,
+      "now": 179,
+      "deal": "folder",
+      "name": "Wortelen geschrapt en gewassen",
+      "until": "2026-11-15"
+    },
+    "boter": {
+      "was": 598,
+      "now": 449,
+      "deal": "1+1",
+      "name": "Boonacker rozijnen krentenbollen en/of Alledaags mini roomboter rozijnenbollen",
+      "until": "2026-11-15"
+    },
+    "rookworst": {
+      "was": 399,
+      "now": 179,
+      "deal": "55% korting",
+      "name": "Unox Gelderse, extra magere of vegetarische rookworst",
+      "until": "2026-11-15"
     }
   },
   "coop": {
@@ -445,6 +466,13 @@
       "name": "DekaVers Achterham flinterdun",
       "until": "2026-11-09"
     },
+    "fruit": {
+      "was": 199,
+      "now": 89,
+      "deal": "per kilo 0,89",
+      "name": "Del Monte Bananen",
+      "until": "2026-11-08"
+    },
     "zalm": {
       "was": 329,
       "now": 149,
@@ -579,11 +607,32 @@
   },
   "gewoon_coop": {
     "kip": {
-      "was": 279,
+      "was": 319,
       "now": 199,
-      "deal": "29% korting",
-      "name": "Kipfilet naturel of bacon",
-      "until": "2026-11-08"
+      "deal": "38% korting",
+      "name": "Flinterdunne beenham of kipfilet",
+      "until": "2026-11-15"
+    },
+    "aardappel": {
+      "was": 399,
+      "now": 299,
+      "deal": "25% korting",
+      "name": "Hollandse kruimige aardappelen",
+      "until": "2026-11-15"
+    },
+    "boter": {
+      "was": 598,
+      "now": 448,
+      "deal": "1+1",
+      "name": "Boonacker rozijnen krentenbollen en/of Alledaags mini roomboter rozijnenbollen",
+      "until": "2026-11-15"
+    },
+    "rookworst": {
+      "was": 415,
+      "now": 179,
+      "deal": "57% korting",
+      "name": "Unox Gelderse, extra magere of vegetarische rookworst",
+      "until": "2026-11-15"
     }
   },
   "hoogvliet": {
@@ -667,10 +716,10 @@
       "until": "2026-11-10"
     },
     "pasta": {
-      "was": 309,
-      "now": 232,
-      "deal": "3+1 gratis",
-      "name": "Ella's Kitchen Bio Organic Spaghetti Bolognese met Kaas 10+ Maanden 190 g",
+      "was": 379,
+      "now": 284,
+      "deal": "2e halve prijs",
+      "name": "Rummo Spaghetti Glutenvrij 400 g",
       "until": "2026-11-10"
     },
     "melk": {
@@ -839,11 +888,39 @@
   },
   "mcd": {
     "kip": {
-      "was": 279,
+      "was": 319,
       "now": 199,
-      "deal": "29% korting",
-      "name": "KIPFILET NATUREL OF BACON",
-      "until": "2026-11-08"
+      "deal": "38% korting",
+      "name": "Flinterdunne beenham of kipfilet",
+      "until": "2026-11-15"
+    },
+    "aardappel": {
+      "was": 399,
+      "now": 299,
+      "deal": "25% korting",
+      "name": "Hollandse kruimige aardappelen",
+      "until": "2026-11-15"
+    },
+    "wortel": {
+      "was": 179,
+      "now": 179,
+      "deal": "folder",
+      "name": "Wortelen geschrapt en gewassen",
+      "until": "2026-11-15"
+    },
+    "boter": {
+      "was": 598,
+      "now": 449,
+      "deal": "1+1",
+      "name": "Boonacker rozijnen krentenbollen en/of Alledaags mini roomboter rozijnenbollen",
+      "until": "2026-11-15"
+    },
+    "rookworst": {
+      "was": 409,
+      "now": 179,
+      "deal": "56% korting",
+      "name": "Unox Gelderse, extra magere of vegetarische rookworst",
+      "until": "2026-11-15"
     }
   },
   "nettorama": {
@@ -956,10 +1033,10 @@
       "until": "2026-11-17"
     },
     "boter": {
-      "was": 339,
-      "now": 250,
+      "was": 499,
+      "now": 399,
       "deal": "multipack",
-      "name": "Campina Verse roomboter gezouten",
+      "name": "PLUS Korenlanders Roomboter appelkruimelvlaai half",
       "until": "2026-11-17"
     },
     "pesto": {
@@ -967,14 +1044,14 @@
       "now": 200,
       "deal": "multipack",
       "name": "Plus Groene pesto",
-      "until": "2026-11-07"
+      "until": "2026-11-08"
     },
     "rijst": {
       "was": 1199,
       "now": 600,
       "deal": "1+1",
       "name": "Lucovitaal Rode gist rijst",
-      "until": "2026-11-07"
+      "until": "2026-11-08"
     },
     "wraps": {
       "was": 599,
@@ -1152,6 +1229,43 @@
       "deal": "aanbieding",
       "name": "Gesneden Champignons",
       "until": "2026-11-07"
+    }
+  },
+  "spar": {
+    "boter": {
+      "was": 549,
+      "now": 349,
+      "deal": "36% korting",
+      "name": "SPAR appeltaart met roomboter",
+      "until": "2026-11-18"
+    },
+    "wraps": {
+      "was": 800,
+      "now": 499,
+      "deal": "38% korting",
+      "name": "alle SPAR wraps",
+      "until": "2026-11-18"
+    },
+    "spinazie": {
+      "was": 199,
+      "now": 149,
+      "deal": "25% korting",
+      "name": "bloemkoolroosjes, worteltjes of spinazie",
+      "until": "2026-11-18"
+    },
+    "rookworst": {
+      "was": 738,
+      "now": 599,
+      "deal": "19% korting",
+      "name": "Unox rookworst 275 of 285 gram of soep in blik 800 ml",
+      "until": "2026-11-18"
+    },
+    "zalm": {
+      "was": 998,
+      "now": 599,
+      "deal": "40% korting",
+      "name": "gerookte Noorse zalm",
+      "until": "2026-11-18"
     }
   },
   "vomar": {
