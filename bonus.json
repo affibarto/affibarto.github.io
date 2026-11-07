@@ -1,7 +1,7 @@
 {
   "week": "2–8 nov 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-11-06",
+  "fetched": "2026-11-07",
   "note": "Folder/actie, automatisch. Geen kassaprijs.",
   "ah": {
     "gehakt": {
@@ -329,13 +329,6 @@
     }
   },
   "coop": {
-    "kip": {
-      "was": 1049,
-      "now": 750,
-      "deal": "28% korting",
-      "name": "Kipfilet",
-      "until": "2026-11-06"
-    },
     "aardappel": {
       "was": 298,
       "now": 250,
@@ -505,18 +498,25 @@
       "until": "2026-11-10"
     },
     "kip": {
-      "was": 539,
-      "now": 462,
-      "deal": "14% korting",
-      "name": "Vleeschmeesters Actie kipfilet 2 stuks",
-      "until": "2026-11-10"
+      "was": 475,
+      "now": 139,
+      "deal": "71% korting",
+      "name": "Knorr Trattoria kipfilet toscana",
+      "until": "2026-11-17"
     },
     "aardappel": {
-      "was": 109,
-      "now": 99,
-      "deal": "9% korting",
+      "was": 349,
+      "now": 249,
+      "deal": "29% korting",
       "name": "1 de Beste Aardappelen kruimig",
-      "until": "2026-11-10"
+      "until": "2026-11-17"
+    },
+    "wortel": {
+      "was": 187,
+      "now": 99,
+      "deal": "47% korting",
+      "name": "Hak Wortelen extra fijn",
+      "until": "2026-11-17"
     },
     "ui": {
       "was": 99,
@@ -524,6 +524,13 @@
       "deal": "20% korting",
       "name": "Bio+ Bio gele uien",
       "until": "2026-11-10"
+    },
+    "boter": {
+      "was": 289,
+      "now": 149,
+      "deal": "48% korting",
+      "name": "Lurpak Roomboter blok gezouten",
+      "until": "2026-11-17"
     },
     "yoghurt": {
       "was": 239,
@@ -539,6 +546,13 @@
       "name": "Mealmasters Rendang met cocosrijst-boontjes",
       "until": "2026-11-10"
     },
+    "spinazie": {
+      "was": 395,
+      "now": 199,
+      "deal": "50% korting",
+      "name": "Garden Gourmet Spinazie kaas rondo",
+      "until": "2026-11-17"
+    },
     "brood": {
       "was": 189,
       "now": 169,
@@ -546,12 +560,33 @@
       "name": "Vloerbrood volkoren heel",
       "until": "2026-11-10"
     },
+    "ham": {
+      "was": 289,
+      "now": 199,
+      "deal": "31% korting",
+      "name": "1 de Beste Boeren achterham gerookt",
+      "until": "2026-11-17"
+    },
     "mozzarella": {
       "was": 389,
       "now": 189,
       "deal": "PROBEER PRIJS",
       "name": "Grand'Italia Gnocchi mozzarella e pomodoro",
       "until": "2026-11-10"
+    },
+    "rookworst": {
+      "was": 299,
+      "now": 249,
+      "deal": "17% korting",
+      "name": "Vleeschmeesters Kip rookworst",
+      "until": "2026-11-17"
+    },
+    "komkommer": {
+      "was": 139,
+      "now": 119,
+      "deal": "14% korting",
+      "name": "Bio komkommer",
+      "until": "2026-11-17"
     },
     "champignon": {
       "was": 179,
@@ -636,6 +671,13 @@
     }
   },
   "hoogvliet": {
+    "gehakt": {
+      "was": 650,
+      "now": 325,
+      "deal": "50% korting",
+      "name": "Rundergehakt of Kruimgehakt",
+      "until": "2026-11-17"
+    },
     "pasta": {
       "was": 219,
       "now": 99,
@@ -656,6 +698,13 @@
       "deal": "43% korting",
       "name": "Knorr Wereldgerechten trattoria kipfilet toscana",
       "until": "2026-11-10"
+    },
+    "kaas": {
+      "was": 279,
+      "now": 169,
+      "deal": "39% korting",
+      "name": "Vergeer geraspte kaas",
+      "until": "2026-11-17"
     },
     "boter": {
       "was": 499,
@@ -698,6 +747,13 @@
       "deal": "43% korting",
       "name": "Parrano Mozzarella rasp",
       "until": "2026-11-10"
+    },
+    "rookworst": {
+      "was": 479,
+      "now": 249,
+      "deal": "48% korting",
+      "name": "Verse slagers-rookworst XL",
+      "until": "2026-11-17"
     },
     "zalm": {
       "was": 569,
@@ -859,15 +915,15 @@
     },
     "spinazie": {
       "was": 179,
-      "now": 129,
-      "deal": "27% korting",
+      "now": 179,
+      "deal": "met Lidl Plus",
       "name": "Gewassen spinazie",
       "until": "2026-11-08"
     },
     "ham": {
       "was": 249,
-      "now": 199,
-      "deal": "20% korting",
+      "now": 249,
+      "deal": "met Lidl Plus",
       "name": "Zwagerman Slagersachterham",
       "until": "2026-11-08"
     },
@@ -879,8 +935,8 @@
       "until": "2026-11-08"
     },
     "zalm": {
-      "was": 389,
-      "now": 389,
+      "was": 499,
+      "now": 499,
       "deal": "folder",
       "name": "Nautica Gerookte zalm",
       "until": "2026-11-08"
@@ -983,13 +1039,6 @@
   },
   "picnic": {},
   "plus": {
-    "gehakt": {
-      "was": 419,
-      "now": 356,
-      "deal": "15% korting",
-      "name": "Biologisch PLUS Rundergehakt",
-      "until": "2026-11-06"
-    },
     "pasta": {
       "was": 199,
       "now": 100,
@@ -1044,14 +1093,14 @@
       "now": 200,
       "deal": "multipack",
       "name": "Plus Groene pesto",
-      "until": "2026-11-08"
+      "until": "2026-11-09"
     },
     "rijst": {
       "was": 1199,
       "now": 600,
       "deal": "1+1",
       "name": "Lucovitaal Rode gist rijst",
-      "until": "2026-11-08"
+      "until": "2026-11-09"
     },
     "wraps": {
       "was": 599,
@@ -1061,10 +1110,10 @@
       "until": "2026-11-10"
     },
     "spinazie": {
-      "was": 499,
-      "now": 399,
+      "was": 259,
+      "now": 100,
       "deal": "multipack",
-      "name": "Plus Spinazie stamppot hamburger",
+      "name": "Hak Spinazie",
       "until": "2026-11-17"
     },
     "sla": {
