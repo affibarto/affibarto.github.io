@@ -1,7 +1,7 @@
 {
   "week": "9–15 nov 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-11-09",
+  "fetched": "2026-11-10",
   "note": "Folder/actie, automatisch. Geen kassaprijs.",
   "ah": {
     "pasta": {
@@ -294,13 +294,6 @@
       "name": "Banderos tortillawraps",
       "until": "2026-11-15"
     },
-    "ei": {
-      "was": 499,
-      "now": 325,
-      "deal": "35% korting",
-      "name": "Scharreleieren",
-      "until": "2026-11-09"
-    },
     "mozzarella": {
       "was": 275,
       "now": 199,
@@ -355,11 +348,11 @@
       "until": "2026-11-16"
     },
     "pasta": {
-      "was": 245,
-      "now": 123,
+      "was": 169,
+      "now": 84,
       "deal": "1+1 GRATIS",
-      "name": "Daily Chef Spaghetti",
-      "until": "2026-11-09"
+      "name": "Knorr Mix voor spaghetti",
+      "until": "2026-11-16"
     },
     "melk": {
       "was": 175,
@@ -367,13 +360,6 @@
       "deal": "1+1 GRATIS",
       "name": "Campina Houdbare halfvolle melk langlekker",
       "until": "2026-11-16"
-    },
-    "kip": {
-      "was": 225,
-      "now": 149,
-      "deal": "100 gram 1,49",
-      "name": "DekaVers Kipfilet flinterdun",
-      "until": "2026-11-09"
     },
     "aardappel": {
       "was": 125,
@@ -383,18 +369,11 @@
       "until": "2026-11-16"
     },
     "ui": {
-      "was": 129,
-      "now": 99,
-      "deal": "per stuk 0,99",
-      "name": "Bio+ Biologische uien",
-      "until": "2026-11-09"
-    },
-    "kaas": {
-      "was": 265,
-      "now": 169,
-      "deal": "per stuk 1,69",
-      "name": "Parrano Geraspte kaas",
-      "until": "2026-11-09"
+      "was": 99,
+      "now": 74,
+      "deal": "2 voor 1,49",
+      "name": "Rode uien trio",
+      "until": "2026-11-16"
     },
     "boter": {
       "was": 349,
@@ -411,25 +390,25 @@
       "until": "2026-11-16"
     },
     "spinazie": {
-      "was": 379,
-      "now": 225,
-      "deal": "2 voor 4,49",
-      "name": "Vivera Spinazie kaas filet 2 stuks",
-      "until": "2026-11-09"
+      "was": 179,
+      "now": 99,
+      "deal": "per stuk 0,99",
+      "name": "Olvarit 12+ Maanden Spinazie Kip Aardappel",
+      "until": "2026-11-16"
     },
-    "sla": {
-      "was": 95,
-      "now": 79,
-      "deal": "100 gram 0,79",
-      "name": "Ijsbergsla",
-      "until": "2026-11-09"
+    "paprika": {
+      "was": 495,
+      "now": 198,
+      "deal": "2+3 GRATIS",
+      "name": "Unox Paprika tomatensoep extra rijkgevuld",
+      "until": "2026-11-16"
     },
     "ham": {
-      "was": 179,
-      "now": 149,
-      "deal": "100 gram 1,49",
-      "name": "DekaVers Achterham flinterdun",
-      "until": "2026-11-09"
+      "was": 299,
+      "now": 299,
+      "deal": "100 gram 1,99",
+      "name": "Proef 't Verschil West-friese achterham",
+      "until": "2026-11-16"
     },
     "beleg": {
       "was": 445,
@@ -439,11 +418,11 @@
       "until": "2026-11-16"
     },
     "zalm": {
-      "was": 329,
-      "now": 149,
-      "deal": "per kuip 1,49",
-      "name": "DekaVers Salade gerookte zalm",
-      "until": "2026-11-09"
+      "was": 155,
+      "now": 99,
+      "deal": "per stuk 0,99",
+      "name": "Olvarit Pasta-spinazie-zalm 8+ Maanden",
+      "until": "2026-11-16"
     },
     "komkommer": {
       "was": 229,
@@ -451,13 +430,6 @@
       "deal": "2 voor 3,5",
       "name": "Snoep komkommer",
       "until": "2026-11-16"
-    },
-    "lasagne": {
-      "was": 245,
-      "now": 123,
-      "deal": "1+1 GRATIS",
-      "name": "Daily Chef Lasagnebladen",
-      "until": "2026-11-09"
     }
   },
   "delhaize": {},
@@ -481,13 +453,6 @@
       "now": 249,
       "deal": "29% korting",
       "name": "1 de Beste Aardappelen kruimig",
-      "until": "2026-11-17"
-    },
-    "wortel": {
-      "was": 187,
-      "now": 99,
-      "deal": "47% korting",
-      "name": "Hak Wortelen extra fijn",
       "until": "2026-11-17"
     },
     "ui": {
@@ -906,6 +871,20 @@
       "name": "Zwagerman Gelderse rookworst",
       "until": "2026-11-15"
     },
+    "beleg": {
+      "was": 449,
+      "now": 349,
+      "deal": "22% korting",
+      "name": "Pindakaas",
+      "until": "2026-11-15"
+    },
+    "hagelslag": {
+      "was": 275,
+      "now": 265,
+      "deal": "4% korting",
+      "name": "Hagelslag melk",
+      "until": "2026-11-15"
+    },
     "fruit": {
       "was": 219,
       "now": 219,
@@ -1025,13 +1004,6 @@
       "name": "Plus Scharrel kipfilet KVP",
       "until": "2026-11-10"
     },
-    "wortel": {
-      "was": 185,
-      "now": 149,
-      "deal": "multipack",
-      "name": "Biologisch PLUS Wortelen",
-      "until": "2026-11-17"
-    },
     "kaas": {
       "was": 279,
       "now": 100,
@@ -1040,10 +1012,10 @@
       "until": "2026-11-17"
     },
     "boter": {
-      "was": 499,
-      "now": 399,
+      "was": 379,
+      "now": 249,
       "deal": "multipack",
-      "name": "PLUS Korenlanders Roomboter appelkruimelvlaai half",
+      "name": "Plus Roomboter Amandelstaaf",
       "until": "2026-11-17"
     },
     "pesto": {
@@ -1082,17 +1054,17 @@
       "until": "2026-11-17"
     },
     "paprika": {
-      "was": 429,
-      "now": 322,
-      "deal": "25% korting",
-      "name": "Plus Mixzak Naturel & Paprika",
+      "was": 199,
+      "now": 100,
+      "deal": "multipack",
+      "name": "Chio Fusion Peanuts Sweet Paprika",
       "until": "2026-11-10"
     },
     "ham": {
-      "was": 185,
-      "now": 100,
-      "deal": "multipack",
-      "name": "Plus Achterham flinterdun",
+      "was": 369,
+      "now": 277,
+      "deal": "25% korting",
+      "name": "Biologisch PLUS Slagers achterham",
       "until": "2026-11-17"
     },
     "mozzarella": {
@@ -1114,6 +1086,13 @@
       "now": 284,
       "deal": "1+1",
       "name": "Cereal Hagelslag melk",
+      "until": "2026-11-10"
+    },
+    "fruit": {
+      "was": 100,
+      "now": 100,
+      "deal": "folder",
+      "name": "Plus Bananen Fairtrade",
       "until": "2026-11-10"
     },
     "zalm": {
