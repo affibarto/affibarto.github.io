@@ -1,7 +1,7 @@
 {
   "week": "9–15 nov 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-11-11",
+  "fetched": "2026-11-12",
   "note": "Folder/actie, automatisch. Geen kassaprijs.",
   "ah": {
     "pasta": {
@@ -119,7 +119,7 @@
       "until": "2026-11-15"
     },
     "aardappel": {
-      "was": 369,
+      "was": 349,
       "now": 249,
       "deal": "-28%",
       "name": "Extra grote kruimige aardappelen",
@@ -157,7 +157,7 @@
       "was": 95,
       "now": 65,
       "deal": "-23%",
-      "name": "Nederlandse ijsbergsla",
+      "name": "IJsbergsla",
       "until": "2026-11-22"
     },
     "mozzarella": {
@@ -300,13 +300,6 @@
       "deal": "1+1",
       "name": "Vergeer geraspte kaas",
       "until": "2026-11-15"
-    },
-    "boter": {
-      "was": 99,
-      "now": 50,
-      "deal": "multipack",
-      "name": "Roomboter appelflap",
-      "until": "2026-11-11"
     },
     "wraps": {
       "was": 100,
@@ -658,10 +651,10 @@
       "until": "2026-11-17"
     },
     "paprika": {
-      "was": 329,
+      "was": 399,
       "now": 199,
-      "deal": "40% korting",
-      "name": "Duyvis Tijgernootjes bbq paprika",
+      "deal": "50% korting",
+      "name": "Tuc Paprika",
       "until": "2026-11-17"
     },
     "mozzarella": {
@@ -974,14 +967,14 @@
       "now": 200,
       "deal": "multipack",
       "name": "Plus Groene pesto",
-      "until": "2026-11-13"
+      "until": "2026-11-14"
     },
     "rijst": {
       "was": 1199,
       "now": 600,
       "deal": "1+1",
       "name": "Lucovitaal Rode gist rijst",
-      "until": "2026-11-13"
+      "until": "2026-11-14"
     },
     "spinazie": {
       "was": 259,
@@ -1030,7 +1023,7 @@
       "now": 167,
       "deal": "multipack",
       "name": "Plus Snoepkomkommer",
-      "until": "2026-11-13"
+      "until": "2026-11-14"
     }
   },
   "poiesz": {
@@ -1207,17 +1200,24 @@
       "until": "2026-11-14"
     },
     "boter": {
-      "was": 349,
-      "now": 349,
+      "was": 100,
+      "now": 100,
       "deal": "limited",
-      "name": "Echte Boter Roomboter",
-      "until": "2026-11-13"
+      "name": "Versgebakken Roomboter Croissants",
+      "until": "2026-11-14"
     },
     "rijst": {
       "was": 449,
       "now": 399,
       "deal": "11% korting",
       "name": "Unirice Rijst",
+      "until": "2026-11-14"
+    },
+    "spinazie": {
+      "was": 230,
+      "now": 150,
+      "deal": "35% korting",
+      "name": "Börek Sticks Kip Sweet Chili of Spinazie Feta",
       "until": "2026-11-14"
     },
     "ei": {
@@ -1233,6 +1233,13 @@
       "deal": "6% korting",
       "name": "Galbani Maxi St. Luca Mozzarella",
       "until": "2026-11-14"
+    },
+    "fruit": {
+      "was": 99,
+      "now": 99,
+      "deal": "limited",
+      "name": "Bananen",
+      "until": "2026-11-12"
     },
     "champignon": {
       "was": 179,
