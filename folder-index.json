@@ -1,7 +1,7 @@
 {
   "week": "9–15 nov 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-11-12",
+  "fetched": "2026-11-13",
   "stores": [
     {
       "id": "dirk",
@@ -102,13 +102,6 @@
       "count": 100
     },
     {
-      "id": "boons_markt",
-      "n": "Boons Markt",
-      "pp": "boons_markt",
-      "file": "folder-boons_markt.json",
-      "count": 97
-    },
-    {
       "id": "coop",
       "n": "Coop",
       "pp": "coop",
@@ -127,14 +120,7 @@
       "n": "Gewoon Coop",
       "pp": "gewoon_coop",
       "file": "folder-gewoon_coop.json",
-      "count": 90
-    },
-    {
-      "id": "mcd",
-      "n": "Mcd",
-      "pp": "mcd",
-      "file": "folder-mcd.json",
-      "count": 96
+      "count": 100
     },
     {
       "id": "nettorama",
