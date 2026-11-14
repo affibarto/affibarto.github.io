@@ -1,7 +1,7 @@
 {
   "week": "9–15 nov 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-11-13",
+  "fetched": "2026-11-14",
   "note": "Folder/actie, automatisch. Geen kassaprijs.",
   "ah": {
     "gehakt": {
@@ -546,6 +546,20 @@
   },
   "delhaize": {},
   "dirk": {
+    "gehakt": {
+      "was": 389,
+      "now": 329,
+      "deal": "15% korting",
+      "name": "Vleeschmeesters Actie rundergehakt",
+      "until": "2026-11-24"
+    },
+    "melk": {
+      "was": 209,
+      "now": 79,
+      "deal": "62% korting",
+      "name": "Campina Halfvolle melk proteine",
+      "until": "2026-11-24"
+    },
     "kip": {
       "was": 475,
       "now": 139,
@@ -581,6 +595,13 @@
       "name": "Lurpak Roomboter blok gezouten",
       "until": "2026-11-17"
     },
+    "pesto": {
+      "was": 199,
+      "now": 149,
+      "deal": "VR, ZA & ZO actie",
+      "name": "Bits & Bites Pesto groen",
+      "until": "2026-11-22"
+    },
     "rijst": {
       "was": 249,
       "now": 89,
@@ -594,6 +615,13 @@
       "deal": "50% korting",
       "name": "Garden Gourmet Spinazie kaas rondo",
       "until": "2026-11-17"
+    },
+    "sla": {
+      "was": 299,
+      "now": 249,
+      "deal": "VR, ZA & ZO actie",
+      "name": "1 de Beste Groene salade ijsbergsla mix komkommer & farmersalade",
+      "until": "2026-11-22"
     },
     "ham": {
       "was": 289,
@@ -616,12 +644,19 @@
       "name": "Vleeschmeesters Kip rookworst",
       "until": "2026-11-17"
     },
+    "zalm": {
+      "was": 375,
+      "now": 199,
+      "deal": "47% korting",
+      "name": "Johma Zalm salade",
+      "until": "2026-11-24"
+    },
     "komkommer": {
-      "was": 139,
-      "now": 119,
-      "deal": "14% korting",
-      "name": "Bio komkommer",
-      "until": "2026-11-17"
+      "was": 285,
+      "now": 199,
+      "deal": "30% korting",
+      "name": "Philadelphia Roomkaas feta & komkommer",
+      "until": "2026-11-24"
     }
   },
   "ekoplaza": {
@@ -1003,7 +1038,7 @@
       "was": 149,
       "now": 149,
       "deal": "folder",
-      "name": "NASI-BAMI OF MACARONI-SPAGHETTI GROENTEN",
+      "name": "Nasi-bami of macaroni-spaghetti groenten",
       "until": "2026-11-22"
     },
     "kip": {
@@ -1031,7 +1066,7 @@
       "was": 409,
       "now": 299,
       "deal": "27% korting",
-      "name": "Geraspte Kaas Mild",
+      "name": "Geraspte kaas mild",
       "until": "2026-11-22"
     },
     "boter": {
@@ -1052,7 +1087,7 @@
       "was": 119,
       "now": 99,
       "deal": "17% korting",
-      "name": "IJSBERGSLA NATUREL, FIJN OF MELANGE",
+      "name": "IJsbergsla naturel, fijn of melange",
       "until": "2026-11-22"
     },
     "ham": {
@@ -1156,14 +1191,14 @@
       "now": 200,
       "deal": "multipack",
       "name": "Plus Groene pesto",
-      "until": "2026-11-15"
+      "until": "2026-11-16"
     },
     "rijst": {
       "was": 1199,
       "now": 600,
       "deal": "1+1",
       "name": "Lucovitaal Rode gist rijst",
-      "until": "2026-11-15"
+      "until": "2026-11-16"
     },
     "spinazie": {
       "was": 259,
@@ -1212,7 +1247,7 @@
       "now": 167,
       "deal": "multipack",
       "name": "Plus Snoepkomkommer",
-      "until": "2026-11-15"
+      "until": "2026-11-16"
     }
   },
   "poiesz": {
@@ -1301,14 +1336,14 @@
       "until": "2026-11-14"
     },
     "beleg": {
-      "was": 729,
+      "was": 765,
       "now": 499,
       "deal": "aanbieding",
       "name": "Calve Pindakaas Stukjes Pinda",
       "until": "2026-11-14"
     },
     "hagelslag": {
-      "was": 499,
+      "was": 524,
       "now": 299,
       "deal": "aanbieding",
       "name": "venz XXL hagelslag melk",
