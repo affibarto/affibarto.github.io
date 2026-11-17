@@ -1,7 +1,7 @@
 {
   "week": "16–22 nov 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-11-16",
+  "fetched": "2026-11-17",
   "note": "Folder/actie, automatisch. Geen kassaprijs.",
   "ah": {
     "gehakt": {
@@ -149,6 +149,13 @@
       "now": 200,
       "deal": "2 voor 3.99",
       "name": "AH Roerbakgroente Italiaans champignons",
+      "until": "2026-11-22"
+    },
+    "linzen": {
+      "was": 399,
+      "now": 200,
+      "deal": "1 + 1 gratis",
+      "name": "Bonduelle Mix & meal linzen dahl",
       "until": "2026-11-22"
     }
   },
@@ -307,13 +314,6 @@
       "deal": "32% korting",
       "name": "Aardappelen kruimig of vastkokend",
       "until": "2026-11-22"
-    },
-    "ei": {
-      "was": 499,
-      "now": 325,
-      "deal": "35% korting",
-      "name": "Scharreleieren",
-      "until": "2026-11-16"
     }
   },
   "dagwinkel": {
@@ -340,27 +340,6 @@
     }
   },
   "dekamarkt": {
-    "gehakt": {
-      "was": 599,
-      "now": 599,
-      "deal": "400 gram 4,99",
-      "name": "DekaVers rundergehakt mager",
-      "until": "2026-11-16"
-    },
-    "pasta": {
-      "was": 169,
-      "now": 84,
-      "deal": "1+1 GRATIS",
-      "name": "Knorr Mix voor spaghetti",
-      "until": "2026-11-16"
-    },
-    "melk": {
-      "was": 175,
-      "now": 88,
-      "deal": "1+1 GRATIS",
-      "name": "Campina Houdbare halfvolle melk langlekker",
-      "until": "2026-11-16"
-    },
     "kip": {
       "was": 569,
       "now": 399,
@@ -368,54 +347,26 @@
       "name": "Daily Chef Worteltjes en erwtjes met kipfilet krieltjes en peperroomsaus",
       "until": "2026-11-23"
     },
-    "aardappel": {
-      "was": 125,
-      "now": 99,
-      "deal": "1 kilo 0,99",
-      "name": "Met passie geteeld Aardappelen kruimig",
-      "until": "2026-11-16"
-    },
-    "ui": {
-      "was": 99,
-      "now": 74,
-      "deal": "2 voor 1,49",
-      "name": "Rode uien trio",
-      "until": "2026-11-16"
-    },
-    "boter": {
-      "was": 349,
-      "now": 199,
-      "deal": "per stuk 1,99",
-      "name": "Roomboter speculaasstaaf",
-      "until": "2026-11-16"
-    },
     "rijst": {
-      "was": 155,
+      "was": 249,
       "now": 99,
       "deal": "per stuk 0,99",
-      "name": "Olvarit 6+ Maanden Wortel Kip Rijst",
-      "until": "2026-11-16"
+      "name": "Lassie Basmatirijst builtjes",
+      "until": "2026-11-23"
     },
     "spinazie": {
-      "was": 179,
-      "now": 99,
-      "deal": "per stuk 0,99",
-      "name": "Olvarit 12+ Maanden Spinazie Kip Aardappel",
-      "until": "2026-11-16"
+      "was": 165,
+      "now": 125,
+      "deal": "2 voor 2,49",
+      "name": "Spinazie gewassen",
+      "until": "2026-11-23"
     },
     "paprika": {
-      "was": 495,
-      "now": 198,
-      "deal": "2+3 GRATIS",
-      "name": "Unox Paprika tomatensoep extra rijkgevuld",
-      "until": "2026-11-16"
-    },
-    "ham": {
-      "was": 299,
-      "now": 299,
-      "deal": "100 gram 1,99",
-      "name": "Proef 't Verschil West-friese achterham",
-      "until": "2026-11-16"
+      "was": 149,
+      "now": 74,
+      "deal": "1+1 GRATIS",
+      "name": "Silvo Mix voor gehakt paprika",
+      "until": "2026-11-23"
     },
     "mozzarella": {
       "was": 389,
@@ -424,26 +375,12 @@
       "name": "Grand'Italia Gnocchi mozzarella e pomodoro",
       "until": "2026-11-23"
     },
-    "beleg": {
-      "was": 445,
-      "now": 249,
-      "deal": "per stuk 2,49",
-      "name": "Calvé 100% pindakaas",
-      "until": "2026-11-16"
-    },
     "zalm": {
       "was": 249,
       "now": 169,
       "deal": "per stuk 1,69",
       "name": "G'woon Salade zalm",
       "until": "2026-11-23"
-    },
-    "komkommer": {
-      "was": 229,
-      "now": 175,
-      "deal": "2 voor 3,5",
-      "name": "Snoep komkommer",
-      "until": "2026-11-16"
     }
   },
   "delhaize": {},
@@ -595,6 +532,13 @@
       "now": 199,
       "deal": "23% korting",
       "name": "Witte champignons",
+      "until": "2026-11-17"
+    },
+    "linzen": {
+      "was": 149,
+      "now": 126,
+      "deal": "15% korting",
+      "name": "Linzen haver aardbei puffs 6+ mnd",
       "until": "2026-11-17"
     }
   },
@@ -841,13 +785,6 @@
       "name": "Jumbo Groene Pesto Salade 200 g",
       "until": "2026-12-08"
     },
-    "rijst": {
-      "was": 159,
-      "now": 100,
-      "deal": "voor 1,00",
-      "name": "Olvarit Pompoen Kip Rijst 8+ Maanden 200 g",
-      "until": "2026-11-24"
-    },
     "wraps": {
       "was": 319,
       "now": 239,
@@ -919,11 +856,11 @@
       "until": "2026-11-17"
     },
     "komkommer": {
-      "was": 229,
-      "now": 225,
-      "deal": "2 voor 4,50",
-      "name": "Jumbo Komkommer Salade 200 g",
-      "until": "2026-12-08"
+      "was": 339,
+      "now": 250,
+      "deal": "2 voor 4,99",
+      "name": "Jumbo Komkommer Snackgroente 400 g",
+      "until": "2026-11-17"
     },
     "champignon": {
       "was": 239,
@@ -931,6 +868,13 @@
       "deal": "3 voor 6,00",
       "name": "Jumbo Champignons Knoflook 100 g",
       "until": "2026-11-24"
+    },
+    "linzen": {
+      "was": 329,
+      "now": 200,
+      "deal": "2 voor 3,99",
+      "name": "Hak Indiaas Gekruid Linzen Curryschotel 550g",
+      "until": "2026-11-17"
     },
     "lasagne": {
       "was": 249,
@@ -1143,9 +1087,23 @@
       "deal": "multipack",
       "name": "Plus Snoepkomkommer",
       "until": "2026-11-17"
+    },
+    "linzen": {
+      "was": 219,
+      "now": 100,
+      "deal": "multipack",
+      "name": "Hak Linzen",
+      "until": "2026-11-17"
     }
   },
   "poiesz": {
+    "gehakt": {
+      "was": 649,
+      "now": 399,
+      "deal": "aanbieding",
+      "name": "Noordertrots Rundergehakt Gekruid",
+      "until": "2026-11-21"
+    },
     "pasta": {
       "was": 799,
       "now": 500,
@@ -1189,7 +1147,7 @@
       "until": "2026-11-21"
     },
     "sla": {
-      "was": 110,
+      "was": 140,
       "now": 100,
       "deal": "aanbieding",
       "name": "IJsbergsla",
@@ -1228,6 +1186,13 @@
       "now": 300,
       "deal": "aanbieding",
       "name": "Groene Salade Komkommer & Tomaat",
+      "until": "2026-11-21"
+    },
+    "linzen": {
+      "was": 185,
+      "now": 93,
+      "deal": "1+1 gratis",
+      "name": "Olvarit Hutspot bulgur & linzen 12+ maanden",
       "until": "2026-11-21"
     }
   },
