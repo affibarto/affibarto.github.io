@@ -1,7 +1,7 @@
 {
   "week": "16–22 nov 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-11-18",
+  "fetched": "2026-11-19",
   "stores": [
     {
       "id": "dirk",
@@ -36,7 +36,7 @@
       "n": "Plus",
       "pp": "plus",
       "file": "folder-plus.json",
-      "count": 4
+      "count": 100
     },
     {
       "id": "aldi",
@@ -149,6 +149,13 @@
       "pp": "poiesz",
       "file": "folder-poiesz.json",
       "count": 100
+    },
+    {
+      "id": "spar",
+      "n": "Spar",
+      "pp": "spar",
+      "file": "folder-spar.json",
+      "count": 39
     }
   ]
 }
