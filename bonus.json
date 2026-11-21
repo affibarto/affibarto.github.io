@@ -1,7 +1,7 @@
 {
   "week": "16–22 nov 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-11-20",
+  "fetched": "2026-11-21",
   "note": "Folder/actie, automatisch. Geen kassaprijs.",
   "ah": {
     "gehakt": {
@@ -358,11 +358,11 @@
       "until": "2026-11-22"
     },
     "kip": {
-      "was": 1049,
-      "now": 750,
-      "deal": "28% korting",
-      "name": "Kipfilet",
-      "until": "2026-11-20"
+      "was": 359,
+      "now": 359,
+      "deal": "1+1",
+      "name": "Kipfilet of kipfilet met tuinkruiden",
+      "until": "2026-11-22"
     },
     "aardappel": {
       "was": 439,
@@ -455,6 +455,13 @@
       "name": "Vleeschmeesters Actie rundergehakt",
       "until": "2026-11-24"
     },
+    "pasta": {
+      "was": 175,
+      "now": 149,
+      "deal": "15% korting",
+      "name": "1 de Beste Macaroni spaghetti groente",
+      "until": "2026-12-01"
+    },
     "melk": {
       "was": 209,
       "now": 79,
@@ -463,11 +470,18 @@
       "until": "2026-11-24"
     },
     "kip": {
-      "was": 209,
-      "now": 199,
+      "was": 679,
+      "now": 647,
       "deal": "5% korting",
-      "name": "1 de Beste Kipfilet gebraden",
-      "until": "2026-11-24"
+      "name": "Vleeschmeesters Kipfilet 3 stuks",
+      "until": "2026-12-01"
+    },
+    "aardappel": {
+      "was": 109,
+      "now": 99,
+      "deal": "9% korting",
+      "name": "1 de Beste Aardappelen kruimig",
+      "until": "2026-12-01"
     },
     "pesto": {
       "was": 199,
@@ -490,6 +504,20 @@
       "name": "Chio Heartbreakers paprika",
       "until": "2026-11-24"
     },
+    "mozzarella": {
+      "was": 329,
+      "now": 249,
+      "deal": "24% korting",
+      "name": "Valess Tomaat mozzarella",
+      "until": "2026-12-01"
+    },
+    "rookworst": {
+      "was": 109,
+      "now": 79,
+      "deal": "28% korting",
+      "name": "Slagerhuis Gelderse rookworst",
+      "until": "2026-12-01"
+    },
     "beleg": {
       "was": 739,
       "now": 399,
@@ -510,6 +538,13 @@
       "deal": "30% korting",
       "name": "Philadelphia Roomkaas feta & komkommer",
       "until": "2026-11-24"
+    },
+    "champignon": {
+      "was": 199,
+      "now": 169,
+      "deal": "15% korting",
+      "name": "Bio+ Kastanje champignons bio",
+      "until": "2026-12-01"
     }
   },
   "ekoplaza": {
@@ -672,11 +707,25 @@
       "until": "2026-11-24"
     },
     "kip": {
-      "was": 949,
-      "now": 849,
-      "deal": "11% korting",
-      "name": "Hoogvliet Kipfilet grootverpakking",
-      "until": "2026-11-24"
+      "was": 469,
+      "now": 299,
+      "deal": "36% korting",
+      "name": "Kipfilet of achterham",
+      "until": "2026-12-01"
+    },
+    "ui": {
+      "was": 999,
+      "now": 499,
+      "deal": "50% korting",
+      "name": "Kersttruien voor het hele gezin",
+      "until": "2026-12-01"
+    },
+    "kaas": {
+      "was": 349,
+      "now": 349,
+      "deal": "folder",
+      "name": "Geraspte kaas mild",
+      "until": "2026-12-01"
     },
     "rijst": {
       "was": 362,
@@ -707,11 +756,11 @@
       "until": "2026-11-24"
     },
     "ham": {
-      "was": 335,
-      "now": 219,
-      "deal": "35% korting",
-      "name": "Hoogvliet Slagersachterham",
-      "until": "2026-11-24"
+      "was": 469,
+      "now": 299,
+      "deal": "36% korting",
+      "name": "Kipfilet of achterham",
+      "until": "2026-12-01"
     },
     "mozzarella": {
       "was": 529,
@@ -726,6 +775,13 @@
       "deal": "39% korting",
       "name": "Unox Rookworst Extra Magere",
       "until": "2026-11-24"
+    },
+    "beleg": {
+      "was": 349,
+      "now": 199,
+      "deal": "43% korting",
+      "name": "Whole Earth pindakaas",
+      "until": "2026-12-01"
     },
     "zalm": {
       "was": 335,
@@ -772,7 +828,7 @@
       "until": "2026-11-24"
     },
     "wortel": {
-      "was": 135,
+      "was": 129,
       "now": 100,
       "deal": "voor 1,00",
       "name": "Jumbo Geschrapte Wortelen 300 g ",
@@ -1079,7 +1135,7 @@
       "now": 600,
       "deal": "1+1",
       "name": "Lucovitaal Rode gist rijst",
-      "until": "2026-11-22"
+      "until": "2026-11-23"
     },
     "spinazie": {
       "was": 349,
