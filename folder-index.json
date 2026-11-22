@@ -1,7 +1,7 @@
 {
   "week": "16–22 nov 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-11-21",
+  "fetched": "2026-11-22",
   "stores": [
     {
       "id": "dirk",
@@ -109,20 +109,6 @@
       "count": 100
     },
     {
-      "id": "coop",
-      "n": "Coop",
-      "pp": "coop",
-      "file": "folder-coop.json",
-      "count": 100
-    },
-    {
-      "id": "dagwinkel",
-      "n": "Dagwinkel",
-      "pp": "dagwinkel",
-      "file": "folder-dagwinkel.json",
-      "count": 62
-    },
-    {
       "id": "gewoon_coop",
       "n": "Gewoon Coop",
       "pp": "gewoon_coop",
@@ -149,13 +135,6 @@
       "pp": "poiesz",
       "file": "folder-poiesz.json",
       "count": 100
-    },
-    {
-      "id": "spar",
-      "n": "Spar",
-      "pp": "spar",
-      "file": "folder-spar.json",
-      "count": 39
     }
   ]
 }
