@@ -1,7 +1,7 @@
 {
   "week": "23–29 nov 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-11-23",
+  "fetched": "2026-11-24",
   "note": "Folder/actie, automatisch. Geen kassaprijs.",
   "ah": {
     "pasta": {
@@ -192,7 +192,7 @@
   "amazing_oriental": {
     "rijst": {
       "was": 255,
-      "now": 234,
+      "now": 153,
       "deal": "Mega Deals",
       "name": "Lee Kum Kee Zoete Sojasaus voor Dim Sum & Rijst",
       "until": "2026-12-08"
@@ -300,20 +300,6 @@
       "deal": "multipack",
       "name": "Aardappelen kruimig of vastkokend",
       "until": "2026-12-06"
-    },
-    "boter": {
-      "was": 99,
-      "now": 50,
-      "deal": "multipack",
-      "name": "Roomboter appelflap",
-      "until": "2026-11-25"
-    },
-    "ei": {
-      "was": 499,
-      "now": 325,
-      "deal": "35% korting",
-      "name": "Scharreleieren",
-      "until": "2026-11-23"
     }
   },
   "dagwinkel": {
@@ -354,13 +340,6 @@
       "name": "Heinz Tomatenblokjes knoflook",
       "until": "2026-11-30"
     },
-    "kip": {
-      "was": 569,
-      "now": 399,
-      "deal": "per stuk 3,99",
-      "name": "Daily Chef Worteltjes en erwtjes met kipfilet krieltjes en peperroomsaus",
-      "until": "2026-11-23"
-    },
     "aardappel": {
       "was": 379,
       "now": 299,
@@ -368,33 +347,19 @@
       "name": "Kruimige aardappelen",
       "until": "2026-11-30"
     },
-    "rijst": {
-      "was": 249,
-      "now": 99,
-      "deal": "per stuk 0,99",
-      "name": "Lassie Basmatirijst builtjes",
-      "until": "2026-11-23"
-    },
-    "spinazie": {
-      "was": 165,
-      "now": 125,
-      "deal": "2 voor 2,49",
-      "name": "Spinazie gewassen",
-      "until": "2026-11-23"
+    "boter": {
+      "was": 439,
+      "now": 349,
+      "deal": "per stuk 3,49",
+      "name": "Vers afbak Roomboter appeltaart",
+      "until": "2026-11-30"
     },
     "paprika": {
-      "was": 149,
-      "now": 74,
-      "deal": "1+1 GRATIS",
-      "name": "Silvo Mix voor gehakt paprika",
-      "until": "2026-11-23"
-    },
-    "mozzarella": {
-      "was": 389,
-      "now": 199,
-      "deal": "per stuk 1,99",
-      "name": "Grand'Italia Gnocchi mozzarella e pomodoro",
-      "until": "2026-11-23"
+      "was": 197,
+      "now": 149,
+      "deal": "per stuk 1,49",
+      "name": "Chio Heartbreakers paprika",
+      "until": "2026-11-30"
     },
     "rookworst": {
       "was": 379,
@@ -409,13 +374,6 @@
       "deal": "2e halve PRIJS",
       "name": "Fairtrade Hagelslag puur",
       "until": "2026-11-30"
-    },
-    "zalm": {
-      "was": 249,
-      "now": 169,
-      "deal": "per stuk 1,69",
-      "name": "G'woon Salade zalm",
-      "until": "2026-11-23"
     }
   },
   "delhaize": {},
@@ -456,9 +414,9 @@
       "until": "2026-12-01"
     },
     "paprika": {
-      "was": 187,
+      "was": 179,
       "now": 99,
-      "deal": "47% korting",
+      "deal": "45% korting",
       "name": "Chio Heartbreakers paprika",
       "until": "2026-11-24"
     },
