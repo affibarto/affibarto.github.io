@@ -1,7 +1,7 @@
 {
   "week": "23–29 nov 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-11-25",
+  "fetched": "2026-11-26",
   "note": "Folder/actie, automatisch. Geen kassaprijs.",
   "ah": {
     "kip": {
@@ -130,13 +130,6 @@
       "now": 149,
       "deal": "OP=OP",
       "name": "Roomboter gezouten of ongezouten",
-      "until": "2026-11-29"
-    },
-    "paprika": {
-      "was": 179,
-      "now": 179,
-      "deal": "OP=OP",
-      "name": "Rode paprika's",
       "until": "2026-11-29"
     },
     "ham": {
@@ -286,20 +279,6 @@
       "deal": "multipack",
       "name": "Aardappelen kruimig of vastkokend",
       "until": "2026-12-06"
-    },
-    "boter": {
-      "was": 99,
-      "now": 50,
-      "deal": "multipack",
-      "name": "Roomboter appelflap",
-      "until": "2026-11-25"
-    },
-    "paprika": {
-      "was": 239,
-      "now": 175,
-      "deal": "multipack",
-      "name": "Snackkomkommers, snackpaprika's of snacktomaten",
-      "until": "2026-12-06"
     }
   },
   "dagwinkel": {
@@ -308,20 +287,6 @@
       "now": 149,
       "deal": "17% korting",
       "name": "Aardappelen kruimig of vastkokend",
-      "until": "2026-12-06"
-    },
-    "boter": {
-      "was": 279,
-      "now": 279,
-      "deal": "limited",
-      "name": "Van Welzen roomboter amandelstaaf",
-      "until": "2026-12-06"
-    },
-    "paprika": {
-      "was": 249,
-      "now": 199,
-      "deal": "20% korting",
-      "name": "Snackkomkommers, snackpaprika's of snacktomaten",
       "until": "2026-12-06"
     },
     "ham": {
@@ -355,7 +320,7 @@
       "until": "2026-11-30"
     },
     "aardappel": {
-      "was": 379,
+      "was": 389,
       "now": 299,
       "deal": "3 kilo 2,99",
       "name": "Kruimige aardappelen",
@@ -414,18 +379,18 @@
       "until": "2026-12-01"
     },
     "rijst": {
-      "was": 399,
+      "was": 299,
       "now": 189,
-      "deal": "53% korting",
-      "name": "Basmatirijst",
+      "deal": "37% korting",
+      "name": "Rijst parboiled",
       "until": "2026-12-01"
     },
     "paprika": {
-      "was": 249,
-      "now": 149,
-      "deal": "VR, ZA & ZO actie",
-      "name": "Boboli Duo focaccia paprika & olijf",
-      "until": "2026-11-29"
+      "was": 145,
+      "now": 69,
+      "deal": "52% korting",
+      "name": "Silvo Mix voor gehakt paprika",
+      "until": "2026-12-01"
     },
     "mozzarella": {
       "was": 329,
@@ -580,6 +545,13 @@
       "name": "Geraspte kaas mild",
       "until": "2026-12-01"
     },
+    "boter": {
+      "was": 199,
+      "now": 149,
+      "deal": "25% korting",
+      "name": "Euro Patisserie Roomboter speculaaspop met amandelen",
+      "until": "2026-12-01"
+    },
     "rijst": {
       "was": 635,
       "now": 449,
@@ -592,6 +564,13 @@
       "now": 99,
       "deal": "58% korting",
       "name": "Hak Gesneden bladspinazie",
+      "until": "2026-12-01"
+    },
+    "paprika": {
+      "was": 399,
+      "now": 199,
+      "deal": "50% korting",
+      "name": "Tuc Paprika",
       "until": "2026-12-01"
     },
     "ham": {
@@ -639,11 +618,11 @@
       "until": "2026-12-01"
     },
     "kip": {
-      "was": 289,
-      "now": 250,
-      "deal": "2 voor 5,00",
-      "name": "Jumbo Scharrel Kipfilet 120 g",
-      "until": "2026-12-15"
+      "was": 300,
+      "now": 200,
+      "deal": "5 voor 10,00",
+      "name": "Jumbo Gourmet Mini Kipfilet 120 g",
+      "until": "2026-12-22"
     },
     "wortel": {
       "was": 139,
@@ -671,7 +650,7 @@
       "now": 225,
       "deal": "2 voor 4,50",
       "name": "Jumbo Groene Pesto Salade 200 g",
-      "until": "2026-12-15"
+      "until": "2026-12-22"
     },
     "spinazie": {
       "was": 375,
@@ -692,14 +671,14 @@
       "now": 250,
       "deal": "2 voor 5,00",
       "name": "Jumbo Achterham 140 g",
-      "until": "2026-12-15"
+      "until": "2026-12-22"
     },
     "rookworst": {
       "was": 359,
       "now": 300,
       "deal": "2 voor 6,00",
       "name": "Jumbo Verse Erwtensoep met Rookworst 500 g",
-      "until": "2026-12-15"
+      "until": "2026-12-22"
     },
     "beleg": {
       "was": 279,
@@ -713,7 +692,7 @@
       "now": 466,
       "deal": "2+1 gratis",
       "name": "Warmgerookte zalm petit fours citroen peper 185 g",
-      "until": "2026-12-15"
+      "until": "2026-12-22"
     },
     "komkommer": {
       "was": 399,
@@ -721,6 +700,13 @@
       "deal": "voor 2,99",
       "name": "Jumbo Groene Salade Tomaat & Komkommer 340 g",
       "until": "2026-12-01"
+    },
+    "champignon": {
+      "was": 269,
+      "now": 200,
+      "deal": "5 voor 10,00",
+      "name": "Jumbo Gourmetschotel champignons, paprika en prei 165 g",
+      "until": "2026-12-22"
     }
   },
   "lidl": {
@@ -745,6 +731,13 @@
       "name": "Aardappelen kruimig",
       "until": "2026-11-29"
     },
+    "kaas": {
+      "was": 256,
+      "now": 256,
+      "deal": "korting",
+      "name": "Geraspte kaas jong belegen",
+      "until": "2026-12-06"
+    },
     "boter": {
       "was": 249,
       "now": 249,
@@ -752,12 +745,19 @@
       "name": "Roomboter amandelstaaf",
       "until": "2026-11-29"
     },
+    "spinazie": {
+      "was": 179,
+      "now": 179,
+      "deal": "korting",
+      "name": "Spinazie",
+      "until": "2026-12-06"
+    },
     "rookworst": {
-      "was": 269,
-      "now": 269,
-      "deal": "met Lidl Plus",
-      "name": "Zwagerman Verse rookworst",
-      "until": "2026-11-29"
+      "was": 179,
+      "now": 169,
+      "deal": "6% korting",
+      "name": "Extra magere rookworst",
+      "until": "2026-12-06"
     },
     "hagelslag": {
       "was": 275,
@@ -767,11 +767,11 @@
       "until": "2026-11-29"
     },
     "zalm": {
-      "was": 699,
-      "now": 699,
-      "deal": "folder",
-      "name": "Nautica Gerookte zalm",
-      "until": "2026-11-29"
+      "was": 389,
+      "now": 289,
+      "deal": "26% korting",
+      "name": "OCEAN SEA Zalm in bladerdeeg",
+      "until": "2026-12-06"
     }
   },
   "mcd": {
@@ -863,7 +863,85 @@
     }
   },
   "picnic": {},
-  "plus": {},
+  "plus": {
+    "pasta": {
+      "was": 255,
+      "now": 102,
+      "deal": "1+1",
+      "name": "Knorr Mix voor Spaghetti XXL",
+      "until": "2026-12-01"
+    },
+    "kip": {
+      "was": 539,
+      "now": 216,
+      "deal": "1+1",
+      "name": "Knorr Trattoria kipfilet romana",
+      "until": "2026-12-01"
+    },
+    "boter": {
+      "was": 399,
+      "now": 299,
+      "deal": "multipack",
+      "name": "Plus Roomboter speculaastaart",
+      "until": "2026-12-01"
+    },
+    "pesto": {
+      "was": 329,
+      "now": 200,
+      "deal": "multipack",
+      "name": "Plus Groene pesto",
+      "until": "2026-11-28"
+    },
+    "rijst": {
+      "was": 1199,
+      "now": 600,
+      "deal": "1+1",
+      "name": "Lucovitaal Rode gist rijst",
+      "until": "2026-12-01"
+    },
+    "spinazie": {
+      "was": 185,
+      "now": 100,
+      "deal": "multipack",
+      "name": "Olvarit 12+mnd Spinazie Kip Aardappel",
+      "until": "2026-12-01"
+    },
+    "paprika": {
+      "was": 349,
+      "now": 175,
+      "deal": "1+1",
+      "name": "Feestelijk PLUS Gourmet mini kipfiletlapje paprika",
+      "until": "2026-12-01"
+    },
+    "ham": {
+      "was": 209,
+      "now": 200,
+      "deal": "multipack",
+      "name": "PLUS Puur van smaak Kleintje Achterham",
+      "until": "2026-12-01"
+    },
+    "mozzarella": {
+      "was": 399,
+      "now": 200,
+      "deal": "multipack",
+      "name": "dr. oetker Ristorante Salame Mozzarella Pesto",
+      "until": "2026-12-01"
+    },
+    "zalm": {
+      "was": 499,
+      "now": 399,
+      "deal": "multipack",
+      "name": "GIJS Warmgerookte zalm Italiaanse kruiden",
+      "until": "2026-12-01"
+    },
+    "komkommer": {
+      "was": 419,
+      "now": 299,
+      "deal": "multipack",
+      "name": "Plus Salade Tomaat Komkommer",
+      "until": "2026-12-01"
+    }
+  },
   "poiesz": {
     "kip": {
       "was": 369,
@@ -960,11 +1038,18 @@
       "name": "Bami-Nasi of Macaroni-Spaghetti Groenten",
       "until": "2026-11-28"
     },
+    "ui": {
+      "was": 229,
+      "now": 129,
+      "deal": "44% korting",
+      "name": "Hollandse Rode Uien",
+      "until": "2026-11-28"
+    },
     "boter": {
-      "was": 245,
-      "now": 245,
-      "deal": "folder",
-      "name": "G'woon Roomboter Amandelstaaf",
+      "was": 25,
+      "now": 25,
+      "deal": "multipack",
+      "name": "Vers-gebakken Roomboter Croissants",
       "until": "2026-11-28"
     },
     "ei": {
@@ -972,7 +1057,7 @@
       "now": 399,
       "deal": "folder",
       "name": "Scharreleieren",
-      "until": "2026-11-25"
+      "until": "2026-11-28"
     },
     "ham": {
       "was": 299,
