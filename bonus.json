@@ -1,14 +1,35 @@
 {
   "week": "23–29 nov 2026",
   "source": "PrijsProfeet",
-  "fetched": "2026-11-26",
+  "fetched": "2026-11-27",
   "note": "Folder/actie, automatisch. Geen kassaprijs.",
   "ah": {
+    "gehakt": {
+      "was": 531,
+      "now": 449,
+      "deal": "VOOR 4.49",
+      "name": "AH Rundergehakt",
+      "until": "2026-12-06"
+    },
+    "pasta": {
+      "was": 249,
+      "now": 125,
+      "deal": "1 + 1 gratis",
+      "name": "AH Spaghetti all' uovo",
+      "until": "2026-12-06"
+    },
     "kip": {
       "was": 399,
       "now": 299,
       "deal": "25% korting",
       "name": "Streeckgenoten Ovengebakken kipfilet",
+      "until": "2026-11-29"
+    },
+    "kaas": {
+      "was": 299,
+      "now": 250,
+      "deal": "2 voor 5.00",
+      "name": "AH Cheddar geraspte kaas",
       "until": "2026-11-29"
     },
     "boter": {
@@ -24,6 +45,13 @@
       "deal": "25% korting",
       "name": "Actimel Drinkyoghurt naturel 0%",
       "until": "2026-11-29"
+    },
+    "pesto": {
+      "was": 299,
+      "now": 200,
+      "deal": "3 VOOR 5.99",
+      "name": "AH Groene pesto",
+      "until": "2026-12-06"
     },
     "rijst": {
       "was": 749,
@@ -68,17 +96,24 @@
       "until": "2026-11-29"
     },
     "rookworst": {
-      "was": 439,
-      "now": 329,
-      "deal": "25% korting",
-      "name": "Streeckgenoten Rookworst",
-      "until": "2026-11-29"
+      "was": 599,
+      "now": 419,
+      "deal": "30% korting",
+      "name": "Unox Rookworst extra mager",
+      "until": "2026-12-06"
     },
     "beleg": {
       "was": 489,
       "now": 244,
       "deal": "50% korting",
       "name": "Whole earth Crunchy pindakaas",
+      "until": "2026-11-29"
+    },
+    "fruit": {
+      "was": 199,
+      "now": 175,
+      "deal": "2 voor 3.50",
+      "name": "Chiquita Ready to eat bananen",
       "until": "2026-11-29"
     },
     "zalm": {
@@ -89,10 +124,10 @@
       "until": "2026-11-29"
     },
     "komkommer": {
-      "was": 419,
-      "now": 350,
-      "deal": "2 voor 7.00",
-      "name": "AH Tomaat komkommer M",
+      "was": 239,
+      "now": 167,
+      "deal": "3 voor 5.00",
+      "name": "AH Komkommer met partydip",
       "until": "2026-11-29"
     },
     "champignon": {
@@ -229,12 +264,26 @@
       "name": "Kleintje macaroni-spaghetti, nasi-bami, wok- en/of roerbakgroenten",
       "until": "2026-11-29"
     },
+    "kip": {
+      "was": 300,
+      "now": 150,
+      "deal": "multipack",
+      "name": "Kipfilet naturel, kalkoenfilet en/of kipfilet Italiaans",
+      "until": "2026-12-06"
+    },
     "aardappel": {
       "was": 399,
       "now": 299,
       "deal": "25% korting",
       "name": "Hollandse kruimige of vastkokende aardappelen",
       "until": "2026-11-29"
+    },
+    "wortel": {
+      "was": 129,
+      "now": 100,
+      "deal": "multipack",
+      "name": "Geschrapte wortelen en/of wortel Julienne",
+      "until": "2026-12-06"
     },
     "boter": {
       "was": 389,
@@ -263,6 +312,13 @@
       "deal": "multipack",
       "name": "Ambachtelijke rookworst fijn en/of grof",
       "until": "2026-11-29"
+    },
+    "beleg": {
+      "was": 359,
+      "now": 250,
+      "deal": "multipack",
+      "name": "Calvé pindakaas regular of met stukjes pinda",
+      "until": "2026-12-06"
     }
   },
   "coop": {
@@ -386,11 +442,11 @@
       "until": "2026-12-01"
     },
     "paprika": {
-      "was": 145,
-      "now": 69,
-      "deal": "52% korting",
-      "name": "Silvo Mix voor gehakt paprika",
-      "until": "2026-12-01"
+      "was": 249,
+      "now": 149,
+      "deal": "VR, ZA & ZO actie",
+      "name": "Boboli Duo focaccia paprika & olijf",
+      "until": "2026-11-29"
     },
     "mozzarella": {
       "was": 329,
@@ -487,12 +543,26 @@
       "name": "Kleintje macaroni-spaghetti, nasi-bami, wok- en/of roerbakgroenten",
       "until": "2026-11-29"
     },
+    "kip": {
+      "was": 300,
+      "now": 150,
+      "deal": "multipack",
+      "name": "Kipfilet naturel, kalkoenfilet en/of kipfilet Italiaans",
+      "until": "2026-12-06"
+    },
     "aardappel": {
       "was": 419,
       "now": 299,
       "deal": "29% korting",
       "name": "Hollandse kruimige of vastkokende aardappelen",
       "until": "2026-11-29"
+    },
+    "wortel": {
+      "was": 129,
+      "now": 100,
+      "deal": "multipack",
+      "name": "Geschrapte wortelen en/of wortel Julienne",
+      "until": "2026-12-06"
     },
     "boter": {
       "was": 405,
@@ -521,6 +591,13 @@
       "deal": "multipack",
       "name": "Ambachtelijke rookworst fijn en/of grof",
       "until": "2026-11-29"
+    },
+    "beleg": {
+      "was": 375,
+      "now": 250,
+      "deal": "multipack",
+      "name": "Calvé pindakaas regular of met stukjes pinda",
+      "until": "2026-12-06"
     }
   },
   "hoogvliet": {
@@ -767,11 +844,11 @@
       "until": "2026-11-29"
     },
     "zalm": {
-      "was": 389,
-      "now": 289,
-      "deal": "26% korting",
-      "name": "OCEAN SEA Zalm in bladerdeeg",
-      "until": "2026-12-06"
+      "was": 699,
+      "now": 699,
+      "deal": "folder",
+      "name": "Nautica Gerookte zalm",
+      "until": "2026-11-29"
     }
   },
   "mcd": {
@@ -788,6 +865,13 @@
       "deal": "29% korting",
       "name": "Hollandse kruimige of vastkokende aardappelen",
       "until": "2026-11-29"
+    },
+    "wortel": {
+      "was": 129,
+      "now": 100,
+      "deal": "multipack",
+      "name": "Geschrapte wortelen en/of wortel Julienne",
+      "until": "2026-12-06"
     },
     "boter": {
       "was": 389,
@@ -816,6 +900,13 @@
       "deal": "multipack",
       "name": "Ambachtelijke rookworst fijn en/of grof",
       "until": "2026-11-29"
+    },
+    "beleg": {
+      "was": 369,
+      "now": 250,
+      "deal": "multipack",
+      "name": "Calvé pindakaas regular of met stukjes pinda",
+      "until": "2026-12-06"
     }
   },
   "nettorama": {
@@ -890,7 +981,7 @@
       "now": 200,
       "deal": "multipack",
       "name": "Plus Groene pesto",
-      "until": "2026-11-28"
+      "until": "2026-11-29"
     },
     "rijst": {
       "was": 1199,
@@ -1065,13 +1156,6 @@
       "deal": "33% korting",
       "name": "Versgesneden Westfriese Achterham",
       "until": "2026-11-28"
-    },
-    "fruit": {
-      "was": 99,
-      "now": 99,
-      "deal": "folder",
-      "name": "Bananen",
-      "until": "2026-11-26"
     }
   }
 }
